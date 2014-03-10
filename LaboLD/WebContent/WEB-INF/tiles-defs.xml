@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://struts.apache.org/dtds/tiles-config_1_1.dtd">
+
+<tiles-definitions>
+
+	<!-- ======================================================= -->
+	<!-- Master definition -->
+	<!-- ======================================================= -->
+
+	<!-- Doc index page description -->
+	<definition name=".base" path="/jsp/tiles/layout.jsp">
+		<put name="title" value="Main Layout" />
+		<put name="header" value="/jsp/tiles/header.jsp" />
+		<put name="menu" value="/jsp/tiles/menu.jsp" />
+		<put name="footer" value="/jsp/tiles/footer.jsp" />
+		<put name="body" value="doc.portal.body" />
+	</definition>
+
+	<!-- ========== PAGES ========== -->
+
+
+	<definition name=".index" extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/index.jsp" />
+	</definition>
+
+	<!-- LOCALIDAD -->
+	<definition name=".altaLocalidad" extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/altaLocalidad.jsp" />
+	</definition>
+
+	<definition name=".recuperarLocalidades" extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/recuperarLocalidades.jsp" />
+	</definition>
+	
+	<definition name=".recuperarLocalidades" extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/recuperarLocalidades.jsp" />
+	</definition>
+	
+	<definition name=".altaProvincia" extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/altaProvincia.jsp" />
+	</definition>	
+
+	<definition name=".recuperarProvincias" extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/recuperarProvincias.jsp" />
+	</definition>	
+
+	<definition name=".modificacionLocalidad" extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/modificacionLocalidad.jsp" />
+	</definition>		
+	
+	<!-- FIN LOCALIDAD -->
+
+
+	<!-- ESTABLECIMIENTO -->
+	<definition name=".altaEstablecimiento" extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/altaEstablecimiento.jsp" />
+	</definition>
+
+	<definition name=".recuperarEstablecimientos" extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/recuperarEstablecimientos.jsp" />
+	</definition>
+	
+	<definition name=".recuperarEstablecimientos" extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/recuperarEstablecimientos.jsp" />
+	</definition>
+
+	<definition name=".modificacionEstablecimiento" extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/modificacionEstablecimiento.jsp" />
+	</definition>		
+	
+	<!-- FIN ESTABLECIMIENTO -->
+
+	<!-- PERIODO -->
+	<definition name=".altaPeriodo" extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/altaPeriodo.jsp" />
+	</definition>
+
+	<definition name=".recuperarPeriodos" extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/recuperarPeriodos.jsp" />
+	</definition>
+	<!-- FIN PERIODO -->
+
+	<!-- ENTIDAD -->
+	<definition name=".altaEntidad" extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/altaEntidad.jsp" />
+	</definition>
+
+	<definition name=".recuperarEntidades" extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/recuperarEntidades.jsp" />
+	</definition>
+	<!-- FIN ENTIDAD -->
+
+	<!-- USUARIO -->
+	<definition name=".altaUsuario" extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/altaUsuario.jsp" />
+	</definition>
+
+	<definition name=".recuperarUsuarios" extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/recuperarUsuarios.jsp" />
+	</definition>
+	<!-- FIN USUARIO -->
+
+	<!-- TIPO PRODUCTO -->
+	<definition name=".modificacionTipoProducto"
+		extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/modificacionTipoProducto.jsp" />
+	</definition>
+	<!-- FIN TIPO PRODUCTO -->
+
+	<!-- MARCA SEÑAL -->
+	<definition name=".recuperarMarcasSeniales"
+		extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/recuperarMarcasSeniales.jsp" />
+	</definition>
+
+	<definition name=".altaRenovacionMarcaSenial"
+		extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/altaRenovacionMarcaSenial.jsp" />
+	</definition>	
+
+	<definition name=".pagoBoletasMarcaSenial"
+		extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/pagoBoletasMarcaSenial.jsp" />
+	</definition>			
+	<!-- FIN MARCA SEÑAL -->
+
+	<!-- AUTORIZACION -->
+	<definition name=".altaAutorizacion"
+		extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/altaAutorizacion.jsp" />
+	</definition>
+	
+	<definition name=".recuperarAutorizaciones" extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/recuperarAutorizaciones.jsp" />
+	</definition>
+	
+	<!-- FIN AUTORIZACION -->
+
+	<!-- GUIA -->
+	<definition name=".altaLegalizacionGuia"
+		extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/altaLegalizacionGuia.jsp" />
+	</definition>
+	<definition name=".consultaGeneralGuia"
+		extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/consultaGeneralGuia.jsp" />
+	</definition>		
+	<definition name=".consultaGuiaLegalizada"
+		extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/consultaGuiaLegalizada.jsp" />		
+	</definition>		
+	<definition name=".devolucionGuia"
+		extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/devolucionGuia.jsp" />		
+	</definition>
+	<definition name=".consultaGuiasDevueltas"
+		extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/consultaGuiasDevueltas.jsp" />
+	</definition>	
+	<definition name=".consultaGuiaDevuelta"
+		extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/consultaGuiaDevuelta.jsp" />
+	</definition>	
+	<definition name=".cargarBoletaParaRegistracionPago"
+		extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/cargarBoletaParaRegistracionPago.jsp" />
+	</definition>		
+	<!-- FIN GUIA -->
+
+
+	<!-- AUTORIZADO -->
+	<definition name=".altaAutorizado"
+		extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/altaAutorizado.jsp" />
+	</definition>
+
+	<definition name=".recuperarAutorizados"
+		extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/recuperarAutorizados.jsp" />
+	</definition>
+	<!-- FIN AUTORIZADO -->
+
+	<!-- TIPOANIMAL -->
+	<definition name=".altaTipoAnimal"
+		extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/altaTipoAnimal.jsp" />
+	</definition>
+
+	<definition name=".recuperarTipoAnimales"
+		extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/recuperarTipoAnimales.jsp" />
+	</definition>
+	<!-- FIN TIPOANIMAL -->
+
+	<!-- DENUNCIA -->
+	<definition name=".altaDenuncia"
+		extends=".base">
+		<put name="title" value="SIIGs" />
+		<put name="body" value="/jsp/altaDenuncia.jsp" />
+	</definition>
+	<!-- FIN DENUNCIA -->
+	
+	<!-- REPORTES -->
+	<definition name=".reporteGralPorProductorYPeriodo" extends=".base">
+		<put name="title" value="SIIMs" />
+		<put name="body" value="/jsp/reporteGralPorProductorYPeriodo.jsp" />
+	</definition>
+	
+	<definition name=".reporteGralProductorPeriodoDestino" extends=".base">
+		<put name="title" value="SIIMs" />
+		<put name="body" value="/jsp/reporteGralPorProductorPeriodoDestino.jsp" />
+	</definition>
+	<!-- FIN REPORTES -->
+	
+	<!-- STOCK ANIMAL DE PRODUCTOR EN ESTABLECIMIENTO -->
+	<definition name=".altaStockAnimalDeProductorEnEstablecimiento" extends=".base">
+		<put name="title" value="SIIMs" />
+		<put name="body" value="/jsp/altaStockAnimalDeProductorEnEstablecimiento.jsp" />
+	</definition>	
+	
+	<definition name=".consultaModificacionStockAnimal" extends=".base">
+		<put name="title" value="SIIMs" />
+		<put name="body" value="/jsp/consultaModificacionStockAnimal.jsp" />
+	</definition>	
+
+	<definition name=".modificacionStockAnimal" extends=".base">
+		<put name="title" value="SIIMs" />
+		<put name="body" value="/jsp/modificacionStockAnimal.jsp" />
+	</definition>			
+	<!-- FIN STOCK ANIMAL DE PRODUCTOR EN ESTABLECIMIENTO -->
+	
+	<definition name=".error" extends=".base">
+		<put name="title" value="Error en SIIGs" />
+		<put name="body" value="/jsp/error.jsp" />
+	</definition>
+
+</tiles-definitions>
