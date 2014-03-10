@@ -21,6 +21,8 @@
 		<property name="hbm2ddl.auto">update</property>
 
 		<!-- Enable Hibernate's automatic session context management -->
+		<mapping class='ar.com.labold.negocio.Rol' />
+		<mapping class='ar.com.labold.negocio.ItemMenu' />
 	
 	</session-factory>
 </hibernate-configuration>
