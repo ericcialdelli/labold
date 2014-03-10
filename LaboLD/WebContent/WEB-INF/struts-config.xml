@@ -3,7 +3,9 @@
 <struts-config>
 
 	<form-beans>
-		
+		<form-bean name="loginForm" 
+			type="ar.com.labold.struts.actions.forms.LoginForm">
+		</form-bean>		
 	</form-beans>
 
 	<global-exceptions></global-exceptions>
@@ -14,7 +16,20 @@
 	</global-forwards>
 
 	<action-mappings>
-
+	
+		<!-- MENU -->
+		<action path="/menu" type="ar.com.labold.struts.actions.MenuAction"
+			parameter="metodo" />	
+	
+		<!-- LOGIN -->
+		<action path="/login" type="ar.com.labold.struts.actions.LoginAction"
+			parameter="metodo" name="loginForm" scope="session">
+			<forward name="exitoLogin" path=".index" />
+			<forward name="errorLogin" path="/jsp/login.jsp" />
+			<forward name="exitoLogout" path="/jsp/login.jsp" />
+		</action>
+		<!-- FIN LOGIN -->
+				
 	</action-mappings>
 
 	<message-resources parameter="ar.com.labold.struts.resources.application" />
