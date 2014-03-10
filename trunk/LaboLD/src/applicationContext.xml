@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/labold" />
+		<property name="username" value="labold" />
+		<property name="password" value="labold" />
+	</bean>
+
+	<!-- Hibernate SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+		<property name="configurationClass" value="org.hibernate.cfg.AnnotationConfiguration" />
+	</bean>
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- Transaction manager for a single Hibernate SessionFactory (alternative 
+		to JTA) -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+
+  <!-- enable the configuration of transactional behavior based on annotations -->
+  <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+	<!--  *******************-->
+	<!--     Respositories   -->
+	<!--  *******************-->
+
+	<bean id="abstractRepository" abstract="true">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	
+
+	<!--  *******************-->
+	<!--     DAOS            -->
+	<!--  *******************-->
+
+
+	
+	<!--  *******************-->
+	<!--     Fachadas        -->
+	<!--  *******************-->
+
+	
+	
+	<!--  *******************-->
+	<!--       Parameters    -->
+	<!--  *******************-->
+
+	<bean id="version" class="java.lang.String">
+		<constructor-arg value="1.0" />
+	</bean>
+
+
+
+</beans>
