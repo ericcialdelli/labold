@@ -12,8 +12,6 @@ public class UsuarioDTO {
 	
 	private boolean habilitado;
 	
-	private boolean habilitadoFirmaGuias;
-	
 	public UsuarioDTO(){
 		
 		rol = new RolDTO();
@@ -58,13 +56,4 @@ public class UsuarioDTO {
 	public void setHabilitado(boolean habilitado) {
 		this.habilitado = habilitado;
 	}
-
-	public boolean isHabilitadoFirmaGuias() {
-		return habilitadoFirmaGuias;
-	}
-
-	public void setHabilitadoFirmaGuias(boolean habilitadoFirmaGuias) {
-		this.habilitadoFirmaGuias = habilitadoFirmaGuias;
-	}
-	
 }
