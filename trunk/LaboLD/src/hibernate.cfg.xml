@@ -23,6 +23,8 @@
 		<!-- Enable Hibernate's automatic session context management -->
 		<mapping class='ar.com.labold.negocio.Rol' />
 		<mapping class='ar.com.labold.negocio.ItemMenu' />
+		<mapping class='ar.com.labold.negocio.Usuario' />
+		<mapping class='ar.com.labold.negocio.Paciente' />
 	
 	</session-factory>
 </hibernate-configuration>

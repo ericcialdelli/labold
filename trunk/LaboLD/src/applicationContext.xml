@@ -56,14 +56,32 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	<!--  *******************-->
 	<!--     DAOS            -->
 	<!--  *******************-->
-
-
+	<bean id="menuDAO" class="ar.com.labold.dao.MenuDAO" parent="abstractRepository" />
+	<bean id="loginDAO" class="ar.com.labold.dao.LoginDAO" parent="abstractRepository" />
+	<bean id="rolDAO" class="ar.com.labold.dao.RolDAO" parent="abstractRepository" />
+	<bean id="usuarioDAO" class="ar.com.labold.dao.UsuarioDAO" parent="abstractRepository" />
+	<bean id="pacienteDAO" class="ar.com.labold.dao.PacienteDAO" parent="abstractRepository" />
 	
 	<!--  *******************-->
 	<!--     Fachadas        -->
 	<!--  *******************-->
-
-	
+	<bean id="menuFachada" class="ar.com.labold.fachada.MenuFachada">
+		<constructor-arg ref="menuDAO" />
+	</bean>
+	<bean id="loginFachada" class="ar.com.labold.fachada.LoginFachada">
+		<constructor-arg ref="loginDAO" />
+	</bean>
+	<bean id="rolFachada" class="ar.com.labold.fachada.RolFachada">
+		<constructor-arg ref="rolDAO" />
+		<constructor-arg ref="usuarioDAO" />
+	</bean>
+	<bean id="usuarioFachada" class="ar.com.labold.fachada.UsuarioFachada">
+		<constructor-arg ref="usuarioDAO" />
+		<constructor-arg ref="rolFachada" />
+	</bean>	
+	<bean id="pacienteFachada" class="ar.com.labold.fachada.PacienteFachada">
+		<constructor-arg ref="pacienteDAO" />
+	</bean>	
 	
 	<!--  *******************-->
 	<!--       Parameters    -->

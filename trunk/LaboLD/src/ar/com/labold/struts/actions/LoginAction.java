@@ -12,8 +12,8 @@ import org.springframework.web.struts.DispatchActionSupport;
 
 import ar.com.labold.negocio.exception.NegocioException;
 import ar.com.labold.utils.MyLogger;
-//import ar.com.labold.dto.UsuarioDTO;
-//import ar.com.labold.fachada.LoginFachada;
+import ar.com.labold.dto.UsuarioDTO;
+import ar.com.labold.fachada.LoginFachada;
 import ar.com.labold.struts.actions.forms.LoginForm;
 import ar.com.labold.utils.Constantes;
 
@@ -24,7 +24,7 @@ public class LoginAction extends DispatchActionSupport {
 			HttpServletResponse response) throws Exception {
 
 		String strForward = "exitoLogin";
-/*
+
 		try {
 
 			LoginForm loginForm = (LoginForm) form;
@@ -49,7 +49,7 @@ public class LoginAction extends DispatchActionSupport {
 			request.setAttribute("error", "Error Inesperado");
 			strForward = "error";
 		}
-*/
+
 		return mapping.findForward(strForward);
 	}
 
@@ -58,7 +58,7 @@ public class LoginAction extends DispatchActionSupport {
 			HttpServletResponse response) throws Exception {
 
 		String strForward = "exitoLogout";
-/*
+
 		try {
 
 			HttpSession session = request.getSession();
@@ -73,7 +73,7 @@ public class LoginAction extends DispatchActionSupport {
 			request.setAttribute("error", "Error Inesperado");
 			strForward = "error";
 		}
-*/
+
 		return mapping.findForward(strForward);
 	}
 }

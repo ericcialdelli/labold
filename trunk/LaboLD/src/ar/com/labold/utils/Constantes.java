@@ -4,7 +4,7 @@ public class Constantes {
 
 	public static final String USER_LABEL_SESSION = "usuario";
 
-	public static final Long ID_ROL_ADMINISTRADOR = 2L;
+	public static final Long ID_ROL_ADMINISTRADOR = 1L;
 
 	// USUARIO
 	public static final String TITULO_ALTA_USUARIO = "Alta de Usuario";
