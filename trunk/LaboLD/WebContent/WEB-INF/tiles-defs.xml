@@ -52,6 +52,13 @@
 	</definition>
 	<!-- FIN PACIENTE -->	
 	
+	<!-- OBRA SOCIAL -->
+	<definition name=".altaObraSocial" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/altaObraSocial.jsp" />
+	</definition>
+	<!-- FIN OBRA SOCIAL -->	
+	
 	<definition name=".error" extends=".base">
 		<put name="title" value="Error en LaboLD" />
 		<put name="body" value="/jsp/error.jsp" />

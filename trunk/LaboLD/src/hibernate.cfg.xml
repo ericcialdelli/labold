@@ -25,6 +25,7 @@
 		<mapping class='ar.com.labold.negocio.ItemMenu' />
 		<mapping class='ar.com.labold.negocio.Usuario' />
 		<mapping class='ar.com.labold.negocio.Paciente' />
+		<mapping class='ar.com.labold.negocio.ObraSocial' />
 	
 	</session-factory>
 </hibernate-configuration>

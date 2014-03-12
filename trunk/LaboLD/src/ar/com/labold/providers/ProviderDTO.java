@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ar.com.labold.dto.ItemMenuDTO;
+import ar.com.labold.dto.ObraSocialDTO;
 import ar.com.labold.dto.PacienteDTO;
 import ar.com.labold.dto.RolDTO;
 import ar.com.labold.dto.UsuarioDTO;
 import ar.com.labold.negocio.ItemMenu;
+import ar.com.labold.negocio.ObraSocial;
 import ar.com.labold.negocio.Paciente;
 import ar.com.labold.negocio.Rol;
 import ar.com.labold.negocio.Usuario;
+import ar.com.labold.utils.Fecha;
 
 /*import ar.com.siig.dto.AutorizadoDTO;
 import ar.com.siig.dto.BoletaDepositoDTO;
@@ -120,9 +123,21 @@ public abstract class ProviderDTO {
 		pacienteDTO.setId(paciente.getId());
 		pacienteDTO.setNombre(paciente.getNombre());
 		pacienteDTO.setTelefono(paciente.getTelefono());
+		pacienteDTO.setFechaNacimiento(Fecha.getFechaDDMMAAAASlash(Fecha
+				.dateToStringDDMMAAAA(paciente.getFechaNacimiento())));
+		pacienteDTO.setObraSocial(ProviderDTO.getObraSocialDTO(paciente.getObraSocial()));
 		
 		return pacienteDTO;
 	}	
+	
+	public static ObraSocialDTO getObraSocialDTO(ObraSocial obraSocial){
+		
+		ObraSocialDTO obraSocialDTO = new ObraSocialDTO();
+		obraSocialDTO.setId(obraSocial.getId());
+		obraSocialDTO.setNombre(obraSocial.getNombre());
+		
+		return obraSocialDTO;
+	}
 	
 	/*public static PeriodoDTO getPeriodoDTO(Periodo periodo) {
 

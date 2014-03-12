@@ -4,9 +4,21 @@
 
 <script type="text/javascript" src="<html:rewrite page='/js/validacionAjax.js'/>"></script>
 <script type="text/javascript" src="<html:rewrite page='/js/funcUtiles.js'/>"></script>
-<script type="text/javascript" src="<html:rewrite page='/dwr/interface/RolFachada.js'/>"></script>
+<script type="text/javascript" src="<html:rewrite page='/js/validarLetras.js'/>"></script>
+<script type="text/javascript" src="<html:rewrite page='/js/validarNum.js'/>"></script>
+
+<script type="text/javascript"
+	src="<html:rewrite page='/js/JQuery/ui/jquery-ui-1.8.10.custom.min.js'/>"></script>	
+
+<link rel="stylesheet" href="<html:rewrite page='/css/ui-lightness/jquery-ui-1.8.10.custom.css'/>"
+	type="text/css">
 
 <script type="text/javascript">
+
+	/*$(function() {
+		$( "#datepicker" ).datepicker({ dateFormat: 'dd/mm/yy'});		
+	});*/
+
 	function submitir(){
 		validarForm("pacienteFormId","../paciente","validarPacienteForm","PacienteForm");
 	}
@@ -50,37 +62,20 @@
 		<tr>
 			<td class="botoneralNegritaRight" width="40%">Nombre</td>
 			<td align="left">
-				<html:text property="pacienteDTO.nombre" value="" />
+				<html:text property="pacienteDTO.nombre" value="" styleClass="botonerab" styleId="nombre"/>
 			</td>
 		</tr>	
 		<tr>
 			<td class="botoneralNegritaRight" width="40%">Apellido</td>
 			<td  align="left">
-				<html:text property="pacienteDTO.apellido" value="" />			
+				<html:text property="pacienteDTO.apellido" value="" styleClass="botonerab"/>			
 			</td>
 		</tr>
 		<tr>
-			<td class="botoneralNegritaRight" width="40%">
-				Dirección
-			</td>
+			<td class="botoneralNegritaRight" width="40%">Fecha de Nacimiento</td>
 			<td  align="left">
-				<html:text property="pacienteDTO.direccion" value="" />			
-			</td>
-		</tr>
-		<tr>
-			<td class="botoneralNegritaRight" width="40%">
-				Telefono
-			</td>
-			<td  align="left">
-				<html:text property="pacienteDTO.telefono" value="" />			
-			</td>
-		</tr>
-		<tr>
-			<td class="botoneralNegritaRight" width="40%">
-				E-Mail
-			</td>
-			<td  align="left">
-				<html:text property="pacienteDTO.email" value="" />			
+				<input id="datepicker" class="botonerab" type="text" size="15" name="pacienteDTO.fechaNacimiento">						
+				<img alt="" src="<html:rewrite page='/imagenes/calendar/calendar2.gif'/>" align="top" width='17' height='21'>							
 			</td>
 		</tr>
 		<tr>
@@ -88,7 +83,31 @@
 				DNI
 			</td>
 			<td  align="left">
-				<html:text property="pacienteDTO.dni" value="" />			
+				<html:text property="pacienteDTO.dni" value="" onkeypress="javascript:esNumerico(event);" styleClass="botonerab"/>			
+			</td>
+		</tr>				
+		<tr>
+			<td class="botoneralNegritaRight" width="40%">
+				Dirección
+			</td>
+			<td  align="left">
+				<html:text property="pacienteDTO.direccion" value="" styleClass="botonerab"/>			
+			</td>
+		</tr>
+		<tr>
+			<td class="botoneralNegritaRight" width="40%">
+				Telefono
+			</td>
+			<td  align="left">
+				<html:text property="pacienteDTO.telefono" value="" styleClass="botonerab"/>			
+			</td>
+		</tr>
+		<tr>
+			<td class="botoneralNegritaRight" width="40%">
+				E-Mail
+			</td>
+			<td  align="left">
+				<html:text property="pacienteDTO.email" value="" styleClass="botonerab"/>			
 			</td>
 		</tr>
 		<tr>
@@ -96,19 +115,15 @@
 				Obra Social
 			</td>
 			<td  align="left">
-				<select id="obraSocial" class="botonerab">
-					<option value="ioma">
+				<select id="obraSocial" class="botonerab" name="pacienteDTO.obraSocial.id">
+					<option value="-1">
 						-Seleccione una Obra Social-
-					</option>				
-					<option value="ioma">
-						IOMA
-					</option>
-					<option value="ioma">
-						OSDE
-					</option>
-					<option value="ioma">
-						OSPE
-					</option>										
+					</option>		
+					<c:forEach items="${obrasSociales}" var="os">
+						<option value="${os.id}">
+							<c:out value="${os.nombre}"></c:out>
+						</option>
+					</c:forEach>										
 				</select>			
 			</td>
 		</tr>				
@@ -126,3 +141,8 @@
 	</table>
 
 </html:form>
+<script type="text/javascript">
+
+	$('#nombre').focus();
+
+</script>

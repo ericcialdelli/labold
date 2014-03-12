@@ -16,7 +16,14 @@ public class PacienteDTO {
 	
 	private int dni;	
 	
-	public PacienteDTO(){}
+	private String fechaNacimiento;
+	
+	private ObraSocialDTO obraSocial;
+	
+	public PacienteDTO(){
+		
+		obraSocial = new ObraSocialDTO();
+	}
 
 	public Long getId() {
 		return id;
@@ -72,5 +79,21 @@ public class PacienteDTO {
 
 	public void setDni(int dni) {
 		this.dni = dni;
+	}
+
+	public String getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(String fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public ObraSocialDTO getObraSocial() {
+		return obraSocial;
+	}
+
+	public void setObraSocial(ObraSocialDTO obraSocial) {
+		this.obraSocial = obraSocial;
 	}
 }

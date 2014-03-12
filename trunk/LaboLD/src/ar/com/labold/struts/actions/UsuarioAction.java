@@ -51,7 +51,7 @@ public class UsuarioAction extends ValidadorAction {
 		UsuarioFachada usuarioFachada = (UsuarioFachada) ctx.getBean("usuarioFachada");
 		boolean existe = usuarioFachada.existeUsuario(usuarioForm.getUsuarioDTO().getNombreUsuario(), usuarioForm.getUsuarioDTO().getId());
 		if (existe) {
-			Validator.addErrorXML(error, Constantes.EXISTE_ENTIDAD);
+			Validator.addErrorXML(error, Constantes.EXISTE_USUARIO);
 		}
 		return !existe && usuarioForm.validar(error);
 	}

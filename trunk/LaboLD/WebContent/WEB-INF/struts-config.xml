@@ -11,7 +11,10 @@
 		</form-bean>
 		<form-bean name="pacienteForm"
 			type="ar.com.labold.struts.actions.forms.PacienteForm">
-		</form-bean>						
+		</form-bean>
+		<form-bean name="obraSocialForm"
+			type="ar.com.labold.struts.actions.forms.ObraSocialForm">
+		</form-bean>								
 	</form-beans>
 
 	<global-exceptions></global-exceptions>
@@ -22,6 +25,12 @@
 	</global-forwards>
 
 	<action-mappings>
+	
+		<!-- JSP -->
+		<action path="/jsp" type="ar.com.labold.struts.actions.TilesForwardAction">
+			<forward name=".index" path=".index" />		
+			<forward name=".altaObraSocial" path=".altaObraSocial" />
+		</action>	
 	
 		<!-- MENU -->
 		<action path="/menu" type="ar.com.labold.struts.actions.MenuAction"
@@ -61,6 +70,14 @@
 			<forward name="exitoAltaPaciente" path="/paciente.do?metodo=cargarAltaPaciente" />
 		</action>				
 		<!-- FIN PACIENTE -->
+
+		<!-- OBRA SOCIAL -->
+		<action path="/obraSocial" type="ar.com.labold.struts.actions.ObraSocialAction"
+			parameter="metodo" name="obraSocialForm" scope="request">
+			<forward name="exitoAltaObraSocial" path="/jsp.do?page=.altaObraSocial" />
+		</action>				
+		<!-- FIN OBRA SOCIAL -->				
+		
 				
 	</action-mappings>
 

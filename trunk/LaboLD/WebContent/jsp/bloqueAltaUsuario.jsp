@@ -54,10 +54,10 @@
 			<td align="left">
 				<c:choose>
 					<c:when test="${metodo=='altaUsuario'}">
-						<html:text property="usuarioDTO.nombreUsuario" value="${usu.nombreUsuario}" />
+						<html:text property="usuarioDTO.nombreUsuario" value="${usu.nombreUsuario}" styleId="nombre"/>
 					</c:when>
 					<c:otherwise><!-- AL MODIFICAR NO PUEDO CAMBIAR EL NOMBRE DE USUARIO -->
-						<html:text property="usuarioDTO.nombreUsuario" value="${usu.nombreUsuario}" readonly="true"/>
+						<html:text property="usuarioDTO.nombreUsuario" value="${usu.nombreUsuario}" readonly="true" styleId="nombre"/>
 					</c:otherwise>
 				</c:choose>
 			</td>
@@ -147,3 +147,8 @@
 	</table>
 
 </html:form>
+<script type="text/javascript">
+
+	$('#nombre').focus();
+
+</script>
