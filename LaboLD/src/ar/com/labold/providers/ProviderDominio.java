@@ -4,13 +4,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.com.labold.dto.ObraSocialDTO;
 import ar.com.labold.dto.PacienteDTO;
 import ar.com.labold.dto.RolDTO;
 import ar.com.labold.dto.UsuarioDTO;
 import ar.com.labold.negocio.ItemMenu;
+import ar.com.labold.negocio.ObraSocial;
 import ar.com.labold.negocio.Paciente;
 import ar.com.labold.negocio.Rol;
 import ar.com.labold.negocio.Usuario;
+import ar.com.labold.utils.Fecha;
 
 
 public abstract class ProviderDominio {
@@ -56,8 +59,20 @@ public abstract class ProviderDominio {
 		paciente.setId(pacienteDTO.getId());
 		paciente.setNombre(pacienteDTO.getNombre());
 		paciente.setTelefono(pacienteDTO.getTelefono());
+		paciente.setFechaNacimiento(Fecha
+				.stringDDMMAAAAToUtilDate(pacienteDTO.getFechaNacimiento()));
+		paciente.setObraSocial(ProviderDominio.getObraSocial(pacienteDTO.getObraSocial()));
 		
 		return paciente;
+	}	
+	
+	public static ObraSocial getObraSocial(ObraSocialDTO obraSocialDTO){
+		
+		ObraSocial obraSocial = new ObraSocial();
+		obraSocial.setId(obraSocialDTO.getId());
+		obraSocial.setNombre(obraSocialDTO.getNombre());
+		
+		return obraSocial;
 	}	
 	
 	/*public static Localidad getLocalidad(LocalidadDTO localidadDTO) {
