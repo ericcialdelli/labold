@@ -6,11 +6,13 @@ import java.util.List;
 
 import ar.com.labold.dto.ObraSocialDTO;
 import ar.com.labold.dto.PacienteDTO;
+import ar.com.labold.dto.PracticaDTO;
 import ar.com.labold.dto.RolDTO;
 import ar.com.labold.dto.UsuarioDTO;
 import ar.com.labold.negocio.ItemMenu;
 import ar.com.labold.negocio.ObraSocial;
 import ar.com.labold.negocio.Paciente;
+import ar.com.labold.negocio.Practica;
 import ar.com.labold.negocio.Rol;
 import ar.com.labold.negocio.Usuario;
 import ar.com.labold.utils.Fecha;
@@ -18,6 +20,7 @@ import ar.com.labold.utils.Fecha;
 
 public abstract class ProviderDominio {
 
+	//Se usa en el Alta de Usuario
 	public static Usuario getUsuario(UsuarioDTO usuarioDTO, Rol rol) {
 
 		Usuario usuario = new Usuario();
@@ -29,6 +32,7 @@ public abstract class ProviderDominio {
 		return usuario;
 	}
 
+	//Se usa en la modificacion de Usuario
 	public static Usuario getUsuario(Usuario usuario, UsuarioDTO usuarioDTO, Rol rol) {
 
 		usuario.setHabilitado(usuarioDTO.isHabilitado());
@@ -48,7 +52,8 @@ public abstract class ProviderDominio {
 		return rol;
 	}	
 	
-	public static Paciente getPaciente(PacienteDTO pacienteDTO) {
+	//Se usa en el alta de Paciente
+	public static Paciente getPaciente(PacienteDTO pacienteDTO, ObraSocial obraSocial) {
 
 		Paciente paciente = new Paciente();
 
@@ -61,11 +66,28 @@ public abstract class ProviderDominio {
 		paciente.setTelefono(pacienteDTO.getTelefono());
 		paciente.setFechaNacimiento(Fecha
 				.stringDDMMAAAAToUtilDate(pacienteDTO.getFechaNacimiento()));
-		paciente.setObraSocial(ProviderDominio.getObraSocial(pacienteDTO.getObraSocial()));
+		paciente.setObraSocial(obraSocial);
 		
 		return paciente;
 	}	
 	
+	//Se usa en la modificacion de Paciente
+	public static Paciente getPaciente(Paciente paciente, PacienteDTO pacienteDTO, ObraSocial obraSocial) {
+
+		paciente.setApellido(pacienteDTO.getApellido());
+		paciente.setDireccion(pacienteDTO.getDireccion());
+		paciente.setDni(pacienteDTO.getDni());
+		paciente.setEmail(pacienteDTO.getEmail());
+		paciente.setNombre(pacienteDTO.getNombre());
+		paciente.setTelefono(pacienteDTO.getTelefono());
+		paciente.setFechaNacimiento(Fecha
+				.stringDDMMAAAAToUtilDate(pacienteDTO.getFechaNacimiento()));
+		paciente.setObraSocial(obraSocial);
+		
+		return paciente;
+	}	
+	
+	//Se usa en el alta de Obra Social
 	public static ObraSocial getObraSocial(ObraSocialDTO obraSocialDTO){
 		
 		ObraSocial obraSocial = new ObraSocial();
@@ -74,6 +96,32 @@ public abstract class ProviderDominio {
 		
 		return obraSocial;
 	}	
+	
+	//Se usa en la modificacion de Obra Social
+	public static ObraSocial getObraSocial(ObraSocial obraSocial, ObraSocialDTO obraSocialDTO){
+			
+		obraSocial.setNombre(obraSocialDTO.getNombre());
+		
+		return obraSocial;
+	}	
+	
+	//Se usa en el alta de la Practica
+	public static Practica getPractica(PracticaDTO practicaDTO){
+		
+		Practica practica = new Practica();
+		practica.setId(practicaDTO.getId());
+		practica.setNombre(practicaDTO.getNombre());
+		
+		return practica;
+	}	
+	
+	//Se usa en la modificacion de la Practica
+	public static Practica getPractica(Practica practica, PracticaDTO practicaDTO){
+
+		practica.setNombre(practicaDTO.getNombre());
+		
+		return practica;
+	}		
 	
 	/*public static Localidad getLocalidad(LocalidadDTO localidadDTO) {
 

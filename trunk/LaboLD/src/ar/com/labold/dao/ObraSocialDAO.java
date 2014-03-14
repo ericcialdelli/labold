@@ -46,5 +46,10 @@ public class ObraSocialDAO extends HibernateDaoSupport {
 		this.getHibernateTemplate().saveOrUpdate(obraSocial);
 		this.getHibernateTemplate().flush();
 		this.getHibernateTemplate().clear();	
-	}	
+	}
+	
+	public ObraSocial getObraSocial(Long id){
+		
+		return (ObraSocial)getHibernateTemplate().get(ObraSocial.class,id);
+	}
 }

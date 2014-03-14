@@ -26,6 +26,11 @@ public class ObraSocialFachada {
 		
 		return obraSocialDAO.getObrasSociales();
 	}
+
+	public ObraSocial getObraSocial(Long id){
+		
+		return obraSocialDAO.getObraSocial(id);
+	}		
 	
 	public boolean existeObraSocial(ObraSocialDTO obraSocial){
 		
@@ -35,5 +40,12 @@ public class ObraSocialFachada {
 	public void altaObraSocial(ObraSocialDTO obraSocialDTO) throws NegocioException{
 		
 		obraSocialDAO.altaObraSocial(ProviderDominio.getObraSocial(obraSocialDTO));
+	}
+	
+	public void modificacionObraSocial(ObraSocialDTO obraSocialDTO) throws NegocioException{
+		
+		ObraSocial obraSocial = obraSocialDAO.getObraSocial(obraSocialDTO.getId());
+		
+		obraSocialDAO.altaObraSocial(ProviderDominio.getObraSocial(obraSocial,obraSocialDTO));
 	}
 }

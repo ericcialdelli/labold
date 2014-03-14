@@ -11,35 +11,36 @@ import org.apache.struts.action.ActionMapping;
 import org.springframework.web.context.WebApplicationContext;
 
 import ar.com.labold.fachada.ObraSocialFachada;
-import ar.com.labold.fachada.PacienteFachada;
+import ar.com.labold.fachada.PracticaFachada;
 import ar.com.labold.negocio.ObraSocial;
-import ar.com.labold.negocio.Paciente;
+import ar.com.labold.negocio.Practica;
 import ar.com.labold.struts.actions.forms.ObraSocialForm;
+import ar.com.labold.struts.actions.forms.PracticaForm;
+import ar.com.labold.struts.utils.Validator;
 import ar.com.labold.utils.Constantes;
 import ar.com.labold.utils.MyLogger;
-import ar.com.labold.struts.utils.Validator;
 
-public class ObraSocialAction extends ValidadorAction {
+public class PracticaAction extends ValidadorAction {
 
-	public ActionForward altaObraSocial(ActionMapping mapping,
+	public ActionForward altaPractica(ActionMapping mapping,
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
-		String strForward = "exitoAltaObraSocial";
+		String strForward = "exitoAltaPractica";
 		try {
 			
-			ObraSocialForm obraSocialForm = (ObraSocialForm)form;
+			PracticaForm pacticaForm = (PracticaForm)form;
 			WebApplicationContext ctx = getWebApplicationContext();
-			ObraSocialFachada obraSocialFachada = (ObraSocialFachada) 
-									ctx.getBean("obraSocialFachada");			
+			PracticaFachada practicaFachada = (PracticaFachada) 
+												ctx.getBean("practicaFachada");			
 			
 			// valido nuevamente por seguridad.  
-			if (!validarObraSocialForm(new StringBuffer(), obraSocialForm)) {
+			if (!validarPracticaForm(new StringBuffer(), pacticaForm)) {
 				throw new Exception("Error de Seguridad");
 			}			
 			
-			obraSocialFachada.altaObraSocial(obraSocialForm.getObraSocialDTO());
-			request.setAttribute("exitoGrabado", Constantes.EXITO_ALTA_OBRA_SOCIAL);			
+			practicaFachada.altaPractica(pacticaForm.getPracticaDTO());
+			request.setAttribute("exitoGrabado", Constantes.EXITO_ALTA_PRACTICA);			
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
@@ -47,23 +48,23 @@ public class ObraSocialAction extends ValidadorAction {
 			strForward = "error";
 		}
 		return mapping.findForward(strForward);
-	}
+	}	
 	
 	@SuppressWarnings("unchecked")
-	public ActionForward recuperarObrasSociales(ActionMapping mapping,
+	public ActionForward recuperarPracticas(ActionMapping mapping,
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		String strForward = "exitoRecuperarObrasSociales";
+		String strForward = "exitoRecuperarPracticas";
 
 		try {
 			WebApplicationContext ctx = getWebApplicationContext();
-			ObraSocialFachada obraSocialFachada = (ObraSocialFachada) 
-										ctx.getBean("obraSocialFachada");
+			PracticaFachada practicaFachada = (PracticaFachada) 
+										ctx.getBean("practicaFachada");	
 						
-			List<ObraSocial> listaObrasSociales = obraSocialFachada.getObrasSociales();
+			List<Practica> listaPracticass = practicaFachada.getPracticas();
 			
-			request.setAttribute("obrasSociales", listaObrasSociales);
+			request.setAttribute("practicas", listaPracticass);
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
@@ -75,21 +76,21 @@ public class ObraSocialAction extends ValidadorAction {
 	}	
 	
 	@SuppressWarnings("unchecked")
-	public ActionForward recuperarObraSocial(ActionMapping mapping,
+	public ActionForward recuperarPractica(ActionMapping mapping,
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		String strForward = "exitoRecuperarObraSocial";
+		String strForward = "exitoRecuperarPractica";
 
 		try {
 			WebApplicationContext ctx = getWebApplicationContext();
-			ObraSocialFachada obraSocialFachada = (ObraSocialFachada) 
-										ctx.getBean("obraSocialFachada");
+			PracticaFachada practicaFachada = (PracticaFachada) 
+											ctx.getBean("practicaFachada");	
 			
-			String idObraSocial = request.getParameter("id");			
-			ObraSocial obraSocial = obraSocialFachada.getObraSocial(Long.valueOf(idObraSocial));
+			String idPractica = request.getParameter("id");			
+			Practica practica = practicaFachada.getPractica(Long.valueOf(idPractica));
 			
-			request.setAttribute("obraSocial", obraSocial);
+			request.setAttribute("practica", practica);
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
@@ -97,49 +98,49 @@ public class ObraSocialAction extends ValidadorAction {
 			strForward = "error";
 		}
 
-		return mapping.findForward(strForward);
-	}	
-	
-	public ActionForward modificacionObraSocial(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		
-		String strForward = "exitoModificacionObraSocial";
-		try {
-			
-			ObraSocialForm obraSocialForm = (ObraSocialForm)form;
-			WebApplicationContext ctx = getWebApplicationContext();
-			ObraSocialFachada obraSocialFachada = (ObraSocialFachada) 
-									ctx.getBean("obraSocialFachada");			
-			
-			// valido nuevamente por seguridad.  
-			if (!validarObraSocialForm(new StringBuffer(), obraSocialForm)) {
-				throw new Exception("Error de Seguridad");
-			}			
-			
-			obraSocialFachada.modificacionObraSocial(obraSocialForm.getObraSocialDTO());
-			request.setAttribute("exitoGrabado", Constantes.EXITO_MODIFICACION_OBRA_SOCIAL);			
-			
-		} catch (Throwable t) {
-			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
-			strForward = "error";
-		}
 		return mapping.findForward(strForward);
 	}		
 	
-	public boolean validarObraSocialForm(StringBuffer error, ActionForm form) {
+	public ActionForward modificacionPractica(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		String strForward = "exitoModificacionPractica";
 		try {
-			ObraSocialForm obraSocialForm = (ObraSocialForm)form;
-			WebApplicationContext ctx = getWebApplicationContext();
-			ObraSocialFachada obraSocialFachada = (ObraSocialFachada) 
-									ctx.getBean("obraSocialFachada");
 			
-			boolean b1 = Validator.requerido(obraSocialForm.getObraSocialDTO().getNombre(),
+			PracticaForm pacticaForm = (PracticaForm)form;
+			WebApplicationContext ctx = getWebApplicationContext();
+			PracticaFachada practicaFachada = (PracticaFachada) 
+												ctx.getBean("practicaFachada");			
+			
+			// valido nuevamente por seguridad.  
+			if (!validarPracticaForm(new StringBuffer(), pacticaForm)) {
+				throw new Exception("Error de Seguridad");
+			}			
+			
+			practicaFachada.modificacionPractica(pacticaForm.getPracticaDTO());
+			request.setAttribute("exitoGrabado", Constantes.EXITO_MODIFICACION_PRACTICA);						
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+		return mapping.findForward(strForward);
+	}	
+	
+	public boolean validarPracticaForm(StringBuffer error, ActionForm form) {
+		try {
+			PracticaForm pacticaForm = (PracticaForm)form;
+			WebApplicationContext ctx = getWebApplicationContext();
+			PracticaFachada practicaFachada = (PracticaFachada) 
+									ctx.getBean("practicaFachada");
+			
+			boolean b1 = Validator.requerido(pacticaForm.getPracticaDTO().getNombre(),
 																		"Nombre", error);			
-			boolean existe = obraSocialFachada.existeObraSocial(obraSocialForm.getObraSocialDTO());
+			boolean existe = practicaFachada.existeObraSocial(pacticaForm.getPracticaDTO());
 			if (existe) {
-				Validator.addErrorXML(error, Constantes.EXISTE_OBRA_SOCIAL);
+				Validator.addErrorXML(error, Constantes.EXISTE_PRACTICA);
 			}
 			return !existe && b1;
 

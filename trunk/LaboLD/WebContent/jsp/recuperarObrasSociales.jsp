@@ -16,10 +16,10 @@
 
 <script>
 
-	function recuperarPaciente(id){
+	function recuperarObraSocial(id){
 		//var urlSeleccionGuia = $('#paramUrlSeleccionGuia').val();
 		//parent.location=contextRoot() + "/guia.do?metodo="+urlSeleccionGuia+"&id="+id;
-		parent.location=contextRoot() + "/paciente.do?metodo=recuperarPaciente&id="+id;
+		parent.location=contextRoot() + "/obraSocial.do?metodo=recuperarObraSocial&id="+id;
 	}
 
 	var clase;
@@ -39,36 +39,32 @@
 </script>
 
 <div id="exitoGrabado" class="verdeExito">${exitoGrabado}</div>
-<table border="0" class="cuadrado" align="center" width="80%"
+<table border="0" class="cuadrado" align="center" width="70%"
 	cellpadding="2">
 	<tr>
-		<td class="azulAjustado">Modificación de Pacientes</td>
+		<td class="azulAjustado">Modificación de Obras Sociales</td>
 	</tr>
 	<tr>
 		<td height="20"></td>
 	</tr>
 	<tr>
 		<td>
-			<table border="0" class="cuadrado" align="center" width="80%" cellpadding="2">
+			<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2">
 				<tr>
-					<td class="azulAjustado">Nombre y Apellido</td>
-					<td class="azulAjustado">DNI</td>
-					<td class="azulAjustado">Fecha Nacimiento</td>
+					<td class="azulAjustado">Nombre</td>
 					<td class="azulAjustado"></td>
 				</tr>
 				<%String clase=""; %>
-				<c:forEach items="${pacientes}" var="paciente" varStatus="i">
+				<c:forEach items="${obrasSociales}" var="obraSocial" varStatus="i">
 					<%clase=(clase.equals("")?"par":""); %>
-					
+
 					<tr class="<%=clase%>" onmouseover="javascript:pintarFila('idTr<c:out value='${i.index}'></c:out>');"
 						onmouseout="javascript:despintarFila('idTr<c:out value='${i.index}'></c:out>');"
 						id="idTr<c:out value='${i.index}'></c:out>">					
-					
-						<td>${paciente.apellido}, ${paciente.nombre}</td>
-						<td>${paciente.dni}</td>
-						<td><fmt:formatDate	value='${paciente.fechaNacimiento}' pattern='dd/MM/yyyy' /></td>
+										
+						<td>${obraSocial.nombre}</td>
 						<td>
-							<a href="javascript:recuperarPaciente(${paciente.id});">
+							<a href="javascript:recuperarObraSocial(${obraSocial.id});">
 								Seleccionar
 							</a>
 						</td>

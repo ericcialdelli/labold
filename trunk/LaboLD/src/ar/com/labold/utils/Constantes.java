@@ -60,8 +60,26 @@ public class Constantes {
 	//OBRA SOCIAL
 	public static final String EXITO_ALTA_OBRA_SOCIAL = "La Obra Social se ha dado de alta con exito";
 	
+	public static final String EXITO_MODIFICACION_OBRA_SOCIAL = "La Obra Social se ha modificado con exito";	
+	
 	public static final String EXISTE_OBRA_SOCIAL = "Ya existe una Obra Social con ese nombre";
 	//FIN OBRA SOCIAL
+
+	//PACIENTE
+	public static final String EXITO_ALTA_PACIENTE = "El Paciente se ha dado de alta con exito";
+	
+	public static final String EXITO_MODIFICACION_PACIENTE = "El Paciente se ha modificado con exito";	
+	
+	public static final String EXISTE_PACIENTE = "Ya existe un Paciente con ese DNI";
+	//FIN PACIENTE	
+	
+	//PRACTICA
+	public static final String EXITO_ALTA_PRACTICA = "La Práctica se ha dado de alta con exito";
+	
+	public static final String EXITO_MODIFICACION_PRACTICA = "La Práctica se ha modificado con exito";	
+	
+	public static final String EXISTE_PRACTICA = "Ya existe una Práctica con ese nombre";
+	//FIN PRACTICA	
 	
 	// REPORTES
 	public static final String REPORTE_VENCIMIENTO_MARCAS_SENIALES = "reporteVencimientoMarcasSeniales";
