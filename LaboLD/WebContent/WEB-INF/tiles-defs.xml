@@ -50,6 +50,11 @@
 		<put name="title" value="LaboLD" />
 		<put name="body" value="/jsp/recuperarPacientes.jsp" />
 	</definition>
+
+	<definition name=".modificarPaciente" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/modificarPaciente.jsp" />
+	</definition>	
 	<!-- FIN PACIENTE -->	
 	
 	<!-- OBRA SOCIAL -->
@@ -57,7 +62,34 @@
 		<put name="title" value="LaboLD" />
 		<put name="body" value="/jsp/altaObraSocial.jsp" />
 	</definition>
+
+	<definition name=".recuperarObrasSociales" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/recuperarObrasSociales.jsp" />
+	</definition>
+	
+	<definition name=".modificarObraSocial" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/modificarObraSocial.jsp" />
+	</definition>			
 	<!-- FIN OBRA SOCIAL -->	
+
+	<!-- PRACTICA -->
+	<definition name=".altaPractica" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/altaPractica.jsp" />
+	</definition>		
+
+	<definition name=".recuperarPracticas" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/recuperarPracticas.jsp" />
+	</definition>	
+
+	<definition name=".modificarPractica" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/modificarPractica.jsp" />
+	</definition>		
+	<!-- FIN PRACTICA -->	
 	
 	<definition name=".error" extends=".base">
 		<put name="title" value="Error en LaboLD" />
