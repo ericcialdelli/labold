@@ -330,3 +330,24 @@
 }
 
 .tachado{text-decoration:line-through;}
+
+
+/*Multas*/
+.tituloOpcion {
+	FONT-WEIGHT: bold; FONT-SIZE: 13px; COLOR: #333333; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.lineaColor {
+	BORDER-RIGHT: #8ebfdd 0px solid; PADDING-RIGHT: 0px; BORDER-TOP: #8ebfdd 0px solid; PADDING-LEFT: 0px; FONT-WEIGHT: normal; FONT-SIZE: 11px; PADDING-BOTTOM: 2px; BORDER-LEFT: #8ebfdd 0px solid; COLOR: #373737; LINE-HEIGHT: 17px; PADDING-TOP: 2px; BORDER-BOTTOM: #8ebfdd 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.TDtablaBoldRight {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; color: black; FONT-FAMILY: Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #f4f9fd; text-align: right;
+}
+.TDtablaNormal {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #535353; FONT-FAMILY: Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #f4f9fd
+}
+.TDtabla {
+	BORDER-RIGHT: #e1e8fb 1px solid; PADDING-RIGHT: 3px; BORDER-TOP: #def1f5 1px solid; PADDING-LEFT: 4px; FONT-WEIGHT: normal; FONT-SIZE: 11px; LIST-STYLE-IMAGE: none; PADDING-BOTTOM: 2px; BORDER-LEFT: 0px solid; COLOR: #535353; LINE-HEIGHT: 17px; PADDING-TOP: 2px; BORDER-BOTTOM: 0px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #f4f9fd
+}
+.tituloTabla {
+	FONT-WEIGHT: bold; FONT-SIZE: 13px; COLOR: #ffffff; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; HEIGHT: 24px; BACKGROUND-COLOR: #0080b7
+}

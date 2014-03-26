@@ -42,16 +42,27 @@
 	<html:hidden property="metodo" value="${metodo}"/>
 	<html:hidden property="usuarioDTO.id" value="${usu.id}"/>
 
-	<table border="0" class="cuadrado" align="center" width="60%" cellpadding="2">
+	<table width="80%" cellspacing="1" cellpadding="0" border="0" align="center">
+        <tr>
+            <td class="lineaColor">
+                <span class="tituloOpcion">
+                    ${titulo}
+                </span>
+            </td>
+        </tr>
+	</table>
+	<br>
+	<br>
+	<table border="0" class="cuadrado" align="center" width="60%" cellpadding="2" cellspacing="0">
 		<tr>
-			<td colspan="2"  class="azulAjustado" >${titulo}</td>
+			<td colspan="2"  class="tituloTabla" ></td>
 		</tr>
 		<tr>
-			<td height="20" colspan="2"></td>
+			<td height="20" colspan="2" class="TDtablaNormal"></td>
 		</tr>				
 		<tr>
-			<td class="botoneralNegritaRight">Nombre</td>
-			<td align="left">
+			<td class="TDtablaBoldRight">Nombre</td>
+			<td align="left" class="TDtablaNormal">
 				<c:choose>
 					<c:when test="${metodo=='altaUsuario'}">
 						<html:text property="usuarioDTO.nombreUsuario" value="${usu.nombreUsuario}" styleId="nombre"/>
@@ -63,26 +74,26 @@
 			</td>
 		</tr>	
 		<tr>
-			<td class="botoneralNegritaRight">Contraseña</td>
-			<td  align="left">
+			<td class="TDtablaBoldRight">Contraseña</td>
+			<td  align="left" class="TDtablaNormal">
 				<html:password property="usuarioDTO.password" value="${usu.password}"/>			
 			</td>
 		</tr>
 		<tr>
-			<td class="botoneralNegritaRight">
+			<td class="TDtablaBoldRight">
 				Confirmar Contraseña
 			</td>
-			<td  align="left">
+			<td  align="left" class="TDtablaNormal">
 				<html:password property="contrasenia" value="${usu.password}"/>			
 			</td>
 		</tr>
 		<tr>
 			<c:choose>
 				<c:when test="${metodo=='altaUsuario'}"><!-- ALTA -->
-					<td class="botoneralNegritaRight">
+					<td class="TDtablaBoldRight">
 						Habilitado
 					</td>					
-					<td align="left">
+					<td align="left" class="TDtablaNormal">
 						<input type="checkbox" name="usuarioDTO.habilitado" class="botonerab" 
 								checked="checked" value="true" disabled="disabled">
 					</td>
@@ -91,10 +102,10 @@
 					<html:hidden property="usuarioDTO.habilitado" value="true"/>
 				</c:when>
 				<c:otherwise><!-- MODIFICACION ADMINISTRADOR -->
-					<td class="botoneralNegritaRight">
+					<td class="TDtablaBoldRight">
 						Habilitado
 					</td>
-					<td align="left">
+					<td align="left" class="TDtablaNormal">
 						<c:choose>
 							<c:when test="${usu.habilitado}">
 									<input type="checkbox" name="usuarioDTO.habilitado" class="botonerab" 
@@ -111,10 +122,10 @@
 		</tr>
 
 		<tr>
-			<td class="botoneralNegritaRight">
+			<td class="TDtablaBoldRight">
 				Rol
 			</td>
-			<td align="left">
+			<td align="left" class="TDtablaNormal">
 				<html:select  styleClass="botonerab" property="usuarioDTO.rol.id" styleId="idRol">
 					<c:forEach items="${roles}" var="rol">
 						<option value="${rol.id}">
@@ -125,10 +136,10 @@
 			</td>
 		</tr>
 		<tr>
-			<td height="20" colspan="2"></td>
+			<td height="20" colspan="2" class="TDtablaNormal"></td>
 		</tr>
 		<tr>
-			<td height="20" colspan="2">				
+			<td height="20" colspan="2" class="TDtablaNormal">				
 				<c:choose>
 					<c:when test="${metodo=='altaUsuario'}">
 						<input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();">
@@ -142,7 +153,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td height="10" colspan="2"></td>
+			<td height="10" colspan="2" class="TDtablaNormal"></td>
 		</tr>									
 	</table>
 

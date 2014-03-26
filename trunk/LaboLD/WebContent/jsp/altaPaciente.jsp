@@ -52,7 +52,7 @@
 <html:form action="paciente" styleId="pacienteFormId">
 	<html:hidden property="metodo" value="altaPaciente"/>
 
-	<table border="0" class="cuadrado" align="center" width="60%" cellpadding="2">
+	<table border="0" class="cuadrado" align="center" width="60%" cellpadding="2" cellspacing="0">
 		<tr>
 			<td colspan="2"  class="azulAjustado" >Alta de Paciente</td>
 		</tr>
@@ -60,14 +60,14 @@
 			<td height="20" colspan="2"></td>
 		</tr>				
 		<tr>
-			<td class="botoneralNegritaRight" width="40%">Nombre</td>
-			<td align="left">
+			<td class="botoneralNegritaRight" width="40%" style="background-color: #f4f9fd">Nombre</td>
+			<td align="left" style="background-color: #f4f9fd">
 				<html:text property="pacienteDTO.nombre" value="" styleClass="botonerab" styleId="nombre"/>
 			</td>
 		</tr>	
 		<tr>
-			<td class="botoneralNegritaRight" width="40%">Apellido</td>
-			<td  align="left">
+			<td class="botoneralNegritaRight" width="40%" style="background-color: #f4f9fd">Apellido</td>
+			<td  align="left" style="background-color: #f4f9fd">
 				<html:text property="pacienteDTO.apellido" value="" styleClass="botonerab"/>			
 			</td>
 		</tr>
