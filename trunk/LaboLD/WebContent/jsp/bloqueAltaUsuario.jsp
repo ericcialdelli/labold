@@ -61,7 +61,7 @@
 			<td height="20" colspan="2" class="TDtablaNormal"></td>
 		</tr>				
 		<tr>
-			<td class="TDtablaBoldRight">Nombre</td>
+			<td class="TDtablaBoldRight">Nombr</td>
 			<td align="left" class="TDtablaNormal">
 				<c:choose>
 					<c:when test="${metodo=='altaUsuario'}">
