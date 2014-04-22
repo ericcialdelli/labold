@@ -107,7 +107,7 @@
 			<forward name="exitoCargaAltaEstudio" path=".altaEstudio" />
 			<forward name="exitoAltaEstudio" path="/estudio.do?metodo=cargarAltaEstudio" />
 			
-			<forward name="exitoCargarRecuperarEstudios" path=".recuperarEstudios" />
+			<forward name="exitoCargarRecuperarEstudios" path=".recuperarEstudiosParaModificacion" />
 			<forward name="exitoRecuperarEstudios" path="/jsp/bloqueRecuperarEstudios.jsp" />
 			<forward name="exitoRecuperarEstudio" path=".modificarEstudio" />
 			<forward name="exitoModificacionEstudio" path="/estudio.do?metodo=recuperarEstudios" />								
