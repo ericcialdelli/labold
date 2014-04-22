@@ -17,7 +17,10 @@
 		</form-bean>
 		<form-bean name="practicaForm"
 			type="ar.com.labold.struts.actions.forms.PracticaForm">
-		</form-bean>										
+		</form-bean>
+		<form-bean name="estudioForm"
+			type="ar.com.labold.struts.actions.forms.EstudioForm">
+		</form-bean>												
 	</form-beans>
 
 	<global-exceptions></global-exceptions>
@@ -97,6 +100,19 @@
 			<forward name="exitoModificacionPractica" path="/practica.do?metodo=recuperarPracticas" />																	
 		</action>				
 		<!-- FIN PRACTICA -->
+
+		<!-- ESTUDIO -->
+		<action path="/estudio" type="ar.com.labold.struts.actions.EstudioAction"
+			parameter="metodo" name="estudioForm" scope="request">
+			<forward name="exitoCargaAltaEstudio" path=".altaEstudio" />
+			<forward name="exitoAltaEstudio" path="/estudio.do?metodo=cargarAltaEstudio" />
+			
+			<forward name="exitoCargarRecuperarEstudios" path=".recuperarEstudios" />
+			<forward name="exitoRecuperarEstudios" path="/jsp/bloqueRecuperarEstudios.jsp" />
+			<forward name="exitoRecuperarEstudio" path=".modificarEstudio" />
+			<forward name="exitoModificacionEstudio" path="/estudio.do?metodo=recuperarEstudios" />								
+		</action>				
+		<!-- FIN ESTUDIO -->
 				
 	</action-mappings>
 

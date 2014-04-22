@@ -81,6 +81,17 @@ public class Constantes {
 	public static final String EXISTE_PRACTICA = "Ya existe una Práctica con ese nombre";
 	//FIN PRACTICA	
 	
+	//ESTUDIO
+	public static final String EXITO_ALTA_ESTUDIO = "El Estudio se ha dado de alta con exito";
+
+	public static final String EXITO_MODIFICACION_ESTUDIO = "El Estudio se ha modificado con exito";		
+	//FIN ESTUDIO		
+	
+	
+	
+	
+	
+	
 	// REPORTES
 	public static final String REPORTE_VENCIMIENTO_MARCAS_SENIALES = "reporteVencimientoMarcasSeniales";
 

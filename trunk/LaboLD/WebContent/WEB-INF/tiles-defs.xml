@@ -90,6 +90,23 @@
 		<put name="body" value="/jsp/modificarPractica.jsp" />
 	</definition>		
 	<!-- FIN PRACTICA -->	
+
+	<!-- ESTUDIO -->
+	<definition name=".altaEstudio" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/altaEstudio.jsp" />
+	</definition>	
+	
+	<definition name=".recuperarEstudios" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/recuperarEstudios.jsp" />
+	</definition>	
+	
+	<definition name=".modificarEstudio" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/modificarEstudio.jsp" />
+	</definition>	
+	<!-- FIN ESTUDIO -->		
 	
 	<definition name=".error" extends=".base">
 		<put name="title" value="Error en LaboLD" />

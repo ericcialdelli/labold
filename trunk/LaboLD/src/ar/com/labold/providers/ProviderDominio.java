@@ -4,11 +4,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.com.labold.dto.EstudioDTO;
 import ar.com.labold.dto.ObraSocialDTO;
 import ar.com.labold.dto.PacienteDTO;
 import ar.com.labold.dto.PracticaDTO;
 import ar.com.labold.dto.RolDTO;
 import ar.com.labold.dto.UsuarioDTO;
+import ar.com.labold.negocio.Estudio;
 import ar.com.labold.negocio.ItemMenu;
 import ar.com.labold.negocio.ObraSocial;
 import ar.com.labold.negocio.Paciente;
@@ -121,6 +123,29 @@ public abstract class ProviderDominio {
 		practica.setNombre(practicaDTO.getNombre());
 		
 		return practica;
+	}		
+	
+	//Se usa en el alta del Estudio
+	public static Estudio getEstudio(EstudioDTO estudioDTO, Paciente paciente){
+		
+		Estudio estudio = new Estudio(); 
+		estudio.setId(estudioDTO.getId());
+		estudio.setNumero(estudioDTO.getNumero());
+		estudio.setPaciente(paciente);
+		estudio.setSolicitadoPor(estudioDTO.getSolicitadoPor());
+		estudio.setFecha(Fecha.stringDDMMAAAAToUtilDate(estudioDTO.getFecha()));
+		
+		return estudio;
+	}	
+	
+	//Se usa en la modificacion del Estudio
+	public static Estudio getEstudio(Estudio estudio, EstudioDTO estudioDTO){
+					
+		estudio.setNumero(estudioDTO.getNumero());		
+		estudio.setSolicitadoPor(estudioDTO.getSolicitadoPor());
+		estudio.setFecha(Fecha.stringDDMMAAAAToUtilDate(estudioDTO.getFecha()));
+		
+		return estudio;
 	}		
 	
 	/*public static Localidad getLocalidad(LocalidadDTO localidadDTO) {

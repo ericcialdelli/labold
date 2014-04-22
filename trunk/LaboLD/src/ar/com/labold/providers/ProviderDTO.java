@@ -3,11 +3,13 @@ package ar.com.labold.providers;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.com.labold.dto.EstudioDTO;
 import ar.com.labold.dto.ItemMenuDTO;
 import ar.com.labold.dto.ObraSocialDTO;
 import ar.com.labold.dto.PacienteDTO;
 import ar.com.labold.dto.RolDTO;
 import ar.com.labold.dto.UsuarioDTO;
+import ar.com.labold.negocio.Estudio;
 import ar.com.labold.negocio.ItemMenu;
 import ar.com.labold.negocio.ObraSocial;
 import ar.com.labold.negocio.Paciente;
@@ -138,6 +140,20 @@ public abstract class ProviderDTO {
 		
 		return obraSocialDTO;
 	}
+	
+	public static EstudioDTO getEstudioDTO(Estudio estudio){
+		
+		EstudioDTO estudioDTO = new EstudioDTO(); 
+		estudioDTO.setId(estudio.getId());
+		estudioDTO.setNumero(estudio.getNumero());
+		estudioDTO.setPaciente(ProviderDTO.getPacienteDTO(estudio.getPaciente()));
+		estudioDTO.setSolicitadoPor(estudio.getSolicitadoPor());
+		estudioDTO.setFecha(Fecha.getFechaDDMMAAAASlash(Fecha
+				.dateToStringDDMMAAAA(estudio.getFecha())));
+		
+		return estudioDTO;
+	}
+	
 	
 	/*public static PeriodoDTO getPeriodoDTO(Periodo periodo) {
 
