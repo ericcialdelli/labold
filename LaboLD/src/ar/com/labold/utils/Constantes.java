@@ -86,23 +86,8 @@ public class Constantes {
 
 	public static final String EXITO_MODIFICACION_ESTUDIO = "El Estudio se ha modificado con exito";		
 	//FIN ESTUDIO		
-	
-	
-	
-	
-	
-	
+
 	// REPORTES
-	public static final String REPORTE_VENCIMIENTO_MARCAS_SENIALES = "reporteVencimientoMarcasSeniales";
-
-	public static final String REPORTE_GUIAS_LEGALIZADAS = "reporteGuiasLegalizadas";
-
-	public static final String REPORTE_GUIAS_DEVUELTAS = "reporteGuiasDevueltas";
-
-	public static final String REPORTE_GUIAS_REGISTRADAS = "reporteGuiasRegistradas";
-
-	public static final String REPORTE_GUIAS_CANCELADAS = "reporteGuiasCanceladas";
-
-	public static final String REPORTE_PRODUCTOR_PERIODO_DESTINO = "reporteProductorPeriodoDestino";
+	public static final String REPORTE_ESTUDIOS_A_REALIZAR_ENTRE_FECHAS = "reporteEstudiosARealizarEntreFechas";
 	// FIN REPORTES
 }
