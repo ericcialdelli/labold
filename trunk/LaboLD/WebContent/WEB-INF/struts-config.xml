@@ -37,6 +37,7 @@
 			<forward name=".index" path=".index" />		
 			<forward name=".altaObraSocial" path=".altaObraSocial" />
 			<forward name=".altaPractica" path=".altaPractica" />
+			<forward name=".reporteEstudiosARealizarEntreFechas" path=".reporteEstudiosEntreFechas" />
 		</action>	
 	
 		<!-- MENU -->
@@ -113,7 +114,13 @@
 			<forward name="exitoModificacionEstudio" path="/estudio.do?metodo=recuperarEstudios" />								
 		</action>				
 		<!-- FIN ESTUDIO -->
-				
+
+		<!-- REPORTE -->
+		<action path="/reporte" type="ar.com.labold.struts.actions.ReportesAction"
+			parameter="metodo" scope="request">											
+		</action>				
+		<!-- FIN REPORTE -->
+								
 	</action-mappings>
 
 	<message-resources parameter="ar.com.labold.struts.resources.application" />

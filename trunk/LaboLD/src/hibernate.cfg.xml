@@ -28,6 +28,7 @@
 		<mapping class='ar.com.labold.negocio.ObraSocial' />
 		<mapping class='ar.com.labold.negocio.Practica' />
 		<mapping class='ar.com.labold.negocio.Estudio' />
+		<mapping class='ar.com.labold.negocio.Reporte' />
 	
 	</session-factory>
 </hibernate-configuration>
