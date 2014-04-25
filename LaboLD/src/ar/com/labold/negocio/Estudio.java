@@ -1,6 +1,8 @@
 package ar.com.labold.negocio;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -34,6 +37,10 @@ public class Estudio {
 	@JoinColumn(name = "paciente_fk")	
 	private Paciente paciente;
 
+	@OneToMany(mappedBy = "estudio")
+	@Cascade(value = { CascadeType.SAVE_UPDATE, CascadeType.DELETE_ORPHAN })
+	private List<PracticaEstudio> practicasEstudio = new ArrayList<PracticaEstudio>();	
+	
 	public Long getId() {
 		return id;
 	}
@@ -74,4 +81,13 @@ public class Estudio {
 		this.fecha = fecha;
 	}
 
+	public List<PracticaEstudio> getPracticasEstudio() {
+		return practicasEstudio;
+	}
+
+	public void setPracticasEstudio(List<PracticaEstudio> practicasEstudio) {
+		this.practicasEstudio = practicasEstudio;
+	}
+
+	
 }

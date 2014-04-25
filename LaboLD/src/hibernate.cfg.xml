@@ -29,6 +29,9 @@
 		<mapping class='ar.com.labold.negocio.Practica' />
 		<mapping class='ar.com.labold.negocio.Estudio' />
 		<mapping class='ar.com.labold.negocio.Reporte' />
+		<mapping class='ar.com.labold.negocio.GrupoPractica'/>
+		<mapping class='ar.com.labold.negocio.ValorPractica'/>
+		<mapping class='ar.com.labold.negocio.PracticaEstudio'/>	
 	
 	</session-factory>
 </hibernate-configuration>
