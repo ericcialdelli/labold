@@ -1,6 +1,7 @@
 package ar.com.labold.negocio;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -44,6 +46,10 @@ public class Paciente {
 	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "obraSocial_fk")	
 	private ObraSocial obraSocial;
+	
+	@OneToMany(mappedBy = "paciente")
+	@Cascade(value = { CascadeType.SAVE_UPDATE, CascadeType.DELETE_ORPHAN })
+	private List<Estudio> estudios;	
 	
 	public Long getId() {
 		return id;
@@ -116,4 +122,13 @@ public class Paciente {
 	public void setObraSocial(ObraSocial obraSocial) {
 		this.obraSocial = obraSocial;
 	}
+
+	public List<Estudio> getEstudios() {
+		return estudios;
+	}
+
+	public void setEstudios(List<Estudio> estudios) {
+		this.estudios = estudios;
+	}
+	
 }
