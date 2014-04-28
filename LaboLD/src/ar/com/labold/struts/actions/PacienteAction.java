@@ -1,8 +1,6 @@
 package ar.com.labold.struts.actions;
 
-import java.util.Date;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,7 +10,6 @@ import org.apache.struts.action.ActionMapping;
 import org.springframework.web.context.WebApplicationContext;
 
 import ar.com.labold.utils.Constantes;
-import ar.com.labold.utils.Fecha;
 import ar.com.labold.utils.MyLogger;
 import ar.com.labold.dto.PacienteDTO;
 import ar.com.labold.fachada.ObraSocialFachada;
@@ -114,7 +111,7 @@ public class PacienteAction extends ValidadorAction {
 			String idPaciente = request.getParameter("id");			
 			Paciente paciente = pacienteFachada.getPaciente(Long.valueOf(idPaciente));
 			
-			request.setAttribute("obrasSociales", obraSocialFachada.getObrasSociales());			
+			request.setAttribute("obrasSociales", obraSocialFachada.getObrasSociales());
 			request.setAttribute("paciente", paciente);
 			
 		} catch (Throwable t) {
