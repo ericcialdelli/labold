@@ -15,7 +15,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 @Entity
-public class PracticaEstudio {
+public class ValoresEstudio {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,7 +26,7 @@ public class PracticaEstudio {
 	@JoinColumn(name = "grupoPractica_fk")
 	private GrupoPractica grupoPractica;
 
-	@OneToMany(mappedBy = "practicaEstudio")
+	@OneToMany(mappedBy = "valoresEstudio")
 	@Cascade(value = { CascadeType.SAVE_UPDATE, CascadeType.DELETE_ORPHAN })
 	private List<ValorPractica> valoresPracticas = new ArrayList<ValorPractica>();	
 	

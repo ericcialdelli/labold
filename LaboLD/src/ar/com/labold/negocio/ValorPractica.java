@@ -28,8 +28,8 @@ public class ValorPractica {
 	
 	@ManyToOne()
 	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@JoinColumn(name = "practicaEstudio_fk")
-	private PracticaEstudio practicaEstudio;
+	@JoinColumn(name = "valoresEstudio_fk")
+	private ValoresEstudio valoresEstudio;
 	
 	public Long getId() {
 		return id;
@@ -55,12 +55,14 @@ public class ValorPractica {
 		this.practica = practica;
 	}
 
-	public PracticaEstudio getPracticaEstudio() {
-		return practicaEstudio;
+	public ValoresEstudio getValoresEstudio() {
+		return valoresEstudio;
 	}
 
-	public void setPracticaEstudio(PracticaEstudio practicaEstudio) {
-		this.practicaEstudio = practicaEstudio;
+	public void setValoresEstudio(ValoresEstudio valoresEstudio) {
+		this.valoresEstudio = valoresEstudio;
 	}
+
+
 	
 }

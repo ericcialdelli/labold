@@ -31,7 +31,9 @@
 		<mapping class='ar.com.labold.negocio.Reporte' />
 		<mapping class='ar.com.labold.negocio.GrupoPractica'/>
 		<mapping class='ar.com.labold.negocio.ValorPractica'/>
-		<mapping class='ar.com.labold.negocio.PracticaEstudio'/>	
+		<mapping class='ar.com.labold.negocio.ValoresEstudio'/>
+		<mapping class='ar.com.labold.negocio.SubItemPractica'/>	
+		
 	
 	</session-factory>
 </hibernate-configuration>

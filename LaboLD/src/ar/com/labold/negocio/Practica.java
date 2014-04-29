@@ -53,6 +53,11 @@ public class Practica {
 	@JoinColumn(name = "grupoPractica_fk")
 	private GrupoPractica grupoPractica;	
 	
+	@ManyToOne()
+	@Cascade(value = CascadeType.SAVE_UPDATE)
+	@JoinColumn(name = "subItemPractica_fk")
+	private SubItemPractica subItemPractica;	
+	
 	//-----------------------------//
 	
 	
@@ -126,6 +131,15 @@ public class Practica {
 
 	public void setGrupoPractica(GrupoPractica grupoPractica) {
 		this.grupoPractica = grupoPractica;
+	}
+
+	public SubItemPractica getSubItemPractica() {
+		return subItemPractica;
+	}
+
+	public void setSubItemPractica(SubItemPractica subItemPractica) {
+		this.subItemPractica = subItemPractica;
 	}	
+	
 	
 }
