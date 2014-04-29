@@ -8,14 +8,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-
 @Entity
-public class GrupoPractica {
+public class SubItemPractica {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,13 +25,14 @@ public class GrupoPractica {
 	@Column(nullable = false)
 	private String nombre;
 
-	@OneToMany(mappedBy = "grupoPractica")
+	@ManyToOne()
+	@Cascade(value = CascadeType.SAVE_UPDATE)
+	@JoinColumn(name = "grupoPractica_fk")
+	private GrupoPractica grupoPractica;	
+	
+	@OneToMany(mappedBy = "subItemPractica")
 	@Cascade(value = { CascadeType.SAVE_UPDATE, CascadeType.DELETE_ORPHAN })
 	private List<Practica> practicas = new ArrayList<Practica>();	
-	
-	@OneToMany(mappedBy = "grupoPractica")
-	@Cascade(value = { CascadeType.SAVE_UPDATE, CascadeType.DELETE_ORPHAN })
-	private List<SubItemPractica> subItemsPractica = new ArrayList<SubItemPractica>();	
 	
 	public Long getId() {
 		return id;
@@ -56,12 +58,12 @@ public class GrupoPractica {
 		this.practicas = practicas;
 	}
 
-	public List<SubItemPractica> getSubItemsPractica() {
-		return subItemsPractica;
+	public GrupoPractica getGrupoPractica() {
+		return grupoPractica;
 	}
 
-	public void setSubItemsPractica(List<SubItemPractica> subItemsPractica) {
-		this.subItemsPractica = subItemsPractica;
+	public void setGrupoPractica(GrupoPractica grupoPractica) {
+		this.grupoPractica = grupoPractica;
 	}	
 	
 	
