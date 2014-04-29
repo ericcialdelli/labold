@@ -5,17 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ar.com.labold.dto.EstudioDTO;
+import ar.com.labold.dto.GrupoPracticaDTO;
 import ar.com.labold.dto.ObraSocialDTO;
 import ar.com.labold.dto.PacienteDTO;
 import ar.com.labold.dto.PracticaDTO;
 import ar.com.labold.dto.RolDTO;
+import ar.com.labold.dto.SubItemPracticaDTO;
 import ar.com.labold.dto.UsuarioDTO;
 import ar.com.labold.negocio.Estudio;
+import ar.com.labold.negocio.GrupoPractica;
 import ar.com.labold.negocio.ItemMenu;
 import ar.com.labold.negocio.ObraSocial;
 import ar.com.labold.negocio.Paciente;
 import ar.com.labold.negocio.Practica;
 import ar.com.labold.negocio.Rol;
+import ar.com.labold.negocio.SubItemPractica;
 import ar.com.labold.negocio.Usuario;
 import ar.com.labold.utils.Fecha;
 
@@ -108,11 +112,17 @@ public abstract class ProviderDominio {
 	}	
 	
 	//Se usa en el alta de la Practica
-	public static Practica getPractica(PracticaDTO practicaDTO){
+	public static Practica getPractica(PracticaDTO practicaDTO, GrupoPractica grupo, SubItemPractica subItem){
 		
 		Practica practica = new Practica();
 		practica.setId(practicaDTO.getId());
 		practica.setNombre(practicaDTO.getNombre());
+		practica.setGrupoPractica(grupo);
+		practica.setSubItemPractica(subItem);
+		practica.setUnidad(practicaDTO.getUnidad());
+		practica.setValorNormalDesde(practicaDTO.getValorNormalDesde());
+		practica.setValorNormalHasta(practicaDTO.getValorNormalHasta());
+		practica.setValorReferencia(practicaDTO.getValorReferencia());
 		
 		return practica;
 	}	
@@ -124,6 +134,25 @@ public abstract class ProviderDominio {
 		
 		return practica;
 	}		
+	
+	//Se usa en el alta del GrupoPractica
+	public static GrupoPractica getGrupoPractica(GrupoPracticaDTO grupoPracticaDTO){
+		
+		GrupoPractica grupoPractica = new GrupoPractica();		
+		grupoPractica.setNombre(grupoPracticaDTO.getNombre());
+		
+		return grupoPractica;
+	}	
+	
+	//Se usa en el alta del SubItemPractica
+	public static SubItemPractica getSubItemPractica(SubItemPracticaDTO subItemPracticaDTO, GrupoPractica grupoPractica){
+		
+		SubItemPractica subItemPractica = new SubItemPractica();
+		subItemPractica.setNombre(subItemPracticaDTO.getNombre());
+		subItemPractica.setGrupoPractica(grupoPractica);
+		
+		return subItemPractica;
+	}	
 	
 	//Se usa en el alta del Estudio
 	public static Estudio getEstudio(EstudioDTO estudioDTO, Paciente paciente){

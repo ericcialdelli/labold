@@ -39,7 +39,7 @@ public class Estudio {
 
 	@OneToMany(mappedBy = "estudio")
 	@Cascade(value = { CascadeType.SAVE_UPDATE, CascadeType.DELETE_ORPHAN })
-	private List<ValoresEstudio> practicasEstudio = new ArrayList<ValoresEstudio>();	
+	private List<ValoresEstudio> valoresEstudio = new ArrayList<ValoresEstudio>();	
 	
 	public Long getId() {
 		return id;
@@ -81,13 +81,12 @@ public class Estudio {
 		this.fecha = fecha;
 	}
 
-	public List<ValoresEstudio> getPracticasEstudio() {
-		return practicasEstudio;
+	public List<ValoresEstudio> getValoresEstudio() {
+		return valoresEstudio;
 	}
 
-	public void setPracticasEstudio(List<ValoresEstudio> practicasEstudio) {
-		this.practicasEstudio = practicasEstudio;
+	public void setValoresEstudio(List<ValoresEstudio> valoresEstudio) {
+		this.valoresEstudio = valoresEstudio;
 	}
-
 	
 }

@@ -40,13 +40,13 @@ public class Practica {
 	@Column(nullable = false)
 	private String valorReferencia;	
 	
-	@ManyToOne()
+	/*@ManyToOne()
 	@JoinColumn(name = "practica_fk")
 	private Practica padre;
 
 	@OneToMany(mappedBy = "padre")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Practica> hijos;	
+	private List<Practica> hijos;*/	
 	
 	@ManyToOne()
 	@Cascade(value = CascadeType.SAVE_UPDATE)
@@ -109,7 +109,7 @@ public class Practica {
 		this.valorReferencia = valorReferencia;
 	}
 
-	public Practica getPadre() {
+	/*public Practica getPadre() {
 		return padre;
 	}
 
@@ -123,7 +123,7 @@ public class Practica {
 
 	public void setHijos(List<Practica> hijos) {
 		this.hijos = hijos;
-	}
+	}*/
 
 	public GrupoPractica getGrupoPractica() {
 		return grupoPractica;

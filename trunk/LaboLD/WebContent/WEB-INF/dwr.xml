@@ -4,7 +4,13 @@
 
 <dwr>
 	<allow>
-							
+		<convert converter="bean" match="ar.com.labold.negocio.SubItemPractica">
+			<param name="include" value="id,nombre" />
+		</convert>		
+
+		<create creator="spring" javascript="PracticaFachada">
+			<param name="beanName" value="practicaFachada" />
+		</create>							
 	</allow>
 
 </dwr> 

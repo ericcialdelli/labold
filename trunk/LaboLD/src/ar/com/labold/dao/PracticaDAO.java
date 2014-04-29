@@ -8,13 +8,15 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import ar.com.labold.negocio.GrupoPractica;
 import ar.com.labold.negocio.Practica;
+import ar.com.labold.negocio.SubItemPractica;
 import ar.com.labold.negocio.exception.NegocioException;
 import ar.com.labold.utils.Constantes;
 
 public class PracticaDAO extends HibernateDaoSupport {
 
-	public boolean existeObraSocial(String nombre, Long id){
+	public boolean existePractica(String nombre, Long id){
 		
 		Criteria criteria = getSession().createCriteria(Practica.class);
 		Conjunction conj = Restrictions.conjunction();
@@ -28,15 +30,46 @@ public class PracticaDAO extends HibernateDaoSupport {
 		return (practicas.size() > 0);			
 	}
 	
+	public boolean existeGrupoPractica(String nombre, Long id){
+		
+		Criteria criteria = getSession().createCriteria(GrupoPractica.class);
+		Conjunction conj = Restrictions.conjunction();
+		conj.add(Restrictions.eq("nombre", nombre));
+		if (id != null) {
+			conj.add(Restrictions.ne("id", id));
+		}
+		criteria.add(conj);
+
+		List<Practica> practicas = criteria.list();
+		return (practicas.size() > 0);			
+	}	
+	
 	public void altaPractica(Practica practica) throws NegocioException{
 		
-		if (existeObraSocial(practica.getNombre(), practica.getId())) {
+		if (existePractica(practica.getNombre(), practica.getId())) {
 			throw new NegocioException(Constantes.EXISTE_PRACTICA);
 		}
 		this.getHibernateTemplate().saveOrUpdate(practica);
 		this.getHibernateTemplate().flush();
 		this.getHibernateTemplate().clear();	
 	}
+	
+	public void altaGrupoPractica(GrupoPractica grupoPractica) throws NegocioException{
+		
+		if (existeGrupoPractica(grupoPractica.getNombre(), grupoPractica.getId())) {
+			throw new NegocioException(Constantes.EXISTE_GRUPO_PRACTICA);
+		}
+		this.getHibernateTemplate().saveOrUpdate(grupoPractica);
+		this.getHibernateTemplate().flush();
+		this.getHibernateTemplate().clear();	
+	}	
+	
+	public void altaSubItemPractica(SubItemPractica subItemPractica) throws NegocioException{
+		
+		this.getHibernateTemplate().saveOrUpdate(subItemPractica);
+		this.getHibernateTemplate().flush();
+		this.getHibernateTemplate().clear();
+	}		
 	
 	public Practica getPractica(Long id){
 		
@@ -49,5 +82,35 @@ public class PracticaDAO extends HibernateDaoSupport {
 		criteria.addOrder(Order.asc("nombre"));
 
 		return (List<Practica>) criteria.list();		
-	}	
+	}
+	
+	public List<GrupoPractica> getGruposPractica(){
+		
+		Criteria criteria = getSession().createCriteria(GrupoPractica.class);
+		criteria.addOrder(Order.asc("nombre"));
+
+		return (List<GrupoPractica>) criteria.list();	
+	}
+	
+	public GrupoPractica getGrupoPractica(Long id){
+		
+		return (GrupoPractica)getHibernateTemplate().get(GrupoPractica.class,id);
+	}
+	
+	public List<SubItemPractica> getSubItemsPorGrupoPractica(Long idGrupo){
+		
+		Criteria criteria = getSession().createCriteria(SubItemPractica.class);
+		//criteria.createAlias("provinciaDestino", "pd");
+		Conjunction conj = Restrictions.conjunction();
+		conj.add(Restrictions.eq("grupoPractica.id", idGrupo));
+		criteria.add(conj);
+		
+		List<SubItemPractica> subItemsPractica = criteria.list();
+		return subItemsPractica;		
+	}
+
+	public SubItemPractica getSubItemPractica(Long id){
+		
+		return (SubItemPractica)getHibernateTemplate().get(SubItemPractica.class,id);
+	}		
 }

@@ -20,7 +20,11 @@
 		</form-bean>
 		<form-bean name="estudioForm"
 			type="ar.com.labold.struts.actions.forms.EstudioForm">
-		</form-bean>												
+		</form-bean>
+		<form-bean name="grupoPracticaForm"
+			type="ar.com.labold.struts.actions.forms.GrupoPracticaForm">
+		</form-bean>		
+														
 	</form-beans>
 
 	<global-exceptions></global-exceptions>
@@ -36,8 +40,8 @@
 		<action path="/jsp" type="ar.com.labold.struts.actions.TilesForwardAction">
 			<forward name=".index" path=".index" />		
 			<forward name=".altaObraSocial" path=".altaObraSocial" />
-			<forward name=".altaPractica" path=".altaPractica" />
 			<forward name=".reporteEstudiosARealizarEntreFechas" path=".reporteEstudiosEntreFechas" />
+			<forward name=".altaGrupoPractica" path=".altaGrupoPractica" />
 		</action>	
 	
 		<!-- MENU -->
@@ -94,13 +98,22 @@
 		
 		<!-- PRACTICA -->
 		<action path="/practica" type="ar.com.labold.struts.actions.PracticaAction"
-			parameter="metodo" name="practicaForm" scope="request">
-			<forward name="exitoAltaPractica" path="/jsp.do?page=.altaPractica" />
+			parameter="metodo" name="practicaForm" scope="request">			
+			<forward name="exitoCargarAltaPractica" path=".altaPractica" />
+			<forward name="exitoAltaPractica" path="/practica.do?metodo=cargarAltaPractica" />
 			<forward name="exitoRecuperarPracticas" path=".recuperarPracticas" />
 			<forward name="exitoRecuperarPractica" path=".modificarPractica" />
 			<forward name="exitoModificacionPractica" path="/practica.do?metodo=recuperarPracticas" />																	
-		</action>				
-		<!-- FIN PRACTICA -->
+		</action>	
+		
+		<action path="/grupoPractica" type="ar.com.labold.struts.actions.PracticaAction"
+			parameter="metodo" name="grupoPracticaForm" scope="request">
+			<forward name="exitoAltaGrupoPractica" path="/jsp.do?page=.altaGrupoPractica" />
+			
+			<forward name="exitoCargarAltaSubItemPractica" path=".altaSubItemPractica" />
+			<forward name="exitoAltaSubItemPractica" path="/grupoPractica.do?metodo=cargarAltaSubItemPractica" />																			
+		</action>								
+		<!-- FIN PRACTICA -->		
 
 		<!-- ESTUDIO -->
 		<action path="/estudio" type="ar.com.labold.struts.actions.EstudioAction"

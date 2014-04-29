@@ -5,8 +5,12 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.com.labold.dao.PracticaDAO;
+import ar.com.labold.dto.GrupoPracticaDTO;
 import ar.com.labold.dto.PracticaDTO;
+import ar.com.labold.dto.SubItemPracticaDTO;
+import ar.com.labold.negocio.GrupoPractica;
 import ar.com.labold.negocio.Practica;
+import ar.com.labold.negocio.SubItemPractica;
 import ar.com.labold.negocio.exception.NegocioException;
 import ar.com.labold.providers.ProviderDominio;
 
@@ -22,15 +26,34 @@ public class PracticaFachada {
 		this.practicaDAO = pPracticaDAO;
 	}
 	
-	public boolean existeObraSocial(PracticaDTO practica){
+	public boolean existePractica(PracticaDTO practica){
 		
-		return practicaDAO.existeObraSocial(practica.getNombre(),practica.getId());
+		return practicaDAO.existePractica(practica.getNombre(),practica.getId());
+	}	
+	
+	public boolean existeGrupoPractica(GrupoPracticaDTO grupoPractica){
+		
+		return practicaDAO.existeGrupoPractica(grupoPractica.getNombre(),grupoPractica.getId());
 	}	
 	
 	public void altaPractica(PracticaDTO practicaDTO) throws NegocioException{
 		
-		practicaDAO.altaPractica(ProviderDominio.getPractica(practicaDTO));
+		GrupoPractica grupo = practicaDAO.getGrupoPractica(practicaDTO.getGrupoPracticaDTO().getId());
+		SubItemPractica subItem = practicaDAO.getSubItemPractica(practicaDTO.getSubItemPracticaDTO().getId());
+		
+		practicaDAO.altaPractica(ProviderDominio.getPractica(practicaDTO,grupo,subItem));
 	}
+	
+	public void altaGrupoPractica(GrupoPracticaDTO grupoPracticaDTO) throws NegocioException{
+		
+		practicaDAO.altaGrupoPractica(ProviderDominio.getGrupoPractica(grupoPracticaDTO));
+	}	
+
+	public void altaSubItemPractica(SubItemPracticaDTO subItemPracticaDTO) throws NegocioException{
+		
+		GrupoPractica grupoPractica = practicaDAO.getGrupoPractica(subItemPracticaDTO.getGrupoPractica().getId());
+		practicaDAO.altaSubItemPractica(ProviderDominio.getSubItemPractica(subItemPracticaDTO,grupoPractica));
+	}		
 	
 	public void modificacionPractica(PracticaDTO practicaDTO) throws NegocioException{
 		
@@ -48,4 +71,14 @@ public class PracticaFachada {
 		
 		return practicaDAO.getPractica(id);
 	}	
+	
+	public List<GrupoPractica> getGruposPractica(){
+		
+		return practicaDAO.getGruposPractica();
+	}	
+	
+	public List<SubItemPractica> getSubItemsPorGrupoPractica(Long idGrupo){
+		
+		return practicaDAO.getSubItemsPorGrupoPractica(idGrupo);
+	}
 }
