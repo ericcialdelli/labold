@@ -1,41 +1,40 @@
 package ar.com.labold.negocio;
 
-import javax.persistence.Column;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 @Entity
-public class ValorPractica {
+public class ValorSubItemPractica {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(nullable = false)
-	private String valor;
-
 	@ManyToOne()
 	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@JoinColumn(name = "practica_fk")	
-	private Practica practica;	
+	@JoinColumn(name = "subItemPractica_fk")
+	private SubItemPractica subItemPractica;
 	
 	@ManyToOne()
 	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "valoresEstudio_fk")
 	private ValoresEstudio valoresEstudio;
-
-	@ManyToOne()
-	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@JoinColumn(name = "valorSubItemPractica_fk")
-	private ValorSubItemPractica valorSubItemPractica;	
 	
+	@OneToMany(mappedBy = "valorSubItemPractica")
+	@Cascade(value = { CascadeType.SAVE_UPDATE, CascadeType.DELETE_ORPHAN })
+	private List<ValorPractica> valoresPracticas = new ArrayList<ValorPractica>();
+
 	public Long getId() {
 		return id;
 	}
@@ -44,20 +43,12 @@ public class ValorPractica {
 		this.id = id;
 	}
 
-	public String getValor() {
-		return valor;
+	public SubItemPractica getSubItemPractica() {
+		return subItemPractica;
 	}
 
-	public void setValor(String valor) {
-		this.valor = valor;
-	}
-
-	public Practica getPractica() {
-		return practica;
-	}
-
-	public void setPractica(Practica practica) {
-		this.practica = practica;
+	public void setSubItemPractica(SubItemPractica subItemPractica) {
+		this.subItemPractica = subItemPractica;
 	}
 
 	public ValoresEstudio getValoresEstudio() {
@@ -68,12 +59,12 @@ public class ValorPractica {
 		this.valoresEstudio = valoresEstudio;
 	}
 
-	public ValorSubItemPractica getValorSubItemPractica() {
-		return valorSubItemPractica;
+	public List<ValorPractica> getValoresPracticas() {
+		return valoresPracticas;
 	}
 
-	public void setValorSubItemPractica(ValorSubItemPractica valorSubItemPractica) {
-		this.valorSubItemPractica = valorSubItemPractica;
+	public void setValoresPracticas(List<ValorPractica> valoresPracticas) {
+		this.valoresPracticas = valoresPracticas;
 	}
-	
+
 }

@@ -10,11 +10,10 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.springframework.web.context.WebApplicationContext;
 
-import ar.com.labold.fachada.ObraSocialFachada;
 import ar.com.labold.fachada.PracticaFachada;
-import ar.com.labold.negocio.ObraSocial;
+import ar.com.labold.negocio.GrupoPractica;
 import ar.com.labold.negocio.Practica;
-import ar.com.labold.struts.actions.forms.ObraSocialForm;
+import ar.com.labold.struts.actions.forms.GrupoPracticaForm;
 import ar.com.labold.struts.actions.forms.PracticaForm;
 import ar.com.labold.struts.utils.Validator;
 import ar.com.labold.utils.Constantes;
@@ -22,6 +21,28 @@ import ar.com.labold.utils.MyLogger;
 
 public class PracticaAction extends ValidadorAction {
 
+	public ActionForward cargarAltaPractica(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		String strForward = "exitoCargarAltaPractica";
+		try {
+						
+			WebApplicationContext ctx = getWebApplicationContext();
+			PracticaFachada practicaFachada = (PracticaFachada) 
+												ctx.getBean("practicaFachada");			
+			
+			List<GrupoPractica> listaGrupos = practicaFachada.getGruposPractica(); 
+			request.setAttribute("listaGrupos", listaGrupos);			
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+		return mapping.findForward(strForward);
+	}	
+	
 	public ActionForward altaPractica(ActionMapping mapping,
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -129,6 +150,84 @@ public class PracticaAction extends ValidadorAction {
 		return mapping.findForward(strForward);
 	}	
 	
+	public ActionForward altaGrupoPractica(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		String strForward = "exitoAltaGrupoPractica";
+		try {
+			
+			GrupoPracticaForm grupoPracticaForm = (GrupoPracticaForm)form;
+			WebApplicationContext ctx = getWebApplicationContext();
+			PracticaFachada practicaFachada = (PracticaFachada) 
+												ctx.getBean("practicaFachada");			
+			
+			// valido nuevamente por seguridad.  
+			if (!validarGrupoPracticaForm(new StringBuffer(), grupoPracticaForm)) {
+				throw new Exception("Error de Seguridad");
+			}			
+			
+			practicaFachada.altaGrupoPractica(grupoPracticaForm.getGrupoPracticaDTO());
+			request.setAttribute("exitoGrabado", Constantes.EXITO_ALTA_GRUPO_PRACTICA);			
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+		return mapping.findForward(strForward);
+	}	
+
+	public ActionForward cargarAltaSubItemPractica(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		String strForward = "exitoCargarAltaSubItemPractica";
+		try {
+						
+			WebApplicationContext ctx = getWebApplicationContext();
+			PracticaFachada practicaFachada = (PracticaFachada) 
+												ctx.getBean("practicaFachada");			
+			
+			List<GrupoPractica> listaGrupos = practicaFachada.getGruposPractica(); 
+			request.setAttribute("listaGrupos", listaGrupos);			
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+		return mapping.findForward(strForward);
+	}	
+	
+	public ActionForward altaSubItemPractica(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		String strForward = "exitoAltaSubItemPractica";
+		try {
+			
+			GrupoPracticaForm grupoPracticaForm = (GrupoPracticaForm)form;
+			WebApplicationContext ctx = getWebApplicationContext();
+			PracticaFachada practicaFachada = (PracticaFachada) 
+												ctx.getBean("practicaFachada");			
+			
+			// valido nuevamente por seguridad.  
+			if (!validarSubItemPracticaForm(new StringBuffer(), grupoPracticaForm)) {
+				throw new Exception("Error de Seguridad");
+			}			
+			
+			practicaFachada.altaSubItemPractica(grupoPracticaForm.getSubItemPracticaDTO());
+			request.setAttribute("exitoGrabado", Constantes.EXITO_ALTA_SUBITEM_PRACTICA);			
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+		return mapping.findForward(strForward);
+	}		
+	
 	public boolean validarPracticaForm(StringBuffer error, ActionForm form) {
 		try {
 			PracticaForm pacticaForm = (PracticaForm)form;
@@ -138,7 +237,43 @@ public class PracticaAction extends ValidadorAction {
 			
 			boolean b1 = Validator.requerido(pacticaForm.getPracticaDTO().getNombre(),
 																		"Nombre", error);			
-			boolean existe = practicaFachada.existeObraSocial(pacticaForm.getPracticaDTO());
+			boolean existe = practicaFachada.existePractica(pacticaForm.getPracticaDTO());
+			if (existe) {
+				Validator.addErrorXML(error, Constantes.EXISTE_PRACTICA);
+			}
+			
+			boolean b2 = Validator.validarComboRequeridoSinNull("-1",Long.toString(
+					pacticaForm.getPracticaDTO().getGrupoPracticaDTO().getId()),
+					"Grupo Practica",error);
+			
+			boolean b3 = Validator.requerido(pacticaForm.getPracticaDTO().getSubItemPracticaDTO().getId(),
+											 "SubItem", error);
+			if (b3) {			
+			
+				b3 = Validator.validarComboRequeridoSinNull("-1",Long.toString(
+					pacticaForm.getPracticaDTO().getSubItemPracticaDTO().getId()),
+					"SubItem",error);
+			}	
+			
+			return !existe && b1 && b2 && b3;
+
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			Validator.addErrorXML(error, "Error Inesperado");
+			return false;
+		}
+	}	
+	
+	public boolean validarGrupoPracticaForm(StringBuffer error, ActionForm form) {
+		try {
+			GrupoPracticaForm grupoPracticaForm = (GrupoPracticaForm)form;
+			WebApplicationContext ctx = getWebApplicationContext();
+			PracticaFachada practicaFachada = (PracticaFachada) 
+									ctx.getBean("practicaFachada");
+			
+			boolean b1 = Validator.requerido(grupoPracticaForm.getGrupoPracticaDTO().getNombre(),
+																		"Nombre", error);			
+			boolean existe = practicaFachada.existeGrupoPractica(grupoPracticaForm.getGrupoPracticaDTO());
 			if (existe) {
 				Validator.addErrorXML(error, Constantes.EXISTE_PRACTICA);
 			}
@@ -149,6 +284,25 @@ public class PracticaAction extends ValidadorAction {
 			Validator.addErrorXML(error, "Error Inesperado");
 			return false;
 		}
-
 	}	
+
+	public boolean validarSubItemPracticaForm(StringBuffer error, ActionForm form) {
+		try {
+			GrupoPracticaForm grupoPracticaForm = (GrupoPracticaForm)form;
+			
+			boolean b1 = Validator.requerido(grupoPracticaForm.getSubItemPracticaDTO().getNombre(),
+																		"Nombre SubItem", error);			
+
+			boolean b2 = Validator.validarComboRequeridoSinNull("-1",Long.toString(
+								grupoPracticaForm.getSubItemPracticaDTO().getGrupoPractica().getId()),
+								"Grupo Practica",error);
+
+			return  b1 && b2;
+
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			Validator.addErrorXML(error, "Error Inesperado");
+			return false;
+		}
+	}		
 }

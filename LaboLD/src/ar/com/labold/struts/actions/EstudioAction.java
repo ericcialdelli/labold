@@ -13,7 +13,9 @@ import ar.com.labold.dto.EstudioDTO;
 import ar.com.labold.fachada.EstudioFachada;
 import ar.com.labold.fachada.ObraSocialFachada;
 import ar.com.labold.fachada.PacienteFachada;
+import ar.com.labold.fachada.PracticaFachada;
 import ar.com.labold.negocio.Estudio;
+import ar.com.labold.negocio.GrupoPractica;
 import ar.com.labold.negocio.Paciente;
 import ar.com.labold.struts.actions.forms.EstudioForm;
 import ar.com.labold.struts.actions.forms.PacienteForm;
@@ -34,9 +36,12 @@ public class EstudioAction extends ValidadorAction {
 			WebApplicationContext ctx = getWebApplicationContext();
 			PacienteFachada pacienteFachada = (PacienteFachada) ctx.getBean("pacienteFachada");
 			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			PracticaFachada practicaFachada = (PracticaFachada) ctx.getBean("practicaFachada");
 			
 			request.setAttribute("nroEstudio", estudioFachada.getProximoNroEstudio());
 			request.setAttribute("pacientes", pacienteFachada.getPacientes());
+			List<GrupoPractica> gruposPracticas = practicaFachada.getGruposPractica();
+			request.setAttribute("gruposPracticas", gruposPracticas);
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);

@@ -78,6 +78,52 @@
 		</tr>
 	</table>
 	
+	<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2" cellspacing="0">
+		<tr>
+			<td height="20" colspan="4"></td>
+		</tr>
+		<c:forEach items="${gruposPracticas}" var="grupo">
+			<tr>
+				<td>
+					${grupo.nombre}
+				</td>
+				<td colspan="3"></td>				
+			</tr>
+			<c:forEach items="${grupo.practicas}" var="practica">
+				<tr>
+					<td></td>
+					<td>
+						${practica.nombre}
+					</td>
+					<td colspan="2"></td>				
+				</tr>						
+			</c:forEach>
+			<c:forEach items="${grupo.subItemsPractica}" var="subItem">
+				<tr>
+					<td></td>
+					<td></td>
+					<td>
+						${subItem.nombre}				
+					</td>
+					<td></td>				
+				</tr>
+				<c:forEach items="${subItem.practicas}" var="prac">
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							${prac.nombre}
+						</td>				
+					</tr>						
+				</c:forEach>									
+			</c:forEach>							
+		</c:forEach>		
+		<tr>
+			<td height="20" colspan="4"></td>
+		</tr>		
+	</table>		
+	
 	<table border="0" class="cuadradoSinBorde" align="center" width="70%" cellpadding="2" cellspacing="0">
 		<tr>
 			<td height="10"></td>

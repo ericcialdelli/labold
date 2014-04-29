@@ -30,6 +30,10 @@ public class ValoresEstudio {
 	@Cascade(value = { CascadeType.SAVE_UPDATE, CascadeType.DELETE_ORPHAN })
 	private List<ValorPractica> valoresPracticas = new ArrayList<ValorPractica>();	
 	
+	@OneToMany(mappedBy = "valoresEstudio")
+	@Cascade(value = { CascadeType.SAVE_UPDATE, CascadeType.DELETE_ORPHAN })
+	private List<ValorSubItemPractica> valorSubItemPractica = new ArrayList<ValorSubItemPractica>();		
+	
 	@ManyToOne()
 	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "estudio_fk")
@@ -65,6 +69,15 @@ public class ValoresEstudio {
 
 	public void setEstudio(Estudio estudio) {
 		this.estudio = estudio;
+	}
+
+	public List<ValorSubItemPractica> getValorSubItemPractica() {
+		return valorSubItemPractica;
+	}
+
+	public void setValorSubItemPractica(
+			List<ValorSubItemPractica> valorSubItemPractica) {
+		this.valorSubItemPractica = valorSubItemPractica;
 	}
 	
 	
