@@ -69,7 +69,7 @@ public class EstudioAction extends ValidadorAction {
 			if (!validarEstudioForm(new StringBuffer(), estudioForm)) {
 				throw new Exception("Error de Seguridad");
 			}						
-			estudioFachada.altaEstudio(estudioForm.getEstudioDTO());
+			//estudioFachada.altaEstudio(estudioForm.getEstudioDTO());
 			
 			request.setAttribute("exitoGrabado", Constantes.EXITO_ALTA_ESTUDIO);
 			

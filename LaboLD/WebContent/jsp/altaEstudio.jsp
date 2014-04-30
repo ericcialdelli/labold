@@ -22,6 +22,83 @@
 	function submitir(){
 		validarForm("estudioFormId","../estudio","validarEstudioForm","EstudioForm");
 	}
+
+	function exp(sec) {
+		   
+		 $("#e"+sec).toggle();
+		 $("#c"+sec).toggle();		   
+	}
+
+	function col(sec) {
+
+		$("#e"+sec).toggle();
+		$("#c"+sec).toggle();
+	}
+
+	function expSubItem(sec){
+
+		$("#esi"+sec).toggle();
+		$("#csi"+sec).toggle();		
+	}
+
+	function colSubItem(sec){
+
+		$("#esi"+sec).toggle();
+		$("#csi"+sec).toggle();		
+	}
+
+	function expandirGrupo(idGrupo){
+				
+		$("#trGrupo"+idGrupo).toggle();
+	}
+
+	function pintarFila(tag,id){
+		
+		$('#'+tag+id).attr("class", "verdeSubtitulo");	
+	}
+
+	function despintarFila(tag,id){
+
+		$('#'+tag+id).attr("class", "grisSubtitulo");
+			
+	}
+
+	function clickCheck(grupo, practica){
+
+		if($('#checkG'+grupo+"P"+practica).is(':checked')){
+			$('#trG'+grupo+"P"+practica).addClass("verdeClaroSubtituloCenter");
+			$('#hiddenG'+grupo+"P"+practica).val($('#checkG'+grupo+"P"+practica).val());	
+		}
+		else{
+			$('#trG'+grupo+"P"+practica).removeClass("verdeClaroSubtituloCenter");
+			$('#hiddenG'+grupo+"P"+practica).val(0);
+		}
+	}
+
+	function clickCheckPracticaSubItem(grupo, subItem, practica){
+
+		if($('#checkG'+grupo+"S"+subItem+"P"+practica).is(':checked')){
+			$('#trG'+grupo+"S"+subItem+"P"+practica).addClass("verdeClaroSubtituloCenter");
+			$('#hiddenG'+grupo+"S"+subItem+"P"+practica).val($('#checkG'+grupo+"S"+subItem+"P"+practica).val());		
+		}
+		else{
+			$('#trG'+grupo+"S"+subItem+"P"+practica).removeClass("verdeClaroSubtituloCenter");
+			$('#hiddenG'+grupo+"S"+subItem+"P"+practica).val(0);
+		}		
+	}
+
+	function seleccionarTodos(nroGrupo){
+
+		$('.checkG'+nroGrupo).attr('checked','checked');
+		$('.trG'+nroGrupo).addClass("verdeClaroSubtituloCenter");
+			
+	}
+
+	function desSeleccionarTodos(nroGrupo){
+
+		$('.checkG'+nroGrupo).removeAttr('checked');
+		$('.trG'+nroGrupo).removeClass("verdeClaroSubtituloCenter");
+	}
 	
 </script>
 
@@ -78,49 +155,97 @@
 		</tr>
 	</table>
 	
-	<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2" cellspacing="0">
+	<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2" cellspacing="2">
 		<tr>
-			<td height="20" colspan="4"></td>
+			<td height="20"></td>
 		</tr>
-		<c:forEach items="${gruposPracticas}" var="grupo">
+		<%int i=0; %>
+		<c:forEach items="${gruposPracticas}" var="grupo" varStatus="iGrupo">
 			<tr>
+				<td align="left" onclick="expandirGrupo(<c:out value='${iGrupo.index}'></c:out>)" class="grisSubtitulo"
+					id="grupo<c:out value='${iGrupo.index}'></c:out>" 									
+					onmouseover="javascript:pintarFila('grupo',<c:out value='${iGrupo.index}'></c:out>);"
+					onmouseout="javascript:despintarFila('grupo',<c:out value='${iGrupo.index}'></c:out>);">
+					
+					${grupo.nombre}														
+				</td>							
+			</tr>	
+			<tr style="display: none" id="trGrupo<c:out value='${iGrupo.index}'></c:out>">
 				<td>
-					${grupo.nombre}
+					<table border="0" class="cuadrado" align="left" width="100%" cellpadding="2" >
+						<tr>
+							<td height="5" colspan="2" align="right">
+								<a href="javascript:seleccionarTodos(<c:out value='${iGrupo.index}'></c:out>)">Seleccionar Todos</a>
+								/
+								<a href="javascript:desSeleccionarTodos(<c:out value='${iGrupo.index}'></c:out>)">Deseleccionar Todos</a>
+							</td>
+						</tr>				
+						<c:forEach items="${grupo.practicas}" var="practica" varStatus="iPractica">
+							<c:if test="${practica.subItemPractica == null}">
+								<tr id="trG<c:out value='${iGrupo.index}'></c:out>P<c:out value='${iPractica.index}'></c:out>"
+									class="trG<c:out value='${iGrupo.index}'></c:out>">
+									<td width="5%">
+										<input type="hidden" name="listaPracticas[<%=i%>].id" 
+											id="hiddenG<c:out value='${iGrupo.index}'></c:out>P<c:out value='${iPractica.index}'></c:out>">
+										<input type="checkbox" class="checkG<c:out value='${iGrupo.index}'></c:out>"
+											onchange="clickCheck(<c:out value='${iGrupo.index}'></c:out>,<c:out value='${iPractica.index}'></c:out>)" 
+											id="checkG<c:out value='${iGrupo.index}'></c:out>P<c:out value='${iPractica.index}'></c:out>"
+											value="${practica.id}">
+									</td>
+									<td align="left" width="95%">
+										${practica.nombre}
+									</td>				
+								</tr>	
+								<%i++; %>	
+							</c:if>											
+						</c:forEach>
+						
+						<c:forEach items="${grupo.subItemsPractica}" var="subItem" varStatus="iSubItem">
+							<tr>
+								<td width="5%">
+								</td>
+								<td width="95%" class="negritaLeft">
+									${subItem.nombre}								
+								</td>							
+							</tr>
+							<tr>
+								<td width="5%">
+								</td>
+								<td width="95%">
+									<table border="0" class="cuadrado" align="left" width="100%" cellpadding="2" >
+										<tr>
+											<td height="5" colspan="2"></td>
+										</tr>															
+										<c:forEach items="${subItem.practicas}" var="prac" varStatus="iPrac">											
+											<tr id="trG<c:out value='${iGrupo.index}'></c:out>S<c:out value='${iSubItem.index}'></c:out>P<c:out value='${iPrac.index}'></c:out>"
+												class="trG<c:out value='${iGrupo.index}'></c:out>">											
+												<td width="5%">		
+												
+													<input type="hidden" name="listaPracticas[<%=i%>].id" 
+														id="hiddenG<c:out value='${iGrupo.index}'></c:out>S<c:out value='${iSubItem.index}'></c:out>P<c:out value='${iPrac.index}'></c:out>">												
+																							
+													<input type="checkbox" class="checkG<c:out value='${iGrupo.index}'></c:out>"
+														onchange="clickCheckPracticaSubItem(<c:out value='${iGrupo.index}'></c:out>,<c:out value='${iSubItem.index}'></c:out>,<c:out value='${iPrac.index}'></c:out>)" 
+														id="checkG<c:out value='${iGrupo.index}'></c:out>S<c:out value='${iSubItem.index}'></c:out>P<c:out value='${iPrac.index}'></c:out>"
+														value="${prac.id}">													
+												</td>														
+												<td align="left" width="95%">
+													${prac.nombre}
+												</td>				
+											</tr>
+											<%i++; %>						
+										</c:forEach>																		
+									</table>							
+								</td>							
+							</tr>							
+						</c:forEach>
+						
+					</table>	
 				</td>
-				<td colspan="3"></td>				
-			</tr>
-			<c:forEach items="${grupo.practicas}" var="practica">
-				<tr>
-					<td></td>
-					<td>
-						${practica.nombre}
-					</td>
-					<td colspan="2"></td>				
-				</tr>						
-			</c:forEach>
-			<c:forEach items="${grupo.subItemsPractica}" var="subItem">
-				<tr>
-					<td></td>
-					<td></td>
-					<td>
-						${subItem.nombre}				
-					</td>
-					<td></td>				
-				</tr>
-				<c:forEach items="${subItem.practicas}" var="prac">
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td>
-							${prac.nombre}
-						</td>				
-					</tr>						
-				</c:forEach>									
-			</c:forEach>							
+			</tr>					
 		</c:forEach>		
 		<tr>
-			<td height="20" colspan="4"></td>
+			<td height="20" ></td>
 		</tr>		
 	</table>		
 	
