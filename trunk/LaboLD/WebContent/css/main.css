@@ -21,6 +21,12 @@
 	font-weight: bold;
 }
 
+.negritaLeft {
+	font-weight: bold;
+	text-align: left;
+	font-size: 10px;
+}
+
 .botonerab {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 11px;
@@ -114,6 +120,17 @@
 	color: black;
 }
 
+.verdeClaroSubtituloCenter {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	background-color: #BACE8D;
+	text-align: center;
+	vertical-align: middle;
+	font-style: normal;
+	color: black;
+}
+
 .verdeSubtitulo {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 11px;
@@ -155,6 +172,14 @@
 
 .cuadradoSinBorde {
 	text-align: center;
+	border: none;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: 14px
+}
+
+.cuadradoSinBordeLeft {
+	text-align: left;
 	border: none;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 10px;
