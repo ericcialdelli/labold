@@ -95,7 +95,8 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	</bean>
 	<bean id="estudioFachada" class="ar.com.labold.fachada.EstudioFachada">
 		<constructor-arg ref="estudioDAO" />
-		<constructor-arg ref="pacienteDAO" />		
+		<constructor-arg ref="pacienteDAO" />
+		<constructor-arg ref="practicaDAO" />		
 	</bean>
 
 	<bean id="reportesFachada" class="ar.com.labold.fachada.ReportesFachada">

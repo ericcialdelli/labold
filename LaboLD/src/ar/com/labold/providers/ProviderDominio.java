@@ -155,7 +155,7 @@ public abstract class ProviderDominio {
 	}	
 	
 	//Se usa en el alta del Estudio
-	public static Estudio getEstudio(EstudioDTO estudioDTO, Paciente paciente){
+	public static Estudio getEstudio(EstudioDTO estudioDTO, Paciente paciente, List<Practica> listaPracticas){
 		
 		Estudio estudio = new Estudio(); 
 		estudio.setId(estudioDTO.getId());
@@ -163,6 +163,8 @@ public abstract class ProviderDominio {
 		estudio.setPaciente(paciente);
 		estudio.setSolicitadoPor(estudioDTO.getSolicitadoPor());
 		estudio.setFecha(Fecha.stringDDMMAAAAToUtilDate(estudioDTO.getFecha()));
+		
+		Hay q agregar todas las practicas...
 		
 		return estudio;
 	}	
