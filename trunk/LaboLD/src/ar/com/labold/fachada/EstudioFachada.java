@@ -1,16 +1,18 @@
 package ar.com.labold.fachada;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.com.labold.dao.EstudioDAO;
 import ar.com.labold.dao.PacienteDAO;
+import ar.com.labold.dao.PracticaDAO;
 import ar.com.labold.dto.EstudioDTO;
-import ar.com.labold.dto.PacienteDTO;
+import ar.com.labold.dto.PracticaDTO;
 import ar.com.labold.negocio.Estudio;
-import ar.com.labold.negocio.ObraSocial;
 import ar.com.labold.negocio.Paciente;
+import ar.com.labold.negocio.Practica;
 import ar.com.labold.providers.ProviderDominio;
 
 @Transactional(rollbackFor = { Throwable.class })
@@ -18,21 +20,28 @@ public class EstudioFachada {
 
 	private EstudioDAO estudioDAO;
 	private PacienteDAO pacienteDAO;
+	private PracticaDAO practicaDAO;
 	
 	public EstudioFachada(){}
 	
-	public EstudioFachada(EstudioDAO pEstudioDAO, PacienteDAO pPacienteDAO){
+	public EstudioFachada(EstudioDAO pEstudioDAO, PacienteDAO pPacienteDAO, PracticaDAO pPracticaDAO){
 		
 		this.estudioDAO = pEstudioDAO;
 		this.pacienteDAO = pPacienteDAO;
+		this.practicaDAO = pPracticaDAO;
 	}
 	
-	public void altaEstudio(EstudioDTO estudioDTO){
+	public void altaEstudio(EstudioDTO estudioDTO, List<PracticaDTO> listaPracticasDTO){
+		
+		List<Practica> listaPracticas = new ArrayList<Practica>(); 
+		for (PracticaDTO practicaDTO : listaPracticasDTO) {
+			listaPracticas.add(practicaDAO.getPractica(practicaDTO.getId()));
+		}
 		
 		Paciente paciente = pacienteDAO.getPaciente(estudioDTO.getPaciente().getId());
-		Estudio estudio = ProviderDominio.getEstudio(estudioDTO, paciente);
+		Estudio estudio = ProviderDominio.getEstudio(estudioDTO, paciente,listaPracticas);
 		
-		estudioDAO.altaEstudio(estudio);
+		//estudioDAO.altaEstudio(estudio);
 	}
 	
 	public List<Estudio> getEstudios(){

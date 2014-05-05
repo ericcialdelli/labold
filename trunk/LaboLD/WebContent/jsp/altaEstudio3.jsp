@@ -63,7 +63,7 @@
 			
 	}
 
-	/*function clickCheck(grupo, practica){
+	function clickCheck(grupo, practica){
 
 		if($('#checkG'+grupo+"P"+practica).is(':checked')){
 			$('#trG'+grupo+"P"+practica).addClass("verdeClaroSubtituloCenter");
@@ -85,42 +85,19 @@
 			$('#trG'+grupo+"S"+subItem+"P"+practica).removeClass("verdeClaroSubtituloCenter");
 			$('#hiddenG'+grupo+"S"+subItem+"P"+practica).val(0);
 		}		
-	}*/
-
-	function clickCheck(ind){
-
-		if($('#checkPractica'+ind).is(':checked')){
-			$('#trPractica'+ind).addClass("verdeClaroSubtituloCenter");
-			$('#hiddenPractica'+ind).val($('#checkPractica'+ind).val());	
-		}
-		else{
-			$('#trPractica'+ind).removeClass("verdeClaroSubtituloCenter");
-			$('#hiddenPractica'+ind).val(0);
-		}
 	}
-	
+
 	function seleccionarTodos(nroGrupo){
 
 		$('.checkG'+nroGrupo).attr('checked','checked');
-		//$('.trG'+nroGrupo).addClass("verdeClaroSubtituloCenter");
-
-		$('.grupo'+nroGrupo).each(
-			function(){
-				clickCheck($(this).val());
-			}
-		);	
+		$('.trG'+nroGrupo).addClass("verdeClaroSubtituloCenter");
+			
 	}
 
 	function desSeleccionarTodos(nroGrupo){
 
 		$('.checkG'+nroGrupo).removeAttr('checked');
-		//$('.trG'+nroGrupo).removeClass("verdeClaroSubtituloCenter");
-
-		$('.grupo'+nroGrupo).each(
-			function(){
-				clickCheck($(this).val());
-			}
-		);		
+		$('.trG'+nroGrupo).removeClass("verdeClaroSubtituloCenter");
 	}
 	
 </script>
@@ -205,15 +182,14 @@
 						</tr>				
 						<c:forEach items="${grupo.practicas}" var="practica" varStatus="iPractica">
 							<c:if test="${practica.subItemPractica == null}">
-								<tr id="trPractica<%=i%>"
+								<tr id="trG<c:out value='${iGrupo.index}'></c:out>P<c:out value='${iPractica.index}'></c:out>"
 									class="trG<c:out value='${iGrupo.index}'></c:out>">
 									<td width="5%">
-										<input type="hidden" class="grupo<c:out value='${iGrupo.index}'></c:out>" value="<%=i%>">									
 										<input type="hidden" name="listaPracticas[<%=i%>].id" 
-											id="hiddenPractica<%=i%>">
+											id="hiddenG<c:out value='${iGrupo.index}'></c:out>P<c:out value='${iPractica.index}'></c:out>">
 										<input type="checkbox" class="checkG<c:out value='${iGrupo.index}'></c:out>"
-											onchange="clickCheck(<%=i%>)" 
-											id="checkPractica<%=i%>"
+											onchange="clickCheck(<c:out value='${iGrupo.index}'></c:out>,<c:out value='${iPractica.index}'></c:out>)" 
+											id="checkG<c:out value='${iGrupo.index}'></c:out>P<c:out value='${iPractica.index}'></c:out>"
 											value="${practica.id}">
 									</td>
 									<td align="left" width="95%">
@@ -241,17 +217,16 @@
 											<td height="5" colspan="2"></td>
 										</tr>															
 										<c:forEach items="${subItem.practicas}" var="prac" varStatus="iPrac">											
-											<tr id="trPractica<%=i%>"
+											<tr id="trG<c:out value='${iGrupo.index}'></c:out>S<c:out value='${iSubItem.index}'></c:out>P<c:out value='${iPrac.index}'></c:out>"
 												class="trG<c:out value='${iGrupo.index}'></c:out>">											
-												<td width="5%">	
-													<input type="hidden" class="grupo<c:out value='${iGrupo.index}'></c:out>" 
-														value="<%=i%>">													
+												<td width="5%">		
+												
 													<input type="hidden" name="listaPracticas[<%=i%>].id" 
-														id="hiddenPractica<%=i%>">												
+														id="hiddenG<c:out value='${iGrupo.index}'></c:out>S<c:out value='${iSubItem.index}'></c:out>P<c:out value='${iPrac.index}'></c:out>">												
 																							
 													<input type="checkbox" class="checkG<c:out value='${iGrupo.index}'></c:out>"
-														onchange="clickCheck(<%=i%>)" 
-														id="checkPractica<%=i%>"
+														onchange="clickCheckPracticaSubItem(<c:out value='${iGrupo.index}'></c:out>,<c:out value='${iSubItem.index}'></c:out>,<c:out value='${iPrac.index}'></c:out>)" 
+														id="checkG<c:out value='${iGrupo.index}'></c:out>S<c:out value='${iSubItem.index}'></c:out>P<c:out value='${iPrac.index}'></c:out>"
 														value="${prac.id}">													
 												</td>														
 												<td align="left" width="95%">

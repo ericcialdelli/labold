@@ -64,12 +64,13 @@ public class EstudioAction extends ValidadorAction {
 			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
 			
 			EstudioForm estudioForm = (EstudioForm)form;
+			estudioForm.normalizarListaPracticas();
 			
 			// valido nuevamente por seguridad.  
 			if (!validarEstudioForm(new StringBuffer(), estudioForm)) {
 				throw new Exception("Error de Seguridad");
 			}						
-			//estudioFachada.altaEstudio(estudioForm.getEstudioDTO());
+			estudioFachada.altaEstudio(estudioForm.getEstudioDTO(),estudioForm.getListaPracticas());
 			
 			request.setAttribute("exitoGrabado", Constantes.EXITO_ALTA_ESTUDIO);
 			
