@@ -211,6 +211,7 @@
 										<input type="hidden" class="grupo<c:out value='${iGrupo.index}'></c:out>" value="<%=i%>">									
 										<input type="hidden" name="listaPracticas[<%=i%>].id" 
 											id="hiddenPractica<%=i%>">
+											
 										<input type="checkbox" class="checkG<c:out value='${iGrupo.index}'></c:out>"
 											onchange="clickCheck(<%=i%>)" 
 											id="checkPractica<%=i%>"
@@ -248,7 +249,7 @@
 														value="<%=i%>">													
 													<input type="hidden" name="listaPracticas[<%=i%>].id" 
 														id="hiddenPractica<%=i%>">												
-																							
+									
 													<input type="checkbox" class="checkG<c:out value='${iGrupo.index}'></c:out>"
 														onchange="clickCheck(<%=i%>)" 
 														id="checkPractica<%=i%>"

@@ -18,7 +18,7 @@ public class ValorPractica {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String valor;
 
 	@ManyToOne()

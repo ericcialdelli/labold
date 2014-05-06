@@ -145,7 +145,7 @@ public class EstudioAction extends ValidadorAction {
 			
 			String idEstudio = request.getParameter("id");			
 			Estudio estudio = estudioFachada.getEstudio(Long.valueOf(idEstudio));
-			
+
 			request.setAttribute("pacientes", pacienteFachada.getPacientes());			
 			request.setAttribute("estudio", estudio);
 			
