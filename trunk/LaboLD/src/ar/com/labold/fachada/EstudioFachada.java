@@ -35,13 +35,14 @@ public class EstudioFachada {
 		
 		List<Practica> listaPracticas = new ArrayList<Practica>(); 
 		for (PracticaDTO practicaDTO : listaPracticasDTO) {
-			listaPracticas.add(practicaDAO.getPractica(practicaDTO.getId()));
+			listaPracticas
+			.add(practicaDAO.getPractica(practicaDTO.getId()));
 		}
 		
 		Paciente paciente = pacienteDAO.getPaciente(estudioDTO.getPaciente().getId());
 		Estudio estudio = ProviderDominio.getEstudio(estudioDTO, paciente,listaPracticas);
 		
-		//estudioDAO.altaEstudio(estudio);
+		estudioDAO.altaEstudio(estudio);
 	}
 	
 	public List<Estudio> getEstudios(){

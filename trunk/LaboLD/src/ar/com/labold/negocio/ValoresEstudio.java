@@ -3,6 +3,7 @@ package ar.com.labold.negocio;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +21,10 @@ public class ValoresEstudio {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
+	
+	@Column(nullable = false)
+	private String nombre;	
+	
 	@ManyToOne()
 	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "grupoPractica_fk")
@@ -78,6 +82,14 @@ public class ValoresEstudio {
 	public void setValorSubItemPractica(
 			List<ValorSubItemPractica> valorSubItemPractica) {
 		this.valorSubItemPractica = valorSubItemPractica;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	
 	

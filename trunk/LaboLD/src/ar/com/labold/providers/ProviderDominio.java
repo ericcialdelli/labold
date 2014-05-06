@@ -2,7 +2,10 @@ package ar.com.labold.providers;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import ar.com.labold.dto.EstudioDTO;
 import ar.com.labold.dto.GrupoPracticaDTO;
@@ -21,6 +24,9 @@ import ar.com.labold.negocio.Practica;
 import ar.com.labold.negocio.Rol;
 import ar.com.labold.negocio.SubItemPractica;
 import ar.com.labold.negocio.Usuario;
+import ar.com.labold.negocio.ValorPractica;
+import ar.com.labold.negocio.ValorSubItemPractica;
+import ar.com.labold.negocio.ValoresEstudio;
 import ar.com.labold.utils.Fecha;
 
 
@@ -164,7 +170,57 @@ public abstract class ProviderDominio {
 		estudio.setSolicitadoPor(estudioDTO.getSolicitadoPor());
 		estudio.setFecha(Fecha.stringDDMMAAAAToUtilDate(estudioDTO.getFecha()));
 		
-		Hay q agregar todas las practicas...
+		Map<Long,ValoresEstudio> mapValoresEstudio = new TreeMap<Long,ValoresEstudio>();
+		Map<Long,ValorSubItemPractica> mapValorSubItemPractica = new TreeMap<Long,ValorSubItemPractica>();
+		long idGrupo;
+		long idSubItemPractica;
+		ValoresEstudio valoresEstudio;
+		ValorSubItemPractica valorSubItemPractica;
+		
+		//Hay q agregar todas las practicas...
+		for (Practica practica : listaPracticas) {
+			
+			idGrupo = practica.getGrupoPractica().getId();
+			valoresEstudio = mapValoresEstudio.get(idGrupo);
+			
+			if(valoresEstudio == null){
+				valoresEstudio = new ValoresEstudio();
+				valoresEstudio.setNombre(practica.getGrupoPractica().getNombre());
+				mapValoresEstudio.put(idGrupo, valoresEstudio);
+			}
+			
+			ValorPractica valorPractica = new ValorPractica();
+			valorPractica.setPractica(practica);
+			valorPractica.setValor(null);										
+
+			if(practica.getSubItemPractica() != null ){
+				
+				idSubItemPractica = practica.getSubItemPractica().getId();
+				valorSubItemPractica = mapValorSubItemPractica.get(idSubItemPractica);
+				if(valorSubItemPractica == null){
+					valorSubItemPractica = new ValorSubItemPractica();
+					valorSubItemPractica.setNombre(practica.getSubItemPractica().getNombre());
+					mapValorSubItemPractica.put(idSubItemPractica, valorSubItemPractica);
+					valoresEstudio.getValorSubItemPractica().add(valorSubItemPractica);
+				}
+				
+				valorPractica.setValorSubItemPractica(valorSubItemPractica);
+				valorPractica.setValoresEstudio(null);				
+				valorSubItemPractica.getValoresPracticas().add(valorPractica);
+				valorSubItemPractica.setValoresEstudio(valoresEstudio);
+				
+			}else{				
+				valorPractica.setValoresEstudio(valoresEstudio);
+				valorPractica.setValorSubItemPractica(null);
+				valoresEstudio.getValoresPracticas().add(valorPractica);
+			}					
+		}
+		
+		for (ValoresEstudio valoresEstudio2 : mapValoresEstudio.values()) {
+			
+			valoresEstudio2.setEstudio(estudio);
+			estudio.getValoresEstudio().add(valoresEstudio2);
+		}
 		
 		return estudio;
 	}	
