@@ -13,6 +13,7 @@ import ar.com.labold.dto.PracticaDTO;
 import ar.com.labold.negocio.Estudio;
 import ar.com.labold.negocio.Paciente;
 import ar.com.labold.negocio.Practica;
+import ar.com.labold.negocio.ValorPractica;
 import ar.com.labold.providers.ProviderDominio;
 
 @Transactional(rollbackFor = { Throwable.class })
@@ -70,5 +71,13 @@ public class EstudioFachada {
 	public long getProximoNroEstudio(){
 		
 		return estudioDAO.getProximoNroEstudio();
+	}
+	
+	public void completarEstudio(EstudioDTO estudio, List<ValorPractica> listaValorPractias){
+		
+		for (ValorPractica valorPractica : listaValorPractias) {
+			ValorPractica valPractica = estudioDAO.getValorPractica(valorPractica.getId());
+			valPractica.setValor(valorPractica.getValor());			
+		}
 	}
 }
