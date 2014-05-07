@@ -121,10 +121,13 @@
 			<forward name="exitoCargaAltaEstudio" path=".altaEstudio" />
 			<forward name="exitoAltaEstudio" path="/estudio.do?metodo=cargarAltaEstudio" />
 			
-			<forward name="exitoCargarRecuperarEstudios" path=".recuperarEstudiosParaModificacion" />
+			<forward name="exitoCargarRecuperarEstudios" path=".recuperarEstudios" />
 			<forward name="exitoRecuperarEstudios" path="/jsp/bloqueRecuperarEstudios.jsp" />
-			<forward name="exitoRecuperarEstudio" path=".modificarEstudio" />
-			<forward name="exitoModificacionEstudio" path="/estudio.do?metodo=recuperarEstudios" />								
+			<forward name="exitoRecuperarEstudioParaModificacion" path=".modificarEstudio" />
+			<forward name="exitoRecuperarEstudioParaConsulta" path=".consultaEstudio" />
+			<forward name="exitoRecuperarEstudioParaCompletar" path=".completarEstudio" />			
+			<forward name="exitoModificacionEstudio" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioParaModificacion" />
+			<forward name="exitoCompletarEstudio" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioParaCompletar" />										
 		</action>				
 		<!-- FIN ESTUDIO -->
 

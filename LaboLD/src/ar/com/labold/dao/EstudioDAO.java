@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import ar.com.labold.negocio.Estudio;
+import ar.com.labold.negocio.ValorPractica;
 
 public class EstudioDAO extends HibernateDaoSupport {
 
@@ -55,5 +56,10 @@ public class EstudioDAO extends HibernateDaoSupport {
 			
 			return 1;
 		}
+	}
+	
+	public ValorPractica getValorPractica(Long idValorPractica){
+		
+		return (ValorPractica)getHibernateTemplate().get(ValorPractica.class,idValorPractica);
 	}	
 }

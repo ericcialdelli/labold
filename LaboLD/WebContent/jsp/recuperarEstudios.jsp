@@ -18,7 +18,7 @@
 
 	function cargarEstudios(){
 
-		var idPaciente = $("#selectPacientes").val();
+		var idPaciente = $("#selectPacientes").val();		
 		$('#bloqueEstudios').html("");
 
 		if(idPaciente != "" && idPaciente != "-1"){
@@ -35,16 +35,19 @@
 	function recuperarEstudio(id){
 		//var urlSeleccionGuia = $('#paramUrlSeleccionGuia').val();
 		//parent.location=contextRoot() + "/guia.do?metodo="+urlSeleccionGuia+"&id="+id;
-		parent.location=contextRoot() + "/estudio.do?metodo=recuperarEstudio&id="+id;
+		
+		var forward = $("#forward").val();
+		parent.location=contextRoot() + "/estudio.do?metodo="+forward+"&id="+id;
 	}
 	
 </script>
 
 <div id="exitoGrabado" class="verdeExito">${exitoGrabado}</div>
+<input type="hidden" value="${forward}" id="forward">
 <table border="0" class="cuadrado" align="center" width="60%"
 	cellpadding="2">
 	<tr>
-		<td class="azulAjustado">Modificación de Estudios</td>
+		<td class="azulAjustado">${titulo}</td>
 	</tr>
 	<tr>
 		<td height="20"></td>

@@ -94,7 +94,23 @@ public class EstudioAction extends ValidadorAction {
 			WebApplicationContext ctx = getWebApplicationContext();
 			PacienteFachada pacienteFachada = (PacienteFachada) ctx.getBean("pacienteFachada");
 			
-			request.setAttribute("listaPacientes", pacienteFachada.getPacientes());			
+			String forward = request.getParameter("forward");
+			
+			String titulo;
+			
+			if(forward.equals("recuperarEstudioParaModificacion")){
+				titulo="Modificar Estudio";
+			}else{
+				if(forward.equals("recuperarEstudioParaModificacion")){
+					titulo="Consulta de Estudios";
+				}else{
+					titulo="Completar Estudios";
+				}
+			}
+			
+			request.setAttribute("listaPacientes", pacienteFachada.getPacientes());
+			request.setAttribute("forward", forward);
+			request.setAttribute("titulo", titulo);
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
@@ -117,11 +133,11 @@ public class EstudioAction extends ValidadorAction {
 			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
 			
 			String idPaciente = request.getParameter("idPaciente"); 
-			
+
 			List<Estudio> listaEstudios = estudioFachada.getEstudios(Long.valueOf(idPaciente));
 			
 			request.setAttribute("listaEstudios", listaEstudios);
-			
+
 		} catch (Throwable t) {
 			MyLogger.logError(t);
 			request.setAttribute("error", "Error Inesperado");
@@ -132,11 +148,11 @@ public class EstudioAction extends ValidadorAction {
 	}	
 	
 	@SuppressWarnings("unchecked")
-	public ActionForward recuperarEstudio(ActionMapping mapping,
+	public ActionForward recuperarEstudioParaModificacion(ActionMapping mapping,
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		String strForward = "exitoRecuperarEstudio";
+		String strForward = "exitoRecuperarEstudioParaModificacion";
 
 		try {
 			WebApplicationContext ctx = getWebApplicationContext();
@@ -147,6 +163,56 @@ public class EstudioAction extends ValidadorAction {
 			Estudio estudio = estudioFachada.getEstudio(Long.valueOf(idEstudio));
 
 			request.setAttribute("pacientes", pacienteFachada.getPacientes());			
+			request.setAttribute("estudio", estudio);
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}	
+
+	@SuppressWarnings("unchecked")
+	public ActionForward recuperarEstudioParaConsulta(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoRecuperarEstudioParaConsulta";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			
+			String idEstudio = request.getParameter("id");			
+			Estudio estudio = estudioFachada.getEstudio(Long.valueOf(idEstudio));
+			
+			request.setAttribute("estudio", estudio);
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}	
+
+	@SuppressWarnings("unchecked")
+	public ActionForward recuperarEstudioParaCompletar(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoRecuperarEstudioParaCompletar";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			
+			String idEstudio = request.getParameter("id");			
+			Estudio estudio = estudioFachada.getEstudio(Long.valueOf(idEstudio));
+			
 			request.setAttribute("estudio", estudio);
 			
 		} catch (Throwable t) {
@@ -179,6 +245,37 @@ public class EstudioAction extends ValidadorAction {
 			estudioFachada.modificacionEstudio(estudioForm.getEstudioDTO());
 			
 			request.setAttribute("exitoGrabado", Constantes.EXITO_MODIFICACION_ESTUDIO);
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}	
+	
+	@SuppressWarnings("unchecked")
+	public ActionForward completarEstudio(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoCompletarEstudio";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			
+			EstudioForm estudioForm = (EstudioForm)form;
+			
+			/* valido nuevamente por seguridad.  
+			if (!validarEstudioForm(new StringBuffer(), estudioForm)) {
+				throw new Exception("Error de Seguridad");
+			}*/
+			
+			estudioFachada.completarEstudio(estudioForm.getEstudioDTO(),estudioForm.getListaValoresPractica());
+			
+			request.setAttribute("exitoGrabado", Constantes.EXITO_COMPLETAR_ESTUDIO);
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);

@@ -16,9 +16,6 @@
 
 <script type="text/javascript">
 
-	$(function() {
-		$( "#datepicker" ).datepicker({ dateFormat: 'dd/mm/yy'});		
-	});
 
 	function submitir(){
 		validarForm("estudioFormId","../estudio","validarEstudioForm","EstudioForm");
@@ -26,7 +23,7 @@
 
 	function volver(){
 
-		parent.location=contextRoot() + "/estudio.do?metodo=cargarRecuperarEstudios&forward=recuperarEstudioParaModificacion";
+		parent.location=contextRoot() + "/estudio.do?metodo=cargarRecuperarEstudios&forward=recuperarEstudioParaCompletar";
 	}	
 
 	function expandirGrupo(idGrupo){
@@ -49,13 +46,13 @@
 
 <div id="errores" class="rojoAdvertencia">${error}</div>
 
-<html:form action="estudio" styleId="estudioFormId">
-	<html:hidden property="metodo" value="modificacionEstudio"/>
+<html:form action="estudio">
+	<html:hidden property="metodo" value="completarEstudio"/>
 	<html:hidden property="estudioDTO.id" value="${estudio.id}"/>
 
 	<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2" cellspacing="0">
 		<tr>
-			<td colspan="4"  class="azulAjustado" >Modificación de Estudio</td>
+			<td colspan="4"  class="azulAjustado" >Completar Estudio</td>
 		</tr>
 		<tr>
 			<td height="20" colspan="4"></td>
@@ -63,26 +60,24 @@
 		<tr>
 			<td class="botoneralNegritaRight" width="12%" >Número</td>
 			<td align="left" width="30%">			
-				<html:text property="estudioDTO.numero" value="${estudio.numero}" styleClass="botonerab" size="10"  
-					onkeypress="javascript:esNumerico(event);"/>
+				<html:text property="" value="${estudio.numero}" styleClass="botonerab" size="10"/>
 			</td>
 			
 			<td class="botoneralNegritaRight" width="30%" >Paciente</td>
 			<td align="left">			
 				<input type="text" value="${estudio.paciente.apellido}, ${estudio.paciente.nombre}" class="botonerab" size="40" readonly="readonly"/>
-				<input type="hidden" value="${estudio.paciente.id}" name="estudioDTO.paciente.id">
 			</td>			
 		</tr>	
 		
 		<tr>
 			<td class="botoneralNegritaRight" width="12%" >Solicitado Por</td>
 			<td align="left" width="30%">			
-				<html:text property="estudioDTO.solicitadoPor" value="${estudio.solicitadoPor}" styleClass="botonerab" size="40"/>
+				<input type="text" value="${estudio.solicitadoPor}" class="botonerab" size="40" readonly="readonly"/>
 			</td>	
 			
 			<td class="botoneralNegritaRight" width="30%" >Fecha</td>
 			<td align="left">			
-				<input id="datepicker" type="text" name="estudioDTO.fecha" readonly="readonly" class="botonerab" 
+				<input type="text" readonly="readonly" class="botonerab" 
 					value="<fmt:formatDate	value='${estudio.fecha}' pattern='dd/MM/yyyy' />">
 				<img alt="" src="<html:rewrite page='/imagenes/calendar/calendar2.gif'/>" align="top" width='17' height='21'>				
 			</td>				
@@ -120,9 +115,14 @@
 									class="trG<c:out value='${iGrupo.index}'></c:out>">
 									<td width="5%">
 									</td>
-									<td align="left" width="95%">
+									<td align="left" width="20%">
 										${valorPractica.practica.nombre}
-									</td>				
+										<input type="hidden" name="listaValoresPractica[<%=i%>].id" value="${valorPractica.id}">
+									</td>
+									<td width="75%" align="left">
+										<input type="text" size="5" class="botonerab" name="listaValoresPractica[<%=i%>].valor"
+											value="${valorPractica.valor}">
+									</td>													
 								</tr>	
 								<%i++; %>	
 																		
@@ -132,14 +132,14 @@
 							<tr>
 								<td width="5%">
 								</td>
-								<td width="95%" class="negritaLeft">
+								<td colspan="2" class="negritaLeft">
 									${valorSubItem.nombre}								
 								</td>							
 							</tr>
 							<tr>
 								<td width="5%">
 								</td>
-								<td width="95%">
+								<td colspan="2">
 									<table border="0" class="cuadrado" align="left" width="100%" cellpadding="2" >
 										<tr>
 											<td height="5" colspan="2"></td>
@@ -147,12 +147,15 @@
 										<c:forEach items="${valorSubItem.valoresPracticas}" var="prac" varStatus="iPrac">											
 											<tr id="trPractica<%=i%>"
 												class="trG<c:out value='${iGrupo.index}'></c:out>">											
-												<td width="5%">																					
-													
-												</td>														
-												<td align="left" width="95%">
+												<td width="5%"></td>														
+												<td align="left" width="15%">
 													${prac.practica.nombre}
-												</td>				
+													<input type="hidden" name="listaValoresPractica[<%=i%>].id" value="${prac.id}">
+												</td>
+												<td width="80%" align="left">
+													<input type="text" size="5" class="botonerab" name="listaValoresPractica[<%=i%>].valor"
+														value="${prac.valor}">
+												</td>																
 											</tr>
 											<%i++; %>						
 										</c:forEach>																		
@@ -177,7 +180,7 @@
 		</tr>			
 		<tr>
 			<td align="center">				
-				<input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();">
+				<input type="submit" class="botonerab" value="Aceptar" id="enviar">
 				<input type="button" class="botonerab" value="Volver" id="enviar" onclick="javascript:volver();">
 			</td>
 		</tr>

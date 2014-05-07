@@ -107,14 +107,24 @@
 		<put name="body" value="/jsp/altaEstudio.jsp" />
 	</definition>	
 	
-	<definition name=".recuperarEstudiosParaModificacion" extends=".base">
+	<definition name=".recuperarEstudios" extends=".base">
 		<put name="title" value="LaboLD" />
-		<put name="body" value="/jsp/recuperarEstudiosParaModificacion.jsp" />
+		<put name="body" value="/jsp/recuperarEstudios.jsp" />
 	</definition>	
 	
 	<definition name=".modificarEstudio" extends=".base">
 		<put name="title" value="LaboLD" />
 		<put name="body" value="/jsp/modificarEstudio.jsp" />
+	</definition>	
+
+	<definition name=".consultaEstudio" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/consultaEstudio.jsp" />
+	</definition>		
+
+	<definition name=".completarEstudio" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/completarEstudio.jsp" />
 	</definition>	
 	<!-- FIN ESTUDIO -->		
 

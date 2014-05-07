@@ -9,17 +9,21 @@ import org.apache.struts.action.ActionForm;
 
 import ar.com.labold.dto.EstudioDTO;
 import ar.com.labold.dto.PracticaDTO;
+import ar.com.labold.negocio.ValorPractica;
 
 public class EstudioForm extends ActionForm {
 
 	private EstudioDTO estudioDTO;
-	private List<PracticaDTO> listaPracticas; 
+	private List<PracticaDTO> listaPracticas;
+	private List<ValorPractica> listaValoresPractica; 
 	
 	public EstudioForm(){
 		
 		estudioDTO = new EstudioDTO();
 		listaPracticas = (List<PracticaDTO>) LazyList.decorate(new ArrayList(),
 				FactoryUtils.instantiateFactory(PracticaDTO.class));
+		listaValoresPractica = (List<ValorPractica>) LazyList.decorate(new ArrayList(),
+				FactoryUtils.instantiateFactory(ValorPractica.class));		
 	}
 
 	public EstudioDTO getEstudioDTO() {
@@ -38,6 +42,14 @@ public class EstudioForm extends ActionForm {
 		this.listaPracticas = listaPracticas;
 	}
 	
+	public List<ValorPractica> getListaValoresPractica() {
+		return listaValoresPractica;
+	}
+
+	public void setListaValoresPractica(List<ValorPractica> listaValoresPractica) {
+		this.listaValoresPractica = listaValoresPractica;
+	}
+
 	public void normalizarListaPracticas() {
 
 		List<PracticaDTO> listaEliminar = new ArrayList<PracticaDTO>();

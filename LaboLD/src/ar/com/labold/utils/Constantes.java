@@ -90,7 +90,9 @@ public class Constantes {
 	//ESTUDIO
 	public static final String EXITO_ALTA_ESTUDIO = "El Estudio se ha dado de alta con exito";
 
-	public static final String EXITO_MODIFICACION_ESTUDIO = "El Estudio se ha modificado con exito";		
+	public static final String EXITO_MODIFICACION_ESTUDIO = "El Estudio se ha modificado con exito";
+	
+	public static final String EXITO_COMPLETAR_ESTUDIO = "El Estudio se ha completado con exito";
 	//FIN ESTUDIO		
 
 	// REPORTES
