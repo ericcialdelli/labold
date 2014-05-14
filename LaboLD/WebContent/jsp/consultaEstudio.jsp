@@ -108,9 +108,15 @@
 									<td align="left" width="20%">
 										${valorPractica.practica.nombre}
 									</td>		
-									<td width="75%" align="left">
-										<input type="text" size="5" class="botonerab" value="${valorPractica.valor}" readonly="readonly">
-									</td>											
+									<td width="20%" align="left">
+										<b>${valorPractica.valor}</b>
+										${valorPractica.practica.unidad}
+									</td>
+									<td width="55%" align="left">
+										<c:if test="${valorPractica.practica.valorReferencia != null}">
+											Valor de Referencia: ${valorPractica.practica.valorReferencia}
+										</c:if>										
+									</td>																				
 								</tr>	
 								<%i++; %>	
 																		
@@ -120,17 +126,17 @@
 							<tr>
 								<td width="5%">
 								</td>
-								<td colspan="2" class="negritaLeft">
+								<td colspan="3" class="negritaLeft">
 									${valorSubItem.nombre}								
 								</td>							
 							</tr>
 							<tr>
 								<td width="5%">
 								</td>
-								<td colspan="2">
+								<td colspan="3">
 									<table border="0" class="cuadrado" align="left" width="100%" cellpadding="2" >
 										<tr>
-											<td height="5" colspan="2"></td>
+											<td height="5" colspan="4"></td>
 										</tr>															
 										<c:forEach items="${valorSubItem.valoresPracticas}" var="prac" varStatus="iPrac">											
 											<tr id="trPractica<%=i%>"
@@ -141,9 +147,15 @@
 												<td align="left" width="15%">
 													${prac.practica.nombre}
 												</td>
-												<td width="80%" align="left">
-													<input type="text" size="5" class="botonerab" value="${prac.valor}" readonly="readonly">
-												</td>																
+												<td width="15%" align="left">
+													<b>${prac.valor}</b>
+													${prac.practica.unidad}													
+												</td>
+												<td width="65%" align="left">
+													<c:if test="${prac.practica.valorReferencia != null}">
+														Valor de Referencia: ${prac.practica.valorReferencia}
+													</c:if>										
+												</td>																												
 											</tr>
 											<%i++; %>						
 										</c:forEach>																		

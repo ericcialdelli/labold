@@ -1,6 +1,6 @@
 .footer {	
 	background-color: #333333;
-	height: 2.7em;
+	height: 1.2em;
 	width: 100%;
 	text-align: center;	
 }
@@ -33,6 +33,15 @@
 	font-style: normal;
 	text-decoration: none;
 	line-height: normal;
+}
+
+.botonerabRojo {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	text-decoration: none;
+	line-height: normal;
+	color: #FF0000;
 }
 
 .botonerabRight {

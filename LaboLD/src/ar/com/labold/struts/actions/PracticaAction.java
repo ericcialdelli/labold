@@ -231,6 +231,7 @@ public class PracticaAction extends ValidadorAction {
 	public boolean validarPracticaForm(StringBuffer error, ActionForm form) {
 		try {
 			PracticaForm pacticaForm = (PracticaForm)form;
+			pacticaForm.getPracticaDTO().normalizarValores();
 			WebApplicationContext ctx = getWebApplicationContext();
 			PracticaFachada practicaFachada = (PracticaFachada) 
 									ctx.getBean("practicaFachada");
@@ -255,7 +256,20 @@ public class PracticaAction extends ValidadorAction {
 					"SubItem",error);
 			}	
 			
-			return !existe && b1 && b2 && b3;
+			boolean b4 = true;
+			boolean b5 = true;
+			
+			if(pacticaForm.getCheckValor().equals("DH")){
+				
+				b4 = Validator.requerido(pacticaForm.getPracticaDTO().getValorNormalDesde(), "Valor Desde", error);
+				b5 = Validator.requerido(pacticaForm.getPracticaDTO().getValorNormalHasta(), "Valor Hasta", error);
+			}
+			if(pacticaForm.getCheckValor().equals("Ref")){
+				
+				b4 = Validator.requerido(pacticaForm.getPracticaDTO().getValorReferencia(), "Valor Referencia", error);
+			}
+			
+			return !existe && b1 && b2 && b3 && b4 && b5;
 
 		} catch (Throwable t) {
 			MyLogger.logError(t);

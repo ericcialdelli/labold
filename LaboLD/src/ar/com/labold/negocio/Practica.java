@@ -27,18 +27,16 @@ public class Practica {
 	private String nombre;
 
 	
-	//-----------------------------//
-	@Column(nullable = false)	
+	//-----------------------------//	
 	private String unidad;
 	
-	@Column(nullable = false)
 	private String valorNormalDesde;
 
-	@Column(nullable = false)
 	private String valorNormalHasta;
 	
-	@Column(nullable = false)
 	private String valorReferencia;	
+	
+	private String mayorMenor;
 	
 	/*@ManyToOne()
 	@JoinColumn(name = "practica_fk")
@@ -139,6 +137,14 @@ public class Practica {
 
 	public void setSubItemPractica(SubItemPractica subItemPractica) {
 		this.subItemPractica = subItemPractica;
+	}
+
+	public String getMayorMenor() {
+		return mayorMenor;
+	}
+
+	public void setMayorMenor(String mayorMenor) {
+		this.mayorMenor = mayorMenor;
 	}	
 	
 	

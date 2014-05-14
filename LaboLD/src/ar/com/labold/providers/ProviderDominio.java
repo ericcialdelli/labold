@@ -129,6 +129,7 @@ public abstract class ProviderDominio {
 		practica.setValorNormalDesde(practicaDTO.getValorNormalDesde());
 		practica.setValorNormalHasta(practicaDTO.getValorNormalHasta());
 		practica.setValorReferencia(practicaDTO.getValorReferencia());
+		practica.setMayorMenor(practicaDTO.getMayorMenor());
 		
 		return practica;
 	}	

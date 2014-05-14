@@ -56,6 +56,41 @@
 		dwr.util.addOptions("selectSubItemPractica", data, "id", "nombre");
 		dwr.util.addOptions("selectSubItemPractica", subItems, "id", "nombre");		
 	}
+
+	function cambiarValores(){
+
+		var valor = $('input[name=valores]:checked').val();
+		$('#idCheckValor').val(valor);
+		
+		if(valor=="DH"){
+			$('#trValorDesdeHasta').show();
+			$('#trValorReferencia').hide();
+
+			$('.refe').val(null);			
+		}
+		if(valor=="Ref"){
+			$('#trValorDesdeHasta').hide();
+			$('#trValorReferencia').show();
+
+			$('.DH').val(null);
+			$('#idMayorMenor').val(">");
+		}
+		if(valor=="SV"){
+			$('#trValorDesdeHasta').hide();
+			$('#trValorReferencia').hide();
+			
+			$('.DH').val(null);
+			$('.refe').val(null);
+		}				
+	}
+
+	function cambiarMayorMenor(){
+
+		var valor = $('input[name=referencia]:checked').val();
+		valor = (valor=='menor')?'<':'>';
+		$('#idMayorMenor').val(valor);
+	}
+	
 </script>
 
 
@@ -119,28 +154,58 @@
 						styleId="nombre" onkeypress="return evitarAutoSubmit(event)"/>
 			</td>
 		</tr>
+		
 		<tr>
-			<td width="40%" class="botoneralNegritaRight">Valor Normal Desde</td>
-			<td align="left">
-				<html:text styleClass="botonerab" property="practicaDTO.valorNormalDesde" value="" 
-						styleId="nombre" onkeypress="return evitarAutoSubmit(event)"/>
-			</td>
-		</tr>
-		<tr>
-			<td width="40%" class="botoneralNegritaRight">Valor Normal Hasta</td>
-			<td align="left">
-				<html:text styleClass="botonerab" property="practicaDTO.valorNormalHasta" value="" 
-						styleId="nombre" onkeypress="return evitarAutoSubmit(event)"/>
-			</td>
-		</tr>		
-		<tr>
-			<td width="40%" class="botoneralNegritaRight">Valor de Referencia</td>
-			<td align="left">
-				<html:text styleClass="botonerab" property="practicaDTO.valorReferencia" value="" 
-						styleId="nombre" onkeypress="return evitarAutoSubmit(event)"/>
+			<td colspan="2" class="botoneralNegrita">
+				<input type="hidden" name="checkValor" value="SV" id="idCheckValor">
+				<input type="radio" name="valores" onchange="cambiarValores();" value="SV" checked="checked">Sin Valor
+				<input type="radio" name="valores" onchange="cambiarValores();" value="DH">Valores Desde/Hasta
+				<input type="radio" name="valores" onchange="cambiarValores();" value="Ref">Valor Referencia
 			</td>
 		</tr>		
 		
+		<tr style="display: none" id="trValorDesdeHasta">
+			<td colspan="2">
+				<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2">		
+					<tr>
+						<td width="40%" class="botoneralNegritaRight">Valor Normal Desde</td>
+						<td align="left">
+							<html:text styleClass="botonerab DH" property="practicaDTO.valorNormalDesde" value="" 
+									styleId="nombre" onkeypress="return evitarAutoSubmit(event)"/>
+						</td>
+					</tr>
+					<tr>
+						<td width="40%" class="botoneralNegritaRight">Valor Normal Hasta</td>
+						<td align="left">
+							<html:text styleClass="botonerab DH" property="practicaDTO.valorNormalHasta" value="" 
+									styleId="nombre" onkeypress="return evitarAutoSubmit(event)"/>
+						</td>
+					</tr>
+				</table>			
+			</td>
+		</tr>			
+		<tr style="display: none" id="trValorReferencia">
+			<td colspan="2">
+				<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2">										
+					<tr>
+						<td width="40%" class="botoneralNegritaRight">Valor de Referencia</td>
+						<td align="left">
+							<html:text styleClass="botonerab refe" property="practicaDTO.valorReferencia" value="" 
+									styleId="nombre" onkeypress="return evitarAutoSubmit(event)" />
+						</td>
+					</tr>		
+					<tr>
+						<td width="40%" class="botoneralNegritaRight">Mayor/Menor</td>
+						<td align="left">
+							<input type="hidden" class="refe" name="practicaDTO.mayorMenor" value=">" id="idMayorMenor">
+							<input type="radio" name="referencia" checked="checked" onchange="cambiarMayorMenor();"
+								value="mayor">Mayor
+							<input type="radio" name="referencia" onchange="cambiarMayorMenor();" value="menor">Menor
+						</td>
+					</tr>		
+				</table>			
+			</td>
+		</tr>					
 		<tr>
 			<td height="20" colspan="2"></td>
 		</tr>
