@@ -14,6 +14,8 @@ public class PracticaDTO {
 		
 	private String valorReferencia;		
 	
+	private String mayorMenor;
+	
 	private GrupoPracticaDTO grupoPracticaDTO;
 	
 	private SubItemPracticaDTO subItemPracticaDTO;
@@ -86,6 +88,21 @@ public class PracticaDTO {
 
 	public void setValorReferencia(String valorReferencia) {
 		this.valorReferencia = valorReferencia;
+	}
+
+	public String getMayorMenor() {
+		return mayorMenor;
+	}
+
+	public void setMayorMenor(String mayorMenor) {
+		this.mayorMenor = mayorMenor;
 	}	
 	
+	public void normalizarValores(){
+		
+		this.setValorNormalDesde((this.valorNormalDesde.equals(""))?null:this.valorNormalDesde);
+		this.setValorNormalHasta((this.valorNormalHasta.equals(""))?null:this.valorNormalHasta);
+		this.setValorReferencia((this.valorReferencia.equals(""))?null:this.valorReferencia);
+		this.setMayorMenor((this.valorReferencia==null)?null:this.mayorMenor);
+	}	
 }

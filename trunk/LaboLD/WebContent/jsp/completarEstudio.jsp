@@ -38,8 +38,57 @@
 
 	function despintarFila(tag,id){
 
-		$('#'+tag+id).attr("class", "grisSubtitulo");
+		$('#'+tag+id).attr("class", "grisSubtitulo");		
+	}
+
+	function verificarValor(id){
+
+		if($("#valorNormalDesde"+id).val()!=null){
 			
+			var valor = new Number($("#valor"+id).val());
+			var valorDesde = new Number($("#valorNormalDesde"+id).val());
+			var valorHasta = new Number($("#valorNormalHasta"+id).val()); 
+			
+			if((valor < valorDesde || valor > valorHasta) && !$("#valor"+id).hasClass("botonerabRojo")){
+				//$("#valor"+id).removeClass("botonerab");				
+				$("#valor"+id).addClass("botonerabRojo");
+			}
+			else{
+				if(valor >= valorDesde && valor <= valorHasta){
+					$("#valor"+id).removeClass("botonerabRojo");
+				}	
+			}
+		}
+		else{
+			if($("#valorReferencia"+id).val()!=null){
+
+				var valor = new Number($("#valor"+id).val());
+				var valorReferencia = new Number($("#valorReferencia"+id).val());
+				var mayorMenor = $("#mayorMenor"+id).val();
+
+				if(mayorMenor == "<"){
+					//alert("Debe ser menor que "+valorReferencia);
+					if(valor > valorReferencia && !$("#valor"+id).hasClass("botonerabRojo")){				
+						$("#valor"+id).addClass("botonerabRojo");
+					}
+					else{
+						if(valor <= valorReferencia){
+							$("#valor"+id).removeClass("botonerabRojo");
+						}	
+					}					
+				}else{
+					//alert("Debe ser mayor que "+valorReferencia);
+					if(valor < valorReferencia && !$("#valor"+id).hasClass("botonerabRojo")){			
+						$("#valor"+id).addClass("botonerabRojo");
+					}
+					else{
+						if(valor >= valorReferencia){
+							$("#valor"+id).removeClass("botonerabRojo");
+						}	
+					}					
+				}				
+			}	
+		}	
 	}
 	
 </script>
@@ -119,10 +168,24 @@
 										${valorPractica.practica.nombre}
 										<input type="hidden" name="listaValoresPractica[<%=i%>].id" value="${valorPractica.id}">
 									</td>
-									<td width="75%" align="left">
-										<input type="text" size="5" class="botonerab" name="listaValoresPractica[<%=i%>].valor"
-											value="${valorPractica.valor}">
-									</td>													
+									<td width="20%" align="left">
+										<input type="text" size="10" class="botonerab" name="listaValoresPractica[<%=i%>].valor"
+											value="${valorPractica.valor}" onkeyup="verificarValor('<%=i%>');" id="valor<%=i%>">	
+									</td>
+									<td width="55%" align="left">
+										<c:choose>
+											<c:when test="${valorPractica.practica.valorReferencia != null}">
+												Valor de Referencia: ${valorPractica.practica.mayorMenor} ${valorPractica.practica.valorReferencia} ${prac.practica.unidad}
+												<input type="hidden" value="${valorPractica.practica.valorReferencia}" id="valorReferencia<%=i%>">
+												<input type="hidden" value="${valorPractica.practica.mayorMenor}" id="mayorMenor<%=i%>">	
+											</c:when>
+											<c:when test="${valorPractica.practica.valorNormalDesde != null}">
+												Valor de Referencia: ${valorPractica.practica.valorNormalDesde} a ${valorPractica.practica.valorNormalHasta} ${valorPractica.practica.unidad}
+												<input type="hidden" value="${valorPractica.practica.valorNormalDesde}" id="valorNormalDesde<%=i%>">
+												<input type="hidden" value="${valorPractica.practica.valorNormalHasta}" id="valorNormalHasta<%=i%>">		 	
+											</c:when>											
+										</c:choose>										
+									</td>																						
 								</tr>	
 								<%i++; %>	
 																		
@@ -132,17 +195,17 @@
 							<tr>
 								<td width="5%">
 								</td>
-								<td colspan="2" class="negritaLeft">
+								<td colspan="3" class="negritaLeft">
 									${valorSubItem.nombre}								
 								</td>							
 							</tr>
 							<tr>
 								<td width="5%">
 								</td>
-								<td colspan="2">
+								<td colspan="3">
 									<table border="0" class="cuadrado" align="left" width="100%" cellpadding="2" >
 										<tr>
-											<td height="5" colspan="2"></td>
+											<td height="5" colspan="4"></td>
 										</tr>															
 										<c:forEach items="${valorSubItem.valoresPracticas}" var="prac" varStatus="iPrac">											
 											<tr id="trPractica<%=i%>"
@@ -152,10 +215,24 @@
 													${prac.practica.nombre}
 													<input type="hidden" name="listaValoresPractica[<%=i%>].id" value="${prac.id}">
 												</td>
-												<td width="80%" align="left">
-													<input type="text" size="5" class="botonerab" name="listaValoresPractica[<%=i%>].valor"
-														value="${prac.valor}">
-												</td>																
+												<td width="20%" align="left">
+													<input type="text" size="10" class="botonerab" name="listaValoresPractica[<%=i%>].valor"
+														value="${prac.valor}" onkeyup="verificarValor('<%=i%>');" id="valor<%=i%>">
+												</td>
+												<td width="60%" align="left">
+										<c:choose>
+											<c:when test="${prac.practica.valorReferencia != null}">
+												Valor de Referencia: ${prac.practica.mayorMenor} ${prac.practica.valorReferencia} ${prac.practica.unidad}
+												<input type="hidden" value="${prac.practica.valorReferencia}" id="valorReferencia<%=i%>">
+												<input type="hidden" value="${valorPractica.practica.mayorMenor}" id="mayorMenor<%=i%>">	
+											</c:when>
+											<c:when test="${prac.practica.valorNormalDesde != null}">
+												Valor de Referencia: ${prac.practica.valorNormalDesde} a ${prac.practica.valorNormalHasta} ${prac.practica.unidad}
+												<input type="hidden" value="${prac.practica.valorNormalDesde}" id="valorNormalDesde<%=i%>">
+												<input type="hidden" value="${prac.practica.valorNormalHasta}" id="valorNormalHasta<%=i%>">		 	
+											</c:when>											
+										</c:choose>										
+												</td>																												
 											</tr>
 											<%i++; %>						
 										</c:forEach>																		
