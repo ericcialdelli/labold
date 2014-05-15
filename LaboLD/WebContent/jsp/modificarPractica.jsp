@@ -42,6 +42,8 @@
 
 			$('.DH').val(null);
 			$('#idMayorMenor').val(">");
+			$('#radioMayor').attr('checked','checked');
+			$('#radioMenor').removeAttr('checked');
 		}
 		if(valor=="SV"){
 			$('#trValorDesdeHasta').hide();
@@ -66,6 +68,16 @@
 <html:form action="practica" styleId="practicaFormId">
 	<html:hidden property="metodo" value="modificacionPractica"/>
 	<html:hidden property="practicaDTO.id" value="${practica.id}"/>
+	<html:hidden property="practicaDTO.grupoPracticaDTO.id" value="${practica.grupoPractica.id}"/>
+	
+	<c:choose>
+		<c:when test="${practica.subItemPractica != null}">
+			<html:hidden property="practicaDTO.subItemPracticaDTO.id" value="${practica.subItemPractica.id}"/>
+		</c:when>
+		<c:otherwise>
+			<html:hidden property="practicaDTO.subItemPracticaDTO.id" value="0"/>
+		</c:otherwise>		
+	</c:choose>
 	
 	<table border="0" class="cuadrado" align="center" width="60%" cellpadding="2">
 		<tr>
@@ -155,14 +167,16 @@
 								<c:when test="${practica.mayorMenor == '<'}">
 									<input type="hidden" class="refe" name="practicaDTO.mayorMenor" value="<" id="idMayorMenor">
 									<input type="radio" name="referencia" onchange="cambiarMayorMenor();"
-										value="mayor">Mayor
-									<input type="radio" name="referencia" checked="checked" onchange="cambiarMayorMenor();" value="menor">Menor
+										value="mayor" id="radioMayor">Mayor
+									<input type="radio" name="referencia" checked="checked" onchange="cambiarMayorMenor();" 
+										value="menor" id="radioMenor">Menor
 								</c:when>
 								<c:otherwise>
 									<input type="hidden" class="refe" name="practicaDTO.mayorMenor" value=">" id="idMayorMenor">
 									<input type="radio" name="referencia" checked="checked" onchange="cambiarMayorMenor();"
-										value="mayor">Mayor
-									<input type="radio" name="referencia" onchange="cambiarMayorMenor();" value="menor">Menor								
+										value="mayor" id="radioMayor">Mayor
+									<input type="radio" name="referencia" onchange="cambiarMayorMenor();" value="menor"
+									 	id="radioMenor">Menor								
 								</c:otherwise>	
 							</c:choose>		
 						</td>
