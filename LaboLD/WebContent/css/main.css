@@ -35,6 +35,14 @@
 	line-height: normal;
 }
 
+.informe{
+	font-family: Courier New;
+	font-size: 12px;
+	font-style: normal;
+	text-decoration: none;
+	line-height: normal;	
+}
+
 .botonerabRojo {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 11px;

@@ -24,6 +24,41 @@
 
 		parent.location=contextRoot() + "/practica.do?metodo=recuperarPracticas";
 	}	
+
+	function cambiarValores(){
+
+		var valor = $('input[name=valores]:checked').val();
+		$('#idCheckValor').val(valor);
+		
+		if(valor=="DH"){
+			$('#trValorDesdeHasta').show();
+			$('#trValorReferencia').hide();
+
+			$('.refe').val(null);			
+		}
+		if(valor=="Ref"){
+			$('#trValorDesdeHasta').hide();
+			$('#trValorReferencia').show();
+
+			$('.DH').val(null);
+			$('#idMayorMenor').val(">");
+		}
+		if(valor=="SV"){
+			$('#trValorDesdeHasta').hide();
+			$('#trValorReferencia').hide();
+			
+			$('.DH').val(null);
+			$('.refe').val(null);
+		}				
+	}
+
+	function cambiarMayorMenor(){
+
+		var valor = $('input[name=referencia]:checked').val();
+		valor = (valor=='menor')?'<':'>';
+		$('#idMayorMenor').val(valor);
+	}
+	
 </script>
 
 <div id="errores" class="rojoAdvertencia">${error}</div>
@@ -44,7 +79,98 @@
 			<td align="left">
 				<html:text property="practicaDTO.nombre" value="${practica.nombre}" styleClass="botonerab" styleId="nombre"/>
 			</td>
-		</tr>					
+		</tr>
+		<tr>
+			<td class="botoneralNegritaRight" width="40%">Unidad</td>
+			<td align="left">
+				<html:text property="practicaDTO.unidad" value="${practica.unidad}" styleClass="botonerab" styleId="nombre"/>
+			</td>
+		</tr>	
+		<tr>
+			<td colspan="2" class="botoneralNegrita">
+				<input type="hidden" name="checkValor" value="SV" id="idCheckValor">
+				<c:choose>
+					<c:when test="${practica.valorReferencia != null}">
+						<input type="radio" name="valores" onchange="cambiarValores();" value="SV">Sin Valor
+						<input type="radio" name="valores" onchange="cambiarValores();" value="DH">Valores Desde/Hasta
+						<input type="radio" name="valores" onchange="cambiarValores();" value="Ref" checked="checked">Valor Referencia
+						<script type="text/javascript">
+							var tr = "trValorReferencia"
+						</script>
+					</c:when>
+					<c:when test="${practica.valorNormalDesde != null}">
+						<input type="radio" name="valores" onchange="cambiarValores();" value="SV">Sin Valor
+						<input type="radio" name="valores" onchange="cambiarValores();" value="DH" checked="checked">Valores Desde/Hasta
+						<input type="radio" name="valores" onchange="cambiarValores();" value="Ref">Valor Referencia
+						<script type="text/javascript">
+							var tr = "trValorDesdeHasta";
+						</script>						
+					</c:when>
+					<c:otherwise>
+						<input type="radio" name="valores" onchange="cambiarValores();" value="SV" checked="checked">Sin Valor
+						<input type="radio" name="valores" onchange="cambiarValores();" value="DH">Valores Desde/Hasta
+						<input type="radio" name="valores" onchange="cambiarValores();" value="Ref">Valor Referencia
+						<script type="text/javascript">
+							var tr = "";
+						</script>					
+					</c:otherwise>						
+				</c:choose>		
+			</td>
+		</tr>	
+		
+		<tr style="display: none" id="trValorDesdeHasta">
+			<td colspan="2">
+				<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2">		
+					<tr>
+						<td width="40%" class="botoneralNegritaRight">Valor Normal Desde</td>
+						<td align="left">
+							<html:text styleClass="botonerab DH" property="practicaDTO.valorNormalDesde" value="${practica.valorNormalDesde}" 
+									styleId="nombre" onkeypress="return evitarAutoSubmit(event)"/>
+						</td>
+					</tr>
+					<tr>
+						<td width="40%" class="botoneralNegritaRight">Valor Normal Hasta</td>
+						<td align="left">
+							<html:text styleClass="botonerab DH" property="practicaDTO.valorNormalHasta" value="${practica.valorNormalHasta}" 
+									styleId="nombre" onkeypress="return evitarAutoSubmit(event)"/>
+						</td>
+					</tr>
+				</table>			
+			</td>
+		</tr>			
+		<tr style="display: none" id="trValorReferencia">
+			<td colspan="2">
+				<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2">										
+					<tr>
+						<td width="40%" class="botoneralNegritaRight">Valor de Referencia</td>
+						<td align="left">
+							<html:text styleClass="botonerab refe" property="practicaDTO.valorReferencia" value="${practica.valorReferencia}" 
+									styleId="nombre" onkeypress="return evitarAutoSubmit(event)" />
+						</td>
+					</tr>		
+					<tr>
+						<td width="40%" class="botoneralNegritaRight">Mayor/Menor</td>
+						<td align="left">
+							<c:choose>
+								<c:when test="${practica.mayorMenor == '<'}">
+									<input type="hidden" class="refe" name="practicaDTO.mayorMenor" value="<" id="idMayorMenor">
+									<input type="radio" name="referencia" onchange="cambiarMayorMenor();"
+										value="mayor">Mayor
+									<input type="radio" name="referencia" checked="checked" onchange="cambiarMayorMenor();" value="menor">Menor
+								</c:when>
+								<c:otherwise>
+									<input type="hidden" class="refe" name="practicaDTO.mayorMenor" value=">" id="idMayorMenor">
+									<input type="radio" name="referencia" checked="checked" onchange="cambiarMayorMenor();"
+										value="mayor">Mayor
+									<input type="radio" name="referencia" onchange="cambiarMayorMenor();" value="menor">Menor								
+								</c:otherwise>	
+							</c:choose>		
+						</td>
+					</tr>		
+				</table>			
+			</td>
+		</tr>		
+									
 		<tr>
 			<td height="20" colspan="2"></td>
 		</tr>
@@ -63,5 +189,6 @@
 <script type="text/javascript">
 
 	$('#nombre').focus();
+	$('#'+tr).show();
 
 </script>
