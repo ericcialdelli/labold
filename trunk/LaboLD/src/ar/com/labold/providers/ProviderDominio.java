@@ -138,6 +138,11 @@ public abstract class ProviderDominio {
 	public static Practica getPractica(Practica practica, PracticaDTO practicaDTO){
 
 		practica.setNombre(practicaDTO.getNombre());
+		practica.setUnidad(practicaDTO.getUnidad());
+		practica.setValorNormalDesde(practicaDTO.getValorNormalDesde());
+		practica.setValorNormalHasta(practicaDTO.getValorNormalHasta());
+		practica.setValorReferencia(practicaDTO.getValorReferencia());
+		practica.setMayorMenor(practicaDTO.getMayorMenor());
 		
 		return practica;
 	}		
