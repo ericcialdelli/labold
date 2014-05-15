@@ -51,7 +51,7 @@ public class PracticaDAO extends HibernateDaoSupport {
 		}
 		this.getHibernateTemplate().saveOrUpdate(practica);
 		this.getHibernateTemplate().flush();
-		this.getHibernateTemplate().clear();	
+		this.getHibernateTemplate().clear();
 	}
 	
 	public void altaGrupoPractica(GrupoPractica grupoPractica) throws NegocioException{

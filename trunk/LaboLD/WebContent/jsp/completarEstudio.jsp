@@ -175,7 +175,7 @@
 									<td width="55%" align="left">
 										<c:choose>
 											<c:when test="${valorPractica.practica.valorReferencia != null}">
-												Valor de Referencia: ${valorPractica.practica.mayorMenor} ${valorPractica.practica.valorReferencia} ${prac.practica.unidad}
+												Valor de Referencia: ${valorPractica.practica.mayorMenor} ${valorPractica.practica.valorReferencia} ${valorPractica.practica.unidad}
 												<input type="hidden" value="${valorPractica.practica.valorReferencia}" id="valorReferencia<%=i%>">
 												<input type="hidden" value="${valorPractica.practica.mayorMenor}" id="mayorMenor<%=i%>">	
 											</c:when>

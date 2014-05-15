@@ -113,9 +113,14 @@
 										${valorPractica.practica.unidad}
 									</td>
 									<td width="55%" align="left">
-										<c:if test="${valorPractica.practica.valorReferencia != null}">
-											Valor de Referencia: ${valorPractica.practica.valorReferencia}
-										</c:if>										
+										<c:choose>
+											<c:when test="${valorPractica.practica.valorReferencia != null}">
+												Valor de Referencia: ${valorPractica.practica.mayorMenor} ${valorPractica.practica.valorReferencia} ${valorPractica.practica.unidad}
+											</c:when>
+											<c:when test="${valorPractica.practica.valorNormalDesde != null}">
+												Valor de Referencia: ${valorPractica.practica.valorNormalDesde} a ${valorPractica.practica.valorNormalHasta} ${valorPractica.practica.unidad}		 	
+											</c:when>											
+										</c:choose>																				
 									</td>																				
 								</tr>	
 								<%i++; %>	
@@ -152,9 +157,14 @@
 													${prac.practica.unidad}													
 												</td>
 												<td width="65%" align="left">
-													<c:if test="${prac.practica.valorReferencia != null}">
-														Valor de Referencia: ${prac.practica.valorReferencia}
-													</c:if>										
+													<c:choose>
+														<c:when test="${prac.practica.valorReferencia != null}">
+															Valor de Referencia: ${prac.practica.mayorMenor} ${prac.practica.valorReferencia} ${prac.practica.unidad}
+														</c:when>
+														<c:when test="${prac.practica.valorNormalDesde != null}">
+															Valor de Referencia: ${prac.practica.valorNormalDesde} a ${prac.practica.valorNormalHasta} ${prac.practica.unidad}		 	
+														</c:when>											
+													</c:choose>																					
 												</td>																												
 											</tr>
 											<%i++; %>						
