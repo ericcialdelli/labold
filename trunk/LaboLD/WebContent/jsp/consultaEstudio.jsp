@@ -16,6 +16,18 @@
 
 <script type="text/javascript">
 
+function generarReporte(){
+
+	var idEstudio = $("#idEstudio").val();
+	
+	var especificaciones = 'top=0,left=0,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable';
+	if(type == "IE"){
+		window.open("./reporte.do?metodo=generarReporteEstudio&idEstudio="+idEstudio,"",especificaciones);		
+	}else{
+		window.open("../../reporte.do?metodo=generarReporteEstudio&idEstudio="+idEstudio,"",especificaciones);				
+	}	
+}
+
 	function volver(){
 
 		parent.location=contextRoot() + "/estudio.do?metodo=cargarRecuperarEstudios&forward=recuperarEstudioParaConsulta";
@@ -39,7 +51,7 @@
 	
 </script>
 
-
+	<input type="hidden" value="${estudio.id}" id="idEstudio"/>
 	<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2" cellspacing="0">
 		<tr>
 			<td colspan="4"  class="azulAjustado" >Consulta de Estudio</td>
@@ -189,7 +201,8 @@
 			<td height="10"></td>
 		</tr>			
 		<tr>
-			<td align="center">				
+			<td align="center">
+				<input type="button" value="Generar Reporte" class="botonerab" onclick="generarReporte();">				
 				<input type="button" class="botonerab" value="Volver" id="enviar" onclick="javascript:volver();">
 			</td>
 		</tr>
