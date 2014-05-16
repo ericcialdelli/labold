@@ -97,5 +97,7 @@ public class Constantes {
 
 	// REPORTES
 	public static final String REPORTE_ESTUDIOS_A_REALIZAR_ENTRE_FECHAS = "reporteEstudiosARealizarEntreFechas";
+	
+	public static final String REPORTE_ESTUDIO = "reporteEstudio";
 	// FIN REPORTES
 }

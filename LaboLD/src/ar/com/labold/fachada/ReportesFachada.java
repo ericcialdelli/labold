@@ -34,4 +34,14 @@ public class ReportesFachada {
 		return reportesDAO.generarReporte(
 				Constantes.REPORTE_ESTUDIOS_A_REALIZAR_ENTRE_FECHAS, parameters);
 	}	
+	
+	public byte[] generarReporteEstudio(String path, Long idEstudio) throws Exception {
+
+		Map parameters = new HashMap();
+		parameters.put("PATH_SUB_REPORTES", path);
+		parameters.put("idEstudio", idEstudio);
+
+		return reportesDAO.generarReporte(
+				Constantes.REPORTE_ESTUDIO, parameters);
+	}	
 }
