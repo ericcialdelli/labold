@@ -42,6 +42,7 @@
 			<forward name=".altaObraSocial" path=".altaObraSocial" />
 			<forward name=".reporteEstudiosARealizarEntreFechas" path=".reporteEstudiosEntreFechas" />
 			<forward name=".altaGrupoPractica" path=".altaGrupoPractica" />
+			<forward name=".generarReportesEstudios" path=".generarReportesEstudios" />			
 		</action>	
 	
 		<!-- MENU -->

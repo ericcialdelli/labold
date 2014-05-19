@@ -76,4 +76,36 @@ public class ReportesAction extends ValidadorAction {
 
 		return null;
 	}	
+	
+	public ActionForward generarReportesEstudios(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		try {
+			String path = request.getSession().getServletContext()
+					.getRealPath("jasper");
+
+			WebApplicationContext ctx = getWebApplicationContext();
+			ReportesFachada reportesFachada = (ReportesFachada) ctx.getBean("reportesFachada");
+			
+			String desde = request.getParameter("desde");
+			String hasta = request.getParameter("hasta");
+			
+			byte[] bytes = reportesFachada
+					.generarReportesEstudios(path,Long.valueOf(desde),Long.valueOf(hasta));
+
+			// Lo muestro en la salida del response
+			response.setContentType("application/pdf");
+			ServletOutputStream out = response.getOutputStream();
+			out.write(bytes, 0, bytes.length);
+			out.flush();
+
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			return mapping.findForward("errorSinMenu");
+		}
+
+		return null;
+	}		
 }

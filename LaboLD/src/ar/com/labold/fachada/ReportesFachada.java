@@ -43,5 +43,16 @@ public class ReportesFachada {
 
 		return reportesDAO.generarReporte(
 				Constantes.REPORTE_ESTUDIO, parameters);
+	}
+	
+	public byte[] generarReportesEstudios(String path, Long desde, Long hasta) throws Exception {
+
+		Map parameters = new HashMap();
+		parameters.put("PATH_SUB_REPORTES", path);
+		parameters.put("numeroDesde", desde);
+		parameters.put("numeroHasta", hasta);
+
+		return reportesDAO.generarReporte(
+				Constantes.REPORTES_ESTUDIOS, parameters);
 	}	
 }
