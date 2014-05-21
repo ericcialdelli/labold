@@ -32,7 +32,7 @@ public class ReportesFachada {
 		parameters.put("fechaHasta", Fecha.stringDDMMAAAAToUtilDate(fechaHasta));
 
 		return reportesDAO.generarReporte(
-				Constantes.REPORTE_ESTUDIOS_A_REALIZAR_ENTRE_FECHAS, parameters);
+				Constantes.PLANILLA_PRACTICAS_EN_ESTUDIOS_POR_GRUPOS, parameters);
 	}	
 	
 	public byte[] generarReporteEstudio(String path, Long idEstudio) throws Exception {
