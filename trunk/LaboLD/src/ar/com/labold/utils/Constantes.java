@@ -98,6 +98,8 @@ public class Constantes {
 	// REPORTES
 	public static final String REPORTE_ESTUDIOS_A_REALIZAR_ENTRE_FECHAS = "reporteEstudiosARealizarEntreFechas";
 	
+	public static final String PLANILLA_PRACTICAS_EN_ESTUDIOS_POR_GRUPOS = "planillaPracticasEnEstudiosPorGrupos";
+	
 	public static final String REPORTE_ESTUDIO = "reporteEstudio";
 	
 	public static final String REPORTES_ESTUDIOS = "reportesEstudios";
