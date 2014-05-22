@@ -8,6 +8,8 @@ public class PracticaDTO {
 	
 	private String unidad;
 	
+	private String metodo;
+	
 	private String valorNormalDesde;
 
 	private String valorNormalHasta;
@@ -98,6 +100,14 @@ public class PracticaDTO {
 		this.mayorMenor = mayorMenor;
 	}	
 	
+	public String getMetodo() {
+		return metodo;
+	}
+
+	public void setMetodo(String metodo) {
+		this.metodo = metodo;
+	}
+
 	public void normalizarValores(){
 		
 		this.setValorNormalDesde((this.valorNormalDesde.equals(""))?null:this.valorNormalDesde);

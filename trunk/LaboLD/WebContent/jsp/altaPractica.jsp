@@ -154,6 +154,14 @@
 						styleId="nombre" onkeypress="return evitarAutoSubmit(event)"/>
 			</td>
 		</tr>
+
+		<tr>
+			<td width="40%" class="botoneralNegritaRight">Método</td>
+			<td align="left">
+				<html:text styleClass="botonerab" property="practicaDTO.metodo" value="" 
+						styleId="nombre" onkeypress="return evitarAutoSubmit(event)"/>
+			</td>
+		</tr>
 		
 		<tr>
 			<td colspan="2" class="botoneralNegrita">

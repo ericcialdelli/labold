@@ -30,6 +30,8 @@ public class Practica {
 	//-----------------------------//	
 	private String unidad;
 	
+	private String metodo;
+	
 	private String valorNormalDesde;
 
 	private String valorNormalHasta;
@@ -145,7 +147,14 @@ public class Practica {
 
 	public void setMayorMenor(String mayorMenor) {
 		this.mayorMenor = mayorMenor;
+	}
+
+	public String getMetodo() {
+		return metodo;
+	}
+
+	public void setMetodo(String metodo) {
+		this.metodo = metodo;
 	}	
-	
 	
 }
