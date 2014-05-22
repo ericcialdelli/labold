@@ -126,6 +126,7 @@ public abstract class ProviderDominio {
 		practica.setGrupoPractica(grupo);
 		practica.setSubItemPractica(subItem);
 		practica.setUnidad(practicaDTO.getUnidad());
+		practica.setMetodo(practicaDTO.getMetodo());
 		practica.setValorNormalDesde(practicaDTO.getValorNormalDesde());
 		practica.setValorNormalHasta(practicaDTO.getValorNormalHasta());
 		practica.setValorReferencia(practicaDTO.getValorReferencia());
@@ -139,6 +140,7 @@ public abstract class ProviderDominio {
 
 		practica.setNombre(practicaDTO.getNombre());
 		practica.setUnidad(practicaDTO.getUnidad());
+		practica.setMetodo(practicaDTO.getMetodo());
 		practica.setValorNormalDesde(practicaDTO.getValorNormalDesde());
 		practica.setValorNormalHasta(practicaDTO.getValorNormalHasta());
 		practica.setValorReferencia(practicaDTO.getValorReferencia());
