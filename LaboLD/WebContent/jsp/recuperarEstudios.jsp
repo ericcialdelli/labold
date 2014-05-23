@@ -39,6 +39,13 @@
 		var forward = $("#forward").val();
 		parent.location=contextRoot() + "/estudio.do?metodo="+forward+"&id="+id;
 	}
+
+	function submitir(){
+
+		var nroProtocolo = $("#nroProtocolo").val();
+		var forward = $("#forward").val();
+		parent.location=contextRoot() + "/estudio.do?metodo="+forward+"&id="+nroProtocolo;
+	}
 	
 </script>
 
@@ -54,11 +61,39 @@
 	</tr>
 	
 	<tr>
-		<td>	
+		<td>		
 			<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2">
 				<tr>
 					<td height="20"></td>
 				</tr>
+				<tr>
+					<td width="30%" class="botoneralNegritaRight">
+						Nro de Protocolo
+					</td>
+					<td width="10%">
+						
+					</td>						
+					<td align="left">
+						<input class="botonerab" type="text" size="20" name="estudioDTO.numero" 
+								onkeypress="return evitarAutoSubmit(event)" id="nroProtocolo">
+						<input class="botonerab" type="button" value="Buscar" onclick="javascript:submitir();">
+					</td>	
+								
+				</tr>				
+				<tr>
+					<td height="20"></td>
+				</tr>
+			</table>						
+		</td>
+	</tr>
+	
+	<tr>
+		<td>	
+			<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2">
+				<tr>
+					<td height="20"></td>
+				</tr>				
+				
 				<tr>
 					<td width="30%" class="botoneralNegritaRight">
 						Paciente
@@ -98,3 +133,9 @@
 		<td height="10"></td>
 	</tr>	
 </table>
+
+<script type="text/javascript">
+
+	$('#nroProtocolo').focus();
+
+</script>
