@@ -194,6 +194,7 @@ public abstract class ProviderDominio {
 			if(valoresEstudio == null){
 				valoresEstudio = new ValoresEstudio();
 				valoresEstudio.setNombre(practica.getGrupoPractica().getNombre());
+				valoresEstudio.setGrupoPractica(practica.getGrupoPractica());
 				mapValoresEstudio.put(idGrupo, valoresEstudio);
 			}
 			
