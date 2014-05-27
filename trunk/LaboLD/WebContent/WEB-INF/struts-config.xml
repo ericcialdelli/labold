@@ -102,9 +102,10 @@
 			parameter="metodo" name="practicaForm" scope="request">			
 			<forward name="exitoCargarAltaPractica" path=".altaPractica" />
 			<forward name="exitoAltaPractica" path="/practica.do?metodo=cargarAltaPractica" />
-			<forward name="exitoRecuperarPracticas" path=".recuperarPracticas" />
+			<forward name="exitoCargarModificacionPractica" path=".recuperarPracticasPorGrupo" />						
+			<forward name="exitoRecuperarPracticasPorGrupo" path="/jsp/bloqueRecuperarPracticasPorGrupo.jsp" />
 			<forward name="exitoRecuperarPractica" path=".modificarPractica" />
-			<forward name="exitoModificacionPractica" path="/practica.do?metodo=recuperarPracticas" />																	
+			<forward name="exitoModificacionPractica" path="/practica.do?metodo=cargarModificacionPractica" />																	
 		</action>	
 		
 		<action path="/grupoPractica" type="ar.com.labold.struts.actions.PracticaAction"

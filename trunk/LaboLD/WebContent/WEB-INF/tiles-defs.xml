@@ -80,9 +80,9 @@
 		<put name="body" value="/jsp/altaPractica.jsp" />
 	</definition>		
 
-	<definition name=".recuperarPracticas" extends=".base">
+	<definition name=".recuperarPracticasPorGrupo" extends=".base">
 		<put name="title" value="LaboLD" />
-		<put name="body" value="/jsp/recuperarPracticas.jsp" />
+		<put name="body" value="/jsp/recuperarPracticasPorGrupo.jsp" />
 	</definition>	
 
 	<definition name=".modificarPractica" extends=".base">

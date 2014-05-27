@@ -35,6 +35,22 @@
 		$('#'+idTr).addClass(clase);
 		$('#'+idTr).removeClass("verdeSeleccionFila");
 	}
+
+	function cargarPracticas(){
+
+		var idGrupo = $("#selectGrupoPractica").val();		
+		$('#bloquePracticas').html("");
+
+		if(idGrupo != "" && idGrupo != "-1"){
+			$('#bloquePracticas').load("../../practica.do?metodo=recuperarPracticasPorGrupo&idGrupo="+idGrupo);
+			$('#bloquePracticas').hide();
+			$('#bloquePracticas').fadeIn(600);
+				
+		}else{
+			$('#bloquePracticas').hide(600);
+			$('#bloquePracticas').html("");			
+		}		
+	}
 	
 </script>
 
@@ -42,38 +58,39 @@
 <table border="0" class="cuadrado" align="center" width="60%"
 	cellpadding="2">
 	<tr>
-		<td class="azulAjustado">Modificación de Prácticas</td>
+		<td class="azulAjustado" colspan="2">Modificación de Prácticas</td>
 	</tr>
 	<tr>
-		<td height="20"></td>
+		<td height="20" colspan="2"></td>
 	</tr>
+	
 	<tr>
-		<td>
-			<table border="0" class="cuadrado" align="center" width="60%" cellpadding="2">
-				<tr>
-					<td class="azulAjustado">Nombre</td>
-					<td class="azulAjustado"></td>
-				</tr>
-				<%String clase=""; %>
-				<c:forEach items="${practicas}" var="practica" varStatus="i">
-					<%clase=(clase.equals("")?"par":""); %>
-
-					<tr class="<%=clase%>" onmouseover="javascript:pintarFila('idTr<c:out value='${i.index}'></c:out>');"
-						onmouseout="javascript:despintarFila('idTr<c:out value='${i.index}'></c:out>');"
-						id="idTr<c:out value='${i.index}'></c:out>">					
-										
-						<td>${practica.nombre}</td>
-						<td>
-							<a href="javascript:recuperarPractica(${practica.id});">
-								Seleccionar
-							</a>
-						</td>
-					</tr>
-				</c:forEach>
-			</table>
+		<td width="40%" class="botoneralNegritaRight">Grupo Practica</td>
+		<td align="left">
+			<select id="selectGrupoPractica" class="botonerab" onchange="cargarPracticas();">
+				<option value="-1">
+					Seleccione un Grupo...
+				</option>		
+				<c:forEach items="${listaGrupos}" var="grupo">
+					<option value="${grupo.id}">
+						<c:out value="${grupo.nombre}"></c:out>
+					</option>
+				</c:forEach>										
+			</select>
+		</td>
+	</tr>	
+	
+	<tr>
+		<td height="10" colspan="2"></td>
+	</tr>	
+	
+	<tr>
+		<td colspan="2">
+			<div id="bloquePracticas"></div>
 		</td>
 	</tr>
 	<tr>
-		<td height="10"></td>
+		<td height="10" colspan="2"></td>
 	</tr>	
+	
 </table>

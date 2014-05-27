@@ -22,7 +22,7 @@
 
 	function volver(){
 
-		parent.location=contextRoot() + "/practica.do?metodo=recuperarPracticas";
+		parent.location=contextRoot() + "/practica.do?metodo=cargarModificacionPractica";
 	}	
 
 	function cambiarValores(){

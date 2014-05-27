@@ -84,6 +84,17 @@ public class PracticaDAO extends HibernateDaoSupport {
 		return (List<Practica>) criteria.list();		
 	}
 	
+	public List<Practica> getPracticasPorGrupo(Long idGrupo){
+		
+		Criteria criteria = getSession().createCriteria(Practica.class);
+		Conjunction conj = Restrictions.conjunction();
+		conj.add(Restrictions.eq("grupoPractica.id", idGrupo));
+		criteria.add(conj);		
+		criteria.addOrder(Order.asc("nombre"));
+
+		return (List<Practica>) criteria.list();	
+	}	
+	
 	public List<GrupoPractica> getGruposPractica(){
 		
 		Criteria criteria = getSession().createCriteria(GrupoPractica.class);
