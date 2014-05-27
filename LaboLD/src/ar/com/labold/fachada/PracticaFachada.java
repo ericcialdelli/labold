@@ -66,7 +66,12 @@ public class PracticaFachada {
 		
 		return practicaDAO.getPracticas();
 	}
-
+	
+	public List<Practica> getPracticasPorGrupo(Long idGrupo){
+		
+		return practicaDAO.getPracticasPorGrupo(idGrupo);
+	}
+	
 	public Practica getPractica(Long id){
 		
 		return practicaDAO.getPractica(id);

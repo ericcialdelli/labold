@@ -71,21 +71,45 @@ public class PracticaAction extends ValidadorAction {
 		return mapping.findForward(strForward);
 	}	
 	
+	public ActionForward cargarModificacionPractica(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		String strForward = "exitoCargarModificacionPractica";
+		try {
+						
+			WebApplicationContext ctx = getWebApplicationContext();
+			PracticaFachada practicaFachada = (PracticaFachada) 
+												ctx.getBean("practicaFachada");			
+			
+			List<GrupoPractica> listaGrupos = practicaFachada.getGruposPractica(); 
+			request.setAttribute("listaGrupos", listaGrupos);			
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+		return mapping.findForward(strForward);
+	}	
+	
 	@SuppressWarnings("unchecked")
-	public ActionForward recuperarPracticas(ActionMapping mapping,
+	public ActionForward recuperarPracticasPorGrupo(ActionMapping mapping,
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		String strForward = "exitoRecuperarPracticas";
+		String strForward = "exitoRecuperarPracticasPorGrupo";
 
 		try {
 			WebApplicationContext ctx = getWebApplicationContext();
 			PracticaFachada practicaFachada = (PracticaFachada) 
 										ctx.getBean("practicaFachada");	
-						
-			List<Practica> listaPracticass = practicaFachada.getPracticas();
 			
-			request.setAttribute("practicas", listaPracticass);
+			String idGrupo = request.getParameter("idGrupo");
+			
+			List<Practica> listaPracticas = practicaFachada.getPracticasPorGrupo(Long.valueOf(idGrupo));
+			
+			request.setAttribute("practicas", listaPracticas);
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);

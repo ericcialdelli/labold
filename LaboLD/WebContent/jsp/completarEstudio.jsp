@@ -109,7 +109,7 @@
 		<tr>
 			<td class="botoneralNegritaRight" width="12%" >Número</td>
 			<td align="left" width="30%">			
-				<html:text property="" value="${estudio.numero}" styleClass="botonerab" size="10"/>
+				<input type="text" value="${estudio.numero}" class="botonerab" size="10" readonly="readonly"/>
 			</td>
 			
 			<td class="botoneralNegritaRight" width="30%" >Paciente</td>
