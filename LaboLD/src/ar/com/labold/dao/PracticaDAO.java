@@ -16,11 +16,12 @@ import ar.com.labold.utils.Constantes;
 
 public class PracticaDAO extends HibernateDaoSupport {
 
-	public boolean existePractica(String nombre, Long id){
+	public boolean existePractica(String nombre, Long id, Long idGrupo){
 		
 		Criteria criteria = getSession().createCriteria(Practica.class);
 		Conjunction conj = Restrictions.conjunction();
 		conj.add(Restrictions.eq("nombre", nombre));
+		conj.add(Restrictions.eq("grupoPractica.id", idGrupo));
 		if (id != null) {
 			conj.add(Restrictions.ne("id", id));
 		}
@@ -46,7 +47,7 @@ public class PracticaDAO extends HibernateDaoSupport {
 	
 	public void altaPractica(Practica practica) throws NegocioException{
 		
-		if (existePractica(practica.getNombre(), practica.getId())) {
+		if (existePractica(practica.getNombre(), practica.getId(), practica.getGrupoPractica().getId())) {
 			throw new NegocioException(Constantes.EXISTE_PRACTICA);
 		}
 		this.getHibernateTemplate().saveOrUpdate(practica);

@@ -28,7 +28,7 @@ public class PracticaFachada {
 	
 	public boolean existePractica(PracticaDTO practica){
 		
-		return practicaDAO.existePractica(practica.getNombre(),practica.getId());
+		return practicaDAO.existePractica(practica.getNombre(),practica.getId(),practica.getGrupoPracticaDTO().getId());
 	}	
 	
 	public boolean existeGrupoPractica(GrupoPracticaDTO grupoPractica){
