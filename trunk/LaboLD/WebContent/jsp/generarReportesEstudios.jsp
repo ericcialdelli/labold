@@ -60,6 +60,6 @@
 
 <script type="text/javascript">
 
-	$('#nombre').focus();
+	$('#desde').focus();
 
 </script>
