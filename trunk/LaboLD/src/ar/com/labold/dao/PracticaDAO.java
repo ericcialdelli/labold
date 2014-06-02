@@ -75,7 +75,7 @@ public class PracticaDAO extends HibernateDaoSupport {
 	public Practica getPractica(Long id){
 		
 		return (Practica)getHibernateTemplate().get(Practica.class,id);
-	}
+	}		
 	
 	public List<Practica> getPracticas(){
 		

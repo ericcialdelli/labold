@@ -18,6 +18,8 @@ public class PracticaDTO {
 	
 	private String mayorMenor;
 	
+	private int unidadFacturacion;
+	
 	private GrupoPracticaDTO grupoPracticaDTO;
 	
 	private SubItemPracticaDTO subItemPracticaDTO;
@@ -106,6 +108,14 @@ public class PracticaDTO {
 
 	public void setMetodo(String metodo) {
 		this.metodo = metodo;
+	}
+
+	public int getUnidadFacturacion() {
+		return unidadFacturacion;
+	}
+
+	public void setUnidadFacturacion(int unidadFacturacion) {
+		this.unidadFacturacion = unidadFacturacion;
 	}
 
 	public void normalizarValores(){

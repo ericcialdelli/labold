@@ -164,6 +164,14 @@
 		</tr>
 		
 		<tr>
+			<td width="40%" class="botoneralNegritaRight">Unidad de Facturación</td>
+			<td align="left">
+				<html:text styleClass="botonerab" property="practicaDTO.unidadFacturacion" value="" 
+						styleId="nombre" onkeypress="return evitarAutoSubmit(event)"/>
+			</td>
+		</tr>		
+		
+		<tr>
 			<td colspan="2" class="botoneralNegrita">
 				<input type="hidden" name="checkValor" value="SV" id="idCheckValor">
 				<input type="radio" name="valores" onchange="cambiarValores();" value="SV" checked="checked">Sin Valor

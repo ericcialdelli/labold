@@ -24,6 +24,8 @@ public class GrupoPractica {
 	@Column(nullable = false)
 	private String nombre;
 
+	private int unidadFacturacion;	
+	
 	@OneToMany(mappedBy = "grupoPractica")
 	@Cascade(value = { CascadeType.SAVE_UPDATE, CascadeType.DELETE_ORPHAN })
 	private List<Practica> practicas = new ArrayList<Practica>();	
@@ -62,7 +64,14 @@ public class GrupoPractica {
 
 	public void setSubItemsPractica(List<SubItemPractica> subItemsPractica) {
 		this.subItemsPractica = subItemsPractica;
+	}
+
+	public int getUnidadFacturacion() {
+		return unidadFacturacion;
+	}
+
+	public void setUnidadFacturacion(int unidadFacturacion) {
+		this.unidadFacturacion = unidadFacturacion;
 	}	
-	
 	
 }

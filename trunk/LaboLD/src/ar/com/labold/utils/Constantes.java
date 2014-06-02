@@ -80,7 +80,9 @@ public class Constantes {
 	
 	public static final String EXITO_ALTA_SUBITEM_PRACTICA = "El SubItem se ha dado de alta con exito";
 	
-	public static final String EXITO_MODIFICACION_PRACTICA = "La Práctica se ha modificado con exito";	
+	public static final String EXITO_MODIFICACION_PRACTICA = "La Práctica se ha modificado con exito";
+	
+	public static final String EXITO_MODIFICACION_GRUPO_PRACTICA = "El Grupo se ha modificado con exito";	
 	
 	public static final String EXISTE_PRACTICA = "Ya existe una Práctica con ese nombre";
 	
