@@ -103,7 +103,13 @@
 			<td align="left">
 				<html:text property="practicaDTO.metodo" value="${practica.metodo}" styleClass="botonerab" styleId="nombre"/>
 			</td>
-		</tr>			
+		</tr>
+		<tr>
+			<td class="botoneralNegritaRight" width="40%">Unidad de Facturación</td>
+			<td align="left">
+				<html:text property="practicaDTO.unidadFacturacion" value="${practica.unidadFacturacion}" styleClass="botonerab" styleId="nombre"/>
+			</td>
+		</tr>					
 		<tr>
 			<td colspan="2" class="botoneralNegrita">
 				<input type="hidden" name="checkValor" value="SV" id="idCheckValor">

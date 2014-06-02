@@ -10,6 +10,8 @@ public class EstudioDTO {
 	
 	private String fecha;
 	
+	private Double unidadesFacturacionTotal;
+	
 	private PacienteDTO paciente;
 	
 	public EstudioDTO(){
@@ -54,6 +56,14 @@ public class EstudioDTO {
 
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
+	}
+
+	public Double getUnidadesFacturacionTotal() {
+		return unidadesFacturacionTotal;
+	}
+
+	public void setUnidadesFacturacionTotal(Double unidadesFacturacionTotal) {
+		this.unidadesFacturacionTotal = unidadesFacturacionTotal;
 	}
 
 }

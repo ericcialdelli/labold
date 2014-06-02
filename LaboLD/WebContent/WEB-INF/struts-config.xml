@@ -111,6 +111,9 @@
 		<action path="/grupoPractica" type="ar.com.labold.struts.actions.PracticaAction"
 			parameter="metodo" name="grupoPracticaForm" scope="request">
 			<forward name="exitoAltaGrupoPractica" path="/jsp.do?page=.altaGrupoPractica" />
+			<forward name="exitoCargarModificacionGrupoPractica" path=".recuperarGruposPractica" />			
+			<forward name="exitoRecuperarGrupoPractica" path=".modificarGrupoPractica" />
+			<forward name="exitoModificacionGrupoPractica" path="/grupoPractica.do?metodo=cargarModificacionGrupoPractica" />						
 			
 			<forward name="exitoCargarAltaSubItemPractica" path=".altaSubItemPractica" />
 			<forward name="exitoAltaSubItemPractica" path="/grupoPractica.do?metodo=cargarAltaSubItemPractica" />																			

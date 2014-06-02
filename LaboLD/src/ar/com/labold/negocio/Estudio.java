@@ -32,6 +32,8 @@ public class Estudio {
 	@Column(nullable = false)
 	private Date fecha;
 	
+	private Double unidadesFacturacionTotal; 
+	
 	@ManyToOne()
 	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "paciente_fk")	
@@ -87,6 +89,14 @@ public class Estudio {
 
 	public void setValoresEstudio(List<ValoresEstudio> valoresEstudio) {
 		this.valoresEstudio = valoresEstudio;
+	}
+
+	public Double getUnidadesFacturacionTotal() {
+		return unidadesFacturacionTotal;
+	}
+
+	public void setUnidadesFacturacionTotal(Double unidadesFacturacionTotal) {
+		this.unidadesFacturacionTotal = unidadesFacturacionTotal;
 	}
 	
 }

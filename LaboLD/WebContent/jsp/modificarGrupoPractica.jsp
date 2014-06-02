@@ -11,6 +11,11 @@
 	function submitir(){
 		validarForm("grupoPracticaFormId","../grupoPractica","validarGrupoPracticaForm","GrupoPracticaForm");
 	}
+
+	function volver(){
+
+		parent.location=contextRoot() + "/grupoPractica.do?metodo=cargarModificacionGrupoPractica";
+	}	
 </script>
 
 
@@ -20,13 +25,14 @@
 
 <html:form action="grupoPractica" styleId="grupoPracticaFormId" onsubmit="javascript:submitir();">
 
-	<html:hidden property="metodo" value="altaGrupoPractica" />
+	<html:hidden property="metodo" value="modificacionGrupoPractica" />
+	<html:hidden property="grupoPracticaDTO.id" value="${grupoPractica.id}"/>
 	
 	<table border="0" class="cuadrado" align="center" width="60%"
 		cellpadding="2">
 		<tr>
 			<td colspan="2" class="azulAjustado">
-				Alta de Grupo Práctica
+				Modificacion de Grupo Práctica
 			</td>
 		</tr>
 		<tr>
@@ -35,15 +41,15 @@
 		<tr>
 			<td width="40%" class="botoneralNegritaRight">Nombre</td>
 			<td align="left">
-				<html:text styleClass="botonerab" property="grupoPracticaDTO.nombre" value="" 
+				<html:text styleClass="botonerab" property="grupoPracticaDTO.nombre" value="${grupoPractica.nombre}" 
 						styleId="nombre" onkeypress="return evitarAutoSubmit(event)"/>
 			</td>
 		</tr>
 		<tr>
 			<td width="40%" class="botoneralNegritaRight">Unidad de Facturación</td>
 			<td align="left">
-				<html:text styleClass="botonerab" property="grupoPracticaDTO.unidadFacturacion" value="" 
-						styleId="nombre" onkeypress="return evitarAutoSubmit(event)"/>
+				<html:text styleClass="botonerab" property="grupoPracticaDTO.unidadFacturacion" value="${grupoPractica.unidadFacturacion}" 
+						onkeypress="return evitarAutoSubmit(event)"/>
 			</td>
 		</tr>
 		
@@ -52,7 +58,8 @@
 		</tr>
 		<tr>
 			<td height="20" colspan="2">
-				<input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();"> 
+				<input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();">
+				<input type="button" class="botonerab" value="Volver" id="enviar" onclick="javascript:volver();"> 
 			</td>
 		</tr>
 		<tr>

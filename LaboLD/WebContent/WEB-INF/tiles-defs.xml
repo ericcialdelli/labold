@@ -95,6 +95,16 @@
 		<put name="body" value="/jsp/altaGrupoPractica.jsp" />
 	</definition>		
 
+	<definition name=".recuperarGruposPractica" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/recuperarGruposPractica.jsp" />
+	</definition>
+
+	<definition name=".modificarGrupoPractica" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/modificarGrupoPractica.jsp" />
+	</definition>
+
 	<definition name=".altaSubItemPractica" extends=".base">
 		<put name="title" value="LaboLD" />
 		<put name="body" value="/jsp/altaSubItemPractica.jsp" />

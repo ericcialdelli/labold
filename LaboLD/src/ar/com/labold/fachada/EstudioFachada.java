@@ -43,7 +43,8 @@ public class EstudioFachada {
 		Paciente paciente = pacienteDAO.getPaciente(estudioDTO.getPaciente().getId());
 		Estudio estudio = ProviderDominio.getEstudio(estudioDTO, paciente,listaPracticas);
 		
-		estudioDAO.altaEstudio(estudio);
+		//estudioDAO.altaEstudio(estudio);
+		System.out.println(estudio);
 	}
 	
 	public List<Estudio> getEstudios(){
