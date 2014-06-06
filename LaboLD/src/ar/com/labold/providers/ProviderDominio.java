@@ -126,6 +126,7 @@ public abstract class ProviderDominio {
 		practica.setGrupoPractica(grupo);
 		practica.setSubItemPractica(subItem);
 		practica.setUnidad(practicaDTO.getUnidad());
+		practica.setCodigoObraSocial(practicaDTO.getCodigoObraSocial());
 		practica.setMetodo(practicaDTO.getMetodo());
 		practica.setUnidadFacturacion(practicaDTO.getUnidadFacturacion());
 		practica.setValorNormalDesde(practicaDTO.getValorNormalDesde());
@@ -143,6 +144,7 @@ public abstract class ProviderDominio {
 		practica.setUnidad(practicaDTO.getUnidad());
 		practica.setMetodo(practicaDTO.getMetodo());
 		practica.setUnidadFacturacion(practicaDTO.getUnidadFacturacion());
+		practica.setCodigoObraSocial(practicaDTO.getCodigoObraSocial());
 		practica.setValorNormalDesde(practicaDTO.getValorNormalDesde());
 		practica.setValorNormalHasta(practicaDTO.getValorNormalHasta());
 		practica.setValorReferencia(practicaDTO.getValorReferencia());
@@ -194,7 +196,7 @@ public abstract class ProviderDominio {
 		Map<Long,ValorSubItemPractica> mapValorSubItemPractica = new TreeMap<Long,ValorSubItemPractica>();
 		
 		//Map donde pongo la cantidad de practicas por grupo
-		Map<Long,Integer> mapCantPracPorGrupo = new TreeMap<Long,Integer>();		
+		//Map<Long,Integer> mapCantPracPorGrupo = new TreeMap<Long,Integer>();		
 
 		//Map donde pongo la cantidad de practicas que elegí por grupo
 		Map<Long,Integer> mapCantPracElegidasPorGrupo = new TreeMap<Long,Integer>();		
@@ -278,12 +280,12 @@ public abstract class ProviderDominio {
 			valoresEstudio2.setEstudio(estudio);
 			estudio.getValoresEstudio().add(valoresEstudio2);
 			
-			System.out.println(valoresEstudio2.getGrupoPractica().getId());
+			/*System.out.println(valoresEstudio2.getGrupoPractica().getId());
 			System.out.println(valoresEstudio2.getGrupoPractica().getNombre());
 			System.out.println("Practicas del Grupo: "+valoresEstudio2.getGrupoPractica().getPracticas().size());			
 			System.out.println("Practicas elegidas: "+mapCantPracElegidasPorGrupo.get(valoresEstudio2.getGrupoPractica().getId()));
 			System.out.println("Unidades de Facturacion elegidas: "+mapCantUnidPorGrupo.get(valoresEstudio2.getGrupoPractica().getId()));
-			System.out.println("");
+			System.out.println("");*/
 			
 			if(valoresEstudio2.getGrupoPractica().getPracticas().size() == mapCantPracElegidasPorGrupo.get(valoresEstudio2.getGrupoPractica().getId())){
 				
@@ -293,7 +295,7 @@ public abstract class ProviderDominio {
 			totalUnidadesFacturacion=totalUnidadesFacturacion+mapCantUnidPorGrupo.get(valoresEstudio2.getGrupoPractica().getId());
 		}
 		
-		System.out.println("Unidades de Facturacion Total: "+totalUnidadesFacturacion);
+		//System.out.println("Unidades de Facturacion Total: "+totalUnidadesFacturacion);
 		estudio.setUnidadesFacturacionTotal(new Double(totalUnidadesFacturacion));
 		
 		return estudio;

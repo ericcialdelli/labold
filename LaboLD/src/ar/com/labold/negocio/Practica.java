@@ -37,6 +37,8 @@ public class Practica {
 	
 	private int unidadFacturacion;
 	
+	private String codigoObraSocial;
+	
 	/*@ManyToOne()
 	@JoinColumn(name = "practica_fk")
 	private Practica padre;
@@ -160,6 +162,14 @@ public class Practica {
 
 	public void setUnidadFacturacion(int unidadFacturacion) {
 		this.unidadFacturacion = unidadFacturacion;
+	}
+
+	public String getCodigoObraSocial() {
+		return codigoObraSocial;
+	}
+
+	public void setCodigoObraSocial(String codigoObraSocial) {
+		this.codigoObraSocial = codigoObraSocial;
 	}	
-	
+
 }

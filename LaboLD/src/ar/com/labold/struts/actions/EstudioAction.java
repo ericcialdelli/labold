@@ -70,9 +70,9 @@ public class EstudioAction extends ValidadorAction {
 			if (!validarEstudioForm(new StringBuffer(), estudioForm)) {
 				throw new Exception("Error de Seguridad");
 			}						
-			estudioFachada.altaEstudio(estudioForm.getEstudioDTO(),estudioForm.getListaPracticas());
+			double unidadesFacturacion = estudioFachada.altaEstudio(estudioForm.getEstudioDTO(),estudioForm.getListaPracticas());
 			
-			request.setAttribute("exitoGrabado", Constantes.EXITO_ALTA_ESTUDIO);
+			request.setAttribute("exitoGrabado", Constantes.EXITO_ALTA_ESTUDIO+unidadesFacturacion+Constantes.EXITO_ALTA_ESTUDIO2);
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
