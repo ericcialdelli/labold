@@ -90,7 +90,8 @@ public class Constantes {
 	//FIN PRACTICA	
 	
 	//ESTUDIO
-	public static final String EXITO_ALTA_ESTUDIO = "El Estudio se ha dado de alta con exito";
+	public static final String EXITO_ALTA_ESTUDIO = "Se ha dado de alta el Estudio con ";
+	public static final String EXITO_ALTA_ESTUDIO2 = " unidades de facturación";
 
 	public static final String EXITO_MODIFICACION_ESTUDIO = "El Estudio se ha modificado con exito";
 	

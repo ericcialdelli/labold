@@ -124,9 +124,8 @@
 	}
 	
 </script>
-
-<div id="exitoGrabado" class="verdeExito">${exitoGrabado}</div>
-<div id="errores" class="rojoAdvertencia">${error}</div>
+<div id="exitoGrabado" class="verdeExito"><br>${exitoGrabado}<br></div>
+<div id="errores" class="rojoAdvertencia"><br>${error}<br></div>
 
 <html:form action="estudio" styleId="estudioFormId">
 	<html:hidden property="metodo" value="altaEstudio"/>

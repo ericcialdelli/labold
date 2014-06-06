@@ -32,7 +32,7 @@ public class EstudioFachada {
 		this.practicaDAO = pPracticaDAO;
 	}
 	
-	public void altaEstudio(EstudioDTO estudioDTO, List<PracticaDTO> listaPracticasDTO){
+	public double altaEstudio(EstudioDTO estudioDTO, List<PracticaDTO> listaPracticasDTO){
 		
 		List<Practica> listaPracticas = new ArrayList<Practica>(); 
 		for (PracticaDTO practicaDTO : listaPracticasDTO) {
@@ -43,8 +43,9 @@ public class EstudioFachada {
 		Paciente paciente = pacienteDAO.getPaciente(estudioDTO.getPaciente().getId());
 		Estudio estudio = ProviderDominio.getEstudio(estudioDTO, paciente,listaPracticas);
 		
-		//estudioDAO.altaEstudio(estudio);
-		System.out.println(estudio);
+		estudioDAO.altaEstudio(estudio);
+		
+		return estudio.getUnidadesFacturacionTotal();
 	}
 	
 	public List<Estudio> getEstudios(){
