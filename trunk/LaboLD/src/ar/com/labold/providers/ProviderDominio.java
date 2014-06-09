@@ -159,6 +159,7 @@ public abstract class ProviderDominio {
 		GrupoPractica grupoPractica = new GrupoPractica();		
 		grupoPractica.setNombre(grupoPracticaDTO.getNombre());
 		grupoPractica.setUnidadBioquimica(grupoPracticaDTO.getUnidadBioquimica());
+		grupoPractica.setCodigoFaba(grupoPracticaDTO.getCodigoFaba());
 		
 		return grupoPractica;
 	}	
@@ -168,6 +169,7 @@ public abstract class ProviderDominio {
 				
 		grupoPractica.setNombre(grupoPracticaDTO.getNombre());
 		grupoPractica.setUnidadBioquimica(grupoPracticaDTO.getUnidadBioquimica());
+		grupoPractica.setCodigoFaba(grupoPracticaDTO.getCodigoFaba());
 		
 		return grupoPractica;
 	}	

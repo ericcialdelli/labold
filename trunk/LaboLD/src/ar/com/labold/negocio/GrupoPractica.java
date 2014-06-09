@@ -26,6 +26,8 @@ public class GrupoPractica {
 
 	private double unidadBioquimica;	
 	
+	private String codigoFaba;
+	
 	@OneToMany(mappedBy = "grupoPractica")
 	@Cascade(value = { CascadeType.SAVE_UPDATE, CascadeType.DELETE_ORPHAN })
 	private List<Practica> practicas = new ArrayList<Practica>();	
@@ -72,6 +74,14 @@ public class GrupoPractica {
 
 	public void setUnidadBioquimica(double unidadBioquimica) {
 		this.unidadBioquimica = unidadBioquimica;
+	}
+
+	public String getCodigoFaba() {
+		return codigoFaba;
+	}
+
+	public void setCodigoFaba(String codigoFaba) {
+		this.codigoFaba = codigoFaba;
 	}
 
 }
