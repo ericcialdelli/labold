@@ -18,9 +18,9 @@ public class PracticaDTO {
 	
 	private String mayorMenor;
 	
-	private int unidadFacturacion;
+	private double unidadBioquimica;
 	
-	private String codigoObraSocial;
+	private String codigoFaba;
 	
 	private GrupoPracticaDTO grupoPracticaDTO;
 	
@@ -112,20 +112,20 @@ public class PracticaDTO {
 		this.metodo = metodo;
 	}
 
-	public int getUnidadFacturacion() {
-		return unidadFacturacion;
+	public double getUnidadBioquimica() {
+		return unidadBioquimica;
 	}
 
-	public void setUnidadFacturacion(int unidadFacturacion) {
-		this.unidadFacturacion = unidadFacturacion;
+	public void setUnidadBioquimica(double unidadBioquimica) {
+		this.unidadBioquimica = unidadBioquimica;
 	}
 
-	public String getCodigoObraSocial() {
-		return codigoObraSocial;
+	public String getCodigoFaba() {
+		return codigoFaba;
 	}
 
-	public void setCodigoObraSocial(String codigoObraSocial) {
-		this.codigoObraSocial = codigoObraSocial;
+	public void setCodigoFaba(String codigoFaba) {
+		this.codigoFaba = codigoFaba;
 	}
 
 	public void normalizarValores(){

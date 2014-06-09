@@ -46,9 +46,9 @@
 			</td>
 		</tr>
 		<tr>
-			<td width="40%" class="botoneralNegritaRight">Unidad de Facturación</td>
+			<td width="40%" class="botoneralNegritaRight">Unidad Bioquimica</td>
 			<td align="left">
-				<html:text styleClass="botonerab" property="grupoPracticaDTO.unidadFacturacion" value="${grupoPractica.unidadFacturacion}" 
+				<html:text styleClass="botonerab" property="grupoPracticaDTO.unidadBioquimica" value="${grupoPractica.unidadBioquimica}" 
 						onkeypress="return evitarAutoSubmit(event)"/>
 			</td>
 		</tr>

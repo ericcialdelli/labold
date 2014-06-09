@@ -164,17 +164,17 @@
 		</tr>
 		
 		<tr>
-			<td width="40%" class="botoneralNegritaRight">Unidad de Facturación</td>
+			<td width="40%" class="botoneralNegritaRight">Unidad de Bioquimica</td>
 			<td align="left">
-				<html:text styleClass="botonerab" property="practicaDTO.unidadFacturacion" value="" 
+				<html:text styleClass="botonerab" property="practicaDTO.unidadBioquimica" value="" 
 						styleId="nombre" onkeypress="return evitarAutoSubmit(event)"/>
 			</td>
 		</tr>		
 
 		<tr>
-			<td width="40%" class="botoneralNegritaRight">Código Obra Social</td>
+			<td width="40%" class="botoneralNegritaRight">Código Faba</td>
 			<td align="left">
-				<html:text styleClass="botonerab" property="practicaDTO.codigoObraSocial" value="" 
+				<html:text styleClass="botonerab" property="practicaDTO.codigoFaba" value="" 
 						styleId="nombre" onkeypress="return evitarAutoSubmit(event)"/>
 			</td>
 		</tr>

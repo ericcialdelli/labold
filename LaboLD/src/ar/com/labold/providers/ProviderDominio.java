@@ -126,9 +126,9 @@ public abstract class ProviderDominio {
 		practica.setGrupoPractica(grupo);
 		practica.setSubItemPractica(subItem);
 		practica.setUnidad(practicaDTO.getUnidad());
-		practica.setCodigoObraSocial(practicaDTO.getCodigoObraSocial());
+		practica.setCodigoFaba(practicaDTO.getCodigoFaba());
 		practica.setMetodo(practicaDTO.getMetodo());
-		practica.setUnidadFacturacion(practicaDTO.getUnidadFacturacion());
+		practica.setUnidadBioquimica(practicaDTO.getUnidadBioquimica());
 		practica.setValorNormalDesde(practicaDTO.getValorNormalDesde());
 		practica.setValorNormalHasta(practicaDTO.getValorNormalHasta());
 		practica.setValorReferencia(practicaDTO.getValorReferencia());
@@ -143,8 +143,8 @@ public abstract class ProviderDominio {
 		practica.setNombre(practicaDTO.getNombre());
 		practica.setUnidad(practicaDTO.getUnidad());
 		practica.setMetodo(practicaDTO.getMetodo());
-		practica.setUnidadFacturacion(practicaDTO.getUnidadFacturacion());
-		practica.setCodigoObraSocial(practicaDTO.getCodigoObraSocial());
+		practica.setUnidadBioquimica(practicaDTO.getUnidadBioquimica());
+		practica.setCodigoFaba(practicaDTO.getCodigoFaba());
 		practica.setValorNormalDesde(practicaDTO.getValorNormalDesde());
 		practica.setValorNormalHasta(practicaDTO.getValorNormalHasta());
 		practica.setValorReferencia(practicaDTO.getValorReferencia());
@@ -158,7 +158,7 @@ public abstract class ProviderDominio {
 		
 		GrupoPractica grupoPractica = new GrupoPractica();		
 		grupoPractica.setNombre(grupoPracticaDTO.getNombre());
-		grupoPractica.setUnidadFacturacion(grupoPracticaDTO.getUnidadFacturacion());
+		grupoPractica.setUnidadBioquimica(grupoPracticaDTO.getUnidadBioquimica());
 		
 		return grupoPractica;
 	}	
@@ -167,7 +167,7 @@ public abstract class ProviderDominio {
 	public static GrupoPractica getGrupoPractica(GrupoPractica grupoPractica, GrupoPracticaDTO grupoPracticaDTO){
 				
 		grupoPractica.setNombre(grupoPracticaDTO.getNombre());
-		grupoPractica.setUnidadFacturacion(grupoPracticaDTO.getUnidadFacturacion());
+		grupoPractica.setUnidadBioquimica(grupoPracticaDTO.getUnidadBioquimica());
 		
 		return grupoPractica;
 	}	
@@ -199,12 +199,12 @@ public abstract class ProviderDominio {
 		//Map<Long,Integer> mapCantPracPorGrupo = new TreeMap<Long,Integer>();		
 
 		//Map donde pongo la cantidad de practicas que elegí por grupo
-		Map<Long,Integer> mapCantPracElegidasPorGrupo = new TreeMap<Long,Integer>();		
-		Integer cantPracElegPorGrupo;
+		Map<Long,Double> mapCantPracElegidasPorGrupo = new TreeMap<Long,Double>();		
+		Double cantPracElegPorGrupo;
 
 		//Map donde pongo la cantidad de unidades de facturacion de las practicas que elegí por grupo
-		Map<Long,Integer> mapCantUnidPorGrupo = new TreeMap<Long,Integer>();		
-		Integer cantUnidPorGrupo;		
+		Map<Long,Double> mapCantUnidPorGrupo = new TreeMap<Long,Double>();		
+		Double cantUnidPorGrupo;		
 		
 		long idGrupo;
 		long idSubItemPractica;
@@ -223,7 +223,7 @@ public abstract class ProviderDominio {
 			//Voy poniendo en un map la cantidad de practicas por grupo que elegí
 			cantPracElegPorGrupo = mapCantPracElegidasPorGrupo.get(idGrupo);
 			if(cantPracElegPorGrupo == null){
-				mapCantPracElegidasPorGrupo.put(idGrupo, 1);
+				mapCantPracElegidasPorGrupo.put(idGrupo, new Double(1));
 			}			
 			else{
 				mapCantPracElegidasPorGrupo.put(idGrupo, 1+cantPracElegPorGrupo);
@@ -232,10 +232,10 @@ public abstract class ProviderDominio {
 			//Voy poniendo en un map la cantidad de unidades de facturacion de practicas que elegí por grupo
 			cantUnidPorGrupo = mapCantUnidPorGrupo.get(idGrupo);
 			if(cantUnidPorGrupo == null){
-				mapCantUnidPorGrupo.put(idGrupo, practica.getUnidadFacturacion());
+				mapCantUnidPorGrupo.put(idGrupo, practica.getUnidadBioquimica());
 			}			
 			else{
-				mapCantUnidPorGrupo.put(idGrupo, practica.getUnidadFacturacion()+cantUnidPorGrupo);
+				mapCantUnidPorGrupo.put(idGrupo, practica.getUnidadBioquimica()+cantUnidPorGrupo);
 			}			
 			
 			valoresEstudio = mapValoresEstudio.get(idGrupo);
@@ -274,7 +274,7 @@ public abstract class ProviderDominio {
 			}					
 		}
 		
-		int totalUnidadesFacturacion=0;
+		double totalUnidadesFacturacion=0;
 		for (ValoresEstudio valoresEstudio2 : mapValoresEstudio.values()) {
 			
 			valoresEstudio2.setEstudio(estudio);
@@ -289,7 +289,7 @@ public abstract class ProviderDominio {
 			
 			if(valoresEstudio2.getGrupoPractica().getPracticas().size() == mapCantPracElegidasPorGrupo.get(valoresEstudio2.getGrupoPractica().getId())){
 				
-				mapCantUnidPorGrupo.put(valoresEstudio2.getGrupoPractica().getId(),valoresEstudio2.getGrupoPractica().getUnidadFacturacion());
+				mapCantUnidPorGrupo.put(valoresEstudio2.getGrupoPractica().getId(),valoresEstudio2.getGrupoPractica().getUnidadBioquimica());
 			}
 			
 			totalUnidadesFacturacion=totalUnidadesFacturacion+mapCantUnidPorGrupo.get(valoresEstudio2.getGrupoPractica().getId());

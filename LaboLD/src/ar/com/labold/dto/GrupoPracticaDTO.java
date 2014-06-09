@@ -10,7 +10,7 @@ public class GrupoPracticaDTO {
 	
 	private String nombre;
 	
-	private int unidadFacturacion;
+	private double unidadBioquimica;
 	
 	private List<SubItemPracticaDTO> subItemsPractica;
 	
@@ -43,12 +43,12 @@ public class GrupoPracticaDTO {
 		this.subItemsPractica = subItemsPractica;
 	}
 
-	public int getUnidadFacturacion() {
-		return unidadFacturacion;
+	public double getUnidadBioquimica() {
+		return unidadBioquimica;
 	}
 
-	public void setUnidadFacturacion(int unidadFacturacion) {
-		this.unidadFacturacion = unidadFacturacion;
+	public void setUnidadBioquimica(double unidadBioquimica) {
+		this.unidadBioquimica = unidadBioquimica;
 	}
-	
+
 }

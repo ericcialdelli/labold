@@ -105,15 +105,15 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="botoneralNegritaRight" width="40%">Unidad de Facturación</td>
+			<td class="botoneralNegritaRight" width="40%">Unidad Bioquimica</td>
 			<td align="left">
-				<html:text property="practicaDTO.unidadFacturacion" value="${practica.unidadFacturacion}" styleClass="botonerab" styleId="nombre"/>
+				<html:text property="practicaDTO.unidadBioquimica" value="${practica.unidadBioquimica}" styleClass="botonerab" styleId="nombre"/>
 			</td>
 		</tr>
 		<tr>
-			<td class="botoneralNegritaRight" width="40%">Código Obra Social</td>
+			<td class="botoneralNegritaRight" width="40%">Código Faba</td>
 			<td align="left">
-				<html:text property="practicaDTO.codigoObraSocial" value="${practica.codigoObraSocial}" styleClass="botonerab" styleId="nombre"/>
+				<html:text property="practicaDTO.codigoFaba" value="${practica.codigoFaba}" styleClass="botonerab" styleId="nombre"/>
 			</td>
 		</tr>							
 		<tr>
