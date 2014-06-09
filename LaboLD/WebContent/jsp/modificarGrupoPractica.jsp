@@ -54,6 +54,13 @@
 		</tr>
 		
 		<tr>
+			<td class="botoneralNegritaRight" width="40%">Código Faba</td>
+			<td align="left">
+				<html:text property="grupoPracticaDTO.codigoFaba" value="${grupoPractica.codigoFaba}" styleClass="botonerab" styleId="nombre"/>
+			</td>
+		</tr>			
+		
+		<tr>
 			<td height="20" colspan="2"></td>
 		</tr>
 		<tr>

@@ -12,6 +12,8 @@ public class GrupoPracticaDTO {
 	
 	private double unidadBioquimica;
 	
+	private String codigoFaba;
+	
 	private List<SubItemPracticaDTO> subItemsPractica;
 	
 	public GrupoPracticaDTO(){
@@ -49,6 +51,14 @@ public class GrupoPracticaDTO {
 
 	public void setUnidadBioquimica(double unidadBioquimica) {
 		this.unidadBioquimica = unidadBioquimica;
+	}
+
+	public String getCodigoFaba() {
+		return codigoFaba;
+	}
+
+	public void setCodigoFaba(String codigoFaba) {
+		this.codigoFaba = codigoFaba;
 	}
 
 }
