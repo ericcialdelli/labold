@@ -25,6 +25,8 @@ public class SubItemPractica {
 	@Column(nullable = false)
 	private String nombre;
 
+	private String codigoFaba;
+	
 	@ManyToOne()
 	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "grupoPractica_fk")
@@ -64,7 +66,14 @@ public class SubItemPractica {
 
 	public void setGrupoPractica(GrupoPractica grupoPractica) {
 		this.grupoPractica = grupoPractica;
+	}
+
+	public String getCodigoFaba() {
+		return codigoFaba;
+	}
+
+	public void setCodigoFaba(String codigoFaba) {
+		this.codigoFaba = codigoFaba;
 	}	
-	
-	
+
 }

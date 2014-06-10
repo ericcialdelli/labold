@@ -179,6 +179,7 @@ public abstract class ProviderDominio {
 		
 		SubItemPractica subItemPractica = new SubItemPractica();
 		subItemPractica.setNombre(subItemPracticaDTO.getNombre());
+		subItemPractica.setCodigoFaba(subItemPracticaDTO.getCodigoFaba());
 		subItemPractica.setGrupoPractica(grupoPractica);
 		
 		return subItemPractica;
