@@ -9,6 +9,8 @@ public class SubItemPracticaDTO {
 	
 	private GrupoPracticaDTO grupoPractica;
 	
+	private String codigoFaba;
+	
 	public SubItemPracticaDTO(){
 		
 		this.grupoPractica = new GrupoPracticaDTO();
@@ -36,6 +38,14 @@ public class SubItemPracticaDTO {
 
 	public void setGrupoPractica(GrupoPracticaDTO grupoPractica) {
 		this.grupoPractica = grupoPractica;
+	}
+
+	public String getCodigoFaba() {
+		return codigoFaba;
+	}
+
+	public void setCodigoFaba(String codigoFaba) {
+		this.codigoFaba = codigoFaba;
 	}
 
 }

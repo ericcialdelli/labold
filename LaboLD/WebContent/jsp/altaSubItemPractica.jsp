@@ -56,6 +56,14 @@
 		</tr>
 		
 		<tr>
+			<td width="40%" class="botoneralNegritaRight">Código Faba</td>
+			<td align="left">
+				<html:text styleClass="botonerab" property="subItemPracticaDTO.codigoFaba" value="" 
+						styleId="nombre" onkeypress="return evitarAutoSubmit(event)"/>
+			</td>
+		</tr>		
+		
+		<tr>
 			<td height="20" colspan="2"></td>
 		</tr>
 		<tr>

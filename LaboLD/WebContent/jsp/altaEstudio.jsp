@@ -122,10 +122,131 @@
 			}
 		);		
 	}
+
+	function seleccionarTodosSubItem(nroGrupo,nroSubItem){
+
+		$('.checkSI'+nroGrupo+"-"+nroSubItem).attr('checked','checked');		
+
+		$('.subItem'+nroGrupo+"-"+nroSubItem).each(
+			function(){
+				clickCheck($(this).val());
+			}
+		);	
+	}
+
+	function desSeleccionarTodosSubItem(nroGrupo,nroSubItem){
+
+		$('.checkSI'+nroGrupo+"-"+nroSubItem).removeAttr('checked');		
+
+		$('.subItem'+nroGrupo+"-"+nroSubItem).each(
+			function(){
+				clickCheck($(this).val());
+			}
+		);		
+	}
+
+	function abrirVentantAgregarPaciente(){
+
+		$('#dialogo').dialog({title: 'Agregar Paciente', height: 350, width: 600, modal: true});
+	}
+
+	function cerrarVentanaAgregarPaciente(){
+
+		$('#textoError').hide();		
+		$('#dialogo').dialog( "close" );
+	}
 	
 </script>
 <div id="exitoGrabado" class="verdeExito"><br>${exitoGrabado}<br></div>
 <div id="errores" class="rojoAdvertencia"><br>${error}<br></div>
+
+<div id="dialogo" style="display: none" >	
+	<br>
+	<div id="textoError" class="rojoAdvertencia" style="display: none" ></div>
+	<br>
+	
+<html:form action="paciente" styleId="pacienteFormId">
+	<html:hidden property="metodo" value="altaPaciente"/>
+
+	<table border="0" class="cuadrado" align="center" width="80%" cellpadding="2" cellspacing="0">
+		<tr>
+			<td height="20" colspan="2"></td>
+		</tr>				
+		<tr>
+			<td class="botoneralNegritaRight" width="40%">Nombre</td>
+			<td align="left">
+				<html:text property="pacienteDTO.nombre" value="" styleClass="botonerabGrande" styleId="nombre"/>
+			</td>
+		</tr>	
+		<tr>
+			<td class="botoneralNegritaRight" width="40%">Apellido</td>
+			<td  align="left">
+				<html:text property="pacienteDTO.apellido" value="" styleClass="botonerabGrande"/>			
+			</td>
+		</tr>
+		<tr>
+			<td class="botoneralNegritaRight" width="40%">Fecha de Nacimiento</td>
+			<td  align="left">
+				<input class="botonerab" type="text" size="15" name="pacienteDTO.fechaNacimiento">						
+				<img alt="" src="<html:rewrite page='/imagenes/calendar/calendar2.gif'/>" align="top" width='17' height='21'>							
+			</td>
+		</tr>
+		<tr>
+			<td class="botoneralNegritaRight" width="40%">
+				DNI
+			</td>
+			<td  align="left">
+				<html:text property="pacienteDTO.dni" value="" onkeypress="javascript:esNumerico(event);" styleClass="botonerab"/>			
+			</td>
+		</tr>				
+		<tr>
+			<td class="botoneralNegritaRight" width="40%">
+				Dirección
+			</td>
+			<td  align="left">
+				<html:text property="pacienteDTO.direccion" value="" styleClass="botonerab"/>			
+			</td>
+		</tr>	
+		<tr>
+			<td class="botoneralNegritaRight" width="40%">
+				Telefono
+			</td>
+			<td  align="left">
+				<html:text property="pacienteDTO.telefono" value="" styleClass="botonerab"/>			
+			</td>
+		</tr>
+		<tr>
+			<td class="botoneralNegritaRight" width="40%">
+				E-Mail
+			</td>
+			<td  align="left">
+				<html:text property="pacienteDTO.email" value="" styleClass="botonerab"/>			
+			</td>
+		</tr>
+		<tr>
+			<td height="20" colspan="2"></td>
+		</tr>					
+	</table>		
+	
+	<table border="0" class="cuadradoSinBorde" align="center" width="80%" cellpadding="2">
+		<tr>
+			<td height="10" colspan="3"></td>
+		</tr>	
+		<tr>
+			<td width="48%" class="botonerab" align="right">
+				<input type="button" class="botonerab" value="Aceptar" onclick="">
+			</td>
+			<td width="4%"></td>			
+			<td width="48%" class="botonerab" align="left">
+				<input type="button" class="botonerab" value="Cancelar" onclick="javascript:cerrarVentanaAgregarPaciente();">
+			</td>							
+		</tr>
+		<tr>
+			<td height="10" colspan="3"></td>
+		</tr>		
+	</table>
+</html:form>	
+</div>
 
 <html:form action="estudio" styleId="estudioFormId">
 	<html:hidden property="metodo" value="altaEstudio"/>
@@ -144,7 +265,7 @@
 					onkeypress="javascript:esNumerico(event);" readonly="readonly"/>
 			</td>
 			
-			<td class="botoneralNegritaRight" width="30%" >Paciente</td>
+			<td class="botoneralNegritaRight" width="20%" >Paciente</td>
 			<td align="left">			
 				<select id="obraSocial" class="botonerab" name="estudioDTO.paciente.id">
 					<option value="-1">
@@ -156,6 +277,7 @@
 						</option>
 					</c:forEach>										
 				</select>
+				<input type="button" value="Agregar" class="botonerab" onclick="abrirVentantAgregarPaciente()">
 			</td>			
 		</tr>	
 		
@@ -165,7 +287,7 @@
 				<html:text property="estudioDTO.solicitadoPor" value="" styleClass="botonerab" size="40"/>
 			</td>
 			
-			<td class="botoneralNegritaRight" width="30%" >Fecha</td>
+			<td class="botoneralNegritaRight" width="20%" >Fecha</td>
 			<td align="left">			
 				<input id="datepicker" type="text" name="estudioDTO.fecha" readonly="readonly" class="botonerab">
 				<img alt="" src="<html:rewrite page='/imagenes/calendar/calendar2.gif'/>" align="top" width='17' height='21'>				
@@ -183,20 +305,23 @@
 		</tr>
 		<%int i=0; %>
 		<c:forEach items="${gruposPracticas}" var="grupo" varStatus="iGrupo">
-			<tr>
-				<td align="left" onclick="expandirGrupo(<c:out value='${iGrupo.index}'></c:out>)" class="grisSubtitulo"
-					id="grupo<c:out value='${iGrupo.index}'></c:out>" 									
+			<tr onclick="expandirGrupo(<c:out value='${iGrupo.index}'></c:out>)" class="grisSubtitulo"
+					id="grupo<c:out value='${iGrupo.index}'></c:out>" width="85%" 									
 					onmouseover="javascript:pintarFila('grupo',<c:out value='${iGrupo.index}'></c:out>);"
 					onmouseout="javascript:despintarFila('grupo',<c:out value='${iGrupo.index}'></c:out>);">
 					
-					${grupo.nombre}														
-				</td>							
+				<td id="grupo<c:out value='${iGrupo.index}'></c:out>" width="85%">					
+					${grupo.nombre}									
+					<c:if test="${grupo.codigoFaba != null && grupo.codigoFaba != ''}">					
+						- (${grupo.codigoFaba})
+					</c:if>							
+				</td>									
 			</tr>	
 			<tr style="display: none" id="trGrupo<c:out value='${iGrupo.index}'></c:out>">
 				<td>
 					<table border="0" class="cuadrado" align="left" width="100%" cellpadding="2" >
 						<tr>
-							<td height="5" colspan="2" align="right">
+							<td height="5" colspan="4" align="right">
 								<a href="javascript:seleccionarTodos(<c:out value='${iGrupo.index}'></c:out>)">Seleccionar Todos</a>
 								/
 								<a href="javascript:desSeleccionarTodos(<c:out value='${iGrupo.index}'></c:out>)">Deseleccionar Todos</a>
@@ -216,9 +341,17 @@
 											id="checkPractica<%=i%>"
 											value="${practica.id}">
 									</td>
-									<td align="left" width="95%">
+									<td align="left" width="65%">
 										${practica.nombre}
-									</td>				
+									</td>
+									<td align="right" width="25%">
+										<c:if test="${practica.codigoFaba != null && practica.codigoFaba != ''}">
+											Codigo Faba
+										</c:if>	
+									</td>
+									<td align="left" width="5%">
+										${practica.codigoFaba}
+									</td>																						
 								</tr>	
 								<%i++; %>	
 							</c:if>											
@@ -226,16 +359,27 @@
 						
 						<c:forEach items="${grupo.subItemsPractica}" var="subItem" varStatus="iSubItem">
 							<tr>
-								<td width="5%">
-								</td>
-								<td width="95%" class="negritaLeft">
-									${subItem.nombre}								
-								</td>							
+								<td colspan="4" height="10">&nbsp;</td>							
 							</tr>
 							<tr>
 								<td width="5%">
 								</td>
-								<td width="95%">
+								<td width="65%" class="negritaLeft">
+									${subItem.nombre}	
+									<c:if test="${subItem.codigoFaba != null && subItem.codigoFaba != ''}">					
+										- (${subItem.codigoFaba})										
+									</c:if>	
+								</td>
+								<td colspan="2" align="right">
+									<a href="javascript:seleccionarTodosSubItem(<c:out value='${iGrupo.index},${iSubItem.index}'></c:out>)">Seleccionar Todos</a>
+									/
+									<a href="javascript:desSeleccionarTodosSubItem(<c:out value='${iGrupo.index},${iSubItem.index}'></c:out>)">Deseleccionar Todos</a>									
+								</td>															
+							</tr>
+							<tr>
+								<td width="5%">
+								</td>
+								<td width="95%" colspan="3">
 									<table border="0" class="cuadrado" align="left" width="100%" cellpadding="2" >
 										<tr>
 											<td height="5" colspan="2"></td>
@@ -245,18 +389,30 @@
 												class="trG<c:out value='${iGrupo.index}'></c:out>">											
 												<td width="5%">	
 													<input type="hidden" class="grupo<c:out value='${iGrupo.index}'></c:out>" 
-														value="<%=i%>">													
+														value="<%=i%>">
+													<input type="hidden" class="subItem<c:out value='${iGrupo.index}'></c:out>-<c:out value='${iSubItem.index}'></c:out>" 
+														value="<%=i%>">															
+																																							
 													<input type="hidden" name="listaPracticas[<%=i%>].id" 
 														id="hiddenPractica<%=i%>">												
 									
-													<input type="checkbox" class="checkG<c:out value='${iGrupo.index}'></c:out>"
+													<input type="checkbox" 
+														class="checkG<c:out value='${iGrupo.index}'></c:out> checkSI<c:out value='${iGrupo.index}'></c:out>-<c:out value='${iSubItem.index}'></c:out>"
 														onchange="clickCheck(<%=i%>)" 
 														id="checkPractica<%=i%>"
 														value="${prac.id}">													
 												</td>														
-												<td align="left" width="95%">
+												<td align="left" width="80%">
 													${prac.nombre}
-												</td>				
+												</td>
+												<td align="left" width="10%">
+													<c:if test="${prac.codigoFaba != null && prac.codigoFaba != ''}">
+														Codigo Faba
+													</c:if>	
+												</td>
+												<td align="left" width="5%">
+													${prac.codigoFaba}
+												</td>																
 											</tr>
 											<%i++; %>						
 										</c:forEach>																		
@@ -270,7 +426,7 @@
 			</tr>					
 		</c:forEach>		
 		<tr>
-			<td height="20" ></td>
+			<td height="20"></td>
 		</tr>		
 	</table>		
 	
