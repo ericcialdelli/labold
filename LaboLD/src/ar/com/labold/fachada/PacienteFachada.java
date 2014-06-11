@@ -25,12 +25,14 @@ public class PacienteFachada {
 		this.obraSocialDAO = pObraSocialDAO;
 	}
 	
-	public void altaPaciente(PacienteDTO pacienteDTO){
+	public Paciente altaPaciente(PacienteDTO pacienteDTO){
 		
 		ObraSocial obraSocial = obraSocialDAO.getObraSocial(pacienteDTO.getObraSocial().getId());
 		Paciente paciente = ProviderDominio.getPaciente(pacienteDTO,obraSocial);
 		
 		pacienteDAO.altaPaciente(paciente);
+		
+		return paciente;
 	}
 
 	public void modificacionPaciente(PacienteDTO pacienteDTO){
@@ -54,5 +56,21 @@ public class PacienteFachada {
 	public boolean existePaciente(int dni, Long id){
 		
 		return pacienteDAO.existePaciente(dni,id);
+	}
+	
+	public Paciente altaPacienteDesdeAltaEstudio(String nombre,String apellido,String fechaNacimiento,int dni, 
+											     String direccion,String telefono,String email, Long idObraSocial){
+		
+		PacienteDTO pacienteDTO = new PacienteDTO();
+		pacienteDTO.setNombre(nombre);
+		pacienteDTO.setApellido(apellido);
+		pacienteDTO.setFechaNacimiento(fechaNacimiento);
+		pacienteDTO.setDni(dni);
+		pacienteDTO.setDireccion(direccion);
+		pacienteDTO.setTelefono(telefono);
+		pacienteDTO.setEmail(email);
+		pacienteDTO.getObraSocial().setId(idObraSocial);
+		
+		return this.altaPaciente(pacienteDTO);		
 	}
 }

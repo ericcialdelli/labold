@@ -1,5 +1,7 @@
 package ar.com.labold.struts.actions;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -71,6 +73,45 @@ public class PacienteAction extends ValidadorAction {
 
 		return mapping.findForward(strForward);
 	}	
+	
+	/*@SuppressWarnings("unchecked")
+	public ActionForward altaPacienteDesdeAltaEstudio(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		StringBuffer nodo = Validator.abrirXML();
+		PrintWriter out = null;
+		
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			PacienteFachada pacienteFachada = (PacienteFachada) ctx.getBean("pacienteFachada");
+			
+			PacienteForm pacienteForm = (PacienteForm)form;
+			
+			// valido nuevamente por seguridad.  
+			if (!validarPacienteForm(new StringBuffer(), pacienteForm)) {
+				throw new Exception("Error de Seguridad");
+			}						
+			Paciente paciente = pacienteFachada.altaPaciente(pacienteForm.getPacienteDTO());
+			nodo.append("\n" + "<id>" + paciente.getId() + "</id>");
+			nodo.append("\n" + "<nombre>" + paciente.getApellido()+","+paciente.getNombre() + "</nombre>");
+			Validator.cerrarXML(nodo);
+			
+		} catch (Throwable t) {
+			
+			nodo = new StringBuffer(Validator.XML_HEADER);
+			Validator.addErrorXML(nodo, "ValidadorAction :" + t.getCause() + "|" + t.getMessage());	
+			
+		} finally {
+			try {
+				out = response.getWriter();
+			} catch (IOException e) {}
+			
+			out.write(nodo.toString());
+			response.setContentType("text/xml");
+		}
+		return null;
+	}*/	
 	
 	@SuppressWarnings("unchecked")
 	public ActionForward recuperarPacientes(ActionMapping mapping,
