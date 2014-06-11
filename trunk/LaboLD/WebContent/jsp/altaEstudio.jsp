@@ -10,6 +10,9 @@
 <script type="text/javascript"
 	src="<html:rewrite page='/js/JQuery/ui/jquery-ui-1.8.10.custom.min.js'/>"></script>	
 
+<script type="text/javascript"
+	src="<html:rewrite page='/dwr/interface/PacienteFachada.js'/>"></script>
+
 <link rel="stylesheet" href="<html:rewrite page='/css/ui-lightness/jquery-ui-1.8.10.custom.css'/>"
 	type="text/css">
 
@@ -147,6 +150,7 @@
 
 	function abrirVentantAgregarPaciente(){
 
+		$('#textoError').text("");
 		$('#dialogo').dialog({title: 'Agregar Paciente', height: 350, width: 600, modal: true});
 	}
 
@@ -155,98 +159,48 @@
 		$('#textoError').hide();		
 		$('#dialogo').dialog( "close" );
 	}
+
+	function agregarPaciente(){
+			
+		var form = $('#pacienteFormId').serialize(); 
+		var url = '../../paciente.do?metodo=validar&validador=validarPacienteForm&form=PacienteForm&formJsp=pacienteFormId';		
+		$.post(url,form,validarPacienteFormCallBack);		
+	}
+
+	function validarPacienteFormCallBack(xmlDoc){
+
+	   	var nodos = xmlDoc.getElementsByTagName('error');
+	    if (nodos.length==0){
+    	   	//var nodos = xmlDoc.getElementsByTagName('formId');
+    	   	//var idForm = nodos[0].firstChild.nodeValue;
+	    	//$('#pacienteFormId').submit();
+	 
+			PacienteFachada.altaPacienteDesdeAltaEstudio($('#nombre').val(),$('#apellido').val(),$('#fechaNacimiento').val(),
+					$('#dni').val(),$('#direccion').val(),$('#telefono').val(),$('#email').val(),$('#obraSocial').val(),mostrarPacienteCallback);
+				    	
+	    } else {
+	    	$('#textoError').text("");
+		    for(var i=0; i < nodos.length; i++) { 
+			    $('#textoError').append( '<div>* ' + nodos[i].firstChild.nodeValue + '</div>');
+		    }
+		    $('#textoError').show();
+	    }
+	}
+
+	function mostrarPacienteCallback(paciente){
+
+		$('#comboPacientes').hide();
+		$('#comboPacientes').html("");
+		$('#inputPaciente').show();
+		$('#idPacienteAgregado').val(paciente.id);		
+		$('#nombrePacienteAgregado').val(paciente.apellido+","+paciente.nombre);
+
+		cerrarVentanaAgregarPaciente();
+	}
 	
 </script>
 <div id="exitoGrabado" class="verdeExito"><br>${exitoGrabado}<br></div>
 <div id="errores" class="rojoAdvertencia"><br>${error}<br></div>
-
-<div id="dialogo" style="display: none" >	
-	<br>
-	<div id="textoError" class="rojoAdvertencia" style="display: none" ></div>
-	<br>
-	
-<html:form action="paciente" styleId="pacienteFormId">
-	<html:hidden property="metodo" value="altaPaciente"/>
-
-	<table border="0" class="cuadrado" align="center" width="80%" cellpadding="2" cellspacing="0">
-		<tr>
-			<td height="20" colspan="2"></td>
-		</tr>				
-		<tr>
-			<td class="botoneralNegritaRight" width="40%">Nombre</td>
-			<td align="left">
-				<html:text property="pacienteDTO.nombre" value="" styleClass="botonerabGrande" styleId="nombre"/>
-			</td>
-		</tr>	
-		<tr>
-			<td class="botoneralNegritaRight" width="40%">Apellido</td>
-			<td  align="left">
-				<html:text property="pacienteDTO.apellido" value="" styleClass="botonerabGrande"/>			
-			</td>
-		</tr>
-		<tr>
-			<td class="botoneralNegritaRight" width="40%">Fecha de Nacimiento</td>
-			<td  align="left">
-				<input class="botonerab" type="text" size="15" name="pacienteDTO.fechaNacimiento">						
-				<img alt="" src="<html:rewrite page='/imagenes/calendar/calendar2.gif'/>" align="top" width='17' height='21'>							
-			</td>
-		</tr>
-		<tr>
-			<td class="botoneralNegritaRight" width="40%">
-				DNI
-			</td>
-			<td  align="left">
-				<html:text property="pacienteDTO.dni" value="" onkeypress="javascript:esNumerico(event);" styleClass="botonerab"/>			
-			</td>
-		</tr>				
-		<tr>
-			<td class="botoneralNegritaRight" width="40%">
-				Dirección
-			</td>
-			<td  align="left">
-				<html:text property="pacienteDTO.direccion" value="" styleClass="botonerab"/>			
-			</td>
-		</tr>	
-		<tr>
-			<td class="botoneralNegritaRight" width="40%">
-				Telefono
-			</td>
-			<td  align="left">
-				<html:text property="pacienteDTO.telefono" value="" styleClass="botonerab"/>			
-			</td>
-		</tr>
-		<tr>
-			<td class="botoneralNegritaRight" width="40%">
-				E-Mail
-			</td>
-			<td  align="left">
-				<html:text property="pacienteDTO.email" value="" styleClass="botonerab"/>			
-			</td>
-		</tr>
-		<tr>
-			<td height="20" colspan="2"></td>
-		</tr>					
-	</table>		
-	
-	<table border="0" class="cuadradoSinBorde" align="center" width="80%" cellpadding="2">
-		<tr>
-			<td height="10" colspan="3"></td>
-		</tr>	
-		<tr>
-			<td width="48%" class="botonerab" align="right">
-				<input type="button" class="botonerab" value="Aceptar" onclick="">
-			</td>
-			<td width="4%"></td>			
-			<td width="48%" class="botonerab" align="left">
-				<input type="button" class="botonerab" value="Cancelar" onclick="javascript:cerrarVentanaAgregarPaciente();">
-			</td>							
-		</tr>
-		<tr>
-			<td height="10" colspan="3"></td>
-		</tr>		
-	</table>
-</html:form>	
-</div>
 
 <html:form action="estudio" styleId="estudioFormId">
 	<html:hidden property="metodo" value="altaEstudio"/>
@@ -266,18 +220,24 @@
 			</td>
 			
 			<td class="botoneralNegritaRight" width="20%" >Paciente</td>
-			<td align="left">			
-				<select id="obraSocial" class="botonerab" name="estudioDTO.paciente.id">
-					<option value="-1">
-						Seleccione un paciente...
-					</option>		
-					<c:forEach items="${pacientes}" var="p">
-						<option value="${p.id}">
-							<c:out value="${p.apellido}"></c:out>, <c:out value="${p.nombre}"></c:out>
-						</option>
-					</c:forEach>										
-				</select>
-				<input type="button" value="Agregar" class="botonerab" onclick="abrirVentantAgregarPaciente()">
+			<td align="left">
+				<div style="display: " id="comboPacientes">			
+					<select id="obraSocial" class="botonerab" name="estudioDTO.paciente.id">
+						<option value="-1">
+							Seleccione un paciente...
+						</option>		
+						<c:forEach items="${pacientes}" var="p">
+							<option value="${p.id}">
+								<c:out value="${p.apellido}"></c:out>, <c:out value="${p.nombre}"></c:out>
+							</option>
+						</c:forEach>										
+					</select>
+					<input type="button" value="Agregar" class="botonerab" onclick="abrirVentantAgregarPaciente()">
+				</div>
+				<div style="display: none" id="inputPaciente">
+					<input type="text" value="" id="nombrePacienteAgregado" readonly="readonly">
+					<input type="hidden" name="estudioDTO.paciente.id" value="" id="idPacienteAgregado">
+				</div>	
 			</td>			
 		</tr>	
 		
@@ -445,6 +405,113 @@
 	</table>
 
 </html:form>
+
+<div id="dialogo" style="display: none" >	
+	<br>
+	<div id="textoError" class="rojoAdvertencia" style="display: none" ></div>
+	<br>
+		
+	<html:form action="paciente" styleId="pacienteFormId">
+		<html:hidden property="metodo" value="altaPacienteDesdeAltaEstudio"/>
+	
+		<table border="0" class="cuadrado" align="center" width="80%" cellpadding="2" cellspacing="0">
+			<tr>
+				<td height="20" colspan="2"></td>
+			</tr>				
+			<tr>
+				<td class="botoneralNegritaRight" width="40%">Nombre</td>
+				<td align="left">
+					<html:text property="pacienteDTO.nombre" value="" styleClass="botonerabGrande" styleId="nombre"/>
+				</td>
+			</tr>	
+			<tr>
+				<td class="botoneralNegritaRight" width="40%">Apellido</td>
+				<td  align="left">
+					<html:text property="pacienteDTO.apellido" value="" styleClass="botonerabGrande" styleId="apellido"/>			
+				</td>
+			</tr>
+			<tr>
+				<td class="botoneralNegritaRight" width="40%">Fecha de Nacimiento</td>
+				<td  align="left">
+					<input class="botonerab" type="text" size="15" name="pacienteDTO.fechaNacimiento" id="fechaNacimiento">						
+					<img alt="" src="<html:rewrite page='/imagenes/calendar/calendar2.gif'/>" align="top" width='17' height='21'>							
+				</td>
+			</tr>
+			<tr>
+				<td class="botoneralNegritaRight" width="40%">
+					DNI
+				</td>
+				<td  align="left">
+					<html:text property="pacienteDTO.dni" value="" onkeypress="javascript:esNumerico(event);" styleClass="botonerab"
+						styleId="dni"/>			
+				</td>
+			</tr>				
+			<tr>
+				<td class="botoneralNegritaRight" width="40%">
+					Dirección
+				</td>
+				<td  align="left">
+					<html:text property="pacienteDTO.direccion" value="" styleClass="botonerab" styleId="direccion"/>			
+				</td>
+			</tr>	
+			<tr>
+				<td class="botoneralNegritaRight" width="40%">
+					Telefono
+				</td>
+				<td  align="left">
+					<html:text property="pacienteDTO.telefono" value="" styleClass="botonerab" styleId="telefono"/>			
+				</td>
+			</tr>
+			<tr>
+				<td class="botoneralNegritaRight" width="40%">
+					E-Mail
+				</td>
+				<td  align="left">
+					<html:text property="pacienteDTO.email" value="" styleClass="botonerab" styleId="email"/>			
+				</td>
+			</tr>
+			<tr>
+				<td class="botoneralNegritaRight" width="40%">
+					Obra Social
+				</td>
+				<td  align="left">
+					<select id="obraSocial" class="botonerab" name="pacienteDTO.obraSocial.id">
+						<option value="-1">
+							-Seleccione una Obra Social-
+						</option>		
+						<c:forEach items="${obrasSociales}" var="os">
+							<option value="${os.id}">
+								<c:out value="${os.nombre}"></c:out>
+							</option>
+						</c:forEach>										
+					</select>			
+				</td>
+			</tr>			
+			<tr>
+				<td height="20" colspan="2"></td>
+			</tr>					
+		</table>		
+		
+		<table border="0" class="cuadradoSinBorde" align="center" width="80%" cellpadding="2">
+			<tr>
+				<td height="10" colspan="3"></td>
+			</tr>	
+			<tr>
+				<td width="48%" class="botonerab" align="right">
+					<input type="button" class="botonerab" value="Aceptar" onclick="javascript:agregarPaciente();">
+				</td>
+				<td width="4%"></td>			
+				<td width="48%" class="botonerab" align="left">
+					<input type="button" class="botonerab" value="Cancelar" onclick="javascript:cerrarVentanaAgregarPaciente();">
+				</td>							
+			</tr>
+			<tr>
+				<td height="10" colspan="3"></td>
+			</tr>		
+		</table>
+	</html:form>	
+</div>
+
 <script type="text/javascript">
 
 	//$('#nombre').focus();

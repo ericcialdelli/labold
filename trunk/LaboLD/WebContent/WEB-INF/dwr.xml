@@ -6,11 +6,18 @@
 	<allow>
 		<convert converter="bean" match="ar.com.labold.negocio.SubItemPractica">
 			<param name="include" value="id,nombre" />
-		</convert>		
+		</convert>
+		<convert converter="bean" match="ar.com.labold.negocio.Paciente">
+			<param name="include" value="id,nombre,apellido" />
+		</convert>				
 
 		<create creator="spring" javascript="PracticaFachada">
 			<param name="beanName" value="practicaFachada" />
-		</create>							
+		</create>
+		
+		<create creator="spring" javascript="PacienteFachada">
+			<param name="beanName" value="pacienteFachada" />
+		</create>
 	</allow>
 
 </dwr> 

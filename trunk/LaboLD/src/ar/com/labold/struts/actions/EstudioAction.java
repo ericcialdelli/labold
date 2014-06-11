@@ -37,7 +37,9 @@ public class EstudioAction extends ValidadorAction {
 			PacienteFachada pacienteFachada = (PacienteFachada) ctx.getBean("pacienteFachada");
 			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
 			PracticaFachada practicaFachada = (PracticaFachada) ctx.getBean("practicaFachada");
+			ObraSocialFachada obraSocialFachada = (ObraSocialFachada) ctx.getBean("obraSocialFachada");
 			
+			request.setAttribute("obrasSociales", obraSocialFachada.getObrasSociales());						
 			request.setAttribute("nroEstudio", estudioFachada.getProximoNroEstudio());
 			request.setAttribute("pacientes", pacienteFachada.getPacientes());
 			List<GrupoPractica> gruposPracticas = practicaFachada.getGruposPractica();
