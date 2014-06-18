@@ -98,5 +98,4 @@ public class Estudio {
 	public void setUnidadesFacturacionTotal(Double unidadesFacturacionTotal) {
 		this.unidadesFacturacionTotal = unidadesFacturacionTotal;
 	}
-	
 }

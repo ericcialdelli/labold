@@ -150,6 +150,13 @@
 	</definition>		
 	<!-- FIN REPORTES -->		
 	
+	<!-- FACTURACION -->
+	<definition name=".eliminarPracticaParaFacturacion" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/eliminarPracticaParaFacturacion.jsp" />
+	</definition>	
+	<!-- FIN FACTURACION -->		
+	
 	<definition name=".error" extends=".base">
 		<put name="title" value="Error en LaboLD" />
 		<put name="body" value="/jsp/error.jsp" />

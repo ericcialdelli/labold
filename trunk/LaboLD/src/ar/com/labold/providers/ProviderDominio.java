@@ -247,13 +247,15 @@ public abstract class ProviderDominio {
 				valoresEstudio = new ValoresEstudio();
 				valoresEstudio.setNombre(practica.getGrupoPractica().getNombre());
 				valoresEstudio.setGrupoPractica(practica.getGrupoPractica());
+				valoresEstudio.setUnidadBioquimica(practica.getGrupoPractica().getUnidadBioquimica());
 				mapValoresEstudio.put(idGrupo, valoresEstudio);
 			}
 			
 			ValorPractica valorPractica = new ValorPractica();
 			valorPractica.setPractica(practica);
 			valorPractica.setValor(null);										
-
+			valorPractica.setUnidadBioquimica(practica.getUnidadBioquimica());
+			
 			if(practica.getSubItemPractica() != null ){
 				
 				idSubItemPractica = practica.getSubItemPractica().getId();

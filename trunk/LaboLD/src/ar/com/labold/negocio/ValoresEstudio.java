@@ -25,6 +25,8 @@ public class ValoresEstudio {
 	@Column(nullable = false)
 	private String nombre;	
 	
+	private Double unidadBioquimica;
+	
 	@ManyToOne()
 	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "grupoPractica_fk")
@@ -91,6 +93,13 @@ public class ValoresEstudio {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
+	public Double getUnidadBioquimica() {
+		return unidadBioquimica;
+	}
+
+	public void setUnidadBioquimica(Double unidadBioquimica) {
+		this.unidadBioquimica = unidadBioquimica;
+	}
 	
 }

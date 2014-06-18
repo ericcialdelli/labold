@@ -21,6 +21,8 @@ public class ValorPractica {
 	@Column(nullable = true)
 	private String valor;
 
+	private Double unidadBioquimica;	
+	
 	@ManyToOne()
 	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "practica_fk")	
@@ -74,6 +76,14 @@ public class ValorPractica {
 
 	public void setValorSubItemPractica(ValorSubItemPractica valorSubItemPractica) {
 		this.valorSubItemPractica = valorSubItemPractica;
+	}
+
+	public Double getUnidadBioquimica() {
+		return unidadBioquimica;
+	}
+
+	public void setUnidadBioquimica(Double unidadBioquimica) {
+		this.unidadBioquimica = unidadBioquimica;
 	}
 	
 }
