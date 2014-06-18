@@ -10,10 +10,12 @@ import ar.com.labold.dao.PacienteDAO;
 import ar.com.labold.dao.PracticaDAO;
 import ar.com.labold.dto.EstudioDTO;
 import ar.com.labold.dto.PracticaDTO;
+import ar.com.labold.dto.ValorPracticaDTO;
 import ar.com.labold.negocio.Estudio;
 import ar.com.labold.negocio.Paciente;
 import ar.com.labold.negocio.Practica;
 import ar.com.labold.negocio.ValorPractica;
+import ar.com.labold.negocio.ValoresEstudio;
 import ar.com.labold.providers.ProviderDominio;
 
 @Transactional(rollbackFor = { Throwable.class })
@@ -74,12 +76,23 @@ public class EstudioFachada {
 		
 		return estudioDAO.getProximoNroEstudio();
 	}
-	
+		
 	public void completarEstudio(EstudioDTO estudio, List<ValorPractica> listaValorPractias){
 		
 		for (ValorPractica valorPractica : listaValorPractias) {
 			ValorPractica valPractica = estudioDAO.getValorPractica(valorPractica.getId());
 			valPractica.setValor(valorPractica.getValor());			
+		}
+	}
+	
+	public void eliminarPracticasParaFacturacion(EstudioDTO estudioDTO, List<ValorPracticaDTO> listaValoresPracticaDTO){
+		
+		Estudio estudio = estudioDAO.getEstudio(estudioDTO.getId());
+		
+		for (ValorPracticaDTO valorPracticaDTO : listaValoresPracticaDTO) {
+
+			ValorPractica valorPractica = estudioDAO.getValorPractica(valorPracticaDTO.getId());
+			valorPractica.setUnidadBioquimica(0.0);	
 		}
 	}
 }

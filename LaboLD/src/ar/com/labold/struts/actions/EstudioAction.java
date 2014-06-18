@@ -106,7 +106,11 @@ public class EstudioAction extends ValidadorAction {
 				if(forward.equals("recuperarEstudioParaModificacion")){
 					titulo="Consulta de Estudios";
 				}else{
-					titulo="Completar Estudios";
+					if(forward.equals("recuperarEstudioParaCompletar")){
+						titulo="Completar Estudios";
+					}else{
+						titulo="Eliminar Practicas de Estudio para Facturacion";
+					}										
 				}
 			}
 			
@@ -225,6 +229,31 @@ public class EstudioAction extends ValidadorAction {
 
 		return mapping.findForward(strForward);
 	}	
+
+	@SuppressWarnings("unchecked")
+	public ActionForward recuperarEstudioEliminarPracticasParaFacturacion(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoRecuperarEstudioEliminarPracticasParaFacturacion";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			
+			String idEstudio = request.getParameter("id");			
+			Estudio estudio = estudioFachada.getEstudio(Long.valueOf(idEstudio));
+			
+			request.setAttribute("estudio", estudio);
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}		
 	
 	@SuppressWarnings("unchecked")
 	public ActionForward modificacionEstudio(ActionMapping mapping,
@@ -287,6 +316,34 @@ public class EstudioAction extends ValidadorAction {
 
 		return mapping.findForward(strForward);
 	}	
+	
+	@SuppressWarnings("unchecked")
+	public ActionForward eliminarPracticasParaFacturacion(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoEliminarPracticasParaFacturacion";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			
+			EstudioForm estudioForm = (EstudioForm)form;
+			estudioForm.normalizarListaValoresPracticaDTO();
+			
+			estudioFachada.eliminarPracticasParaFacturacion(estudioForm.getEstudioDTO(),estudioForm.getListaValoresPracticaDTO());
+			
+			request.setAttribute("exitoGrabado", Constantes.EXITO_COMPLETAR_ESTUDIO);
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}	
+	
 	
 	public boolean validarEstudioForm(StringBuffer error, ActionForm form) {
 		

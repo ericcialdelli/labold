@@ -130,9 +130,12 @@
 			<forward name="exitoRecuperarEstudios" path="/jsp/bloqueRecuperarEstudios.jsp" />
 			<forward name="exitoRecuperarEstudioParaModificacion" path=".modificarEstudio" />
 			<forward name="exitoRecuperarEstudioParaConsulta" path=".consultaEstudio" />
-			<forward name="exitoRecuperarEstudioParaCompletar" path=".completarEstudio" />			
+			<forward name="exitoRecuperarEstudioParaCompletar" path=".completarEstudio" />
+			<forward name="exitoRecuperarEstudioEliminarPracticasParaFacturacion" path=".eliminarPracticaParaFacturacion" />			
 			<forward name="exitoModificacionEstudio" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioParaModificacion" />
-			<forward name="exitoCompletarEstudio" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioParaCompletar" />										
+			<forward name="exitoCompletarEstudio" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioParaCompletar" />
+			<forward name="exitoEliminarPracticasParaFacturacion" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioEliminarPracticasParaFacturacion" />
+												
 		</action>				
 		<!-- FIN ESTUDIO -->
 
@@ -141,6 +144,10 @@
 			parameter="metodo" scope="request">											
 		</action>				
 		<!-- FIN REPORTE -->
+		
+		<!-- FACTURACION -->
+		
+		<!-- FIN FACTURACION -->
 								
 	</action-mappings>
 

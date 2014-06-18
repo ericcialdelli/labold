@@ -9,13 +9,15 @@ import org.apache.struts.action.ActionForm;
 
 import ar.com.labold.dto.EstudioDTO;
 import ar.com.labold.dto.PracticaDTO;
+import ar.com.labold.dto.ValorPracticaDTO;
 import ar.com.labold.negocio.ValorPractica;
 
 public class EstudioForm extends ActionForm {
 
 	private EstudioDTO estudioDTO;
 	private List<PracticaDTO> listaPracticas;
-	private List<ValorPractica> listaValoresPractica; 
+	private List<ValorPractica> listaValoresPractica;
+	private List<ValorPracticaDTO> listaValoresPracticaDTO;
 	
 	public EstudioForm(){
 		
@@ -23,7 +25,10 @@ public class EstudioForm extends ActionForm {
 		listaPracticas = (List<PracticaDTO>) LazyList.decorate(new ArrayList(),
 				FactoryUtils.instantiateFactory(PracticaDTO.class));
 		listaValoresPractica = (List<ValorPractica>) LazyList.decorate(new ArrayList(),
-				FactoryUtils.instantiateFactory(ValorPractica.class));		
+				FactoryUtils.instantiateFactory(ValorPractica.class));
+		
+		listaValoresPracticaDTO = (List<ValorPracticaDTO>) LazyList.decorate(new ArrayList(),
+				FactoryUtils.instantiateFactory(ValorPracticaDTO.class));
 	}
 
 	public EstudioDTO getEstudioDTO() {
@@ -50,6 +55,15 @@ public class EstudioForm extends ActionForm {
 		this.listaValoresPractica = listaValoresPractica;
 	}
 
+	public List<ValorPracticaDTO> getListaValoresPracticaDTO() {
+		return listaValoresPracticaDTO;
+	}
+
+	public void setListaValoresPracticaDTO(
+			List<ValorPracticaDTO> listaValoresPracticaDTO) {
+		this.listaValoresPracticaDTO = listaValoresPracticaDTO;
+	}
+
 	public void normalizarListaPracticas() {
 
 		List<PracticaDTO> listaEliminar = new ArrayList<PracticaDTO>();
@@ -59,5 +73,16 @@ public class EstudioForm extends ActionForm {
 			}
 		}
 		listaPracticas.removeAll(listaEliminar);
+	}
+	
+	public void normalizarListaValoresPracticaDTO() {
+
+		List<ValorPracticaDTO> listaEliminarDTO = new ArrayList<ValorPracticaDTO>();
+		for (ValorPracticaDTO valorPracticaDTO : listaValoresPracticaDTO) {
+			if (valorPracticaDTO != null && valorPracticaDTO.getId() == 0) {
+				listaEliminarDTO.add(valorPracticaDTO);
+			}
+		}
+		listaValoresPracticaDTO.removeAll(listaEliminarDTO);
 	}	
 }
