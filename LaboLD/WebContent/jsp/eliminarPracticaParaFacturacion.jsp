@@ -115,7 +115,7 @@
 					onmouseover="javascript:pintarFila('grupo',<c:out value='${iGrupo.index}'></c:out>);"
 					onmouseout="javascript:despintarFila('grupo',<c:out value='${iGrupo.index}'></c:out>);">
 					
-					${grupo.nombre}														
+					${grupo.nombre}-(${grupo.unidadBioquimica})														
 				</td>							
 			</tr>
 			
@@ -147,7 +147,7 @@
 													value="${valorPractica.id}" <c:out value='${disabled}'></c:out>>										
 									</td>
 									<td align="left" width="95%">
-										${valorPractica.practica.nombre}
+										${valorPractica.practica.nombre}-(${valorPractica.unidadBioquimica})
 									</td>																						
 								</tr>	
 								<%i++; %>	
@@ -191,7 +191,7 @@
 														value="${prac.id}" <c:out value='${disabled}'></c:out>>																																																									
 												</td>														
 												<td align="left" width="95%">
-													${prac.practica.nombre}
+													${prac.practica.nombre}-(${prac.unidadBioquimica})
 												</td>																												
 											</tr>
 											<%i++; %>						
