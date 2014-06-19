@@ -23,6 +23,8 @@ public class ValorPractica {
 
 	private Double unidadBioquimica;	
 	
+	private boolean cubreOS;
+	
 	@ManyToOne()
 	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "practica_fk")	
@@ -84,6 +86,14 @@ public class ValorPractica {
 
 	public void setUnidadBioquimica(Double unidadBioquimica) {
 		this.unidadBioquimica = unidadBioquimica;
+	}
+
+	public boolean isCubreOS() {
+		return cubreOS;
+	}
+
+	public void setCubreOS(boolean cubreOS) {
+		this.cubreOS = cubreOS;
 	}
 	
 }

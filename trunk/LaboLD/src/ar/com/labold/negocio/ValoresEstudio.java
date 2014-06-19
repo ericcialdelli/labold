@@ -25,7 +25,7 @@ public class ValoresEstudio {
 	@Column(nullable = false)
 	private String nombre;	
 	
-	private Double unidadBioquimica;
+	private Double unidadBioquimica;	
 	
 	@ManyToOne()
 	@Cascade(value = CascadeType.SAVE_UPDATE)

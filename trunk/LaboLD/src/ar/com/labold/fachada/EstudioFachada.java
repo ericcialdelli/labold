@@ -64,6 +64,11 @@ public class EstudioFachada {
 		
 		return estudioDAO.getEstudio(idEstudio);
 	}	
+
+	public Estudio getEstudioPorNroProtocolo(Long nroProtocolo){
+		
+		return estudioDAO.getEstudioPorNroProtocolo(nroProtocolo);
+	}		
 	
 	public void modificacionEstudio(EstudioDTO estudioDTO){
 		
@@ -88,11 +93,29 @@ public class EstudioFachada {
 	public void eliminarPracticasParaFacturacion(EstudioDTO estudioDTO, List<ValorPracticaDTO> listaValoresPracticaDTO){
 		
 		Estudio estudio = estudioDAO.getEstudio(estudioDTO.getId());
+		double unidadesFacturacion = estudio.getUnidadesFacturacionTotal();
 		
 		for (ValorPracticaDTO valorPracticaDTO : listaValoresPracticaDTO) {
 
 			ValorPractica valorPractica = estudioDAO.getValorPractica(valorPracticaDTO.getId());
-			valorPractica.setUnidadBioquimica(0.0);	
+			unidadesFacturacion = unidadesFacturacion - valorPractica.getUnidadBioquimica(); 
+			//valorPractica.setUnidadBioquimica(0.0);
+			valorPractica.setCubreOS(false);
 		}
+		estudio.setUnidadesFacturacionTotal(unidadesFacturacion);//Ver bien si esto cierra//
 	}
+
+	public void restablecerPracticasParaFacturacion(EstudioDTO estudioDTO, List<ValorPracticaDTO> listaValoresPracticaDTO){
+		
+		Estudio estudio = estudioDAO.getEstudio(estudioDTO.getId());
+		double unidadesFacturacion = estudio.getUnidadesFacturacionTotal();
+		
+		for (ValorPracticaDTO valorPracticaDTO : listaValoresPracticaDTO) {
+
+			ValorPractica valorPractica = estudioDAO.getValorPractica(valorPracticaDTO.getId());
+			unidadesFacturacion = unidadesFacturacion + valorPractica.getUnidadBioquimica(); 
+			valorPractica.setCubreOS(true);
+		}
+		estudio.setUnidadesFacturacionTotal(unidadesFacturacion);//Ver bien si esto cierra//
+	}		
 }

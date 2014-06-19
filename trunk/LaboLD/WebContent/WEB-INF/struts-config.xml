@@ -131,10 +131,12 @@
 			<forward name="exitoRecuperarEstudioParaModificacion" path=".modificarEstudio" />
 			<forward name="exitoRecuperarEstudioParaConsulta" path=".consultaEstudio" />
 			<forward name="exitoRecuperarEstudioParaCompletar" path=".completarEstudio" />
-			<forward name="exitoRecuperarEstudioEliminarPracticasParaFacturacion" path=".eliminarPracticaParaFacturacion" />			
+			<forward name="exitoRecuperarEstudioEliminarPracticasParaFacturacion" path=".eliminarPracticaParaFacturacion" />
+			<forward name="exitoRecuperarEstudioRestablecerPracticasParaFacturacion" path=".restablecerPracticaParaFacturacion" />					
 			<forward name="exitoModificacionEstudio" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioParaModificacion" />
 			<forward name="exitoCompletarEstudio" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioParaCompletar" />
 			<forward name="exitoEliminarPracticasParaFacturacion" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioEliminarPracticasParaFacturacion" />
+			<forward name="exitoRestablecerPracticasParaFacturacion" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioRestablecerPracticasParaFacturacion" />			
 												
 		</action>				
 		<!-- FIN ESTUDIO -->

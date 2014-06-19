@@ -255,6 +255,7 @@ public abstract class ProviderDominio {
 			valorPractica.setPractica(practica);
 			valorPractica.setValor(null);										
 			valorPractica.setUnidadBioquimica(practica.getUnidadBioquimica());
+			valorPractica.setCubreOS(true);
 			
 			if(practica.getSubItemPractica() != null ){
 				

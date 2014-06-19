@@ -44,6 +44,14 @@ public class EstudioDAO extends HibernateDaoSupport {
 		return (Estudio)getHibernateTemplate().get(Estudio.class,idEstudio);
 	}
 	
+	public Estudio getEstudioPorNroProtocolo(Long nroProtocolo){
+		
+		Criteria criteria = getSession().createCriteria(Estudio.class);
+		criteria.add(Restrictions.eq("numero", nroProtocolo));
+		
+		return (Estudio)criteria.uniqueResult();
+	}
+	
 	public long getProximoNroEstudio(){
 		
 		Criteria criteria = getSession().createCriteria(Estudio.class);
