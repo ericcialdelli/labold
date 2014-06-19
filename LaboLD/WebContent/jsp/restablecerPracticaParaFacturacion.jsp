@@ -19,7 +19,7 @@
 
 	function volver(){
 
-		parent.location=contextRoot() + "/estudio.do?metodo=cargarRecuperarEstudios&forward=recuperarEstudioEliminarPracticasParaFacturacion";
+		parent.location=contextRoot() + "/estudio.do?metodo=cargarRecuperarEstudios&forward=recuperarEstudioRestablecerPracticasParaFacturacion";
 	}	
 
 	function expandirGrupo(idGrupo){
@@ -53,12 +53,12 @@
 </script>
 
 <html:form action="estudio" styleId="estudioFormId">
-	<html:hidden property="metodo" value="eliminarPracticasParaFacturacion"/>
+	<html:hidden property="metodo" value="restablecerPracticasParaFacturacion"/>
 	<input type="hidden" value="${estudio.id}" id="idEstudio" name="estudioDTO.id"/>
 	
 	<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2" cellspacing="0">
 		<tr>
-			<td colspan="4"  class="azulAjustado" >Eliminar Practicas de Estudio para Facturacion</td>
+			<td colspan="4"  class="azulAjustado" >Restablecer Practicas de Estudio para Facturacion</td>
 		</tr>
 		<tr>
 			<td height="20" colspan="4"></td>
@@ -128,11 +128,10 @@
 							
 								<c:choose>
 									<c:when test="${!valorPractica.cubreOS}">
-										<c:set var="disabled" value="disabled='disabled'"></c:set>
-										
+										<c:set var="disabled" value=""></c:set>																				
 									</c:when>
 									<c:otherwise>
-										<c:set var="disabled" value=""></c:set>
+										<c:set var="disabled" value="disabled='disabled'"></c:set>										
 									</c:otherwise>	
 								</c:choose>								
 							
@@ -174,10 +173,10 @@
 										
 											<c:choose>
 												<c:when test="${!prac.cubreOS}">
-													<c:set var="disabled" value="disabled='disabled'"></c:set>
+													<c:set var="disabled" value=""></c:set>
 												</c:when>
 												<c:otherwise>
-													<c:set var="disabled" value=""></c:set>
+													<c:set var="disabled" value="disabled='disabled'"></c:set>
 												</c:otherwise>	
 											</c:choose>											
 																					

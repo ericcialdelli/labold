@@ -55,7 +55,7 @@
 							<fmt:formatDate	value='${estudio.fecha}' pattern='dd/MM/yyyy' />
 						</td>
 						<td>
-							<a href="javascript:recuperarEstudio(${estudio.id});">
+							<a href="javascript:recuperarEstudio(${estudio.numero});">
 								Seleccionar
 							</a>
 						</td>

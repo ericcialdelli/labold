@@ -8,6 +8,8 @@ public class ValorPracticaDTO {
 
 	private Double unidadBioquimica;	
 	
+	private boolean cubreOS;
+	
 	private PracticaDTO practicaDTO;	
 
 	private ValoresEstudioDTO valoresEstudioDTO;
@@ -68,6 +70,14 @@ public class ValorPracticaDTO {
 	public void setValorSubItemPracticaDTO(
 			ValorSubItemPracticaDTO valorSubItemPracticaDTO) {
 		this.valorSubItemPracticaDTO = valorSubItemPracticaDTO;
+	}
+
+	public boolean isCubreOS() {
+		return cubreOS;
+	}
+
+	public void setCubreOS(boolean cubreOS) {
+		this.cubreOS = cubreOS;
 	}
 	
 }

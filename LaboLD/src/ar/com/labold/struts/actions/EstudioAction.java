@@ -109,7 +109,11 @@ public class EstudioAction extends ValidadorAction {
 					if(forward.equals("recuperarEstudioParaCompletar")){
 						titulo="Completar Estudios";
 					}else{
-						titulo="Eliminar Practicas de Estudio para Facturacion";
+						if(forward.equals("recuperarEstudioEliminarPracticasParaFacturacion")){
+							titulo="Eliminar Practicas de Estudio para Facturacion";
+						}else{
+							titulo="Restablecer Practicas de Estudio para Facturacion";
+						}	
 					}										
 				}
 			}
@@ -165,8 +169,8 @@ public class EstudioAction extends ValidadorAction {
 			PacienteFachada pacienteFachada = (PacienteFachada) ctx.getBean("pacienteFachada");
 			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
 			
-			String idEstudio = request.getParameter("id");			
-			Estudio estudio = estudioFachada.getEstudio(Long.valueOf(idEstudio));
+			String nroProtocolo = request.getParameter("nroProtocolo");			
+			Estudio estudio = estudioFachada.getEstudioPorNroProtocolo(Long.valueOf(nroProtocolo));
 
 			request.setAttribute("pacientes", pacienteFachada.getPacientes());			
 			request.setAttribute("estudio", estudio);
@@ -191,8 +195,8 @@ public class EstudioAction extends ValidadorAction {
 			WebApplicationContext ctx = getWebApplicationContext();
 			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
 			
-			String idEstudio = request.getParameter("id");			
-			Estudio estudio = estudioFachada.getEstudio(Long.valueOf(idEstudio));
+			String nroProtocolo = request.getParameter("nroProtocolo");			
+			Estudio estudio = estudioFachada.getEstudioPorNroProtocolo(Long.valueOf(nroProtocolo));
 			
 			request.setAttribute("estudio", estudio);
 			
@@ -216,8 +220,8 @@ public class EstudioAction extends ValidadorAction {
 			WebApplicationContext ctx = getWebApplicationContext();
 			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
 			
-			String idEstudio = request.getParameter("id");			
-			Estudio estudio = estudioFachada.getEstudio(Long.valueOf(idEstudio));
+			String nroProtocolo = request.getParameter("nroProtocolo");			
+			Estudio estudio = estudioFachada.getEstudioPorNroProtocolo(Long.valueOf(nroProtocolo));
 			
 			request.setAttribute("estudio", estudio);
 			
@@ -241,8 +245,8 @@ public class EstudioAction extends ValidadorAction {
 			WebApplicationContext ctx = getWebApplicationContext();
 			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
 			
-			String idEstudio = request.getParameter("id");			
-			Estudio estudio = estudioFachada.getEstudio(Long.valueOf(idEstudio));
+			String nroProtocolo = request.getParameter("nroProtocolo");			
+			Estudio estudio = estudioFachada.getEstudioPorNroProtocolo(Long.valueOf(nroProtocolo));
 			
 			request.setAttribute("estudio", estudio);
 			
@@ -254,6 +258,32 @@ public class EstudioAction extends ValidadorAction {
 
 		return mapping.findForward(strForward);
 	}		
+
+	@SuppressWarnings("unchecked")
+	public ActionForward recuperarEstudioRestablecerPracticasParaFacturacion(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoRecuperarEstudioRestablecerPracticasParaFacturacion";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			
+			String nroProtocolo = request.getParameter("nroProtocolo");			
+			Estudio estudio = estudioFachada.getEstudioPorNroProtocolo(Long.valueOf(nroProtocolo));
+			
+			request.setAttribute("estudio", estudio);
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}	
+	
 	
 	@SuppressWarnings("unchecked")
 	public ActionForward modificacionEstudio(ActionMapping mapping,
@@ -333,7 +363,7 @@ public class EstudioAction extends ValidadorAction {
 			
 			estudioFachada.eliminarPracticasParaFacturacion(estudioForm.getEstudioDTO(),estudioForm.getListaValoresPracticaDTO());
 			
-			request.setAttribute("exitoGrabado", Constantes.EXITO_COMPLETAR_ESTUDIO);
+			request.setAttribute("exitoGrabado", Constantes.EXITO_ELIMINAR_PRACTICA_PARA_FACTURACION);
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
@@ -343,7 +373,33 @@ public class EstudioAction extends ValidadorAction {
 
 		return mapping.findForward(strForward);
 	}	
-	
+
+	@SuppressWarnings("unchecked")
+	public ActionForward restablecerPracticasParaFacturacion(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoRestablecerPracticasParaFacturacion";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			
+			EstudioForm estudioForm = (EstudioForm)form;
+			estudioForm.normalizarListaValoresPracticaDTO();
+			
+			estudioFachada.restablecerPracticasParaFacturacion(estudioForm.getEstudioDTO(),estudioForm.getListaValoresPracticaDTO());
+			
+			request.setAttribute("exitoGrabado", Constantes.EXITO_RESTABLECER_PRACTICA_PARA_FACTURACION);
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}		
 	
 	public boolean validarEstudioForm(StringBuffer error, ActionForm form) {
 		

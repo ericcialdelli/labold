@@ -91,6 +91,7 @@ public class Constantes {
 	
 	//ESTUDIO
 	public static final String EXITO_ALTA_ESTUDIO = "Se ha dado de alta el Estudio con ";
+	
 	public static final String EXITO_ALTA_ESTUDIO2 = " unidades de facturación";
 
 	public static final String EXITO_MODIFICACION_ESTUDIO = "El Estudio se ha modificado con exito";
@@ -98,6 +99,12 @@ public class Constantes {
 	public static final String EXITO_COMPLETAR_ESTUDIO = "El Estudio se ha completado con exito";
 	//FIN ESTUDIO		
 
+	//FACTURACION
+	public static final String EXITO_ELIMINAR_PRACTICA_PARA_FACTURACION = "Las Practicas se han eliminado con exito de la Facturacion";
+	
+	public static final String EXITO_RESTABLECER_PRACTICA_PARA_FACTURACION = "Las Practicas se han restablecido con exito de la Facturacion";
+	//FIN FACTURACION
+	
 	// REPORTES
 	public static final String REPORTE_ESTUDIOS_A_REALIZAR_ENTRE_FECHAS = "reporteEstudiosARealizarEntreFechas";
 	

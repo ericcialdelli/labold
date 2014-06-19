@@ -154,7 +154,12 @@
 	<definition name=".eliminarPracticaParaFacturacion" extends=".base">
 		<put name="title" value="LaboLD" />
 		<put name="body" value="/jsp/eliminarPracticaParaFacturacion.jsp" />
-	</definition>	
+	</definition>
+
+	<definition name=".restablecerPracticaParaFacturacion" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/restablecerPracticaParaFacturacion.jsp" />
+	</definition>		
 	<!-- FIN FACTURACION -->		
 	
 	<definition name=".error" extends=".base">

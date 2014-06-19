@@ -32,19 +32,19 @@
 		}		
 	}
 
-	function recuperarEstudio(id){
+	function recuperarEstudio(nroProtocolo){
 		//var urlSeleccionGuia = $('#paramUrlSeleccionGuia').val();
 		//parent.location=contextRoot() + "/guia.do?metodo="+urlSeleccionGuia+"&id="+id;
 		
 		var forward = $("#forward").val();
-		parent.location=contextRoot() + "/estudio.do?metodo="+forward+"&id="+id;
+		parent.location=contextRoot() + "/estudio.do?metodo="+forward+"&nroProtocolo="+nroProtocolo;
 	}
 
 	function submitir(){
 
 		var nroProtocolo = $("#nroProtocolo").val();
 		var forward = $("#forward").val();
-		parent.location=contextRoot() + "/estudio.do?metodo="+forward+"&id="+nroProtocolo;
+		parent.location=contextRoot() + "/estudio.do?metodo="+forward+"&nroProtocolo="+nroProtocolo;
 	}
 	
 </script>
