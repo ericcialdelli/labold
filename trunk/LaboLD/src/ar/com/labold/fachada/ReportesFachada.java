@@ -55,4 +55,16 @@ public class ReportesFachada {
 		return reportesDAO.generarReporte(
 				Constantes.REPORTES_ESTUDIOS, parameters);
 	}	
+	
+	public byte[] generarReporteFacturacionEntreFechas(String path,
+			String fechaDesde, String fechaHasta) throws Exception {
+
+		Map parameters = new HashMap();
+		parameters.put("PATH_SUB_REPORTES", path);
+		parameters.put("fechaDesde", Fecha.stringDDMMAAAAToUtilDate(fechaDesde));
+		parameters.put("fechaHasta", Fecha.stringDDMMAAAAToUtilDate(fechaHasta));
+
+		return reportesDAO.generarReporte(
+				Constantes.REPORTE_FACTURACION_ENTRE_FECHAS, parameters);
+	}	
 }
