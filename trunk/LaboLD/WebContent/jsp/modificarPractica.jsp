@@ -89,7 +89,7 @@
 		<tr>
 			<td class="botoneralNegritaRight" width="40%">Nombre</td>
 			<td align="left">
-				<html:text property="practicaDTO.nombre" value="${practica.nombre}" styleClass="botonerab" styleId="nombre"/>
+				<html:text property="practicaDTO.nombre" value="${practica.nombre}" styleClass="botonerab" styleId="nombre" size="40"/>
 			</td>
 		</tr>
 		<tr>
