@@ -35,6 +35,8 @@ public class Practica {
 	
 	private String mayorMenor;
 	
+	private String valorRefLibre;
+	
 	private double unidadBioquimica;
 	
 	private String codigoFaba;
@@ -171,6 +173,14 @@ public class Practica {
 
 	public void setCodigoFaba(String codigoFaba) {
 		this.codigoFaba = codigoFaba;
+	}
+
+	public String getValorRefLibre() {
+		return valorRefLibre;
+	}
+
+	public void setValorRefLibre(String valorRefLibre) {
+		this.valorRefLibre = valorRefLibre;
 	}
 
 }
