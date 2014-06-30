@@ -368,6 +368,10 @@ public class PracticaAction extends ValidadorAction {
 				
 				b4 = Validator.requerido(pacticaForm.getPracticaDTO().getValorReferencia(), "Valor Referencia", error);
 			}
+			if(pacticaForm.getCheckValor().equals("Libre")){
+				
+				b4 = Validator.requerido(pacticaForm.getPracticaDTO().getValorRefLibre(), "Valor Referencia Libre", error);
+			}						
 			
 			return !existe && b1 && b2 && b3 && b4 && b5;
 

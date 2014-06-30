@@ -18,6 +18,8 @@ public class PracticaDTO {
 	
 	private String mayorMenor;
 	
+	private String valorRefLibre;
+	
 	private double unidadBioquimica;
 	
 	private String codigoFaba;
@@ -128,11 +130,20 @@ public class PracticaDTO {
 		this.codigoFaba = codigoFaba;
 	}
 
+	public String getValorRefLibre() {
+		return valorRefLibre;
+	}
+
+	public void setValorRefLibre(String valorRefLibre) {
+		this.valorRefLibre = valorRefLibre;
+	}
+
 	public void normalizarValores(){
 		
 		this.setValorNormalDesde((this.valorNormalDesde.equals(""))?null:this.valorNormalDesde);
 		this.setValorNormalHasta((this.valorNormalHasta.equals(""))?null:this.valorNormalHasta);
 		this.setValorReferencia((this.valorReferencia.equals(""))?null:this.valorReferencia);
 		this.setMayorMenor((this.valorReferencia==null)?null:this.mayorMenor);
+		this.setValorRefLibre((this.valorRefLibre.equals(""))?null:this.valorRefLibre);
 	}	
 }

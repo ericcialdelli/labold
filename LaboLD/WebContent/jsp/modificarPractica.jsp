@@ -33,14 +33,18 @@
 		if(valor=="DH"){
 			$('#trValorDesdeHasta').show();
 			$('#trValorReferencia').hide();
-
-			$('.refe').val(null);			
+			$('#trTextArea').hide();
+			
+			$('.refe').val(null);
+			$('#idTextArea').val(null);			
 		}
 		if(valor=="Ref"){
 			$('#trValorDesdeHasta').hide();
 			$('#trValorReferencia').show();
-
+			$('#trTextArea').hide();
+			
 			$('.DH').val(null);
+			$('#idTextArea').val(null);
 			$('#idMayorMenor').val(">");
 			$('#radioMayor').attr('checked','checked');
 			$('#radioMenor').removeAttr('checked');
@@ -48,10 +52,20 @@
 		if(valor=="SV"){
 			$('#trValorDesdeHasta').hide();
 			$('#trValorReferencia').hide();
+			$('#trTextArea').hide();
 			
 			$('.DH').val(null);
 			$('.refe').val(null);
-		}				
+			$('#idTextArea').val(null);
+		}	
+		if(valor=="Libre"){
+			$('#trValorDesdeHasta').hide();
+			$('#trValorReferencia').hide();
+			$('#trTextArea').show();			
+			
+			$('.DH').val(null);
+			$('.refe').val(null);
+		}					
 	}
 
 	function cambiarMayorMenor(){
@@ -124,6 +138,7 @@
 						<input type="radio" name="valores" onchange="cambiarValores();" value="SV">Sin Valor
 						<input type="radio" name="valores" onchange="cambiarValores();" value="DH">Valores Desde/Hasta
 						<input type="radio" name="valores" onchange="cambiarValores();" value="Ref" checked="checked">Valor Referencia
+						<input type="radio" name="valores" onchange="cambiarValores();" value="Libre">Valor Referencia Libre
 						<script type="text/javascript">
 							var tr = "trValorReferencia"
 						</script>
@@ -132,14 +147,25 @@
 						<input type="radio" name="valores" onchange="cambiarValores();" value="SV">Sin Valor
 						<input type="radio" name="valores" onchange="cambiarValores();" value="DH" checked="checked">Valores Desde/Hasta
 						<input type="radio" name="valores" onchange="cambiarValores();" value="Ref">Valor Referencia
+						<input type="radio" name="valores" onchange="cambiarValores();" value="Libre">Valor Referencia Libre
 						<script type="text/javascript">
 							var tr = "trValorDesdeHasta";
 						</script>						
 					</c:when>
+					<c:when test="${practica.valorRefLibre != null}">
+						<input type="radio" name="valores" onchange="cambiarValores();" value="SV">Sin Valor
+						<input type="radio" name="valores" onchange="cambiarValores();" value="DH">Valores Desde/Hasta
+						<input type="radio" name="valores" onchange="cambiarValores();" value="Ref">Valor Referencia
+						<input type="radio" name="valores" onchange="cambiarValores();" value="Libre" checked="checked">Valor Referencia Libre
+						<script type="text/javascript">
+							var tr = "trTextArea";
+						</script>						
+					</c:when>					
 					<c:otherwise>
 						<input type="radio" name="valores" onchange="cambiarValores();" value="SV" checked="checked">Sin Valor
 						<input type="radio" name="valores" onchange="cambiarValores();" value="DH">Valores Desde/Hasta
 						<input type="radio" name="valores" onchange="cambiarValores();" value="Ref">Valor Referencia
+						<input type="radio" name="valores" onchange="cambiarValores();" value="Libre">Valor Referencia Libre
 						<script type="text/javascript">
 							var tr = "";
 						</script>					
@@ -202,6 +228,18 @@
 				</table>			
 			</td>
 		</tr>		
+
+		<tr style="display: none" id="trTextArea">
+			<td colspan="2">
+				<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2">										
+					<tr>
+						<td align="center">
+							<textarea id="idTextArea" rows="5" cols="60" name="practicaDTO.valorRefLibre">${practica.valorRefLibre}</textarea>
+						</td>
+					</tr>		
+				</table>			
+			</td>
+		</tr>
 									
 		<tr>
 			<td height="20" colspan="2"></td>
