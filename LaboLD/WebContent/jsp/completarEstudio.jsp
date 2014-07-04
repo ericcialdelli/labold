@@ -191,7 +191,11 @@
 												Valor de Referencia: ${valorPractica.practica.valorNormalDesde} a ${valorPractica.practica.valorNormalHasta} ${valorPractica.practica.unidad}
 												<input type="hidden" value="${valorPractica.practica.valorNormalDesde}" id="valorNormalDesde<%=i%>">
 												<input type="hidden" value="${valorPractica.practica.valorNormalHasta}" id="valorNormalHasta<%=i%>">		 	
-											</c:when>											
+											</c:when>
+											<c:when test="${valorPractica.practica.valorRefLibre != null}">
+												<textarea rows="2" cols="50" readonly="readonly">${valorPractica.practica.valorRefLibre}</textarea>
+														 	
+											</c:when>																						
 										</c:choose>										
 									</td>																						
 								</tr>	
