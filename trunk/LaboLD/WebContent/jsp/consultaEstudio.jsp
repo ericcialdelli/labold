@@ -139,7 +139,10 @@ function generarReporte(){
 											</c:when>
 											<c:when test="${valorPractica.practica.valorNormalDesde != null}">
 												Valor de Referencia: ${valorPractica.practica.valorNormalDesde} a ${valorPractica.practica.valorNormalHasta} ${valorPractica.practica.unidad}		 	
-											</c:when>											
+											</c:when>	
+											<c:when test="${valorPractica.practica.valorRefLibre != null}">
+												${valorPractica.practica.valorRefLibreConBr}		 	
+											</c:when>																					
 										</c:choose>																				
 									</td>																				
 								</tr>	
@@ -183,7 +186,10 @@ function generarReporte(){
 														</c:when>
 														<c:when test="${prac.practica.valorNormalDesde != null}">
 															Valor de Referencia: ${prac.practica.valorNormalDesde} a ${prac.practica.valorNormalHasta} ${prac.practica.unidad}		 	
-														</c:when>											
+														</c:when>	
+														<c:when test="${prac.practica.valorRefLibre != null}">
+															${valorPractica.practica.valorRefLibreConBr}		 	
+														</c:when>																								
 													</c:choose>																					
 												</td>																												
 											</tr>

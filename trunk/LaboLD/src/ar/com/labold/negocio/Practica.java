@@ -176,11 +176,18 @@ public class Practica {
 	}
 
 	public String getValorRefLibre() {
-		return valorRefLibre;
+		return this.valorRefLibre;
 	}
 
 	public void setValorRefLibre(String valorRefLibre) {
 		this.valorRefLibre = valorRefLibre;
 	}
 
+	public String getValorRefLibreConBr() {
+		
+		if(valorRefLibre!=null){
+			return  valorRefLibre.replaceAll("\r\n", "<br>");			
+		}
+		return valorRefLibre;
+	}	
 }
