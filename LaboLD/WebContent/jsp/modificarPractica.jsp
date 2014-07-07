@@ -21,8 +21,8 @@
 	}
 
 	function volver(){
-
-		parent.location=contextRoot() + "/practica.do?metodo=cargarModificacionPractica";
+		var idGrupo = $("#idGrupo").val();
+		parent.location=contextRoot() + "/practica.do?metodo=cargarModificacionPractica&idGrupo="+idGrupo;
 	}	
 
 	function cambiarValores(){
@@ -82,7 +82,7 @@
 <html:form action="practica" styleId="practicaFormId">
 	<html:hidden property="metodo" value="modificacionPractica"/>
 	<html:hidden property="practicaDTO.id" value="${practica.id}"/>
-	<html:hidden property="practicaDTO.grupoPracticaDTO.id" value="${practica.grupoPractica.id}"/>
+	<html:hidden styleId="idGrupo" property="practicaDTO.grupoPracticaDTO.id" value="${practica.grupoPractica.id}"/>
 	
 	<c:choose>
 		<c:when test="${practica.subItemPractica != null}">

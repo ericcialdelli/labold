@@ -51,6 +51,21 @@
 			$('#bloquePracticas').html("");			
 		}		
 	}
+
+	function cargarPracticasVolver(idGrupo){
+				
+		$('#bloquePracticas').html("");
+
+		if(idGrupo != "" && idGrupo != "-1"){
+			$('#bloquePracticas').load("../../practica.do?metodo=recuperarPracticasPorGrupo&idGrupo="+idGrupo);
+			$('#bloquePracticas').hide();
+			$('#bloquePracticas').fadeIn(600);
+				
+		}else{
+			$('#bloquePracticas').hide(600);
+			$('#bloquePracticas').html("");			
+		}		
+	}
 	
 </script>
 
@@ -94,3 +109,9 @@
 	</tr>	
 	
 </table>
+
+<script type="text/javascript">
+	var idGrupoParam = ${idGrupo};
+	$("#selectGrupoPractica").val(idGrupoParam);
+	cargarPracticas();
+</script>
