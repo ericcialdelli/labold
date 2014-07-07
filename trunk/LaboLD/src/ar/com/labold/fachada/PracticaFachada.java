@@ -55,11 +55,13 @@ public class PracticaFachada {
 		practicaDAO.altaSubItemPractica(ProviderDominio.getSubItemPractica(subItemPracticaDTO,grupoPractica));
 	}		
 	
-	public void modificacionPractica(PracticaDTO practicaDTO) throws NegocioException{
+	public long modificacionPractica(PracticaDTO practicaDTO) throws NegocioException{
 		
 		Practica practica = practicaDAO.getPractica(practicaDTO.getId());
 		
 		practicaDAO.altaPractica(ProviderDominio.getPractica(practica,practicaDTO));
+		
+		return practica.getGrupoPractica().getId();
 	}	
 
 	public void modificacionGrupoPractica(GrupoPracticaDTO grupopracticaDTO) throws NegocioException{

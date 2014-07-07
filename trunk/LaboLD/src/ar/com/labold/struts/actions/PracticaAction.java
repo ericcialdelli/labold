@@ -83,7 +83,12 @@ public class PracticaAction extends ValidadorAction {
 												ctx.getBean("practicaFachada");			
 			
 			List<GrupoPractica> listaGrupos = practicaFachada.getGruposPractica(); 
-			request.setAttribute("listaGrupos", listaGrupos);			
+			request.setAttribute("listaGrupos", listaGrupos);
+			
+			String idGrupo = request.getParameter("idGrupo");
+			if(idGrupo!=null){
+				request.setAttribute("idGrupo",new Long(idGrupo));	
+			}
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
@@ -163,8 +168,9 @@ public class PracticaAction extends ValidadorAction {
 				throw new Exception("Error de Seguridad");
 			}			
 			
-			practicaFachada.modificacionPractica(pacticaForm.getPracticaDTO());
-			request.setAttribute("exitoGrabado", Constantes.EXITO_MODIFICACION_PRACTICA);						
+			long idGrupo = practicaFachada.modificacionPractica(pacticaForm.getPracticaDTO());
+			request.setAttribute("exitoGrabado", Constantes.EXITO_MODIFICACION_PRACTICA);
+			request.setAttribute("idGrupo", idGrupo);
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
