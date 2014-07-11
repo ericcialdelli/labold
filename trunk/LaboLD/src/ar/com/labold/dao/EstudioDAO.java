@@ -9,6 +9,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import ar.com.labold.negocio.Estudio;
 import ar.com.labold.negocio.ValorPractica;
+import ar.com.labold.negocio.ValorUnidadFacturacion;
 import ar.com.labold.negocio.ValoresEstudio;
 
 public class EstudioDAO extends HibernateDaoSupport {
@@ -75,5 +76,10 @@ public class EstudioDAO extends HibernateDaoSupport {
 	public ValoresEstudio getValorEstudio(Long idValorEstudio){
 		
 		return (ValoresEstudio)getHibernateTemplate().get(ValoresEstudio.class,idValorEstudio);
+	}
+	
+	public ValorUnidadFacturacion recuperarValorUnidadFacturacion(){
+		
+		return (ValorUnidadFacturacion)getHibernateTemplate().get(ValorUnidadFacturacion.class,1L);		
 	}	
 }
