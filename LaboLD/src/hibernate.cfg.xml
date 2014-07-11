@@ -34,7 +34,7 @@
 		<mapping class='ar.com.labold.negocio.ValoresEstudio'/>
 		<mapping class='ar.com.labold.negocio.SubItemPractica'/>	
 		<mapping class='ar.com.labold.negocio.ValorSubItemPractica'/>
-		
+		<mapping class='ar.com.labold.negocio.ValorUnidadFacturacion'/>		
 	
 	</session-factory>
 </hibernate-configuration>
