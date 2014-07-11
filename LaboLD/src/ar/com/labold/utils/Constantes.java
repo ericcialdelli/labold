@@ -103,6 +103,8 @@ public class Constantes {
 	public static final String EXITO_ELIMINAR_PRACTICA_PARA_FACTURACION = "Las Practicas se han eliminado con exito de la Facturacion";
 	
 	public static final String EXITO_RESTABLECER_PRACTICA_PARA_FACTURACION = "Las Practicas se han restablecido con exito de la Facturacion";
+	
+	public static final String EXITO_MODIFICAR_VALOR_UNIDAD_FACTURACION = "Se ha modificado con exito el Valor de Unidad de Facturacion";
 	//FIN FACTURACION
 	
 	// REPORTES

@@ -19,6 +19,7 @@ import ar.com.labold.negocio.GrupoPractica;
 import ar.com.labold.negocio.Paciente;
 import ar.com.labold.struts.actions.forms.EstudioForm;
 import ar.com.labold.struts.actions.forms.PacienteForm;
+import ar.com.labold.struts.actions.forms.ValorUnidadFacturacionForm;
 import ar.com.labold.struts.utils.Validator;
 import ar.com.labold.utils.Constantes;
 import ar.com.labold.utils.MyLogger;
@@ -401,6 +402,53 @@ public class EstudioAction extends ValidadorAction {
 		return mapping.findForward(strForward);
 	}		
 	
+	@SuppressWarnings("unchecked")
+	public ActionForward recuperarValorUnidadFacturacion(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoRecuperarValorUnidadFacturacion";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			
+			double valor = estudioFachada.recuperarValorUnidadFacturacion();			
+			request.setAttribute("valor", valor);
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}	
+
+	@SuppressWarnings("unchecked")
+	public ActionForward modificarValorUnidadFacturacion(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoModificarValorUnidadFacturacion";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			ValorUnidadFacturacionForm valorForm = (ValorUnidadFacturacionForm)form;
+			
+			estudioFachada.modificarValorUnidadFacturacion(valorForm.getValorUnidadFacturacion());			
+			request.setAttribute("exitoGrabado", Constantes.EXITO_MODIFICAR_VALOR_UNIDAD_FACTURACION);
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}		
+	
 	public boolean validarEstudioForm(StringBuffer error, ActionForm form) {
 		
 		try{	
@@ -428,5 +476,24 @@ public class EstudioAction extends ValidadorAction {
 			Validator.addErrorXML(error, "Error Inesperado");
 			return false;
 		}
-	}		
+	}
+
+	public boolean validarValorUnidadFacturacionForm(StringBuffer error, ActionForm form) {
+		
+		try{	
+			ValorUnidadFacturacionForm valorForm = (ValorUnidadFacturacionForm)form;
+			
+			boolean ok1 = true;
+			
+			ok1 = Validator.validarDoubleMayorQue(0, String.valueOf(valorForm.getValorUnidadFacturacion()), "Valor $", error);			
+
+			return ok1;
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			Validator.addErrorXML(error, "Error Inesperado");
+			return false;
+		}
+	}	
+	
 }

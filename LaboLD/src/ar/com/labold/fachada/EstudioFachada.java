@@ -15,6 +15,7 @@ import ar.com.labold.negocio.Estudio;
 import ar.com.labold.negocio.Paciente;
 import ar.com.labold.negocio.Practica;
 import ar.com.labold.negocio.ValorPractica;
+import ar.com.labold.negocio.ValorUnidadFacturacion;
 import ar.com.labold.negocio.ValoresEstudio;
 import ar.com.labold.providers.ProviderDominio;
 
@@ -117,5 +118,17 @@ public class EstudioFachada {
 			valorPractica.setCubreOS(true);
 		}
 		estudio.setUnidadesFacturacionTotal(unidadesFacturacion);//Ver bien si esto cierra//
-	}		
+	}
+	
+	public double recuperarValorUnidadFacturacion(){
+		
+		ValorUnidadFacturacion valor = estudioDAO.recuperarValorUnidadFacturacion();
+		return valor.getValorEnPesos();
+	}
+	
+	public void modificarValorUnidadFacturacion(double valor){
+		
+		ValorUnidadFacturacion valorUnidadFacturacion = estudioDAO.recuperarValorUnidadFacturacion();
+		valorUnidadFacturacion.setValorEnPesos(valor);
+	}	
 }

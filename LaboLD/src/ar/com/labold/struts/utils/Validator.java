@@ -200,13 +200,13 @@ public abstract class Validator {
 		try {
 			double entradaDouble = Double.parseDouble(entrada);
 			if (isNaN(entradaDouble) || entradaDouble <= numeroMinimo) {
-				addErrorXML(pError, label + " debe ser un nÃºmero mayor a "
+				addErrorXML(pError, label + " debe ser un número mayor a "
 						+ Integer.toString(numeroMinimo));
 				return false;
 			}
 		} catch (NumberFormatException e) {
 			addErrorXML(pError,
-					" debe ser un nÃºmero entero con decimales vÃ¡lido");
+					" debe ser un número entero con decimales válido");
 			return false;
 		}
 

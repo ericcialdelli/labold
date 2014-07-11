@@ -24,6 +24,9 @@
 		<form-bean name="grupoPracticaForm"
 			type="ar.com.labold.struts.actions.forms.GrupoPracticaForm">
 		</form-bean>		
+		<form-bean name="valorUnidadFacturacionForm"
+			type="ar.com.labold.struts.actions.forms.ValorUnidadFacturacionForm">
+		</form-bean>				
 														
 	</form-beans>
 
@@ -137,9 +140,16 @@
 			<forward name="exitoModificacionEstudio" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioParaModificacion" />
 			<forward name="exitoCompletarEstudio" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioParaCompletar" />
 			<forward name="exitoEliminarPracticasParaFacturacion" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioEliminarPracticasParaFacturacion" />
-			<forward name="exitoRestablecerPracticasParaFacturacion" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioRestablecerPracticasParaFacturacion" />			
-												
-		</action>				
+			<forward name="exitoRestablecerPracticasParaFacturacion" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioRestablecerPracticasParaFacturacion" />															
+		</action>
+		
+		<action path="/facturacion" type="ar.com.labold.struts.actions.EstudioAction"
+			parameter="metodo" name="valorUnidadFacturacionForm" scope="request">
+			
+			<forward name="exitoRecuperarValorUnidadFacturacion" path=".modificarValorUnidadFacturacion" />
+			<forward name="exitoModificarValorUnidadFacturacion" path="/facturacion.do?metodo=recuperarValorUnidadFacturacion" />			
+		</action>			
+						
 		<!-- FIN ESTUDIO -->
 
 		<!-- REPORTE -->

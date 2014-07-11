@@ -160,6 +160,11 @@
 		<put name="title" value="LaboLD" />
 		<put name="body" value="/jsp/restablecerPracticaParaFacturacion.jsp" />
 	</definition>		
+	
+	<definition name=".modificarValorUnidadFacturacion" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/modificarValorUnidadFacturacion.jsp" />
+	</definition>	
 	<!-- FIN FACTURACION -->		
 	
 	<definition name=".error" extends=".base">
