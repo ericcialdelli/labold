@@ -136,6 +136,11 @@
 		<put name="title" value="LaboLD" />
 		<put name="body" value="/jsp/completarEstudio.jsp" />
 	</definition>	
+
+	<definition name=".agregarPracticasAEstudio" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/agregarPracticasAEstudio.jsp" />
+	</definition>		
 	<!-- FIN ESTUDIO -->		
 
 	<!-- REPORTES -->

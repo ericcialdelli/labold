@@ -3,6 +3,7 @@ package ar.com.labold.providers;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -266,6 +267,7 @@ public abstract class ProviderDominio {
 				if(valorSubItemPractica == null){
 					valorSubItemPractica = new ValorSubItemPractica();
 					valorSubItemPractica.setNombre(practica.getSubItemPractica().getNombre());
+					valorSubItemPractica.setSubItemPractica(practica.getSubItemPractica());
 					mapValorSubItemPractica.put(idSubItemPractica, valorSubItemPractica);
 					valoresEstudio.getValorSubItemPractica().add(valorSubItemPractica);
 				}
@@ -308,6 +310,78 @@ public abstract class ProviderDominio {
 		
 		return estudio;
 	}	
+	
+	//Se usa en agregarPracticasAEstudio
+	public static Estudio getEstudio(Estudio estudio, List<Practica> listaPracticas){
+
+		Map<Long,ValoresEstudio> mapValoresEstudio = new HashMap<Long,ValoresEstudio>();
+		Map<Long,ValorSubItemPractica> mapValorSubItemPractica = new HashMap<Long,ValorSubItemPractica>();
+
+		//Armo los maps con los valoresEstudio y ValorSubItemPractica que tiene el Estudio.
+		for (ValoresEstudio ve : estudio.getValoresEstudio()) {
+			
+			mapValoresEstudio.put(ve.getGrupoPractica().getId(), ve);
+			
+			for (ValorSubItemPractica vsip : ve.getValorSubItemPractica()) {			
+				mapValorSubItemPractica.put(vsip.getSubItemPractica().getId(), vsip);
+			}			
+			//System.out.println(ve.getNombre()+": "+ve.cantidadPracticas()+" practicas");
+			//System.out.println("GRUPO: "+ve.getGrupoPractica().getNombre()+": "+ve.getGrupoPractica().cantidadPracticas()+" practicas");
+		}		
+		
+		//Recorro las practicas nuevas y las agrego al ValorEstudio o ValorSubItemPractica del Estudio.
+		ValoresEstudio ve;
+		for (Practica practica : listaPracticas) {
+			
+			ve = mapValoresEstudio.get(practica.getGrupoPractica().getId());
+			
+			if(ve == null){
+				ve = new ValoresEstudio();
+				ve.setNombre(practica.getGrupoPractica().getNombre());
+				ve.setGrupoPractica(practica.getGrupoPractica());
+				ve.setUnidadBioquimica(practica.getGrupoPractica().getUnidadBioquimica());
+				mapValoresEstudio.put(practica.getGrupoPractica().getId(), ve);
+			}			
+			
+			ValorPractica valorPractica = new ValorPractica();
+			valorPractica.setPractica(practica);
+			valorPractica.setValor(null);										
+			valorPractica.setUnidadBioquimica(practica.getUnidadBioquimica());
+			valorPractica.setCubreOS(true);						
+			
+			if(practica.getSubItemPractica()!=null){
+				ValorSubItemPractica vsip = mapValorSubItemPractica.get(practica.getSubItemPractica().getId());
+				if(vsip == null){
+					vsip = new ValorSubItemPractica();
+					vsip.setNombre(practica.getSubItemPractica().getNombre());
+					vsip.setSubItemPractica(practica.getSubItemPractica());
+					vsip.setValoresEstudio(ve);
+					mapValorSubItemPractica.put(practica.getSubItemPractica().getId(), vsip);
+					ve.getValorSubItemPractica().add(vsip);
+				}
+				
+				valorPractica.setValorSubItemPractica(vsip);
+				valorPractica.setValoresEstudio(null);				
+				
+				//Agregar la practica al vsip.				
+				vsip.getValoresPracticas().add(valorPractica);
+			}
+			else{				
+				//Agregar la practica al ve.
+				valorPractica.setValorSubItemPractica(null);
+				valorPractica.setValoresEstudio(ve);
+				ve.getValoresPracticas().add(valorPractica);
+			}
+			
+			if(ve.cantidadPracticas() == ve.getGrupoPractica().cantidadPracticas()){
+				System.out.println("El valorEstudio: "+ve.getNombre()+" tiene todas las practicas del grupo");
+				
+			}
+			
+		}
+		
+		return estudio;
+	}
 	
 	//Se usa en la modificacion del Estudio
 	public static Estudio getEstudio(Estudio estudio, EstudioDTO estudioDTO){

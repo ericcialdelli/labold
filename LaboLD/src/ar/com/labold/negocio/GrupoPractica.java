@@ -84,4 +84,8 @@ public class GrupoPractica {
 		this.codigoFaba = codigoFaba;
 	}
 
+	public int cantidadPracticas(){
+		
+		return	this.getPracticas().size();
+	}	
 }
