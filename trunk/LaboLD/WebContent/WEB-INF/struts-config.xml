@@ -140,7 +140,9 @@
 			<forward name="exitoModificacionEstudio" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioParaModificacion" />
 			<forward name="exitoCompletarEstudio" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioParaCompletar" />
 			<forward name="exitoEliminarPracticasParaFacturacion" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioEliminarPracticasParaFacturacion" />
-			<forward name="exitoRestablecerPracticasParaFacturacion" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioRestablecerPracticasParaFacturacion" />															
+			<forward name="exitoRestablecerPracticasParaFacturacion" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioRestablecerPracticasParaFacturacion" />
+			<forward name="exitoRecuperarEstudioAgregarPracticas" path=".agregarPracticasAEstudio" />
+			<forward name="exitoAgregarPracticasAEstudio" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioAgregarPracticas" />																			
 		</action>
 		
 		<action path="/facturacion" type="ar.com.labold.struts.actions.EstudioAction"

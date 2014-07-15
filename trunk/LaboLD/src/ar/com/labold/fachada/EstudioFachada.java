@@ -130,5 +130,21 @@ public class EstudioFachada {
 		
 		ValorUnidadFacturacion valorUnidadFacturacion = estudioDAO.recuperarValorUnidadFacturacion();
 		valorUnidadFacturacion.setValorEnPesos(valor);
-	}	
+	}
+	
+	public double agregarPracticasAEstudio(EstudioDTO estudioDTO, List<PracticaDTO> listaPracticasDTO){
+		
+		List<Practica> listaPracticas = new ArrayList<Practica>(); 
+		for (PracticaDTO practicaDTO : listaPracticasDTO) {
+			if(practicaDTO != null){
+				listaPracticas.add(practicaDAO.getPractica(practicaDTO.getId()));
+			}	
+		}		
+		Estudio estudio = estudioDAO.getEstudio(estudioDTO.getId());		
+		ProviderDominio.getEstudio(estudio,listaPracticas);
+		
+		//estudioDAO.altaEstudio(estudio);
+		
+		return estudio.getUnidadesFacturacionTotal();
+	}
 }

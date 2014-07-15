@@ -102,4 +102,16 @@ public class ValoresEstudio {
 		this.unidadBioquimica = unidadBioquimica;
 	}
 	
+	public int cantidadPracticas(){
+		
+		int cantPracticas = this.getValoresPracticas().size();
+		int cantPracticasEnSubItem = 0;
+		
+		for (ValorSubItemPractica vsip : this.getValorSubItemPractica()) {
+			
+			cantPracticasEnSubItem = cantPracticasEnSubItem + vsip.getValoresPracticas().size();
+		}
+		
+		return cantPracticas+cantPracticasEnSubItem;
+	}
 }

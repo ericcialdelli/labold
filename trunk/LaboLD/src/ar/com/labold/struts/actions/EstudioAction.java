@@ -1,6 +1,9 @@
 package ar.com.labold.struts.actions;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +20,9 @@ import ar.com.labold.fachada.PracticaFachada;
 import ar.com.labold.negocio.Estudio;
 import ar.com.labold.negocio.GrupoPractica;
 import ar.com.labold.negocio.Paciente;
+import ar.com.labold.negocio.ValorPractica;
+import ar.com.labold.negocio.ValorSubItemPractica;
+import ar.com.labold.negocio.ValoresEstudio;
 import ar.com.labold.struts.actions.forms.EstudioForm;
 import ar.com.labold.struts.actions.forms.PacienteForm;
 import ar.com.labold.struts.actions.forms.ValorUnidadFacturacionForm;
@@ -113,7 +119,12 @@ public class EstudioAction extends ValidadorAction {
 						if(forward.equals("recuperarEstudioEliminarPracticasParaFacturacion")){
 							titulo="Eliminar Practicas de Estudio para Facturacion";
 						}else{
-							titulo="Restablecer Practicas de Estudio para Facturacion";
+							if(forward.equals("recuperarEstudioRestablecerPracticasParaFacturacion")){
+								titulo="Restablecer Practicas de Estudio para Facturacion";
+							}else{
+								titulo="Agregar Practicas a Estudio";
+							}							
+								
 						}	
 					}										
 				}
@@ -439,6 +450,93 @@ public class EstudioAction extends ValidadorAction {
 			
 			estudioFachada.modificarValorUnidadFacturacion(valorForm.getValorUnidadFacturacion());			
 			request.setAttribute("exitoGrabado", Constantes.EXITO_MODIFICAR_VALOR_UNIDAD_FACTURACION);
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}		
+	
+	@SuppressWarnings("unchecked")
+	public ActionForward recuperarEstudioAgregarPracticas(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoRecuperarEstudioAgregarPracticas";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			PracticaFachada practicaFachada = (PracticaFachada) ctx.getBean("practicaFachada");			
+			
+			String nroProtocolo = request.getParameter("nroProtocolo");	
+			
+			Estudio estudio = estudioFachada.getEstudioPorNroProtocolo(Long.valueOf(nroProtocolo));
+			Map<Long,Long> map = this.armarHashMap(estudio);
+			System.out.println(estudio.getValoresEstudio().size());
+			List<GrupoPractica> gruposPracticas = practicaFachada.getGruposPractica();
+			
+			request.setAttribute("gruposPracticas", gruposPracticas);						
+			request.setAttribute("estudio", estudio);
+			request.setAttribute("map", map);
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}	
+	
+	private Map<Long,Long> armarHashMap(Estudio estudio){
+		
+		Map<Long,Long> map = new HashMap<Long, Long>();
+		for (ValoresEstudio ve : estudio.getValoresEstudio()) {
+			System.out.println("GRUPO: "+ve.getNombre());
+			System.out.println("");
+			System.out.println("	Practicas:");
+			for (ValorPractica vp : ve.getValoresPracticas()) {
+				System.out.println("		"+vp.getPractica().getNombre());
+				map.put(vp.getPractica().getId(), vp.getPractica().getId());
+			}
+			System.out.println("");
+			System.out.println("	SubItems:");
+			for (ValorSubItemPractica vsip : ve.getValorSubItemPractica()) {
+				System.out.println("		"+vsip.getNombre());
+				for (ValorPractica vp2 : vsip.getValoresPracticas()) {
+					System.out.println("			"+vp2.getPractica().getNombre());
+					map.put(vp2.getPractica().getId(), vp2.getPractica().getId());
+				}
+			}
+			System.out.println("");
+			System.out.println("-----------------------------------------------");
+			System.out.println("");
+		}
+		
+		return map;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public ActionForward agregarPracticasAEstudio(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoAgregarPracticasAEstudio";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			
+			EstudioForm estudioForm = (EstudioForm)form;
+			estudioForm.normalizarListaPracticas();
+						
+			double unidadesFacturacion = estudioFachada.agregarPracticasAEstudio(estudioForm.getEstudioDTO(),estudioForm.getListaPracticas());
+			
+			request.setAttribute("exitoGrabado", "Se han agregado las Practicas al Estudio con Exito");//Constantes.EXITO_ALTA_ESTUDIO+unidadesFacturacion+Constantes.EXITO_ALTA_ESTUDIO2);
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
