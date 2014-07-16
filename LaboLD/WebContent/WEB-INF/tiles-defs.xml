@@ -140,7 +140,12 @@
 	<definition name=".agregarPracticasAEstudio" extends=".base">
 		<put name="title" value="LaboLD" />
 		<put name="body" value="/jsp/agregarPracticasAEstudio.jsp" />
-	</definition>		
+	</definition>
+
+	<definition name=".eliminarPracticasDeEstudio" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/eliminarPracticasDeEstudio.jsp" />
+	</definition>			
 	<!-- FIN ESTUDIO -->		
 
 	<!-- REPORTES -->

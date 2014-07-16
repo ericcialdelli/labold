@@ -9,6 +9,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import ar.com.labold.negocio.Estudio;
 import ar.com.labold.negocio.ValorPractica;
+import ar.com.labold.negocio.ValorSubItemPractica;
 import ar.com.labold.negocio.ValorUnidadFacturacion;
 import ar.com.labold.negocio.ValoresEstudio;
 
@@ -72,6 +73,11 @@ public class EstudioDAO extends HibernateDaoSupport {
 		
 		return (ValorPractica)getHibernateTemplate().get(ValorPractica.class,idValorPractica);
 	}
+
+	public ValorSubItemPractica getValorSubItemPractica(Long idValorSubItemPractica){
+		
+		return (ValorSubItemPractica)getHibernateTemplate().get(ValorSubItemPractica.class,idValorSubItemPractica);
+	}		
 	
 	public ValoresEstudio getValorEstudio(Long idValorEstudio){
 		
@@ -81,5 +87,26 @@ public class EstudioDAO extends HibernateDaoSupport {
 	public ValorUnidadFacturacion recuperarValorUnidadFacturacion(){
 		
 		return (ValorUnidadFacturacion)getHibernateTemplate().get(ValorUnidadFacturacion.class,1L);		
+	}	
+	
+	public void eliminarValorPractica(ValorPractica valorPractica){
+				
+		this.getHibernateTemplate().delete(valorPractica);
+		this.getHibernateTemplate().flush();
+		this.getHibernateTemplate().clear();
+	}
+	
+	public void eliminarValorSubItemPractica(ValorSubItemPractica vsip){
+		
+		this.getHibernateTemplate().delete(vsip);
+		this.getHibernateTemplate().flush();
+		this.getHibernateTemplate().clear();
+	}
+	
+	public void eliminarValoresEstudio(ValoresEstudio ve){
+		
+		this.getHibernateTemplate().delete(ve);
+		this.getHibernateTemplate().flush();
+		this.getHibernateTemplate().clear();
 	}	
 }

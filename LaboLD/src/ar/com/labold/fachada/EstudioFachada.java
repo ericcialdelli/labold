@@ -15,6 +15,7 @@ import ar.com.labold.negocio.Estudio;
 import ar.com.labold.negocio.Paciente;
 import ar.com.labold.negocio.Practica;
 import ar.com.labold.negocio.ValorPractica;
+import ar.com.labold.negocio.ValorSubItemPractica;
 import ar.com.labold.negocio.ValorUnidadFacturacion;
 import ar.com.labold.negocio.ValoresEstudio;
 import ar.com.labold.providers.ProviderDominio;
@@ -146,5 +147,37 @@ public class EstudioFachada {
 		//estudioDAO.altaEstudio(estudio);
 		
 		return estudio.getUnidadesFacturacionTotal();
+	}
+	
+	public void eliminarPracticasDeEstudio(EstudioDTO estudioDTO, List<ValorPracticaDTO> listaValoresPracticaDTO){
+		
+		Estudio estudio = estudioDAO.getEstudio(estudioDTO.getId());
+		double unidadesFacturacion = estudio.getUnidadesFacturacionTotal();
+		ValoresEstudio ve = null;
+		
+		for (ValorPracticaDTO valorPracticaDTO : listaValoresPracticaDTO) {		
+			
+			ValorPractica valorPractica = estudioDAO.getValorPractica(valorPracticaDTO.getId());			
+			estudioDAO.eliminarValorPractica(valorPractica);					
+									
+			if(valorPractica.getValorSubItemPractica() != null ){				
+				ValorSubItemPractica vsip = estudioDAO.getValorSubItemPractica(valorPractica.getValorSubItemPractica().getId());				
+				if(vsip.getValoresPracticas().size()==0){
+					estudioDAO.eliminarValorSubItemPractica(vsip);
+				}	
+				ve = estudioDAO.getValorEstudio(vsip.getValoresEstudio().getId());
+			}
+			else{				
+				ve = estudioDAO.getValorEstudio(valorPractica.getValoresEstudio().getId());	
+			}
+			if(ve.getValoresPracticas().size()==0){
+				estudioDAO.eliminarValoresEstudio(ve);
+			}			
+			
+			//unidadesFacturacion = unidadesFacturacion - valorPractica.getUnidadBioquimica(); 
+
+		}
+		
+		//estudio.setUnidadesFacturacionTotal(unidadesFacturacion);//Ver bien si esto cierra//		
 	}
 }

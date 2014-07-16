@@ -97,6 +97,8 @@ public class Constantes {
 	public static final String EXITO_MODIFICACION_ESTUDIO = "El Estudio se ha modificado con exito";
 	
 	public static final String EXITO_COMPLETAR_ESTUDIO = "El Estudio se ha completado con exito";
+	
+	public static final String EXITO_ELIMINAR_PRACTICA_DE_ESTUDIO = "Las Practicas se han eliminado con exito";	
 	//FIN ESTUDIO		
 
 	//FACTURACION

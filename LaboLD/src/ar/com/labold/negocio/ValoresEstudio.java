@@ -114,4 +114,20 @@ public class ValoresEstudio {
 		
 		return cantPracticas+cantPracticasEnSubItem;
 	}
+	
+	public double getUnidadesFacturacionDePracticas(){
+		
+		double unidadesFacturacionDePracticas = 0.0;
+		
+		for (ValorPractica vp : this.getValoresPracticas()) {
+			unidadesFacturacionDePracticas = unidadesFacturacionDePracticas + vp.getUnidadBioquimica();
+		}
+
+		for (ValorSubItemPractica vsip : this.getValorSubItemPractica()) {
+			
+			unidadesFacturacionDePracticas = unidadesFacturacionDePracticas + vsip.getUnidadesFacturacionDePracticas();
+		}		
+		
+		return unidadesFacturacionDePracticas;
+	}
 }

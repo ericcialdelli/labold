@@ -121,8 +121,12 @@ public class EstudioAction extends ValidadorAction {
 						}else{
 							if(forward.equals("recuperarEstudioRestablecerPracticasParaFacturacion")){
 								titulo="Restablecer Practicas de Estudio para Facturacion";
-							}else{
-								titulo="Agregar Practicas a Estudio";
+							}else{								
+								if(forward.equals("recuperarEstudioAgregarPracticas")){
+									titulo="Agregar Practicas a Estudio";
+								}else{
+									titulo="Eliminar Practicas de Estudio";
+								}								
 							}							
 								
 						}	
@@ -496,25 +500,25 @@ public class EstudioAction extends ValidadorAction {
 		
 		Map<Long,Long> map = new HashMap<Long, Long>();
 		for (ValoresEstudio ve : estudio.getValoresEstudio()) {
-			System.out.println("GRUPO: "+ve.getNombre());
-			System.out.println("");
-			System.out.println("	Practicas:");
+			//System.out.println("GRUPO: "+ve.getNombre());
+			//System.out.println("");
+			//System.out.println("	Practicas:");
 			for (ValorPractica vp : ve.getValoresPracticas()) {
-				System.out.println("		"+vp.getPractica().getNombre());
+				//System.out.println("		"+vp.getPractica().getNombre());
 				map.put(vp.getPractica().getId(), vp.getPractica().getId());
 			}
-			System.out.println("");
-			System.out.println("	SubItems:");
+			//System.out.println("");
+			//System.out.println("	SubItems:");
 			for (ValorSubItemPractica vsip : ve.getValorSubItemPractica()) {
-				System.out.println("		"+vsip.getNombre());
+				//System.out.println("		"+vsip.getNombre());
 				for (ValorPractica vp2 : vsip.getValoresPracticas()) {
-					System.out.println("			"+vp2.getPractica().getNombre());
+					//System.out.println("			"+vp2.getPractica().getNombre());
 					map.put(vp2.getPractica().getId(), vp2.getPractica().getId());
 				}
 			}
-			System.out.println("");
-			System.out.println("-----------------------------------------------");
-			System.out.println("");
+			//System.out.println("");
+			//System.out.println("-----------------------------------------------");
+			//System.out.println("");
 		}
 		
 		return map;
@@ -546,6 +550,62 @@ public class EstudioAction extends ValidadorAction {
 
 		return mapping.findForward(strForward);
 	}		
+	
+	@SuppressWarnings("unchecked")
+	public ActionForward recuperarEstudioEliminarPracticas(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoRecuperarEstudioEliminarPracticas";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			
+			String nroProtocolo = request.getParameter("nroProtocolo");			
+			Estudio estudio = estudioFachada.getEstudioPorNroProtocolo(Long.valueOf(nroProtocolo));
+			
+			request.setAttribute("estudio", estudio);
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}	
+	
+	@SuppressWarnings("unchecked")
+	public ActionForward eliminarPracticasDeEstudio(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoEliminarPracticasDeEstudio";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			
+			EstudioForm estudioForm = (EstudioForm)form;
+			estudioForm.normalizarListaValoresPracticaDTO();
+			
+			estudioFachada.eliminarPracticasDeEstudio(estudioForm.getEstudioDTO(),estudioForm.getListaValoresPracticaDTO());
+			
+			request.setAttribute("exitoGrabado", Constantes.EXITO_ELIMINAR_PRACTICA_DE_ESTUDIO);			
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}	
+	
+	/**********************************************************************
+	 **********************	METODOS VALIDADORES ***************************
+	 **********************************************************************/
 	
 	public boolean validarEstudioForm(StringBuffer error, ActionForm form) {
 		

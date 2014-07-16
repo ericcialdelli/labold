@@ -314,6 +314,8 @@ public abstract class ProviderDominio {
 	//Se usa en agregarPracticasAEstudio
 	public static Estudio getEstudio(Estudio estudio, List<Practica> listaPracticas){
 
+		double unidadesFacturacionEstudio = estudio.getUnidadesFacturacionTotal();
+		
 		Map<Long,ValoresEstudio> mapValoresEstudio = new HashMap<Long,ValoresEstudio>();
 		Map<Long,ValorSubItemPractica> mapValorSubItemPractica = new HashMap<Long,ValorSubItemPractica>();
 
@@ -333,6 +335,8 @@ public abstract class ProviderDominio {
 		ValoresEstudio ve;
 		for (Practica practica : listaPracticas) {
 			
+			unidadesFacturacionEstudio = unidadesFacturacionEstudio + practica.getUnidadBioquimica();
+			
 			ve = mapValoresEstudio.get(practica.getGrupoPractica().getId());
 			
 			if(ve == null){
@@ -340,6 +344,8 @@ public abstract class ProviderDominio {
 				ve.setNombre(practica.getGrupoPractica().getNombre());
 				ve.setGrupoPractica(practica.getGrupoPractica());
 				ve.setUnidadBioquimica(practica.getGrupoPractica().getUnidadBioquimica());
+				ve.setEstudio(estudio);
+				estudio.getValoresEstudio().add(ve);
 				mapValoresEstudio.put(practica.getGrupoPractica().getId(), ve);
 			}			
 			
@@ -373,12 +379,15 @@ public abstract class ProviderDominio {
 				ve.getValoresPracticas().add(valorPractica);
 			}
 			
+			//Tengo que restarle a las unidades de Facturacion del Estudio, la suma de las unidades de las practias del VE.
+			//Para luego sumarle las unidades de Facturacion del VE como grupo entero.
 			if(ve.cantidadPracticas() == ve.getGrupoPractica().cantidadPracticas()){
-				System.out.println("El valorEstudio: "+ve.getNombre()+" tiene todas las practicas del grupo");
-				
-			}
-			
+				double unidadesFacturacionValorEstudio = ve.getUnidadesFacturacionDePracticas();
+				unidadesFacturacionEstudio = unidadesFacturacionEstudio - unidadesFacturacionValorEstudio;
+				unidadesFacturacionEstudio = unidadesFacturacionEstudio + ve.getUnidadBioquimica();
+			}								
 		}
+		estudio.setUnidadesFacturacionTotal(unidadesFacturacionEstudio);		
 		
 		return estudio;
 	}
