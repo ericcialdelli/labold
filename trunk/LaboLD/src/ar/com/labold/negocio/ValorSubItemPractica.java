@@ -79,5 +79,13 @@ public class ValorSubItemPractica {
 		this.nombre = nombre;
 	}
 
-	
+	public double getUnidadesFacturacionDePracticas(){
+		
+		double unidadesFacturacionDePracticas = 0.0;
+		
+		for (ValorPractica vp : this.getValoresPracticas()) {
+			unidadesFacturacionDePracticas = unidadesFacturacionDePracticas + vp.getUnidadBioquimica();
+		}
+		return unidadesFacturacionDePracticas;
+	}	
 }
