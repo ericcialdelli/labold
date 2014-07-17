@@ -152,7 +152,7 @@ public class EstudioFachada {
 	public void eliminarPracticasDeEstudio(EstudioDTO estudioDTO, List<ValorPracticaDTO> listaValoresPracticaDTO){
 		
 		Estudio estudio = estudioDAO.getEstudio(estudioDTO.getId());
-		double unidadesFacturacion = estudio.getUnidadesFacturacionTotal();
+		double unidadesFacturacionEstudio = estudio.getUnidadesFacturacionTotal();
 		ValoresEstudio ve = null;
 		
 		for (ValorPracticaDTO valorPracticaDTO : listaValoresPracticaDTO) {		
@@ -169,15 +169,23 @@ public class EstudioFachada {
 			}
 			else{				
 				ve = estudioDAO.getValorEstudio(valorPractica.getValoresEstudio().getId());	
+			}			
+			
+			if(ve.cantidadPracticas()+1 == ve.getGrupoPractica().cantidadPracticas()){
+				unidadesFacturacionEstudio = unidadesFacturacionEstudio - ve.getGrupoPractica().getUnidadBioquimica();
+				unidadesFacturacionEstudio = unidadesFacturacionEstudio + ve.getUnidadesFacturacionDePracticas();
 			}
+			else{
+				unidadesFacturacionEstudio = unidadesFacturacionEstudio - valorPractica.getUnidadBioquimica();
+			}
+			
 			if(ve.getValoresPracticas().size()==0){
 				estudioDAO.eliminarValoresEstudio(ve);
 			}			
-			
-			//unidadesFacturacion = unidadesFacturacion - valorPractica.getUnidadBioquimica(); 
-
 		}
 		
-		//estudio.setUnidadesFacturacionTotal(unidadesFacturacion);//Ver bien si esto cierra//		
+		estudio = estudioDAO.getEstudio(estudioDTO.getId());
+		estudio.setUnidadesFacturacionTotal(unidadesFacturacionEstudio);
+		estudioDAO.altaEstudio(estudio);
 	}
 }
