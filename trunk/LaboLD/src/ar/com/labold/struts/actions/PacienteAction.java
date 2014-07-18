@@ -212,11 +212,12 @@ public class PacienteAction extends ValidadorAction {
 			
 			ok = Validator.requerido(paciente.getNombre(),"Nombre", error);
 			ok1 = Validator.requerido(paciente.getApellido(),"Apellido", error);
-			ok2 = Validator.requerido(paciente.getFechaNacimiento(),"Fecha de Nacimiento", error);
-			if(ok2){
+			//ok2 = Validator.requerido(paciente.getFechaNacimiento(),"Fecha de Nacimiento", error);
+			//if(ok2){
+			if(pacienteForm.getPacienteDTO().getFechaNacimiento()!=null && !pacienteForm.getPacienteDTO().getFechaNacimiento().equals("")){
 				ok2 = Validator.validarFechaValida(pacienteForm.getPacienteDTO().getFechaNacimiento(),"Fecha de Nacimiento",error);
 			}	
-			ok3 = Validator.validarEnteroMayorQue(0, String.valueOf(paciente.getDni()), "DNI", error);
+			ok3 = Validator.validarEnteroMayorQue(-1, String.valueOf(paciente.getDni()), "DNI", error);
 			
 			if(ok3){
 				if(pacienteFachada.existePaciente(paciente.getDni(), paciente.getId())){
@@ -225,8 +226,8 @@ public class PacienteAction extends ValidadorAction {
 				}
 			}
 			
-			ok4 = Validator.requerido(paciente.getDireccion(),"Dirección", error);
-			ok5 = Validator.requerido(paciente.getTelefono(),"Telefono", error);
+			//ok4 = Validator.requerido(paciente.getDireccion(),"Dirección", error);
+			//ok5 = Validator.requerido(paciente.getTelefono(),"Telefono", error);
 			ok6 = Validator.validarComboRequeridoSinNull("-1",Long.toString(paciente.getObraSocial().getId()),
 					 																		"Obra Social",error);
 			

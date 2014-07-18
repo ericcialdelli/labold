@@ -92,7 +92,7 @@
 			<td colspan="2"></td>
 			<td class="botoneralNegritaRight" width="30%" >Unidades de Facturación</td>
 			<td align="left">			
-				<input type="text" value="${estudio.unidadesFacturacionTotal}" class="botonerab" size="10" readonly="readonly"/>
+				<input type="text" value="${estudio.unidadesFacturacionTotal}" class="botonerab" size="10" name="estudioDTO.unidadesFacturacionTotal"/>
 			</td>		
 		</tr>		
 					
