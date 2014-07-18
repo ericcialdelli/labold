@@ -398,6 +398,7 @@ public abstract class ProviderDominio {
 		estudio.setNumero(estudioDTO.getNumero());		
 		estudio.setSolicitadoPor(estudioDTO.getSolicitadoPor());
 		estudio.setFecha(Fecha.stringDDMMAAAAToUtilDate(estudioDTO.getFecha()));
+		estudio.setUnidadesFacturacionTotal(estudioDTO.getUnidadesFacturacionTotal());
 		
 		return estudio;
 	}		
