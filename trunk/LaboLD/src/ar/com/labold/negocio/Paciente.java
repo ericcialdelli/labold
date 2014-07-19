@@ -28,18 +28,14 @@ public class Paciente {
 	@Column(nullable = false)
 	private String apellido;
 	
-	@Column(nullable = false)
 	private String direccion;
 
-	@Column(nullable = false)
 	private String telefono;
 
 	private String email;
 	
-	@Column(nullable = false)
 	private int dni;
 
-	@Column(nullable = false)
 	private Date fechaNacimiento;	
 	
 	@ManyToOne()

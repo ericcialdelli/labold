@@ -219,7 +219,7 @@ public class PacienteAction extends ValidadorAction {
 			}	
 			ok3 = Validator.validarEnteroMayorQue(-1, String.valueOf(paciente.getDni()), "DNI", error);
 			
-			if(ok3){
+			if(ok3 && paciente.getDni()>0){
 				if(pacienteFachada.existePaciente(paciente.getDni(), paciente.getId())){
 					Validator.addErrorXML(error, Constantes.EXISTE_PACIENTE);
 					ok3=false;

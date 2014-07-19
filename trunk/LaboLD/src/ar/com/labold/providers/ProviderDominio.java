@@ -77,8 +77,10 @@ public abstract class ProviderDominio {
 		paciente.setId(pacienteDTO.getId());
 		paciente.setNombre(pacienteDTO.getNombre());
 		paciente.setTelefono(pacienteDTO.getTelefono());
-		paciente.setFechaNacimiento(Fecha
-				.stringDDMMAAAAToUtilDate(pacienteDTO.getFechaNacimiento()));
+		if(pacienteDTO.getFechaNacimiento()!=null && !pacienteDTO.getFechaNacimiento().equals("")){
+			paciente.setFechaNacimiento(Fecha
+					.stringDDMMAAAAToUtilDate(pacienteDTO.getFechaNacimiento()));
+		}	
 		paciente.setObraSocial(obraSocial);
 		
 		return paciente;
@@ -93,8 +95,12 @@ public abstract class ProviderDominio {
 		paciente.setEmail(pacienteDTO.getEmail());
 		paciente.setNombre(pacienteDTO.getNombre());
 		paciente.setTelefono(pacienteDTO.getTelefono());
-		paciente.setFechaNacimiento(Fecha
-				.stringDDMMAAAAToUtilDate(pacienteDTO.getFechaNacimiento()));
+		if(pacienteDTO.getFechaNacimiento()!=null && !pacienteDTO.getFechaNacimiento().equals("")){
+			paciente.setFechaNacimiento(Fecha
+					.stringDDMMAAAAToUtilDate(pacienteDTO.getFechaNacimiento()));
+		}else{
+			paciente.setFechaNacimiento(null);
+		}	
 		paciente.setObraSocial(obraSocial);
 		
 		return paciente;
