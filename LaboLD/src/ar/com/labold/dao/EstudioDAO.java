@@ -108,5 +108,15 @@ public class EstudioDAO extends HibernateDaoSupport {
 		this.getHibernateTemplate().delete(ve);
 		this.getHibernateTemplate().flush();
 		this.getHibernateTemplate().clear();
+	}
+	
+	public boolean existeEstudio(long numero) {
+
+		Criteria criteria = getSession().createCriteria(Estudio.class);
+		criteria.add(Restrictions.eq("numero", numero));
+ 
+		List<Estudio> estudios = criteria.list();
+
+		return (estudios.size() > 0);
 	}	
 }

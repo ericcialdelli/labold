@@ -116,7 +116,7 @@ public class Constantes {
 	
 	public static final String REPORTE_ESTUDIO = "reporteEstudio";
 	
-	public static final String REPORTES_ESTUDIOS = "reportesEstudios";
+	public static final String REPORTES_ESTUDIOS = "superReporteEstudio";
 	
 	public static final String REPORTE_FACTURACION_ENTRE_FECHAS = "reporteFacturacionEntreFechas";
 	// FIN REPORTES

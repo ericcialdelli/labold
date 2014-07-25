@@ -188,4 +188,8 @@ public class EstudioFachada {
 		estudio.setUnidadesFacturacionTotal(unidadesFacturacionEstudio);
 		estudioDAO.altaEstudio(estudio);
 	}
+	
+	public boolean existeEstudio(long nroEstudio) {
+		return estudioDAO.existeEstudio(nroEstudio);
+	}	
 }
