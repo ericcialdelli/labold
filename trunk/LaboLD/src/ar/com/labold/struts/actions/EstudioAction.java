@@ -609,7 +609,9 @@ public class EstudioAction extends ValidadorAction {
 	
 	public boolean validarEstudioForm(StringBuffer error, ActionForm form) {
 		
-		try{	
+		try{
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");			
 			EstudioForm estudioForm = (EstudioForm)form;
 			EstudioDTO estudio = estudioForm.getEstudioDTO();
 			
@@ -620,10 +622,18 @@ public class EstudioAction extends ValidadorAction {
 			
 			ok1 = Validator.validarEnteroMayorQue(0, String.valueOf(estudio.getNumero()), "Numero", error);			
 
+			if(ok1){
+				ok1 = !estudioFachada.existeEstudio(estudio.getNumero());
+
+				if (!ok1) {
+					Validator.addErrorXML(error, "El número de Estudio ya existe, especifique otro");
+				}
+			}
+			
 			ok2 = Validator.validarComboRequeridoSinNull("-1",Long.toString(estudio.getPaciente().getId()),
 																			"Paciente",error);			
 			
-			ok3 = Validator.requerido(estudio.getSolicitadoPor(),"Solicitado Por", error);
+			//ok3 = Validator.requerido(estudio.getSolicitadoPor(),"Solicitado Por", error);
 			
 			ok4 = Validator.requerido(estudio.getFecha(),"Fecha", error);
 

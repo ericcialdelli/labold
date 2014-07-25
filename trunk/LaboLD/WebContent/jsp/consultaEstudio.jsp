@@ -21,11 +21,19 @@ function generarReporte(){
 	var idEstudio = $("#idEstudio").val();
 	
 	var especificaciones = 'top=0,left=0,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable';
-	if(type == "IE"){
+	/*if(type == "IE"){
 		window.open("./reporte.do?metodo=generarReporteEstudio&idEstudio="+idEstudio,"",especificaciones);		
 	}else{
 		window.open("../../reporte.do?metodo=generarReporteEstudio&idEstudio="+idEstudio,"",especificaciones);				
-	}	
+	}*/
+
+	var desde = $("#numeroEstudio").val();
+	var hasta = $("#numeroEstudio").val();
+	if(type == "IE"){
+		window.open("./reporte.do?metodo=generarReportesEstudios&desde="+desde+"&hasta="+hasta,"",especificaciones);		
+	}else{
+		window.open("../../reporte.do?metodo=generarReportesEstudios&desde="+desde+"&hasta="+hasta,"",especificaciones);				
+	}		
 }
 
 	function volver(){
@@ -62,7 +70,7 @@ function generarReporte(){
 		<tr>
 			<td class="botoneralNegritaRight" width="12%" >Número</td>
 			<td align="left" width="30%">			
-				<input type="text" value="${estudio.numero}" class="botonerab" size="10" readonly="readonly"/>
+				<input type="text" value="${estudio.numero}" class="botonerab" size="10" readonly="readonly" id="numeroEstudio"/>
 			</td>
 			
 			<td class="botoneralNegritaRight" width="30%" >Paciente</td>
