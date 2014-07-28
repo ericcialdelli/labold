@@ -127,4 +127,8 @@ public class Paciente {
 		this.estudios = estudios;
 	}
 	
+	public String getNombreApellidoDni(){
+		
+		return this.getApellido()+","+this.getNombre();
+	}
 }
