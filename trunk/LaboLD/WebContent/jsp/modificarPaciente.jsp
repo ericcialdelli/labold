@@ -33,9 +33,7 @@
 	<html:hidden property="pacienteDTO.id" value="${paciente.id}"/>
 	
 	<table border="0" class="cuadrado" align="center" width="60%" cellpadding="2">
-		<tr>
-			<td colspan="2"  class="azulAjustado" >Modificación de Paciente</td>
-		</tr>
+
 		<tr>
 			<td height="20" colspan="2"></td>
 		</tr>				

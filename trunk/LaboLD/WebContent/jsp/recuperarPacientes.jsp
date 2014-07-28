@@ -16,11 +16,10 @@
 
 <script>
 
-	function recuperarPaciente(id){
-		//var urlSeleccionGuia = $('#paramUrlSeleccionGuia').val();
-		//parent.location=contextRoot() + "/guia.do?metodo="+urlSeleccionGuia+"&id="+id;
+	/*function recuperarPaciente(id){
+
 		parent.location=contextRoot() + "/paciente.do?metodo=recuperarPaciente&id="+id;
-	}
+	}*/
 
 	var clase;
 	function pintarFila(idTr){
@@ -35,6 +34,22 @@
 		$('#'+idTr).addClass(clase);
 		$('#'+idTr).removeClass("verdeSeleccionFila");
 	}
+
+	function cargarPaciente(){
+
+		var idPaciente = $("#selectPacientes").val();		
+		$('#bloquePacientes').html("");
+
+		if(idPaciente != "" && idPaciente != "-1"){
+			$('#bloquePacientes').load("../../paciente.do?metodo=recuperarPaciente&id="+idPaciente);
+			$('#bloquePacientes').hide();
+			$('#bloquePacientes').fadeIn(600);
+				
+		}else{
+			$('#bloquePacientes').hide(600);
+			$('#bloquePacientes').html("");			
+		}		
+	}
 	
 </script>
 
@@ -42,42 +57,44 @@
 <table border="0" class="cuadrado" align="center" width="80%"
 	cellpadding="2">
 	<tr>
-		<td class="azulAjustado">Modificación de Pacientes</td>
+		<td class="azulAjustado" colspan="2">Modificación de Pacientes</td>
 	</tr>
 	<tr>
-		<td height="20"></td>
+		<td height="20" colspan="2"></td>
 	</tr>
 	<tr>
-		<td>
-			<table border="0" class="cuadrado" align="center" width="80%" cellpadding="2">
-				<tr>
-					<td class="azulAjustado">Nombre y Apellido</td>
-					<td class="azulAjustado">DNI</td>
-					<td class="azulAjustado">Fecha Nacimiento</td>
-					<td class="azulAjustado"></td>
-				</tr>
-				<%String clase=""; %>
-				<c:forEach items="${pacientes}" var="paciente" varStatus="i">
-					<%clase=(clase.equals("")?"par":""); %>
-					
-					<tr class="<%=clase%>" onmouseover="javascript:pintarFila('idTr<c:out value='${i.index}'></c:out>');"
-						onmouseout="javascript:despintarFila('idTr<c:out value='${i.index}'></c:out>');"
-						id="idTr<c:out value='${i.index}'></c:out>">					
-					
-						<td>${paciente.apellido}, ${paciente.nombre}</td>
-						<td>${paciente.dni}</td>
-						<td><fmt:formatDate	value='${paciente.fechaNacimiento}' pattern='dd/MM/yyyy' /></td>
-						<td>
-							<a href="javascript:recuperarPaciente(${paciente.id});">
-								Seleccionar
-							</a>
-						</td>
-					</tr>
-				</c:forEach>
-			</table>
+		<td width="40%" class="botoneralNegritaRight">Paciente</td>
+		<td align="left">
+			<select id="selectPacientes" class="botonerab" onchange="cargarPaciente();">
+				<option value="-1">
+					Seleccione un Paciente...
+				</option>		
+				<c:forEach items="${listaPacientes}" var="paciente">
+					<option value="${paciente.id}">
+						<c:out value="${paciente.nombreApellidoDni}"></c:out>
+					</option>
+				</c:forEach>										
+			</select>
 		</td>
-	</tr>
+	</tr>	
+	
 	<tr>
-		<td height="10"></td>
+		<td height="10" colspan="2"></td>
+	</tr>	
+	
+	<tr>
+		<td colspan="2">
+			<div id="bloquePacientes"></div>
+		</td>
+	</tr>	
+	
+	
+	
+	
+	
+	
+
+	<tr>
+		<td height="10" colspan="2"></td>
 	</tr>	
 </table>

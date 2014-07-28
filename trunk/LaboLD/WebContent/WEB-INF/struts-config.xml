@@ -86,7 +86,7 @@
 			<forward name="exitoCargaAltaPaciente" path=".altaPaciente" />
 			<forward name="exitoAltaPaciente" path="/paciente.do?metodo=cargarAltaPaciente" />
 			<forward name="exitoRecuperarPacientes" path=".recuperarPacientes" />
-			<forward name="exitoRecuperarPaciente" path=".modificarPaciente" />
+			<forward name="exitoRecuperarPaciente" path="/jsp/modificarPaciente.jsp" />
 			<forward name="exitoModificacionPaciente" path="/paciente.do?metodo=recuperarPacientes" />					
 		</action>				
 		<!-- FIN PACIENTE -->

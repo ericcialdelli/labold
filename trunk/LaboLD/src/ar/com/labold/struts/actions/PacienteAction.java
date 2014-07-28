@@ -126,7 +126,7 @@ public class PacienteAction extends ValidadorAction {
 						
 			List<Paciente> listaPacientes = pacienteFachada.getPacientes();
 			
-			request.setAttribute("pacientes", listaPacientes);
+			request.setAttribute("listaPacientes", listaPacientes);
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
