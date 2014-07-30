@@ -20,4 +20,5 @@ public class PacienteForm extends ActionForm {
 	public void setPacienteDTO(PacienteDTO pacienteDTO) {
 		this.pacienteDTO = pacienteDTO;
 	}
+
 }

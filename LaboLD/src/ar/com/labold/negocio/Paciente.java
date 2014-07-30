@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import ar.com.labold.utils.Fecha;
+
 @Entity
 public class Paciente {
 
@@ -130,5 +132,13 @@ public class Paciente {
 	public String getNombreApellidoDni(){
 		
 		return this.getApellido()+","+this.getNombre();
+	}
+	
+	public String getFechaNacimientoString(){
+		
+		if(this.getFechaNacimiento()!=null){
+			return Fecha.getFechaDDMMAAAASlash(Fecha.dateToStringDDMMAAAA(this.getFechaNacimiento())); 
+		}
+		return ""; 
 	}
 }

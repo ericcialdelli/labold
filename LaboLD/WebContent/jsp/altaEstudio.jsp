@@ -148,10 +148,78 @@
 		);		
 	}
 
+//------Modificar Paciente---------//
+	
+	function abrirVentantModificarPaciente(){
+		PacienteFachada.getPaciente($('#idPaciente').val(),mostrarPacienteModificacionCallback);
+		
+	}
+
+	function mostrarPacienteModificacionCallback(paciente){
+		
+		$('#textoError').text("");
+		$('#tdAceptar').hide();
+		$('#tdModificar').show();
+		$('#dialogo').dialog({title: 'Modificar Paciente', height: 400, width: 600, modal: true});
+		
+		$('#paciente').val(paciente.id);
+		$('#nombre').val(paciente.nombre);
+		$('#apellido').val(paciente.apellido);
+		$('#fechaNacimiento').val(paciente.fechaNacimientoString);
+		$('#dni').val(paciente.dni);
+		$('#direccion').val(paciente.direccion);
+		$('#telefono').val(paciente.telefono);
+		$('#email').val(paciente.email);
+		
+		if(paciente.obraSocial == null){
+			$('#obraSocial').val("-1");	
+		}else{
+			$('#obraSocial').val(paciente.obraSocial.id);	
+		}			
+	}
+
+	function modificarPaciente(){
+		
+		var form = $('#pacienteFormId').serialize(); 
+		var url = '../../paciente.do?metodo=validar&validador=validarPacienteForm&form=PacienteForm&formJsp=pacienteFormId';		
+		$.post(url,form,validarModificacionPacienteFormCallBack);		
+	}
+
+	function validarModificacionPacienteFormCallBack(xmlDoc){
+
+	   	var nodos = xmlDoc.getElementsByTagName('error');
+	    if (nodos.length==0){
+
+			PacienteFachada.modificarPacienteDesdeAltaEstudio($('#paciente').val(),$('#nombre').val(),$('#apellido').val(),$('#fechaNacimiento').val(),
+					$('#dni').val(),$('#direccion').val(),$('#telefono').val(),$('#email').val(),$('#obraSocial').val(),cerrarVentanaAgregarPaciente);
+				    	
+	    } else {
+	    	$('#textoError').text("");
+		    for(var i=0; i < nodos.length; i++) { 
+			    $('#textoError').append( '<div>* ' + nodos[i].firstChild.nodeValue + '</div>');
+		    }
+		    $('#textoError').show();
+	    }
+	}
+//------Fin Modificar Paciente---------//
+	
+//------Agregar Paciente---------//
+	
 	function abrirVentantAgregarPaciente(){
 
 		$('#textoError').text("");
-		$('#dialogo').dialog({title: 'Agregar Paciente', height: 350, width: 600, modal: true});
+		$('#tdAceptar').show();
+		$('#tdModificar').hide();
+		$('#paciente').val("");
+		$('#nombre').val("");
+		$('#apellido').val("");
+		$('#fechaNacimiento').val("");
+		$('#dni').val(0);
+		$('#direccion').val("");
+		$('#telefono').val("");
+		$('#email').val("");
+		$('#obraSocial').val("-1");			
+		$('#dialogo').dialog({title: 'Agregar Paciente', height: 400, width: 600, modal: true});
 	}
 
 	function cerrarVentanaAgregarPaciente(){
@@ -197,6 +265,17 @@
 
 		cerrarVentanaAgregarPaciente();
 	}
+
+//------Fin Agregar Paciente---------//
+	
+	function cambioPaciente(){
+
+		if($('#idPaciente').val()!=-1){
+			$('#botonModificar').removeAttr("disabled");
+		}else{
+			$('#botonModificar').attr("disabled","disabled");
+		}
+	}
 	
 </script>
 <div id="exitoGrabado" class="verdeExito"><br>${exitoGrabado}<br></div>
@@ -205,7 +284,7 @@
 <html:form action="estudio" styleId="estudioFormId">
 	<html:hidden property="metodo" value="altaEstudio"/>
 
-	<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2" cellspacing="0">
+	<table border="0" class="cuadrado" align="center" width="85%" cellpadding="2" cellspacing="0">
 		<tr>
 			<td colspan="4"  class="azulAjustado" >Alta de Estudio</td>
 		</tr>
@@ -222,7 +301,7 @@
 			<td class="botoneralNegritaRight" width="20%" >Paciente</td>
 			<td align="left">
 				<div style="display: " id="comboPacientes">			
-					<select id="obraSocial" class="botonerab" name="estudioDTO.paciente.id">
+					<select id="idPaciente" class="botonerab" name="estudioDTO.paciente.id" onchange="cambioPaciente()">
 						<option value="-1">
 							Seleccione un paciente...
 						</option>		
@@ -233,6 +312,8 @@
 						</c:forEach>										
 					</select>
 					<input type="button" value="Agregar" class="botonerab" onclick="abrirVentantAgregarPaciente()">
+					<input id="botonModificar" disabled="disabled" type="button" value="Modificar" class="botonerab" 
+						onclick="abrirVentantModificarPaciente()">
 				</div>
 				<div style="display: none" id="inputPaciente">
 					<input type="text" value="" id="nombrePacienteAgregado" readonly="readonly">
@@ -259,7 +340,7 @@
 		</tr>
 	</table>
 	
-	<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2" cellspacing="2">
+	<table border="0" class="cuadrado" align="center" width="85%" cellpadding="2" cellspacing="2">
 		<tr>
 			<td height="20"></td>
 		</tr>
@@ -390,7 +471,7 @@
 		</tr>		
 	</table>		
 	
-	<table border="0" class="cuadradoSinBorde" align="center" width="70%" cellpadding="2" cellspacing="0">
+	<table border="0" class="cuadradoSinBorde" align="center" width="85%" cellpadding="2" cellspacing="0">
 		<tr>
 			<td height="10"></td>
 		</tr>			
@@ -413,6 +494,7 @@
 		
 	<html:form action="paciente" styleId="pacienteFormId">
 		<html:hidden property="metodo" value="altaPacienteDesdeAltaEstudio"/>
+		<input type="hidden" id="paciente" name="pacienteDTO.id"/>
 	
 		<table border="0" class="cuadrado" align="center" width="80%" cellpadding="2" cellspacing="0">
 			<tr>
@@ -497,9 +579,12 @@
 				<td height="10" colspan="3"></td>
 			</tr>	
 			<tr>
-				<td width="48%" class="botonerab" align="right">
+				<td width="48%" class="botonerab" align="right" id="tdAceptar">
 					<input type="button" class="botonerab" value="Aceptar" onclick="javascript:agregarPaciente();">
 				</td>
+				<td width="48%" class="botonerab" align="right" id="tdModificar" style="display: none;">
+					<input type="button" class="botonerab" value="Modificar" onclick="javascript:modificarPaciente();">
+				</td>				
 				<td width="4%"></td>			
 				<td width="48%" class="botonerab" align="left">
 					<input type="button" class="botonerab" value="Cancelar" onclick="javascript:cerrarVentanaAgregarPaciente();">
@@ -511,6 +596,8 @@
 		</table>
 	</html:form>	
 </div>
+
+
 
 <script type="text/javascript">
 
