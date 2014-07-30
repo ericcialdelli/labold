@@ -73,4 +73,21 @@ public class PacienteFachada {
 		
 		return this.altaPaciente(pacienteDTO);		
 	}
+	
+	public void modificarPacienteDesdeAltaEstudio(Long idPaciente, String nombre,String apellido,String fechaNacimiento,int dni, 
+		     String direccion,String telefono,String email, Long idObraSocial){
+
+		PacienteDTO pacienteDTO = new PacienteDTO();
+		pacienteDTO.setId(idPaciente);
+		pacienteDTO.setNombre(nombre);
+		pacienteDTO.setApellido(apellido);
+		pacienteDTO.setFechaNacimiento(fechaNacimiento);
+		pacienteDTO.setDni(dni);
+		pacienteDTO.setDireccion(direccion);
+		pacienteDTO.setTelefono(telefono);
+		pacienteDTO.setEmail(email);
+		pacienteDTO.getObraSocial().setId(idObraSocial);
+		
+		this.modificacionPaciente(pacienteDTO);		
+	}	
 }

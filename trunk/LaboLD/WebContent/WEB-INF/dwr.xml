@@ -7,8 +7,11 @@
 		<convert converter="bean" match="ar.com.labold.negocio.SubItemPractica">
 			<param name="include" value="id,nombre" />
 		</convert>
+		<convert converter="bean" match="ar.com.labold.negocio.ObraSocial">
+			<param name="include" value="id,nombre" />
+		</convert>		
 		<convert converter="bean" match="ar.com.labold.negocio.Paciente">
-			<param name="include" value="id,nombre,apellido" />
+			<param name="include" value="id,nombre,apellido,direccion,telefono,email,dni,fechaNacimiento,fechaNacimientoString,obraSocial" />
 		</convert>				
 
 		<create creator="spring" javascript="PracticaFachada">
