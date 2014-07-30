@@ -87,17 +87,6 @@
 		</tr>
 		<tr>
 			<td height="10%"></td>	
-		</tr>
-		<tr>
-			<td>
-				<table border="0" width="100%" align="center">
-					<tr>
-						<td>
-							<DIV class="footer"><img src="./imagenes/footerSIIM.jpg"></DIV>
-						</td>
-					</tr>	 
-				</table>
-			</td>	
 		</tr>	
 	</table>		 
 </html:form>

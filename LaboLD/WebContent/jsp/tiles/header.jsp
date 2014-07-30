@@ -6,17 +6,20 @@
 <script type="text/javascript" src="<html:rewrite page='/dwr/util.js'/>"></script>
 
 <div>
-<table class="header">
+<table class="header" border="0">
 
 	<tr>
-		<td width="20%" height="100%"><img height="80%" width="100%" src="../../imagenes/Arba.jpg">
+		<td width="20%" height="100%">
+			<!--  <img height="80%" width="100%" src="../../imagenes/Arba.jpg">-->
+			<img height="80%" width="100%" src="../../imagenes/logoLaboLD.jpg">			
 		</td>
 		<td width="60%" style="text-align: center; font-weight: bold"><jsp:useBean
 			id="now" class="java.util.Date" /> <br>
 			Usuario: <label id="usuario"></label> <br>
 			Roles: <label id="roles"></label> <br>
 		</td>
-		 <td width="20%"><img src="../../imagenes/LaProvincia.jpg">
+		 <td width="20%">
+		 	<!-- <img src="../../imagenes/LaProvincia.jpg"> -->
 		</td>
 	</tr>	
 	
