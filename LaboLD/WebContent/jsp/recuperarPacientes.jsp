@@ -41,7 +41,7 @@
 		$('#bloquePacientes').html("");
 
 		if(idPaciente != "" && idPaciente != "-1"){
-			$('#bloquePacientes').load("../../paciente.do?metodo=recuperarPaciente&id="+idPaciente);
+			$('#bloquePacientes').load("../../paciente.do?metodo=recuperarPaciente&id="+idPaciente+"&forward="+"${forward}");
 			$('#bloquePacientes').hide();
 			$('#bloquePacientes').fadeIn(600);
 				
@@ -57,7 +57,14 @@
 <table border="0" class="cuadrado" align="center" width="80%"
 	cellpadding="2">
 	<tr>
-		<td class="azulAjustado" colspan="2">Modificación de Pacientes</td>
+		<td class="azulAjustado" colspan="2">
+			<c:if test="${forward=='modificacionPaciente'}">
+				Modificación de Pacientes
+			</c:if>
+			<c:if test="${forward=='eliminarPaciente'}">
+				Eliminar Paciente
+			</c:if>				
+		</td>
 	</tr>
 	<tr>
 		<td height="20" colspan="2"></td>

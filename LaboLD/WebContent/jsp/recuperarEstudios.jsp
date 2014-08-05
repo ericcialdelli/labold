@@ -13,6 +13,7 @@
 	src="<html:rewrite page='/js/Concurrent.Thread-full-20090713.js'/>"></script>
 
 <script type="text/javascript" src="<html:rewrite page='/js/funcUtiles.js'/>"></script>
+<script type="text/javascript" src="<html:rewrite page='/js/validarNum.js'/>"></script>
 
 <script>
 
@@ -43,13 +44,28 @@
 	function submitir(){
 
 		var nroProtocolo = $("#nroProtocolo").val();
-		var forward = $("#forward").val();
-		parent.location=contextRoot() + "/estudio.do?metodo="+forward+"&nroProtocolo="+nroProtocolo;
+		var url = '../../estudio.do?metodo=validarNroProtocolo&nroProtocolo='+nroProtocolo;
+		$.post(url,null,validarNroProtocoloCallBack);		
+	}
+
+	function validarNroProtocoloCallBack(xmlDoc){
+
+	   	var nodos = xmlDoc.getElementsByTagName('error');
+	    if (nodos.length==0){
+		    
+			var forward = $("#forward").val();
+			var nroProtocolo = $("#nroProtocolo").val();
+			parent.location=contextRoot() + "/estudio.do?metodo="+forward+"&nroProtocolo="+nroProtocolo;
+			
+	    } else {
+	    	$('#errores').text(nodos[0].firstChild.nodeValue);		 	
+	    }	
 	}
 	
 </script>
 
 <div id="exitoGrabado" class="verdeExito">${exitoGrabado}</div>
+<div id="errores" class="rojoAdvertencia"></div>
 <input type="hidden" value="${forward}" id="forward">
 <table border="0" class="cuadrado" align="center" width="60%"
 	cellpadding="2">
@@ -75,7 +91,7 @@
 					</td>						
 					<td align="left">
 						<input class="botonerab" type="text" size="20" name="estudioDTO.numero" 
-								onkeypress="return evitarAutoSubmit(event)" id="nroProtocolo">
+								onkeypress="javascript:esNumerico(event); return evitarAutoSubmit(event)" id="nroProtocolo">
 						<input class="botonerab" type="button" value="Buscar" onclick="javascript:submitir();">
 					</td>	
 								

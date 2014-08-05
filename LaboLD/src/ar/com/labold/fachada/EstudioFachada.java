@@ -192,4 +192,10 @@ public class EstudioFachada {
 	public boolean existeEstudio(long nroEstudio) {
 		return estudioDAO.existeEstudio(nroEstudio);
 	}	
+	
+	public void eliminarEstudio(Long idEstudio){
+	
+		Estudio estudio = estudioDAO.getEstudio(idEstudio);
+		estudioDAO.eliminarEstudio(estudio);
+	}
 }

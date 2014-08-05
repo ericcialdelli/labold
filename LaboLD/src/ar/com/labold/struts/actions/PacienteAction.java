@@ -123,10 +123,12 @@ public class PacienteAction extends ValidadorAction {
 		try {
 			WebApplicationContext ctx = getWebApplicationContext();
 			PacienteFachada pacienteFachada = (PacienteFachada) ctx.getBean("pacienteFachada");
-						
+			
+			String forward = request.getParameter("forward");
 			List<Paciente> listaPacientes = pacienteFachada.getPacientes();
 			
 			request.setAttribute("listaPacientes", listaPacientes);
+			request.setAttribute("forward", forward);
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
@@ -149,11 +151,13 @@ public class PacienteAction extends ValidadorAction {
 			PacienteFachada pacienteFachada = (PacienteFachada) ctx.getBean("pacienteFachada");
 			ObraSocialFachada obraSocialFachada = (ObraSocialFachada) ctx.getBean("obraSocialFachada");
 			
-			String idPaciente = request.getParameter("id");			
+			String idPaciente = request.getParameter("id");
+			String forward = request.getParameter("forward");
 			Paciente paciente = pacienteFachada.getPaciente(Long.valueOf(idPaciente));
 			
 			request.setAttribute("obrasSociales", obraSocialFachada.getObrasSociales());
 			request.setAttribute("paciente", paciente);
+			request.setAttribute("forward", forward);
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
@@ -193,6 +197,32 @@ public class PacienteAction extends ValidadorAction {
 
 		return mapping.findForward(strForward);
 	}		
+	
+	@SuppressWarnings("unchecked")
+	public ActionForward eliminarPaciente(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoEliminarPaciente";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			PacienteFachada pacienteFachada = (PacienteFachada) ctx.getBean("pacienteFachada");
+			
+			PacienteForm pacienteForm = (PacienteForm)form;
+						
+			pacienteFachada.eliminarPaciente(pacienteForm.getPacienteDTO());
+			
+			request.setAttribute("exitoGrabado", "El Paciente "+ pacienteForm.getPacienteDTO().getNombre() + ", "+ pacienteForm.getPacienteDTO().getApellido() +" se ha eliminado ");
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}	
 	
 	public boolean validarPacienteForm(StringBuffer error, ActionForm form) {
 		

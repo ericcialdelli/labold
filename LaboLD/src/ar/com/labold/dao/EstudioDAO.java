@@ -118,5 +118,12 @@ public class EstudioDAO extends HibernateDaoSupport {
 		List<Estudio> estudios = criteria.list();
 
 		return (estudios.size() > 0);
-	}	
+	}
+	
+	public void eliminarEstudio(Estudio estudio){
+		
+		this.getHibernateTemplate().delete(estudio);
+		this.getHibernateTemplate().flush();
+		this.getHibernateTemplate().clear();		
+	}
 }
