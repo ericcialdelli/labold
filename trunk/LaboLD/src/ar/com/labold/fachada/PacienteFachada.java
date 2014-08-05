@@ -89,5 +89,11 @@ public class PacienteFachada {
 		pacienteDTO.getObraSocial().setId(idObraSocial);
 		
 		this.modificacionPaciente(pacienteDTO);		
-	}	
+	}
+	
+	public void eliminarPaciente(PacienteDTO pacienteDTO){
+		
+		Paciente paciente = pacienteDAO.getPaciente(pacienteDTO.getId());
+		pacienteDAO.eliminarPaciente(paciente);
+	}
 }

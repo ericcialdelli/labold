@@ -22,14 +22,14 @@
 
 	function volver(){
 
-		parent.location=contextRoot() + "/paciente.do?metodo=recuperarPacientes";
+		parent.location=contextRoot() + "/paciente.do?metodo=recuperarPacientes&forward=${forward}";
 	}	
 </script>
 
 <div id="errores" class="rojoAdvertencia">${error}</div>
 
 <html:form action="paciente" styleId="pacienteFormId">
-	<html:hidden property="metodo" value="modificacionPaciente"/>
+	<html:hidden property="metodo" value="" styleId="idMetodo"/>
 	<html:hidden property="pacienteDTO.id" value="${paciente.id}"/>
 	
 	<table border="0" class="cuadrado" align="center" width="60%" cellpadding="2">
@@ -111,8 +111,13 @@
 			<td height="20" colspan="2"></td>
 		</tr>
 		<tr>
-			<td height="20" colspan="2">				
-				<input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();">
+			<td height="20" colspan="2">
+				<c:if test="${forward=='modificacionPaciente'}">
+					<input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();">
+				</c:if>
+				<c:if test="${forward=='eliminarPaciente'}">
+					<input type="submit" class="botonerab" value="Eliminar" id="enviar">
+				</c:if>											
 				<input type="button" class="botonerab" value="Volver" id="enviar" onclick="javascript:volver();">
 			</td>
 		</tr>
@@ -126,4 +131,5 @@
 
 	$('#nombre').focus();
 	$('#obraSocial').val("${paciente.obraSocial.id}");
+	$('#idMetodo').val("${forward}");
 </script>

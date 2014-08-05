@@ -1,5 +1,6 @@
 package ar.com.labold.struts.actions;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -110,7 +111,7 @@ public class EstudioAction extends ValidadorAction {
 			if(forward.equals("recuperarEstudioParaModificacion")){
 				titulo="Modificar Estudio";
 			}else{
-				if(forward.equals("recuperarEstudioParaModificacion")){
+				if(forward.equals("recuperarEstudioParaConsulta")){
 					titulo="Consulta de Estudios";
 				}else{
 					if(forward.equals("recuperarEstudioParaCompletar")){
@@ -125,7 +126,12 @@ public class EstudioAction extends ValidadorAction {
 								if(forward.equals("recuperarEstudioAgregarPracticas")){
 									titulo="Agregar Practicas a Estudio";
 								}else{
-									titulo="Eliminar Practicas de Estudio";
+									if(forward.equals("recuperarEstudioEliminarPracticas")){
+										titulo="Eliminar Practicas de Estudio";
+									}
+									else{
+										titulo="Eliminar Estudio";
+									}
 								}								
 							}							
 								
@@ -603,6 +609,56 @@ public class EstudioAction extends ValidadorAction {
 		return mapping.findForward(strForward);
 	}	
 	
+	@SuppressWarnings("unchecked")
+	public ActionForward recuperarEstudioParaEliminar(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoRecuperarEstudioParaEliminar";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			
+			String nroProtocolo = request.getParameter("nroProtocolo");			
+			Estudio estudio = estudioFachada.getEstudioPorNroProtocolo(Long.valueOf(nroProtocolo));
+			
+			request.setAttribute("estudio", estudio);
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}		
+	
+	@SuppressWarnings("unchecked")
+	public ActionForward eliminarEstudio(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoEliminarEstudio";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			EstudioForm estudioForm = (EstudioForm)form;			
+						
+			estudioFachada.eliminarEstudio(estudioForm.getEstudioDTO().getId());
+			
+			request.setAttribute("exitoGrabado", "El Estudio n° "+estudioForm.getEstudioDTO().getNumero()+" se ha eliminado");
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}		
+	
 	/**********************************************************************
 	 **********************	METODOS VALIDADORES ***************************
 	 **********************************************************************/
@@ -663,5 +719,34 @@ public class EstudioAction extends ValidadorAction {
 			return false;
 		}
 	}	
-	
+
+	@SuppressWarnings("unchecked")
+	public ActionForward validarNroProtocolo(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		PrintWriter out = null;
+		StringBuffer error = Validator.abrirXML();		
+
+		try {
+			out = response.getWriter();
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			String nroProtocolo = request.getParameter("nroProtocolo");
+			
+			if(!estudioFachada.existeEstudio(Long.valueOf(nroProtocolo))){
+				Validator.addErrorXML(error, "No existe un estudio con el nro "+nroProtocolo);
+			}
+									
+			Validator.cerrarXML(error);
+			out.write(error.toString());
+			response.setContentType("text/xml");			
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			Validator.addErrorXML(error, t.getMessage());
+		}
+
+		return null;
+	}	
 }

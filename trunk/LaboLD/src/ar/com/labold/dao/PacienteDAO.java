@@ -44,5 +44,12 @@ public class PacienteDAO extends HibernateDaoSupport {
 	public Paciente getPaciente(Long idPaciente){
 		
 		return (Paciente)getHibernateTemplate().get(Paciente.class,idPaciente);
-	}	
+	}
+	
+	public void eliminarPaciente(Paciente paciente){
+		
+		this.getHibernateTemplate().delete(paciente);
+		this.getHibernateTemplate().flush();
+		this.getHibernateTemplate().clear();		
+	}
 }
