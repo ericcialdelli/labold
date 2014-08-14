@@ -1,7 +1,9 @@
 package ar.com.labold.fachada;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +16,7 @@ import ar.com.labold.dto.ValorPracticaDTO;
 import ar.com.labold.negocio.Estudio;
 import ar.com.labold.negocio.Paciente;
 import ar.com.labold.negocio.Practica;
+import ar.com.labold.negocio.SubItemPractica;
 import ar.com.labold.negocio.ValorPractica;
 import ar.com.labold.negocio.ValorSubItemPractica;
 import ar.com.labold.negocio.ValorUnidadFacturacion;
@@ -197,5 +200,55 @@ public class EstudioFachada {
 	
 		Estudio estudio = estudioDAO.getEstudio(idEstudio);
 		estudioDAO.eliminarEstudio(estudio);
+	}
+	
+	public Map<Long,String> recuperarPracticasAnteriores(Long idPaciente){
+		Map<Long,String> map = new HashMap<Long, String>();
+		List<Estudio> listaEstudios = this.getEstudios(idPaciente);
+		for (Estudio estudio : listaEstudios) {			
+			for (ValoresEstudio valorEstudio : estudio.getValoresEstudio()) {				
+				for (ValorPractica valorPractica : valorEstudio.getValoresPracticas()) {
+					String v = map.get(valorPractica.getId());
+					if(v==null){
+						v="";
+					}
+					v=v+valorPractica.getValor()+"\n";
+					map.put(valorPractica.getId(), v);
+				}
+				for (ValorSubItemPractica valorSubItemPractica : valorEstudio.getValorSubItemPractica()) {
+					for (ValorPractica valorPractica : valorSubItemPractica.getValoresPracticas()) {
+						String v = map.get(valorPractica.getId());
+						if(v==null){
+							v="";
+						}
+						v=v+valorPractica.getValor()+"\n";
+						map.put(valorPractica.getId(), v);						
+					}
+				}				
+			}
+		}
+		for (Estudio estudio : listaEstudios) {			
+			for (ValoresEstudio valorEstudio : estudio.getValoresEstudio()) {				
+				for (ValorPractica valorPractica : valorEstudio.getValoresPracticas()) {
+					String v = map.get(valorPractica.getId());
+					if(v==null){
+						v="";
+					}
+					v=v+valorPractica.getValor()+"\n";
+					map.put(valorPractica.getId(), v);
+				}
+				for (ValorSubItemPractica valorSubItemPractica : valorEstudio.getValorSubItemPractica()) {
+					for (ValorPractica valorPractica : valorSubItemPractica.getValoresPracticas()) {
+						String v = map.get(valorPractica.getId());
+						if(v==null){
+							v="";
+						}
+						v=v+valorPractica.getValor()+"\n";
+						map.put(valorPractica.getId(), v);						
+					}
+				}				
+			}
+		}		
+		return map;
 	}
 }

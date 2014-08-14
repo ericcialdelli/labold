@@ -246,6 +246,8 @@ public class EstudioAction extends ValidadorAction {
 			Estudio estudio = estudioFachada.getEstudioPorNroProtocolo(Long.valueOf(nroProtocolo));
 			
 			request.setAttribute("estudio", estudio);
+			Map<Long,String> map = estudioFachada.recuperarPracticasAnteriores(estudio.getPaciente().getId());			
+			request.setAttribute("estudioV", "asdasd\nasdasdsad");			
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
