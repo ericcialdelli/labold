@@ -178,7 +178,8 @@
 									</td>
 									<td width="20%" align="left">
 										<input type="text" size="10" class="botonerab" name="listaValoresPractica[<%=i%>].valor"
-											value="${valorPractica.valor}" onkeyup="verificarValor('<%=i%>');" id="valor<%=i%>">	
+											value="${valorPractica.valor}" onkeyup="verificarValor('<%=i%>');" id="valor<%=i%>"
+											title="${valorPractica.practica.id}">	
 									</td>
 									<td width="55%" align="left">
 										<c:choose>
