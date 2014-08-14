@@ -177,9 +177,9 @@
 										<input type="hidden" name="listaValoresPractica[<%=i%>].id" value="${valorPractica.id}">
 									</td>
 									<td width="20%" align="left">
-										<input type="text" size="10" class="botonerab" name="listaValoresPractica[<%=i%>].valor"
+										<input type="text" size="15" class="botonerab" name="listaValoresPractica[<%=i%>].valor"
 											value="${valorPractica.valor}" onkeyup="verificarValor('<%=i%>');" id="valor<%=i%>"
-											title="${valorPractica.practica.id}">	
+											title="${map[valorPractica.id]}">	
 									</td>
 									<td width="55%" align="left">
 										<c:choose>
@@ -228,8 +228,9 @@
 													<input type="hidden" name="listaValoresPractica[<%=i%>].id" value="${prac.id}">
 												</td>
 												<td width="20%" align="left">
-													<input type="text" size="10" class="botonerab" name="listaValoresPractica[<%=i%>].valor"
-														value="${prac.valor}" onkeyup="verificarValor('<%=i%>');" id="valor<%=i%>">
+													<input type="text" size="15" class="botonerab" name="listaValoresPractica[<%=i%>].valor"
+														value="${prac.valor}" onkeyup="verificarValor('<%=i%>');" id="valor<%=i%>"
+														title="${map[prac.id]}">
 												</td>
 												<td width="60%" align="left">
 										<c:choose>

@@ -226,28 +226,6 @@ public class EstudioFachada {
 					}
 				}				
 			}
-		}
-		for (Estudio estudio : listaEstudios) {			
-			for (ValoresEstudio valorEstudio : estudio.getValoresEstudio()) {				
-				for (ValorPractica valorPractica : valorEstudio.getValoresPracticas()) {
-					String v = map.get(valorPractica.getId());
-					if(v==null){
-						v="";
-					}
-					v=v+valorPractica.getValor()+"\n";
-					map.put(valorPractica.getId(), v);
-				}
-				for (ValorSubItemPractica valorSubItemPractica : valorEstudio.getValorSubItemPractica()) {
-					for (ValorPractica valorPractica : valorSubItemPractica.getValoresPracticas()) {
-						String v = map.get(valorPractica.getId());
-						if(v==null){
-							v="";
-						}
-						v=v+valorPractica.getValor()+"\n";
-						map.put(valorPractica.getId(), v);						
-					}
-				}				
-			}
 		}		
 		return map;
 	}
