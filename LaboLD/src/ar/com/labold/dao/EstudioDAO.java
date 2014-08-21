@@ -110,6 +110,17 @@ public class EstudioDAO extends HibernateDaoSupport {
 		this.getHibernateTemplate().clear();
 	}
 	
+	public boolean existeEstudio(long numero, long id) {
+
+		Criteria criteria = getSession().createCriteria(Estudio.class);
+		criteria.add(Restrictions.eq("numero", numero));
+		criteria.add(Restrictions.ne("id", id));
+		
+		List<Estudio> estudios = criteria.list();
+
+		return (estudios.size() > 0);
+	}
+
 	public boolean existeEstudio(long numero) {
 
 		Criteria criteria = getSession().createCriteria(Estudio.class);
@@ -118,7 +129,7 @@ public class EstudioDAO extends HibernateDaoSupport {
 		List<Estudio> estudios = criteria.list();
 
 		return (estudios.size() > 0);
-	}
+	}	
 	
 	public void eliminarEstudio(Estudio estudio){
 		

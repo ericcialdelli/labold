@@ -21,7 +21,7 @@
 	});
 
 	function submitir(){
-		validarForm("estudioFormId","../estudio","validarEstudioForm","EstudioForm");
+		validarForm("estudioFormId","../estudio","validarModificacionEstudioForm","EstudioForm");
 	}
 
 	function volver(){
