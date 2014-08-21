@@ -195,6 +195,10 @@ public class EstudioFachada {
 	public boolean existeEstudio(long nroEstudio) {
 		return estudioDAO.existeEstudio(nroEstudio);
 	}	
+
+	public boolean existeEstudio(long nroEstudio, long id) {
+		return estudioDAO.existeEstudio(nroEstudio,id);
+	}
 	
 	public void eliminarEstudio(Long idEstudio){
 	

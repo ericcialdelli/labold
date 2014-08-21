@@ -324,7 +324,7 @@ public class EstudioAction extends ValidadorAction {
 			EstudioForm estudioForm = (EstudioForm)form;
 			
 			// valido nuevamente por seguridad.  
-			if (!validarEstudioForm(new StringBuffer(), estudioForm)) {
+			if (!validarModificacionEstudioForm(new StringBuffer(), estudioForm)) {
 				throw new Exception("Error de Seguridad");
 			}
 			
@@ -705,6 +705,43 @@ public class EstudioAction extends ValidadorAction {
 		}
 	}
 
+	public boolean validarModificacionEstudioForm(StringBuffer error, ActionForm form) {
+		
+		try{
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");			
+			EstudioForm estudioForm = (EstudioForm)form;
+			EstudioDTO estudio = estudioForm.getEstudioDTO();
+			
+			boolean ok1 = true;
+			boolean ok2 = true;
+			boolean ok3 = true;
+			boolean ok4 = true;
+			
+			ok1 = Validator.validarEnteroMayorQue(0, String.valueOf(estudio.getNumero()), "Numero", error);			
+
+			if(ok1){
+				ok1 = !estudioFachada.existeEstudio(estudio.getNumero(),estudio.getId());
+
+				if (!ok1) {
+					Validator.addErrorXML(error, "El número de Estudio ya existe, especifique otro");
+				}
+			}
+			
+			ok2 = Validator.validarComboRequeridoSinNull("-1",Long.toString(estudio.getPaciente().getId()),
+																			"Paciente",error);			
+			
+			ok4 = Validator.requerido(estudio.getFecha(),"Fecha", error);
+
+			return ok1 && ok2 && ok3 && ok4;
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			Validator.addErrorXML(error, "Error Inesperado");
+			return false;
+		}
+	}	
+	
 	public boolean validarValorUnidadFacturacionForm(StringBuffer error, ActionForm form) {
 		
 		try{	
