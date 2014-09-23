@@ -27,6 +27,9 @@
 		<form-bean name="valorUnidadFacturacionForm"
 			type="ar.com.labold.struts.actions.forms.ValorUnidadFacturacionForm">
 		</form-bean>				
+		<form-bean name="medicoForm"
+			type="ar.com.labold.struts.actions.forms.MedicoForm">
+		</form-bean>
 														
 	</form-beans>
 
@@ -46,7 +49,8 @@
 			<forward name=".reporteEstudiosARealizarEntreFechas" path=".reporteEstudiosEntreFechas" />
 			<forward name=".altaGrupoPractica" path=".altaGrupoPractica" />
 			<forward name=".generarReportesEstudios" path=".generarReportesEstudios" />
-			<forward name=".reporteFacturacionEntreFechas" path=".reporteEstudiosEntreFechas" />						
+			<forward name=".reporteFacturacionEntreFechas" path=".reporteEstudiosEntreFechas" />
+			<forward name=".altaMedico" path=".altaMedico" />	
 		</action>	
 	
 		<!-- MENU -->
@@ -101,6 +105,16 @@
 			<forward name="exitoModificacionObraSocial" path="/obraSocial.do?metodo=recuperarObrasSociales" />										
 		</action>				
 		<!-- FIN OBRA SOCIAL -->				
+		
+		<!-- MEDICO -->
+		<action path="/medico" type="ar.com.labold.struts.actions.MedicoAction"
+			parameter="metodo" name="medicoForm" scope="request">
+			<forward name="exitoAltaMedico" path="/jsp.do?page=.altaMedico" />
+			<forward name="exitoRecuperarMedicos" path=".recuperarMedicos" />
+			<forward name="exitoRecuperarMedico" path=".modificarMedico" />
+			<forward name="exitoModificacionMedico" path="/medico.do?metodo=recuperarMedicos" />																
+		</action>				
+		<!-- FIN MEDICO -->		
 		
 		<!-- PRACTICA -->
 		<action path="/practica" type="ar.com.labold.struts.actions.PracticaAction"

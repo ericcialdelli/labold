@@ -65,6 +65,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	<bean id="practicaDAO" class="ar.com.labold.dao.PracticaDAO" parent="abstractRepository" />
 	<bean id="estudioDAO" class="ar.com.labold.dao.EstudioDAO" parent="abstractRepository" />
 	<bean id="reportesDAO" class="ar.com.labold.dao.ReportesDAO" parent="abstractRepository" />
+	<bean id="medicoDAO" class="ar.com.labold.dao.MedicoDAO" parent="abstractRepository" />
 	
 	<!--  *******************-->
 	<!--     Fachadas        -->
@@ -98,9 +99,11 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 		<constructor-arg ref="pacienteDAO" />
 		<constructor-arg ref="practicaDAO" />		
 	</bean>
-
 	<bean id="reportesFachada" class="ar.com.labold.fachada.ReportesFachada">
 		<constructor-arg ref="reportesDAO" />		
+	</bean>
+	<bean id="medicoFachada" class="ar.com.labold.fachada.MedicoFachada">
+		<constructor-arg ref="medicoDAO" />		
 	</bean>
 	
 	<!--  *******************-->
