@@ -65,6 +65,14 @@ public class Constantes {
 	public static final String EXISTE_OBRA_SOCIAL = "Ya existe una Obra Social con ese nombre";
 	//FIN OBRA SOCIAL
 
+	//MEDICO
+	public static final String EXITO_ALTA_MEDICO = "El Médico se ha dado de alta con exito";
+	
+	public static final String EXISTE_MEDICO = "Ya existe un Médico con esa matricula";
+	
+	public static final String EXITO_MODIFICACION_MEDICO = "El Médico se ha modificado con exito";
+	//FIN MEDICO	
+	
 	//PACIENTE
 	public static final String EXITO_ALTA_PACIENTE = "El Paciente se ha dado de alta con exito";
 	

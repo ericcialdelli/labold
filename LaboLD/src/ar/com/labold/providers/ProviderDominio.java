@@ -10,6 +10,7 @@ import java.util.TreeMap;
 
 import ar.com.labold.dto.EstudioDTO;
 import ar.com.labold.dto.GrupoPracticaDTO;
+import ar.com.labold.dto.MedicoDTO;
 import ar.com.labold.dto.ObraSocialDTO;
 import ar.com.labold.dto.PacienteDTO;
 import ar.com.labold.dto.PracticaDTO;
@@ -19,6 +20,7 @@ import ar.com.labold.dto.UsuarioDTO;
 import ar.com.labold.negocio.Estudio;
 import ar.com.labold.negocio.GrupoPractica;
 import ar.com.labold.negocio.ItemMenu;
+import ar.com.labold.negocio.Medico;
 import ar.com.labold.negocio.ObraSocial;
 import ar.com.labold.negocio.Paciente;
 import ar.com.labold.negocio.Practica;
@@ -122,6 +124,32 @@ public abstract class ProviderDominio {
 		obraSocial.setNombre(obraSocialDTO.getNombre());
 		
 		return obraSocial;
+	}	
+
+	//Se usa en el alta de Medico
+	public static Medico getMedico(MedicoDTO medicoDTO){
+		
+		Medico medico = new Medico();
+		medico.setId(medicoDTO.getId());
+		medico.setNombre(medicoDTO.getNombre());
+		medico.setApellido(medicoDTO.getApellido());
+		medico.setTelefono(medicoDTO.getTelefono());
+		medico.setMatricula(medicoDTO.getMatricula());
+		medico.setEspecialidad(medicoDTO.getEspecialidad());
+		
+		return medico;
+	}	
+	
+	//Se usa en la modificacion de Medico
+	public static Medico getMedico(Medico medico, MedicoDTO medicoDTO){
+			
+		medico.setNombre(medicoDTO.getNombre());
+		medico.setApellido(medicoDTO.getApellido());
+		medico.setTelefono(medicoDTO.getTelefono());
+		medico.setMatricula(medicoDTO.getMatricula());
+		medico.setEspecialidad(medicoDTO.getEspecialidad());
+		
+		return medico;
 	}	
 	
 	//Se usa en el alta de la Practica

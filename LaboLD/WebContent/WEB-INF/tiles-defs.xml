@@ -74,6 +74,24 @@
 	</definition>			
 	<!-- FIN OBRA SOCIAL -->	
 
+	<!-- MEDICO -->
+	<definition name=".altaMedico" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/altaMedico.jsp" />
+	</definition>	
+	
+	<definition name=".recuperarMedicos" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/recuperarMedicos.jsp" />
+	</definition>	
+	
+	<definition name=".modificarMedico" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/modificarMedico.jsp" />
+	</definition>			
+	<!-- FIN OBRA SOCIAL -->			
+	<!-- FIN MEDICO -->
+
 	<!-- PRACTICA -->
 	<definition name=".altaPractica" extends=".base">
 		<put name="title" value="LaboLD" />
