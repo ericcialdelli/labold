@@ -8,12 +8,14 @@ import java.util.Map;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.com.labold.dao.EstudioDAO;
+import ar.com.labold.dao.MedicoDAO;
 import ar.com.labold.dao.PacienteDAO;
 import ar.com.labold.dao.PracticaDAO;
 import ar.com.labold.dto.EstudioDTO;
 import ar.com.labold.dto.PracticaDTO;
 import ar.com.labold.dto.ValorPracticaDTO;
 import ar.com.labold.negocio.Estudio;
+import ar.com.labold.negocio.Medico;
 import ar.com.labold.negocio.Paciente;
 import ar.com.labold.negocio.Practica;
 import ar.com.labold.negocio.SubItemPractica;
@@ -29,14 +31,16 @@ public class EstudioFachada {
 	private EstudioDAO estudioDAO;
 	private PacienteDAO pacienteDAO;
 	private PracticaDAO practicaDAO;
+	private MedicoDAO medicoDAO;
 	
 	public EstudioFachada(){}
 	
-	public EstudioFachada(EstudioDAO pEstudioDAO, PacienteDAO pPacienteDAO, PracticaDAO pPracticaDAO){
+	public EstudioFachada(EstudioDAO pEstudioDAO, PacienteDAO pPacienteDAO, PracticaDAO pPracticaDAO, MedicoDAO pMedicoDAO){
 		
 		this.estudioDAO = pEstudioDAO;
 		this.pacienteDAO = pPacienteDAO;
 		this.practicaDAO = pPracticaDAO;
+		this.medicoDAO = pMedicoDAO;
 	}
 	
 	public double altaEstudio(EstudioDTO estudioDTO, List<PracticaDTO> listaPracticasDTO){
@@ -48,7 +52,8 @@ public class EstudioFachada {
 		}
 		
 		Paciente paciente = pacienteDAO.getPaciente(estudioDTO.getPaciente().getId());
-		Estudio estudio = ProviderDominio.getEstudio(estudioDTO, paciente,listaPracticas);
+		Medico medico = medicoDAO.getMedico(estudioDTO.getMedico().getId());
+		Estudio estudio = ProviderDominio.getEstudio(estudioDTO, paciente,listaPracticas,medico);
 		
 		estudioDAO.altaEstudio(estudio);
 		
@@ -78,8 +83,8 @@ public class EstudioFachada {
 	public void modificacionEstudio(EstudioDTO estudioDTO){
 		
 		Estudio estudio = estudioDAO.getEstudio(estudioDTO.getId());				
-		
-		estudioDAO.altaEstudio(ProviderDominio.getEstudio(estudio,estudioDTO));
+		Medico medico = medicoDAO.getMedico(estudioDTO.getMedico().getId());
+		estudioDAO.altaEstudio(ProviderDominio.getEstudio(estudio,estudioDTO,medico));
 	}	
 	
 	public long getProximoNroEstudio(){

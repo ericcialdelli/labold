@@ -14,8 +14,11 @@ public class EstudioDTO {
 	
 	private PacienteDTO paciente;
 	
+	private MedicoDTO medico;
+	
 	public EstudioDTO(){
 		paciente = new PacienteDTO();
+		medico = new MedicoDTO();
 	}
 
 	public Long getId() {
@@ -64,6 +67,14 @@ public class EstudioDTO {
 
 	public void setUnidadesFacturacionTotal(Double unidadesFacturacionTotal) {
 		this.unidadesFacturacionTotal = unidadesFacturacionTotal;
+	}
+
+	public MedicoDTO getMedico() {
+		return medico;
+	}
+
+	public void setMedico(MedicoDTO medico) {
+		this.medico = medico;
 	}
 
 }

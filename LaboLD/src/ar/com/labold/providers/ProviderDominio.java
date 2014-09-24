@@ -223,14 +223,15 @@ public abstract class ProviderDominio {
 	}	
 	
 	//Se usa en el alta del Estudio
-	public static Estudio getEstudio(EstudioDTO estudioDTO, Paciente paciente, List<Practica> listaPracticas){
+	public static Estudio getEstudio(EstudioDTO estudioDTO, Paciente paciente, List<Practica> listaPracticas, Medico medico){
 		
 		Estudio estudio = new Estudio(); 
 		estudio.setId(estudioDTO.getId());
 		estudio.setNumero(estudioDTO.getNumero());
 		estudio.setPaciente(paciente);
-		estudio.setSolicitadoPor(estudioDTO.getSolicitadoPor());
+		//estudio.setSolicitadoPor(estudioDTO.getSolicitadoPor());
 		estudio.setFecha(Fecha.stringDDMMAAAAToUtilDate(estudioDTO.getFecha()));
+		estudio.setMedico(medico);
 		
 		Map<Long,ValoresEstudio> mapValoresEstudio = new TreeMap<Long,ValoresEstudio>();
 		Map<Long,ValorSubItemPractica> mapValorSubItemPractica = new TreeMap<Long,ValorSubItemPractica>();
@@ -427,12 +428,13 @@ public abstract class ProviderDominio {
 	}
 	
 	//Se usa en la modificacion del Estudio
-	public static Estudio getEstudio(Estudio estudio, EstudioDTO estudioDTO){
+	public static Estudio getEstudio(Estudio estudio, EstudioDTO estudioDTO, Medico medico){
 					
 		estudio.setNumero(estudioDTO.getNumero());		
-		estudio.setSolicitadoPor(estudioDTO.getSolicitadoPor());
+		//estudio.setSolicitadoPor(estudioDTO.getSolicitadoPor());
 		estudio.setFecha(Fecha.stringDDMMAAAAToUtilDate(estudioDTO.getFecha()));
 		estudio.setUnidadesFacturacionTotal(estudioDTO.getUnidadesFacturacionTotal());
+		estudio.setMedico(medico);
 		
 		return estudio;
 	}		

@@ -76,8 +76,11 @@
 		
 		<tr>
 			<td class="botoneralNegritaRight" width="12%" >Solicitado Por</td>
-			<td align="left" width="30%">			
-				<html:text property="estudioDTO.solicitadoPor" value="${estudio.solicitadoPor}" styleClass="botonerab" size="30"/>
+			<td align="left" width="30%">
+				<html:select property='estudioDTO.medico.id' styleClass="botonerab" value="${estudio.medico.id}">
+					<html:option value="-1"> -- Seleccione un médico -- </html:option>
+					<html:optionsCollection  name="medicos" value="id" label="descripcion" />
+				</html:select>						
 			</td>	
 			
 			<td class="botoneralNegritaRight" width="30%" >Fecha</td>
@@ -89,7 +92,7 @@
 		</tr>
 		
 		<tr>
-			<td colspan="2"></td>
+			<td colspan="2"></td>			
 			<td class="botoneralNegritaRight" width="30%" >Unidades de Facturación</td>
 			<td align="left">			
 				<input type="text" value="${estudio.unidadesFacturacionTotal}" class="botonerab" size="10" name="estudioDTO.unidadesFacturacionTotal"/>

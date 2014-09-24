@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ar.com.labold.dao.MedicoDAO;
 import ar.com.labold.dto.MedicoDTO;
 import ar.com.labold.dto.ObraSocialDTO;
+import ar.com.labold.dto.PacienteDTO;
 import ar.com.labold.negocio.Medico;
 import ar.com.labold.negocio.ObraSocial;
 import ar.com.labold.negocio.exception.NegocioException;
@@ -36,13 +37,15 @@ public class MedicoFachada {
 		return medicoDAO.existeMedico(medico.getMatricula(),medico.getId());
 	}
 	
-	public void altaMedico(MedicoDTO medico) throws NegocioException{
+	public Medico altaMedico(MedicoDTO medico) throws NegocioException{
 		
-		medicoDAO.altaMedico(ProviderDominio.getMedico(medico));
+		return medicoDAO.altaMedico(ProviderDominio.getMedico(medico));
 	}
 	
 	public List<Medico> getMedicos(){
 		
+		//medicoDAO.agregarMedicos();
+		//medicoDAO.trimMedicos();
 		return medicoDAO.getMedicos();
 	}
 	
@@ -51,10 +54,36 @@ public class MedicoFachada {
 		return medicoDAO.getMedico(idMedico);
 	}
 	
-	public void modificacionMedico(MedicoDTO medicoDTO) throws NegocioException{
+	public Medico modificacionMedico(MedicoDTO medicoDTO) throws NegocioException{
 		
 		Medico medico = medicoDAO.getMedico(medicoDTO.getId());
 		
-		medicoDAO.altaMedico(ProviderDominio.getMedico(medico,medicoDTO));
-	}	
+		return medicoDAO.altaMedico(ProviderDominio.getMedico(medico,medicoDTO));
+	}
+	
+	public Medico altaMedicoDesdeAltaEstudio(String nombre,String apellido,String telefono, 
+											 String matricula,String especialidad) throws NegocioException{
+		MedicoDTO medicoDTO = new MedicoDTO();
+		medicoDTO.setNombre(nombre);
+		medicoDTO.setApellido(apellido);
+		medicoDTO.setTelefono(telefono);
+		medicoDTO.setMatricula(matricula);
+		medicoDTO.setEspecialidad(especialidad);
+		
+		return this.altaMedico(medicoDTO);		
+	}
+	
+	public Medico modificarMedicoDesdeAltaEstudio(Long idMedico, String nombre,String apellido,String telefono, 
+												  String matricula,String especialidad) throws NegocioException{
+		
+		MedicoDTO medicoDTO = new MedicoDTO();
+		medicoDTO.setId(idMedico);
+		medicoDTO.setNombre(nombre);
+		medicoDTO.setApellido(apellido);
+		medicoDTO.setTelefono(telefono);
+		medicoDTO.setMatricula(matricula);
+		medicoDTO.setEspecialidad(especialidad);
+		
+		return this.modificacionMedico(medicoDTO);
+	}
 }

@@ -129,13 +129,16 @@ public class MedicoAction extends ValidadorAction {
 			MedicoForm medicoForm = (MedicoForm)form;
 			WebApplicationContext ctx = getWebApplicationContext();
 			MedicoFachada medicoFachada = (MedicoFachada)ctx.getBean("medicoFachada");
-			
+			boolean existe = false;
 			boolean b1 = Validator.requerido(medicoForm.getMedicoDTO().getNombre(),"Nombre", error);
 			boolean b2 = Validator.requerido(medicoForm.getMedicoDTO().getApellido(),"Apellido", error);
-			boolean existe = medicoFachada.existeMedico(medicoForm.getMedicoDTO());
-			if (existe) {
-				Validator.addErrorXML(error, Constantes.EXISTE_MEDICO);
-			}
+			
+			if(!medicoForm.getMedicoDTO().getMatricula().equals("")){
+				existe = medicoFachada.existeMedico(medicoForm.getMedicoDTO());
+				if (existe) {
+					Validator.addErrorXML(error, Constantes.EXISTE_MEDICO);
+				}
+			}	
 			return !existe && b1 && b2;
 
 		} catch (Throwable t) {

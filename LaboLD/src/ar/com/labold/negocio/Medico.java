@@ -72,4 +72,9 @@ public class Medico {
 	public void setEspecialidad(String especialidad) {
 		this.especialidad = especialidad;
 	}
+	
+	public String getDescripcion(){
+		
+		return this.getApellido()+", "+this.getNombre()+" - "+((this.getMatricula()==null)?"":this.getMatricula());
+	}
 }

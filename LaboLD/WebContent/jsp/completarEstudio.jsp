@@ -121,7 +121,7 @@
 		<tr>
 			<td class="botoneralNegritaRight" width="12%" >Solicitado Por</td>
 			<td align="left" width="30%">			
-				<input type="text" value="${estudio.solicitadoPor}" class="botonerab" size="30" readonly="readonly"/>
+				<input type="text" value="${estudio.medico.descripcion}" class="botonerab" size="30" readonly="readonly"/>
 			</td>	
 			
 			<td class="botoneralNegritaRight" width="30%" >Fecha</td>
@@ -133,7 +133,12 @@
 		</tr>
 		
 		<tr>
-			<td colspan="2"></td>
+			<td class="botoneralNegritaRight" width="12%" >Solicitado Por</td>
+			<td align="left" width="30%">			
+				<input type="text" value="${estudio.solicitadoPor}" class="botonerab" size="30" readonly="readonly"/>
+			</td>
+		
+			<!-- <td colspan="2"></td>-->
 			<td class="botoneralNegritaRight" width="30%" >Unidades de Facturación</td>
 			<td align="left">			
 				<input type="text" value="${estudio.unidadesFacturacionTotal}" class="botonerab" size="10" readonly="readonly"/>
