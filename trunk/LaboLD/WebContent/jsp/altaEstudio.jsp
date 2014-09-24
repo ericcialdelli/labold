@@ -13,6 +13,9 @@
 <script type="text/javascript"
 	src="<html:rewrite page='/dwr/interface/PacienteFachada.js'/>"></script>
 
+<script type="text/javascript"
+	src="<html:rewrite page='/dwr/interface/MedicoFachada.js'/>"></script>
+
 <link rel="stylesheet" href="<html:rewrite page='/css/ui-lightness/jquery-ui-1.8.10.custom.css'/>"
 	type="text/css">
 
@@ -267,13 +270,129 @@
 	}
 
 //------Fin Agregar Paciente---------//
+
+//------Agregar Medico---------//
 	
+	function abrirVentantAgregarMedico(){
+
+		$('#textoErrorMedico').text("");
+		$('#tdAceptarMedico').show();
+		$('#tdModificarMedico').hide();
+		$('#medico').val("");
+		$('#nombreMedico').val("");
+		$('#apellidoMedico').val("");
+		$('#telefonoMedico').val("");
+		$('#matriculaMedico').val("");
+		$('#especialidadMedico').val("");			
+		$('#dialogoMedico').dialog({title: 'Agregar Médico', height: 300, width: 500, modal: true});
+	}
+
+	function agregarMedico(){
+			
+		var form = $('#medicoFormId').serialize(); 
+		var url = '../../medico.do?metodo=validar&validador=validarMedicoForm&form=MedicoForm&formJsp=medicoFormId';		
+		$.post(url,form,validarMedicoFormCallBack);		
+	}
+
+	function validarMedicoFormCallBack(xmlDoc){
+
+	   	var nodos = xmlDoc.getElementsByTagName('error');
+	    if (nodos.length==0){
+
+			MedicoFachada.altaMedicoDesdeAltaEstudio($('#nombreMedico').val(),$('#apellidoMedico').val(),$('#telefonoMedico').val(),
+													 $('#matriculaMedico').val(),$('#especialidadMedico').val(),mostrarMedicoCallback);
+	    	
+	    } else {
+	    	$('#textoError').text("");
+		    for(var i=0; i < nodos.length; i++) { 
+			    $('#textoError').append( '<div>* ' + nodos[i].firstChild.nodeValue + '</div>');
+		    }
+		    $('#textoError').show();
+	    }
+	}
+
+	function mostrarMedicoCallback(medico){
+
+		$('#comboMedicos').hide();
+		$('#comboMedicos').html("");
+		$('#inputMedico').show();
+		$('#idMedicoAgregado').val(medico.id);		
+		$('#nombreMedicoAgregado').val(medico.apellido+", "+medico.nombre+" - "+medico.matricula);
+
+		cerrarVentanaAgregarMedico();
+	}
+
+//------Fin Agregar Medico---------//
+
+//------Modificar Medico---------//
+	
+	function abrirVentantModificarMedico(){
+		MedicoFachada.getMedico($('#idMedico').val(),mostrarMedicoModificacionCallback);
+		
+	}
+
+	function mostrarMedicoModificacionCallback(medico){
+		
+		$('#textoErrorMedico').text("");
+		$('#tdAceptarMedico').hide();
+		$('#tdModificarMedico').show();
+		$('#dialogoMedico').dialog({title: 'Modificar Medico', height: 300, width: 500, modal: true});
+		
+		$('#medico').val(medico.id);
+		$('#nombreMedico').val(medico.nombre);
+		$('#apellidoMedico').val(medico.apellido);
+		$('#telefonoMedico').val(medico.telefono);
+		$('#matriculaMedico').val(medico.matricula);
+		$('#especialidadMedico').val(medico.especialidad);		
+	}
+
+	function modificarMedico(){
+		
+		var form = $('#medicoFormId').serialize(); 
+		var url = '../../medico.do?metodo=validar&validador=validarMedicoForm&form=MedicoForm&formJsp=medicoFormId';		
+		$.post(url,form,validarModificacionMedicoFormCallBack);		
+	}
+
+	function validarModificacionMedicoFormCallBack(xmlDoc){
+
+	   	var nodos = xmlDoc.getElementsByTagName('error');
+	    if (nodos.length==0){
+
+			MedicoFachada.modificarMedicoDesdeAltaEstudio($('#medico').val(),$('#nombreMedico').val(),$('#apellidoMedico').val(),$('#telefonoMedico').val(),
+					$('#matriculaMedico').val(),$('#especialidadMedico').val(),cerrarVentanaAgregarMedico);
+				    	
+	    } else {
+	    	$('#textoErrorMedico').text("");
+		    for(var i=0; i < nodos.length; i++) { 
+			    $('#textoErrorMedico').append( '<div>* ' + nodos[i].firstChild.nodeValue + '</div>');
+		    }
+		    $('#textoErrorMedico').show();
+	    }
+	}
+
+	function cerrarVentanaAgregarMedico(){
+
+		$('#textoErrorMedico').hide();		
+		$('#dialogoMedico').dialog( "close" );
+	}
+		
+//------Fin Modificar Paciente---------//
+
 	function cambioPaciente(){
 
 		if($('#idPaciente').val()!=-1){
 			$('#botonModificar').removeAttr("disabled");
 		}else{
 			$('#botonModificar').attr("disabled","disabled");
+		}
+	}
+
+	function cambioMedico(){
+
+		if($('#idMedico').val()!=-1){
+			$('#botonModificarMedico').removeAttr("disabled");
+		}else{
+			$('#botonModificarMedico').attr("disabled","disabled");
 		}
 	}
 	
@@ -292,13 +411,13 @@
 			<td height="20" colspan="4"></td>
 		</tr>				
 		<tr>
-			<td class="botoneralNegritaRight" width="12%" >Número</td>
-			<td align="left" width="30%">			
+			<td class="botoneralNegritaRight" width="10%" >Número</td>
+			<td align="left" width="40%">			
 				<html:text property="estudioDTO.numero" value="${nroEstudio}" styleClass="botonerab" size="10"  
 					onkeypress="javascript:esNumerico(event);" readonly="readonly"/>
 			</td>
 			
-			<td class="botoneralNegritaRight" width="20%" >Paciente</td>
+			<td class="botoneralNegritaRight" width="12%" >Paciente</td>
 			<td align="left">
 				<div style="display: " id="comboPacientes">			
 					<select id="idPaciente" class="botonerab" name="estudioDTO.paciente.id" onchange="cambioPaciente()">
@@ -323,12 +442,29 @@
 		</tr>	
 		
 		<tr>
-			<td class="botoneralNegritaRight" width="12%" >Solicitado Por</td>
-			<td align="left" width="30%">			
-				<html:text property="estudioDTO.solicitadoPor" value="" styleClass="botonerab" size="40"/>
+			<td class="botoneralNegritaRight" width="10%" >Solicitado Por</td>
+			<td align="left" width="40%">
+				<div style="display: " id="comboMedicos">	
+					<select id="idMedico" class="botonerab" onchange="cambioMedico()" name="estudioDTO.medico.id">
+						<option value="-1">
+							Seleccione un médico...
+						</option>		
+						<c:forEach items="${medicos}" var="m">
+							<option value="${m.id}">
+								<c:out value="${m.apellido}"></c:out>, <c:out value="${m.nombre}"></c:out> - <c:out value="${m.matricula}"></c:out> 
+							</option>
+						</c:forEach>										
+					</select>							
+					<input type="button" value="Agregar" class="botonerab" onclick="abrirVentantAgregarMedico()">
+					<input id="botonModificarMedico" disabled="disabled" type="button" value="Modificar" class="botonerab" onclick="abrirVentantModificarMedico();">
+				</div>	
+				<div style="display: none" id="inputMedico">
+					<input type="text" value="" id="nombreMedicoAgregado" readonly="readonly" size="25">
+					<input type="hidden" value="" id="idMedicoAgregado" name="estudioDTO.medico.id">
+				</div>					
 			</td>
 			
-			<td class="botoneralNegritaRight" width="20%" >Fecha</td>
+			<td class="botoneralNegritaRight" width="12%" >Fecha</td>
 			<td align="left">			
 				<input id="datepicker" type="text" name="estudioDTO.fecha" readonly="readonly" class="botonerab">
 				<img alt="" src="<html:rewrite page='/imagenes/calendar/calendar2.gif'/>" align="top" width='17' height='21'>				
@@ -597,7 +733,76 @@
 	</html:form>	
 </div>
 
-
+<div id="dialogoMedico" style="display: none" >	
+	<br>
+	<div id="textoErrorMedico" class="rojoAdvertencia" style="display: none" ></div>
+	<br>
+		
+	<html:form action="medico" styleId="medicoFormId">
+		<html:hidden property="metodo" value="altaMedicoDesdeAltaEstudio"/>
+		<input type="hidden" id="medico" name="medicoDTO.id"/>
+	
+		<table border="0" class="cuadrado" align="center" width="80%" cellpadding="2" cellspacing="0">
+			<tr>
+				<td height="20" colspan="2"></td>
+			</tr>				
+			<tr>
+				<td class="botoneralNegritaRight" width="40%">Nombre</td>
+				<td align="left">
+					<html:text property="medicoDTO.nombre" value="" styleClass="botonerabGrande" styleId="nombreMedico"/>
+				</td>
+			</tr>	
+			<tr>
+				<td class="botoneralNegritaRight" width="40%">Apellido</td>
+				<td  align="left">
+					<html:text property="medicoDTO.apellido" value="" styleClass="botonerabGrande" styleId="apellidoMedico"/>			
+				</td>
+			</tr>
+			<tr>
+				<td class="botoneralNegritaRight" width="40%">Telefono</td>
+				<td  align="left">
+					<html:text property="medicoDTO.telefono" value="" styleClass="botonerabGrande" styleId="telefonoMedico"/>			
+				</td>
+			</tr>
+			<tr>
+				<td class="botoneralNegritaRight" width="40%">Matricula</td>
+				<td  align="left">
+					<html:text property="medicoDTO.matricula" value="" styleClass="botonerabGrande" styleId="matriculaMedico"/>			
+				</td>
+			</tr>				
+			<tr>
+				<td class="botoneralNegritaRight" width="40%">Especialidad</td>
+				<td  align="left">
+					<html:text property="medicoDTO.especialidad" value="" styleClass="botonerabGrande" styleId="especialidadMedico"/>			
+				</td>
+			</tr>				
+			<tr>
+				<td height="20" colspan="2"></td>
+			</tr>					
+		</table>		
+		
+		<table border="0" class="cuadradoSinBorde" align="center" width="80%" cellpadding="2">
+			<tr>
+				<td height="10" colspan="3"></td>
+			</tr>	
+			<tr>
+				<td width="48%" class="botonerab" align="right" id="tdAceptarMedico">
+					<input type="button" class="botonerab" value="Aceptar" onclick="javascript:agregarMedico();">
+				</td>
+				<td width="48%" class="botonerab" align="right" id="tdModificarMedico" style="display: none;">
+					<input type="button" class="botonerab" value="Modificar" onclick="javascript:modificarMedico();">
+				</td>				
+				<td width="4%"></td>			
+				<td width="48%" class="botonerab" align="left">
+					<input type="button" class="botonerab" value="Cancelar" onclick="javascript:cerrarVentanaAgregarMedico();">
+				</td>							
+			</tr>
+			<tr>
+				<td height="10" colspan="3"></td>
+			</tr>		
+		</table>
+	</html:form>	
+</div>
 
 <script type="text/javascript">
 

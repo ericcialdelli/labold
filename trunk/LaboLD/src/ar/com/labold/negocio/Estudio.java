@@ -39,6 +39,11 @@ public class Estudio {
 	@JoinColumn(name = "paciente_fk")	
 	private Paciente paciente;
 
+	@ManyToOne()
+	@Cascade(value = CascadeType.SAVE_UPDATE)
+	@JoinColumn(name = "medico_fk")	
+	private Medico medico;	
+	
 	@OneToMany(mappedBy = "estudio")
 	@Cascade(value = { CascadeType.SAVE_UPDATE, CascadeType.DELETE_ORPHAN })
 	private List<ValoresEstudio> valoresEstudio = new ArrayList<ValoresEstudio>();	
@@ -98,4 +103,13 @@ public class Estudio {
 	public void setUnidadesFacturacionTotal(Double unidadesFacturacionTotal) {
 		this.unidadesFacturacionTotal = unidadesFacturacionTotal;
 	}
+
+	public Medico getMedico() {
+		return medico;
+	}
+
+	public void setMedico(Medico medico) {
+		this.medico = medico;
+	}
+	
 }

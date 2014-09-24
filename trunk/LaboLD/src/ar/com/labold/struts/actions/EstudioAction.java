@@ -1,6 +1,7 @@
 package ar.com.labold.struts.actions;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,16 +15,21 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.springframework.web.context.WebApplicationContext;
 import ar.com.labold.dto.EstudioDTO;
+import ar.com.labold.dto.PracticaDTO;
 import ar.com.labold.fachada.EstudioFachada;
+import ar.com.labold.fachada.MedicoFachada;
 import ar.com.labold.fachada.ObraSocialFachada;
 import ar.com.labold.fachada.PacienteFachada;
 import ar.com.labold.fachada.PracticaFachada;
 import ar.com.labold.negocio.Estudio;
 import ar.com.labold.negocio.GrupoPractica;
+import ar.com.labold.negocio.Medico;
 import ar.com.labold.negocio.Paciente;
+import ar.com.labold.negocio.Practica;
 import ar.com.labold.negocio.ValorPractica;
 import ar.com.labold.negocio.ValorSubItemPractica;
 import ar.com.labold.negocio.ValoresEstudio;
+import ar.com.labold.providers.ProviderDominio;
 import ar.com.labold.struts.actions.forms.EstudioForm;
 import ar.com.labold.struts.actions.forms.PacienteForm;
 import ar.com.labold.struts.actions.forms.ValorUnidadFacturacionForm;
@@ -46,12 +52,14 @@ public class EstudioAction extends ValidadorAction {
 			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
 			PracticaFachada practicaFachada = (PracticaFachada) ctx.getBean("practicaFachada");
 			ObraSocialFachada obraSocialFachada = (ObraSocialFachada) ctx.getBean("obraSocialFachada");
+			MedicoFachada medicoFachada = (MedicoFachada) ctx.getBean("medicoFachada");
 			
 			request.setAttribute("obrasSociales", obraSocialFachada.getObrasSociales());						
 			request.setAttribute("nroEstudio", estudioFachada.getProximoNroEstudio());
 			request.setAttribute("pacientes", pacienteFachada.getPacientes());
 			List<GrupoPractica> gruposPracticas = practicaFachada.getGruposPractica();
 			request.setAttribute("gruposPracticas", gruposPracticas);
+			request.setAttribute("medicos", medicoFachada.getMedicos());
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
@@ -190,11 +198,13 @@ public class EstudioAction extends ValidadorAction {
 			WebApplicationContext ctx = getWebApplicationContext();
 			PacienteFachada pacienteFachada = (PacienteFachada) ctx.getBean("pacienteFachada");
 			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			MedicoFachada medicoFachada = (MedicoFachada) ctx.getBean("medicoFachada");
 			
 			String nroProtocolo = request.getParameter("nroProtocolo");			
 			Estudio estudio = estudioFachada.getEstudioPorNroProtocolo(Long.valueOf(nroProtocolo));
 
-			request.setAttribute("pacientes", pacienteFachada.getPacientes());			
+			request.setAttribute("pacientes", pacienteFachada.getPacientes());
+			request.setAttribute("medicos", medicoFachada.getMedicos());
 			request.setAttribute("estudio", estudio);
 			
 		} catch (Throwable t) {
@@ -648,7 +658,7 @@ public class EstudioAction extends ValidadorAction {
 			WebApplicationContext ctx = getWebApplicationContext();
 			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
 			EstudioForm estudioForm = (EstudioForm)form;			
-						
+				
 			estudioFachada.eliminarEstudio(estudioForm.getEstudioDTO().getId());
 			
 			request.setAttribute("exitoGrabado", "El Estudio n° "+estudioForm.getEstudioDTO().getNumero()+" se ha eliminado");
@@ -661,6 +671,48 @@ public class EstudioAction extends ValidadorAction {
 
 		return mapping.findForward(strForward);
 	}		
+	
+	@SuppressWarnings("unchecked")
+	public ActionForward cargarPresupuestoEstudio(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoCargaPresupuestoEstudio";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+						
+			PracticaFachada practicaFachada = (PracticaFachada) ctx.getBean("practicaFachada");
+																			
+			List<GrupoPractica> gruposPracticas = practicaFachada.getGruposPractica();
+			request.setAttribute("gruposPracticas", gruposPracticas);
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}	
+	
+	public void calcularPresupuestoEstudio(StringBuffer respuesta, ActionForm form){
+		
+		EstudioForm estudioForm = (EstudioForm)form;
+		estudioForm.normalizarListaPracticas();
+		EstudioDTO estudioDTO = estudioForm.getEstudioDTO();
+		WebApplicationContext ctx = getWebApplicationContext();
+		PracticaFachada practicaFachada = (PracticaFachada) ctx.getBean("practicaFachada");
+		
+		List<Practica> listaPracticas = new ArrayList<Practica>(); 
+		for (PracticaDTO practicaDTO : estudioForm.getListaPracticas()) {
+			listaPracticas.add(practicaFachada.getPractica(practicaDTO.getId()));
+		}		
+		estudioDTO.setFecha("20/09/2014");//Le pongo cualquier fecha para que no pinche en el ProviderDominio
+		Estudio estudio = ProviderDominio.getEstudio(estudioDTO,null,listaPracticas,null);		
+		
+		respuesta.append("<unidades>" + estudio.getUnidadesFacturacionTotal() + "</unidades>");
+	}
 	
 	/**********************************************************************
 	 **********************	METODOS VALIDADORES ***************************

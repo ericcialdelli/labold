@@ -78,6 +78,5 @@
 	
 	function clearMensajesErrores(){
 		$('#errores').text("");
-	}
-	
+	}	
 	

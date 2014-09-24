@@ -161,8 +161,8 @@
 			<forward name="exitoRecuperarEstudioEliminarPracticas" path=".eliminarPracticasDeEstudio" />
 			<forward name="exitoEliminarPracticasDeEstudio" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioEliminarPracticas" />
 			<forward name="exitoRecuperarEstudioParaEliminar" path=".eliminarEstudio" />
-			<forward name="exitoEliminarEstudio" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioParaEliminar" />								
-																								
+			<forward name="exitoEliminarEstudio" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioParaEliminar" />
+			<forward name="exitoCargaPresupuestoEstudio" path=".presupuestoEstudio" />																															
 		</action>
 		
 		<action path="/facturacion" type="ar.com.labold.struts.actions.EstudioAction"

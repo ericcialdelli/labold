@@ -1,5 +1,8 @@
 package ar.com.labold.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MedicoDTO {
 
 	private Long id;
