@@ -3,6 +3,7 @@ package ar.com.labold.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -101,7 +102,11 @@ public class PracticaDAO extends HibernateDaoSupport {
 		Criteria criteria = getSession().createCriteria(GrupoPractica.class);
 		criteria.addOrder(Order.asc("nombre"));
 
-		return (List<GrupoPractica>) criteria.list();	
+		List<GrupoPractica> lista = (List<GrupoPractica>) criteria.list();
+		for (GrupoPractica grupoPractica : lista) {
+			Hibernate.initialize(grupoPractica.getPracticas());
+		}					
+		return lista;
 	}
 	
 	public GrupoPractica getGrupoPractica(Long id){
