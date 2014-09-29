@@ -217,21 +217,25 @@ public class EstudioFachada {
 		for (Estudio estudio : listaEstudios) {			
 			for (ValoresEstudio valorEstudio : estudio.getValoresEstudio()) {				
 				for (ValorPractica valorPractica : valorEstudio.getValoresPracticas()) {
-					String v = map.get(valorPractica.getId());
+					//String v = map.get(valorPractica.getId());
+					String v = map.get(valorPractica.getPractica().getId());
 					if(v==null){
-						v="";
+						v="Valores Anteriores:\n";
 					}
 					v=v+valorPractica.getValor()+"\n";
-					map.put(valorPractica.getId(), v);
+					//map.put(valorPractica.getId(), v);
+					map.put(valorPractica.getPractica().getId(), v);
 				}
 				for (ValorSubItemPractica valorSubItemPractica : valorEstudio.getValorSubItemPractica()) {
 					for (ValorPractica valorPractica : valorSubItemPractica.getValoresPracticas()) {
-						String v = map.get(valorPractica.getId());
+						//String v = map.get(valorPractica.getId());
+						String v = map.get(valorPractica.getPractica().getId());
 						if(v==null){
-							v="";
+							v="Valores Anteriores:\n";
 						}
 						v=v+valorPractica.getValor()+"\n";
-						map.put(valorPractica.getId(), v);						
+						//map.put(valorPractica.getId(), v);
+						map.put(valorPractica.getPractica().getId(), v);
 					}
 				}				
 			}

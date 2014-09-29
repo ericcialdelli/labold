@@ -179,7 +179,7 @@
 									<td width="30%" align="left">
 										<input type="text" size="25" class="botonerab" name="listaValoresPractica[<%=i%>].valor"
 											value="${valorPractica.valor}" onkeyup="verificarValor('<%=i%>');" id="valor<%=i%>"
-											title="${map[valorPractica.id]}">	
+											title="${map[valorPractica.practica.id]}">	
 									</td>
 									<td width="45%" align="left">
 										<c:choose>
@@ -230,7 +230,7 @@
 												<td width="30%" align="left">
 													<input type="text" size="25" class="botonerab" name="listaValoresPractica[<%=i%>].valor"
 														value="${prac.valor}" onkeyup="verificarValor('<%=i%>');" id="valor<%=i%>"
-														title="${map[prac.id]}">
+														title="${map[prac.practica.id]}">
 												</td>
 												<td width="50%" align="left">
 										<c:choose>
