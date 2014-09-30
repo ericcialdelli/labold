@@ -27,9 +27,6 @@ public class Estudio {
 	private Long numero;
 	
 	@Column(nullable = false)
-	private String solicitadoPor;	
-	
-	@Column(nullable = false)
 	private Date fecha;
 	
 	private Double unidadesFacturacionTotal; 
@@ -62,14 +59,6 @@ public class Estudio {
 
 	public void setNumero(Long numero) {
 		this.numero = numero;
-	}
-
-	public String getSolicitadoPor() {
-		return solicitadoPor;
-	}
-
-	public void setSolicitadoPor(String solicitadoPor) {
-		this.solicitadoPor = solicitadoPor;
 	}
 
 	public Paciente getPaciente() {
