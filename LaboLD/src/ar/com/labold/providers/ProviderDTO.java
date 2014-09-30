@@ -147,7 +147,7 @@ public abstract class ProviderDTO {
 		estudioDTO.setId(estudio.getId());
 		estudioDTO.setNumero(estudio.getNumero());
 		estudioDTO.setPaciente(ProviderDTO.getPacienteDTO(estudio.getPaciente()));
-		estudioDTO.setSolicitadoPor(estudio.getSolicitadoPor());
+		//estudioDTO.setSolicitadoPor(estudio.getSolicitadoPor());
 		estudioDTO.setFecha(Fecha.getFechaDDMMAAAASlash(Fecha
 				.dateToStringDDMMAAAA(estudio.getFecha())));
 		
