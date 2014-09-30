@@ -65,10 +65,11 @@ public class MedicoDAO extends HibernateDaoSupport {
 		}
 	}
 	
-	/*public Medico getMedico(String nombre, String apellido){
+	public Medico getMedico(String nombre, String apellido){
 		
 		Criteria criteria = getSession().createCriteria(Medico.class);
 		Conjunction conj = Restrictions.conjunction();
+		conj.add(Restrictions.eq("nombre", nombre));
 		conj.add(Restrictions.eq("apellido", apellido));
 		
 		criteria.add(conj);
@@ -80,7 +81,7 @@ public class MedicoDAO extends HibernateDaoSupport {
 		return null;
 	}
 	
-	public void agregarMedicos(){
+	/*public void agregarMedicos(){
 		
 		Criteria criteria = getSession().createCriteria(Estudio.class);
 		List<Estudio> lista = (List<Estudio>) criteria.list();
@@ -92,7 +93,7 @@ public class MedicoDAO extends HibernateDaoSupport {
 				
 				if(pos>0){
 					String apellido = solicitadoPor.substring(0, pos);
-					String nombre = solicitadoPor.substring(pos+1,solicitadoPor.length());
+					String nombre = solicitadoPor.substring(pos+2,solicitadoPor.length());
 					
 					Medico medico = getMedico(nombre,apellido);
 					if(medico==null){
