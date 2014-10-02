@@ -32,9 +32,9 @@ public class MedicoDAO extends HibernateDaoSupport {
 	
 	public Medico altaMedico(Medico medico) throws NegocioException {
 		
-		if (existeMedico(medico.getNombre(), medico.getId())) {
+		/*if (existeMedico(medico.getNombre(), medico.getId())) {
 			throw new NegocioException(Constantes.EXISTE_MEDICO);
-		}
+		}*/
 		this.getHibernateTemplate().saveOrUpdate(medico);
 		this.getHibernateTemplate().flush();
 		this.getHibernateTemplate().clear();	
