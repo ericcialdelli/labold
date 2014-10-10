@@ -22,7 +22,10 @@ public class Practica {
 	private String nombre;
 
 	
-	//-----------------------------//	
+	//-----------------------------//
+	
+	private int orden;
+	
 	private String unidad;
 	
 	private String metodo;
@@ -189,5 +192,13 @@ public class Practica {
 			return  valorRefLibre.replaceAll("\r\n", "<br>");			
 		}
 		return valorRefLibre;
-	}	
+	}
+
+	public int getOrden() {
+		return orden;
+	}
+
+	public void setOrden(int orden) {
+		this.orden = orden;
+	}
 }

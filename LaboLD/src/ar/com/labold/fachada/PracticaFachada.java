@@ -1,6 +1,9 @@
 package ar.com.labold.fachada;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -81,6 +84,24 @@ public class PracticaFachada {
 		return practicaDAO.getPracticasPorGrupo(idGrupo);
 	}
 	
+	public Map<Long,List<Practica>> getPracticasPorGrupoYSubItem(Long idGrupo){
+		
+		Map<Long,List<Practica>> map = new HashMap<Long, List<Practica>>();
+		List<Practica> lista = practicaDAO.getPracticasPorGrupo(idGrupo);
+		long idSubItem;
+		List<Practica> listaAux;
+		
+		for (Practica practica : lista) {
+			
+			idSubItem = (practica.getSubItemPractica() == null)? 0 : practica.getSubItemPractica().getId();
+			listaAux = (map.get(idSubItem) == null)? new ArrayList<Practica>() : map.get(idSubItem); 
+			listaAux.add(practica);
+			map.put(idSubItem, listaAux);
+		}
+		
+		return map;
+	}	
+	
 	public Practica getPractica(Long id){
 		
 		return practicaDAO.getPractica(id);
@@ -99,5 +120,19 @@ public class PracticaFachada {
 	public List<SubItemPractica> getSubItemsPorGrupoPractica(Long idGrupo){
 		
 		return practicaDAO.getSubItemsPorGrupoPractica(idGrupo);
+	}
+	
+	public List<SubItemPractica> getListaSubItemsConNula(Long id){
+		
+		List<SubItemPractica> listaSubItems = new ArrayList<SubItemPractica>();
+		SubItemPractica si = new SubItemPractica();
+		si.setId(0L);
+		si.setNombre("");
+		listaSubItems.add(si);
+		
+		GrupoPractica grupo = practicaDAO.getGrupoPractica(id);
+		listaSubItems.addAll(grupo.getSubItemsPractica());
+		
+		return listaSubItems;
 	}
 }

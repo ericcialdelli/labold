@@ -107,6 +107,12 @@
 			</td>
 		</tr>
 		<tr>
+			<td class="botoneralNegritaRight" width="40%">Orden</td>
+			<td align="left">
+				<html:text property="practicaDTO.orden" value="${practica.orden}" styleClass="botonerab" styleId="nombre"/>
+			</td>
+		</tr>		
+		<tr>
 			<td class="botoneralNegritaRight" width="40%">Unidad</td>
 			<td align="left">
 				<html:text property="practicaDTO.unidad" value="${practica.unidad}" styleClass="botonerab" styleId="nombre"/>

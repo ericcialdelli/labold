@@ -169,6 +169,7 @@ public abstract class ProviderDominio {
 		practica.setValorReferencia(practicaDTO.getValorReferencia());
 		practica.setMayorMenor(practicaDTO.getMayorMenor());
 		practica.setValorRefLibre(practicaDTO.getValorRefLibre());
+		practica.setOrden(practicaDTO.getOrden());
 		
 		return practica;
 	}	
@@ -186,6 +187,7 @@ public abstract class ProviderDominio {
 		practica.setValorReferencia(practicaDTO.getValorReferencia());
 		practica.setMayorMenor(practicaDTO.getMayorMenor());
 		practica.setValorRefLibre(practicaDTO.getValorRefLibre());
+		practica.setOrden(practicaDTO.getOrden());
 		
 		return practica;
 	}		

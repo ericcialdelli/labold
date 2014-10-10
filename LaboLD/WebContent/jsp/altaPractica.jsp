@@ -162,6 +162,12 @@
 			</td>
 		</tr>
 		<tr>
+			<td class="botoneralNegritaRight" width="40%">Orden</td>
+			<td align="left">
+				<html:text property="practicaDTO.orden" value="" styleClass="botonerab" onkeypress="return evitarAutoSubmit(event)"/>
+			</td>
+		</tr>		
+		<tr>
 			<td width="40%" class="botoneralNegritaRight">Unidad</td>
 			<td align="left">
 				<html:text styleClass="botonerab" property="practicaDTO.unidad" value="" 

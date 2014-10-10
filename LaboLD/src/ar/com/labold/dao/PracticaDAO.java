@@ -92,7 +92,7 @@ public class PracticaDAO extends HibernateDaoSupport {
 		Conjunction conj = Restrictions.conjunction();
 		conj.add(Restrictions.eq("grupoPractica.id", idGrupo));
 		criteria.add(conj);		
-		criteria.addOrder(Order.asc("nombre"));
+		criteria.addOrder(Order.asc("orden"));
 
 		return (List<Practica>) criteria.list();	
 	}	
