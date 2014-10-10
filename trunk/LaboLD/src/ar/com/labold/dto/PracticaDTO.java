@@ -6,6 +6,8 @@ public class PracticaDTO {
 	
 	private String nombre;
 	
+	private int orden;
+	
 	private String unidad;
 	
 	private String metodo;
@@ -136,6 +138,14 @@ public class PracticaDTO {
 
 	public void setValorRefLibre(String valorRefLibre) {
 		this.valorRefLibre = valorRefLibre;
+	}
+
+	public int getOrden() {
+		return orden;
+	}
+
+	public void setOrden(int orden) {
+		this.orden = orden;
 	}
 
 	public void normalizarValores(){

@@ -1,6 +1,7 @@
 package ar.com.labold.struts.actions;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ import org.springframework.web.context.WebApplicationContext;
 import ar.com.labold.fachada.PracticaFachada;
 import ar.com.labold.negocio.GrupoPractica;
 import ar.com.labold.negocio.Practica;
+import ar.com.labold.negocio.SubItemPractica;
 import ar.com.labold.struts.actions.forms.GrupoPracticaForm;
 import ar.com.labold.struts.actions.forms.PracticaForm;
 import ar.com.labold.struts.utils.Validator;
@@ -112,9 +114,14 @@ public class PracticaAction extends ValidadorAction {
 			
 			String idGrupo = request.getParameter("idGrupo");
 			
-			List<Practica> listaPracticas = practicaFachada.getPracticasPorGrupo(Long.valueOf(idGrupo));
+			//List<Practica> listaPracticas = practicaFachada.getPracticasPorGrupo(Long.valueOf(idGrupo));
+			Map<Long,List<Practica>> map = practicaFachada.getPracticasPorGrupoYSubItem(Long.valueOf(idGrupo));
+			List<SubItemPractica> subItems = practicaFachada.getListaSubItemsConNula(Long.valueOf(idGrupo));
 			
-			request.setAttribute("practicas", listaPracticas);
+			//request.setAttribute("practicas", listaPracticas);
+			request.setAttribute("map", map);
+			request.setAttribute("subItems", subItems);
+			//request.setAttribute("keySet", map.keySet());
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);

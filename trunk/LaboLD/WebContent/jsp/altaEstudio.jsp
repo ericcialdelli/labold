@@ -157,7 +157,7 @@
 		PacienteFachada.getPaciente($('#idPaciente').val(),mostrarPacienteModificacionCallback);
 		
 	}
-
+		
 	function mostrarPacienteModificacionCallback(paciente){
 		
 		$('#textoError').text("");
@@ -284,7 +284,7 @@
 		$('#telefonoMedico').val("");
 		$('#matriculaMedico').val("");
 		$('#especialidadMedico').val("");			
-		$('#dialogoMedico').dialog({title: 'Agregar Médico', height: 300, width: 500, modal: true});
+		$('#dialogoMedico').dialog({title: 'Agregar Médico', height: 350, width: 500, modal: true});
 	}
 
 	function agregarMedico(){
@@ -303,11 +303,11 @@
 													 $('#matriculaMedico').val(),$('#especialidadMedico').val(),mostrarMedicoCallback);
 	    	
 	    } else {
-	    	$('#textoError').text("");
+	    	$('#textoErrorMedico').text("");
 		    for(var i=0; i < nodos.length; i++) { 
-			    $('#textoError').append( '<div>* ' + nodos[i].firstChild.nodeValue + '</div>');
+			    $('#textoErrorMedico').append( '<div>* ' + nodos[i].firstChild.nodeValue + '</div>');
 		    }
-		    $('#textoError').show();
+		    $('#textoErrorMedico').show();
 	    }
 	}
 
@@ -336,7 +336,7 @@
 		$('#textoErrorMedico').text("");
 		$('#tdAceptarMedico').hide();
 		$('#tdModificarMedico').show();
-		$('#dialogoMedico').dialog({title: 'Modificar Medico', height: 300, width: 500, modal: true});
+		$('#dialogoMedico').dialog({title: 'Modificar Medico', height: 350, width: 500, modal: true});
 		
 		$('#medico').val(medico.id);
 		$('#nombreMedico').val(medico.nombre);
@@ -397,6 +397,7 @@
 	}
 	
 </script>
+
 <div id="exitoGrabado" class="verdeExito"><br>${exitoGrabado}<br></div>
 <div id="errores" class="rojoAdvertencia"><br>${error}<br></div>
 
