@@ -18,7 +18,7 @@ function llamadoAjaxNull(){
 
 function arrancarAjaxTimer(){
    llamadoAjaxNull();
-   timerID  = setTimeout("arrancarAjaxTimer()", 30000);
+   timerID  = setTimeout("arrancarAjaxTimer()", 60000);
 }
 </script>
 
