@@ -179,6 +179,10 @@
 			parameter="metodo" scope="request">											
 		</action>				
 		<!-- FIN REPORTE -->
+
+		<action path="/ajaxNull" type="ar.com.labold.struts.actions.ValidadorAction"
+			parameter="metodo" scope="request">											
+		</action>				
 		
 		<!-- FACTURACION -->
 		
