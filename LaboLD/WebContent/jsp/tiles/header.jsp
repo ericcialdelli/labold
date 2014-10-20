@@ -2,9 +2,27 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+<script type="text/javascript" src="<html:rewrite page='/js/net.js'/>"></script>
 <script type="text/javascript" src="<html:rewrite page='/dwr/engine.js'/>"></script>
 <script type="text/javascript" src="<html:rewrite page='/dwr/util.js'/>"></script>
 
+<script type="text/javascript">
+var timerID;
+
+function callBack(){}
+
+function llamadoAjaxNull(){		
+    var url = '../../ajaxNull.do?metodo=returnNull'; 
+    var loader1 = new net.ContentLoader(url,callBack,null,"POST",null);	
+}
+
+function arrancarAjaxTimer(){
+   llamadoAjaxNull();
+   timerID  = setTimeout("arrancarAjaxTimer()", 30000);
+}
+</script>
+
+<BODY onload="arrancarAjaxTimer()">
 <div>
 <table class="header" border="0">
 
@@ -26,3 +44,4 @@
 </table>
 
 </div>
+</BODY>
