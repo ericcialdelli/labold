@@ -63,7 +63,7 @@ public class ValidadorAction extends DispatchActionSupport {
 	};
 
 	public ActionForward returnNull(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("Return Null");
+		//System.out.println("Return Null");
 		return null;
 	}	
 }
