@@ -21,6 +21,9 @@
 
 <script type="text/javascript">
 
+	var listaPracticas = [];
+	indexLP = 0;
+
 	var cantUnidadesBioq = 0;
 	
 	function submitir(){
@@ -144,10 +147,42 @@
 			}
 		);		
 	}
+
+	function buscar(){
+		var texto = $('#textoABuscar').val();
+		var noEncontrado = true;
+		
+		for(i=0;i<indexLP;i++){
+			var matches = listaPracticas[i].nombre.indexOf(texto) >= 0 ? true : false;
+			if (matches) {
+				alert("Grupo: "+listaPracticas[i].grupo+"\n"+"Práctica: "+listaPracticas[i].nombre);
+				noEncontrado = false; 
+			}						
+		}
+		if(noEncontrado){
+			alert("No se ha encontrado la práctica");
+		}
+	}
 	
 </script>
 
 <div id="errores" class="rojoAdvertencia"><br>${error}<br></div>
+
+<table border="0" class="cuadrado" align="center" width="85%" cellpadding="2" cellspacing="0">
+	<tr>
+		<td height="10"></td>
+	</tr>			
+	<tr>
+		<td align="center">
+			<b>Práctica:</b>
+			<input type="text" class="botonerab" id="textoABuscar">				
+			<input type="button" class="botonerab" value="Buscar" onclick="javascript:buscar();">
+		</td>
+	</tr>
+	<tr>
+		<td height="10"></td>
+	</tr>									
+</table>
 
 <html:form action="estudio" styleId="estudioFormId">
 	<html:hidden property="metodo" value="altaEstudio"/>
@@ -210,7 +245,20 @@
 									</td>																						
 								</tr>	
 								<%i++; %>	
-							</c:if>											
+							</c:if>	
+							
+							<script type="text/javascript">
+
+								var practica = {
+									    nombre:"${practica.nombre}",
+									    grupo:"${grupo.nombre}"
+									};								
+							
+								//listaPracticas[indexLP] = "${practica.nombre}";
+								listaPracticas[indexLP] = practica;
+								indexLP++;
+							</script>
+																	
 						</c:forEach>
 						
 						<c:forEach items="${grupo.subItemsPractica}" var="subItem" varStatus="iSubItem">
