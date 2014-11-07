@@ -69,6 +69,17 @@
 			
 	}
 
+	function pintarPractica(ind){
+		
+		$('#trPractica'+ind).addClass("verdeClaroSubtituloCenter");
+	}	
+
+	function despintarPractica(ind){
+		if(!$('#checkPractica'+ind).is(':checked')){
+			$('#trPractica'+ind).removeClass("verdeClaroSubtituloCenter");
+		}	
+	}	
+	
 	/*function clickCheck(grupo, practica){
 
 		if($('#checkG'+grupo+"P"+practica).is(':checked')){
@@ -93,6 +104,16 @@
 		}		
 	}*/
 
+	function clickCheckFila(ind){
+		if(!$('#checkPractica'+ind).is(':checked')){
+			$('#checkPractica'+ind).attr('checked','checked');
+		}
+		else{
+			$('#checkPractica'+ind).removeAttr('checked');
+		}
+		clickCheck(ind);
+	}
+	
 	function clickCheck(ind){
 
 		if($('#checkPractica'+ind).is(':checked')){
@@ -508,7 +529,10 @@
 						<c:forEach items="${grupo.practicas}" var="practica" varStatus="iPractica">
 							<c:if test="${practica.subItemPractica == null}">
 								<tr id="trPractica<%=i%>"
-									class="trG<c:out value='${iGrupo.index}'></c:out>">
+									class="trG<c:out value='${iGrupo.index}'></c:out>" 
+									onmouseover="javascript:pintarPractica(<%=i%>);"
+									onmouseout="javascript:despintarPractica(<%=i%>);">
+									
 									<td width="5%">
 										<input type="hidden" class="grupo<c:out value='${iGrupo.index}'></c:out>" value="<%=i%>">									
 										<input type="hidden" name="listaPracticas[<%=i%>].id" 
@@ -519,7 +543,7 @@
 											id="checkPractica<%=i%>"
 											value="${practica.id}">
 									</td>
-									<td align="left" width="65%">
+									<td align="left" width="65%" onclick="javascript:clickCheckFila(<%=i%>);">
 										${practica.nombre}
 									</td>
 									<td align="right" width="25%">
@@ -564,7 +588,10 @@
 										</tr>															
 										<c:forEach items="${subItem.practicas}" var="prac" varStatus="iPrac">											
 											<tr id="trPractica<%=i%>"
-												class="trG<c:out value='${iGrupo.index}'></c:out>">											
+												class="trG<c:out value='${iGrupo.index}'></c:out>"
+												onmouseover="javascript:pintarPractica(<%=i%>);"
+												onmouseout="javascript:despintarPractica(<%=i%>);">
+												
 												<td width="5%">	
 													<input type="hidden" class="grupo<c:out value='${iGrupo.index}'></c:out>" 
 														value="<%=i%>">
@@ -580,7 +607,7 @@
 														id="checkPractica<%=i%>"
 														value="${prac.id}">													
 												</td>														
-												<td align="left" width="80%">
+												<td align="left" width="80%" onclick="javascript:clickCheckFila(<%=i%>);">
 													${prac.nombre}
 												</td>
 												<td align="left" width="10%">
