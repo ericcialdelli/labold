@@ -41,7 +41,12 @@
 		var error = xmlDoc.getElementsByTagName('error');
 		if (error.length==0){
 	   		var nodos = xmlDoc.getElementsByTagName('unidades');
-	   		alert("Unidades Bioquimicas: "+nodos[0].firstChild.nodeValue);
+	   		var valor = xmlDoc.getElementsByTagName('valor');
+	   		//alert("Unidades Bioquimicas: "+nodos[0].firstChild.nodeValue+"\n" + "Valor: $"+valor[0].firstChild.nodeValue);
+
+	   		$('#idUB').html("&nbsp;&nbsp;&nbsp;&nbsp;"+nodos[0].firstChild.nodeValue);
+	   		$('#idValor').html("&nbsp;&nbsp;&nbsp;$"+valor[0].firstChild.nodeValue);
+	   		$('#dialogoValor').dialog({title: 'Valor Presupuesto Estudio', height: 180, width: 380, modal: true});
 		}
 		else{	    	
 		    for(var i=0; i < error.length; i++) { 
@@ -185,6 +190,17 @@
 		}
 	}
 	
+	function cerrarVentanaValor(){
+		
+		$('#dialogoValor').dialog( "close" );
+	}
+
+	function generarReporte(){
+		alert("asdasd");
+		$('#estudioFormId').submit();
+		alert("aaaaa");		
+	}	
+	
 </script>
 
 <div id="errores" class="rojoAdvertencia"><br>${error}<br></div>
@@ -205,8 +221,11 @@
 	</tr>									
 </table>
 
-<html:form action="estudio" styleId="estudioFormId">
-	<html:hidden property="metodo" value="altaEstudio"/>
+<%-- <html:form action="estudio" styleId="estudioFormId">
+	<html:hidden property="metodo" value="altaEstudio"/> --%>
+	
+<html:form action="estudio" styleId="estudioFormId" target="_blank">
+	<html:hidden property="metodo" value="generarReportePresupuestoEstudio"/>	
 	
 	<table border="0" class="cuadrado" align="center" width="85%" cellpadding="2" cellspacing="2">
 		<tr>
@@ -360,6 +379,42 @@
 			<td height="20"></td>
 		</tr>		
 	</table>		
+	
+	<div id="dialogoValor" style="display: none" >
+		<table border="0" class="cuadrado" align="center" width="80%" cellpadding="2" cellspacing="0">
+			<tr>
+				<td height="20" colspan="2"></td>
+			</tr>				
+			<tr>
+				<td class="botoneralNegritaRight" width="55%">Unidades Bioquimicas:</td>
+				<td align="left" class="botoneralNegritaLeftGrande" id="idUB"></td>
+			</tr>	
+			<tr>
+				<td class="botoneralNegritaRight" width="55%">Valor:</td>
+				<td  align="left" class="botoneralNegritaLeftGrande" id="idValor"></td>
+			</tr>				
+			<tr>
+				<td height="20" colspan="2"></td>
+			</tr>					
+		</table>					
+		<table border="0" class="cuadradoSinBorde" align="center" width="80%" cellpadding="2">
+			<tr>
+				<td height="10" colspan="3"></td>
+			</tr>	
+			<tr>
+				<td width="48%" class="botonerab" align="right">
+					<input type="button" class="botonerab" value="Generar Informe" onclick="javascript:generarReporte();">				
+				</td>		
+				<td width="4%"></td>			
+				<td width="48%" class="botonerab" align="left">
+					<input type="button" class="botonerab" value="Salir" onclick="javascript:cerrarVentanaValor();">
+				</td>							
+			</tr>
+			<tr>
+				<td height="10" colspan="3"></td>
+			</tr>		
+		</table>	
+	</div>	
 	
 	<table border="0" class="cuadradoSinBorde" align="center" width="85%" cellpadding="2" cellspacing="0">
 		<tr>

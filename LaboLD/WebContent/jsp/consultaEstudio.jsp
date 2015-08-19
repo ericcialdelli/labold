@@ -33,7 +33,7 @@ function generarReporte(){
 		window.open("./reporte.do?metodo=generarReportesEstudios&desde="+desde+"&hasta="+hasta,"",especificaciones);		
 	}else{
 		window.open("../../reporte.do?metodo=generarReportesEstudios&desde="+desde+"&hasta="+hasta,"",especificaciones);				
-	}		
+	}
 }
 
 	function volver(){
@@ -57,6 +57,8 @@ function generarReporte(){
 			
 	}
 	
+	
+	
 </script>
 
 	<input type="hidden" value="${estudio.id}" id="idEstudio"/>
@@ -68,24 +70,24 @@ function generarReporte(){
 			<td height="20" colspan="4"></td>
 		</tr>				
 		<tr>
-			<td class="botoneralNegritaRight" width="12%" >Número</td>
+			<td class="botoneralNegritaRight" width="15%" >Número</td>
 			<td align="left" width="30%">			
 				<input type="text" value="${estudio.numero}" class="botonerab" size="10" readonly="readonly" id="numeroEstudio"/>
 			</td>
 			
-			<td class="botoneralNegritaRight" width="30%" >Paciente</td>
+			<td class="botoneralNegritaRight" width="27%" >Paciente</td>
 			<td align="left">			
 				<input type="text" value="${estudio.paciente.apellido}, ${estudio.paciente.nombre}" class="botonerab" size="30" readonly="readonly"/>
 			</td>			
 		</tr>	
 		
 		<tr>
-			<td class="botoneralNegritaRight" width="12%" >Solicitado Por</td>
+			<td class="botoneralNegritaRight" width="15%" >Solicitado Por</td>
 			<td align="left" width="30%">			
 				<input type="text" value="${estudio.medico.descripcion}" class="botonerab" size="30" readonly="readonly"/>
 			</td>	
 			
-			<td class="botoneralNegritaRight" width="30%" >Fecha</td>
+			<td class="botoneralNegritaRight" width="27%" >Fecha</td>
 			<td align="left">			
 				<input id="datepicker" type="text" readonly="readonly" class="botonerab" 
 					value="<fmt:formatDate	value='${estudio.fecha}' pattern='dd/MM/yyyy' />">
@@ -94,8 +96,12 @@ function generarReporte(){
 		</tr>
 		
 		<tr>		
-			<td colspan="2"></td>
-			<td class="botoneralNegritaRight" width="30%" >Unidades de Facturación</td>
+			<td class="botoneralNegritaRight" width="15%" >Monto Adeudado $</td>
+			<td align="left" width="30%">			
+				<input type="text" value="${estudio.montoAdeudado}" class="botonerab" size="30" readonly="readonly"/>
+			</td>
+			
+			<td class="botoneralNegritaRight" width="27%" >Unidades de Facturación</td>
 			<td align="left">			
 				<input type="text" value="${estudio.unidadesFacturacionTotal}" class="botonerab" size="10" readonly="readonly"/>
 			</td>		
@@ -196,7 +202,7 @@ function generarReporte(){
 															Valor de Referencia: ${prac.practica.valorNormalDesde} a ${prac.practica.valorNormalHasta} ${prac.practica.unidad}		 	
 														</c:when>	
 														<c:when test="${prac.practica.valorRefLibre != null}">
-															${valorPractica.practica.valorRefLibreConBr}		 	
+															${prac.practica.valorRefLibreConBr}		 	
 														</c:when>																								
 													</c:choose>																					
 												</td>																												

@@ -16,6 +16,8 @@ public class EstudioDTO {
 	
 	private MedicoDTO medico;
 	
+	private double montoAdeudado;	
+	
 	public EstudioDTO(){
 		paciente = new PacienteDTO();
 		medico = new MedicoDTO();
@@ -77,4 +79,11 @@ public class EstudioDTO {
 		this.medico = medico;
 	}
 
+	public double getMontoAdeudado() {
+		return montoAdeudado;
+	}
+
+	public void setMontoAdeudado(double montoAdeudado) {
+		this.montoAdeudado = montoAdeudado;
+	}	
 }

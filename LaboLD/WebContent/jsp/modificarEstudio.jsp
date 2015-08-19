@@ -7,7 +7,11 @@
 <script type="text/javascript" src="<html:rewrite page='/js/funcUtiles.js'/>"></script>
 <script type="text/javascript" src="<html:rewrite page='/js/validarLetras.js'/>"></script>
 <script type="text/javascript" src="<html:rewrite page='/js/validarNum.js'/>"></script>
+<script type="text/javascript" src="<html:rewrite page='/js/agregarModificarMedico.js'/>"></script>
 
+<script type="text/javascript"
+	src="<html:rewrite page='/dwr/interface/MedicoFachada.js'/>"></script>
+	
 <script type="text/javascript"
 	src="<html:rewrite page='/js/JQuery/ui/jquery-ui-1.8.10.custom.min.js'/>"></script>	
 
@@ -53,7 +57,7 @@
 	<html:hidden property="metodo" value="modificacionEstudio"/>
 	<html:hidden property="estudioDTO.id" value="${estudio.id}"/>
 
-	<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2" cellspacing="0">
+	<table border="0" class="cuadrado" align="center" width="80%" cellpadding="2" cellspacing="0">
 		<tr>
 			<td colspan="4"  class="azulAjustado" >Modificación de Estudio</td>
 		</tr>
@@ -62,12 +66,12 @@
 		</tr>				
 		<tr>
 			<td class="botoneralNegritaRight" width="12%" >Número</td>
-			<td align="left" width="30%">			
+			<td align="left" width="40%">			
 				<html:text property="estudioDTO.numero" value="${estudio.numero}" styleClass="botonerab" size="10"  
 					onkeypress="javascript:esNumerico(event);"/>
 			</td>
 			
-			<td class="botoneralNegritaRight" width="30%" >Paciente</td>
+			<td class="botoneralNegritaRight" width="20%" >Paciente</td>
 			<td align="left">			
 				<input type="text" value="${estudio.paciente.apellido}, ${estudio.paciente.nombre}" class="botonerab" size="30" readonly="readonly"/>
 				<input type="hidden" value="${estudio.paciente.id}" name="estudioDTO.paciente.id">
@@ -76,14 +80,25 @@
 		
 		<tr>
 			<td class="botoneralNegritaRight" width="12%" >Solicitado Por</td>
-			<td align="left" width="30%">
-				<html:select property='estudioDTO.medico.id' styleClass="botonerab" value="${estudio.medico.id}">
-					<html:option value="-1"> -- Seleccione un médico -- </html:option>
-					<html:optionsCollection  name="medicos" value="id" label="descripcion" />
-				</html:select>						
+			<td align="left" width="40%">
+				<div style="display: " id="comboMedicos">
+					<html:select property='estudioDTO.medico.id' styleClass="botonerab" value="${estudio.medico.id}" styleId="idMedico" onchange="cambioMedico()">
+						<html:option value="-1"> -- Seleccione un médico -- </html:option>
+						<html:optionsCollection  name="medicos" value="id" label="descripcion" />
+					</html:select>
+					<input type="button" value="Agregar" class="botonerab" onclick="abrirVentantAgregarMedico()">
+					<input id="botonModificarMedico" disabled="disabled" type="button" value="Modificar" class="botonerab" onclick="abrirVentantModificarMedico();">					
+				</div>
+	
+				<div style="display: none" id="inputMedico">
+					<input type="text" value="" id="nombreMedicoAgregado" readonly="readonly" size="25">
+					<input type="hidden" value="" id="idMedicoAgregado" name="estudioDTO.medico.id">
+				</div>				
+				
+										
 			</td>	
 			
-			<td class="botoneralNegritaRight" width="30%" >Fecha</td>
+			<td class="botoneralNegritaRight" width="20%" >Fecha</td>
 			<td align="left">			
 				<input id="datepicker" type="text" name="estudioDTO.fecha" readonly="readonly" class="botonerab" 
 					value="<fmt:formatDate	value='${estudio.fecha}' pattern='dd/MM/yyyy' />">
@@ -92,8 +107,12 @@
 		</tr>
 		
 		<tr>
-			<td colspan="2"></td>			
-			<td class="botoneralNegritaRight" width="30%" >Unidades de Facturación</td>
+			<td class="botoneralNegritaRight" width="12%" >Monto Adeudado $</td>
+			<td align="left" width="40%">			
+				<input type="text" value="${estudio.montoAdeudado}" class="botonerab" size="30" name="estudioDTO.montoAdeudado" onkeypress="javascript:esNumericoConDecimal(event);"/>
+			</td>
+						
+			<td class="botoneralNegritaRight" width="20%" >Unidades de Facturación</td>
 			<td align="left">			
 				<input type="text" value="${estudio.unidadesFacturacionTotal}" class="botonerab" size="10" name="estudioDTO.unidadesFacturacionTotal"/>
 			</td>		
@@ -104,7 +123,7 @@
 		</tr>
 	</table>
 	
-	<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2" cellspacing="2">
+	<table border="0" class="cuadrado" align="center" width="80%" cellpadding="2" cellspacing="2">
 		<tr>
 			<td height="20"></td>
 		</tr>
@@ -182,7 +201,7 @@
 		</tr>		
 	</table>		
 	
-	<table border="0" class="cuadradoSinBorde" align="center" width="70%" cellpadding="2" cellspacing="0">
+	<table border="0" class="cuadradoSinBorde" align="center" width="80%" cellpadding="2" cellspacing="0">
 		<tr>
 			<td height="10"></td>
 		</tr>			
@@ -198,6 +217,78 @@
 	</table>
 
 </html:form>
-<script type="text/javascript">
 
+<div id="dialogoMedico" style="display: none" >	
+	<br>
+	<div id="textoErrorMedico" class="rojoAdvertencia" style="display: none" ></div>
+	<br>
+		
+	<html:form action="medico" styleId="medicoFormId">
+		<html:hidden property="metodo" value="altaMedicoDesdeAltaEstudio"/>
+		<input type="hidden" id="medico" name="medicoDTO.id"/>
+	
+		<table border="0" class="cuadrado" align="center" width="80%" cellpadding="2" cellspacing="0">
+			<tr>
+				<td height="20" colspan="2"></td>
+			</tr>				
+			<tr>
+				<td class="botoneralNegritaRight" width="40%">Nombre</td>
+				<td align="left">
+					<html:text property="medicoDTO.nombre" value="" styleClass="botonerabGrande" styleId="nombreMedico"/>
+				</td>
+			</tr>	
+			<tr>
+				<td class="botoneralNegritaRight" width="40%">Apellido</td>
+				<td  align="left">
+					<html:text property="medicoDTO.apellido" value="" styleClass="botonerabGrande" styleId="apellidoMedico"/>			
+				</td>
+			</tr>
+			<tr>
+				<td class="botoneralNegritaRight" width="40%">Telefono</td>
+				<td  align="left">
+					<html:text property="medicoDTO.telefono" value="" styleClass="botonerabGrande" styleId="telefonoMedico"/>			
+				</td>
+			</tr>
+			<tr>
+				<td class="botoneralNegritaRight" width="40%">Matricula</td>
+				<td  align="left">
+					<html:text property="medicoDTO.matricula" value="" styleClass="botonerabGrande" styleId="matriculaMedico"/>			
+				</td>
+			</tr>				
+			<tr>
+				<td class="botoneralNegritaRight" width="40%">Especialidad</td>
+				<td  align="left">
+					<html:text property="medicoDTO.especialidad" value="" styleClass="botonerabGrande" styleId="especialidadMedico"/>			
+				</td>
+			</tr>				
+			<tr>
+				<td height="20" colspan="2"></td>
+			</tr>					
+		</table>		
+		
+		<table border="0" class="cuadradoSinBorde" align="center" width="80%" cellpadding="2">
+			<tr>
+				<td height="10" colspan="3"></td>
+			</tr>	
+			<tr>
+				<td width="48%" class="botonerab" align="right" id="tdAceptarMedico">
+					<input type="button" class="botonerab" value="Aceptar" onclick="javascript:agregarMedico();">
+				</td>
+				<td width="48%" class="botonerab" align="right" id="tdModificarMedico" style="display: none;">
+					<input type="button" class="botonerab" value="Modificar" onclick="javascript:modificarMedico();">
+				</td>				
+				<td width="4%"></td>			
+				<td width="48%" class="botonerab" align="left">
+					<input type="button" class="botonerab" value="Cancelar" onclick="javascript:cerrarVentanaAgregarMedico();">
+				</td>							
+			</tr>
+			<tr>
+				<td height="10" colspan="3"></td>
+			</tr>		
+		</table>
+	</html:form>	
+</div>
+
+<script type="text/javascript">
+	cambioMedico()
 </script>

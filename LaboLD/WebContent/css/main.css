@@ -262,6 +262,10 @@
 	font-weight: bold;
 }
 
+.botonera2NegritaRight {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; color: black; FONT-FAMILY: Arial, Helvetica, sans-serif; text-align: right;
+}
+
 .botoneralNegritaLeft {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 10px;

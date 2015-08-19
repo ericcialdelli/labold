@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,19 +23,32 @@ import ar.com.labold.fachada.PacienteFachada;
 import ar.com.labold.fachada.PracticaFachada;
 import ar.com.labold.negocio.Estudio;
 import ar.com.labold.negocio.GrupoPractica;
-import ar.com.labold.negocio.Medico;
-import ar.com.labold.negocio.Paciente;
 import ar.com.labold.negocio.Practica;
 import ar.com.labold.negocio.ValorPractica;
 import ar.com.labold.negocio.ValorSubItemPractica;
 import ar.com.labold.negocio.ValoresEstudio;
 import ar.com.labold.providers.ProviderDominio;
 import ar.com.labold.struts.actions.forms.EstudioForm;
-import ar.com.labold.struts.actions.forms.PacienteForm;
 import ar.com.labold.struts.actions.forms.ValorUnidadFacturacionForm;
 import ar.com.labold.struts.utils.Validator;
 import ar.com.labold.utils.Constantes;
 import ar.com.labold.utils.MyLogger;
+
+import ar.com.labold.enums.AspectoOrina;
+import ar.com.labold.enums.CelulasEpitelialesOrina;
+import ar.com.labold.enums.CetonasOrina;
+import ar.com.labold.enums.ColorOrina;
+import ar.com.labold.enums.GlucosaOrina;
+import ar.com.labold.enums.HematiesHbOrina;
+import ar.com.labold.enums.MucusOrina;
+import ar.com.labold.enums.NitritosOrina;
+import ar.com.labold.enums.PigmentosBiliaresOrina;
+import ar.com.labold.enums.PiocitosOrina;
+import ar.com.labold.enums.ProteinasOrina;
+import ar.com.labold.enums.SedimentoOrina;
+import ar.com.labold.enums.UrobilinogenoOrina;
+
+import ar.com.labold.fachada.ReportesFachada;
 
 public class EstudioAction extends ValidadorAction {
 
@@ -259,6 +272,20 @@ public class EstudioAction extends ValidadorAction {
 			Map<Long,String> map = estudioFachada.recuperarPracticasAnteriores(estudio.getPaciente().getId());
 			request.setAttribute("map", map);
 			request.setAttribute("estudioV", "asdasd\nasdasdsad");			
+			
+			request.setAttribute("listaColorOrina", ColorOrina.values());
+			request.setAttribute("listaAspectoOrina", AspectoOrina.values());
+			request.setAttribute("listaProteinasOrina", ProteinasOrina.values());
+			request.setAttribute("listaNitritosOrina", NitritosOrina.values());		
+			request.setAttribute("listaCetonasOrina", CetonasOrina.values());
+			request.setAttribute("listaUrobilinogenoOrina", UrobilinogenoOrina.values());
+			request.setAttribute("listaPigmentosBiliaresOrina", PigmentosBiliaresOrina.values());
+			request.setAttribute("listaHematiesHbOrina", HematiesHbOrina.values());
+			request.setAttribute("listaGlucosaOrina", GlucosaOrina.values());
+			request.setAttribute("listaSedimentoOrina", SedimentoOrina.values());
+			request.setAttribute("listaCelulasEpitelialesOrina", CelulasEpitelialesOrina.values());
+			request.setAttribute("listaPiocitosOrina", PiocitosOrina.values());
+			request.setAttribute("listaMucusOrina", MucusOrina.values());			
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
@@ -696,6 +723,40 @@ public class EstudioAction extends ValidadorAction {
 		return mapping.findForward(strForward);
 	}	
 	
+	@SuppressWarnings("unchecked")
+	public ActionForward generarReportePresupuestoEstudio(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		try {			
+			EstudioForm estudioForm = (EstudioForm)form;
+			estudioForm.normalizarListaPracticas();
+			EstudioDTO estudioDTO = estudioForm.getEstudioDTO();			
+			
+			String path = request.getSession().getServletContext()
+					.getRealPath("jasper");
+
+			WebApplicationContext ctx = getWebApplicationContext();
+			ReportesFachada reportesFachada = (ReportesFachada) ctx.getBean("reportesFachada");
+
+			byte[] bytes = reportesFachada
+			.generarReportesEstudios(path,Long.valueOf(100),Long.valueOf(100));
+			
+			// Lo muestro en la salida del response
+			response.setContentType("application/pdf");
+			ServletOutputStream out = response.getOutputStream();
+			out.write(bytes, 0, bytes.length);
+			out.flush();
+
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			return mapping.findForward("errorSinMenu");
+		}
+
+		return null;
+	}	
+	
 	public void calcularPresupuestoEstudio(StringBuffer respuesta, ActionForm form){
 		
 		EstudioForm estudioForm = (EstudioForm)form;
@@ -703,6 +764,9 @@ public class EstudioAction extends ValidadorAction {
 		EstudioDTO estudioDTO = estudioForm.getEstudioDTO();
 		WebApplicationContext ctx = getWebApplicationContext();
 		PracticaFachada practicaFachada = (PracticaFachada) ctx.getBean("practicaFachada");
+		EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+		
+		double valor = estudioFachada.recuperarValorUnidadFacturacion();		
 		
 		List<Practica> listaPracticas = new ArrayList<Practica>(); 
 		for (PracticaDTO practicaDTO : estudioForm.getListaPracticas()) {
@@ -712,6 +776,7 @@ public class EstudioAction extends ValidadorAction {
 		Estudio estudio = ProviderDominio.getEstudio(estudioDTO,null,listaPracticas,null);		
 		
 		respuesta.append("<unidades>" + estudio.getUnidadesFacturacionTotal() + "</unidades>");
+		respuesta.append("<valor>" + estudio.getUnidadesFacturacionTotal()*valor + "</valor>");		
 	}
 	
 	/**********************************************************************

@@ -150,6 +150,7 @@ public abstract class ProviderDTO {
 		//estudioDTO.setSolicitadoPor(estudio.getSolicitadoPor());
 		estudioDTO.setFecha(Fecha.getFechaDDMMAAAASlash(Fecha
 				.dateToStringDDMMAAAA(estudio.getFecha())));
+		estudioDTO.setMontoAdeudado(estudio.getMontoAdeudado());
 		
 		return estudioDTO;
 	}

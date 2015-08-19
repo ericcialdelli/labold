@@ -31,6 +31,8 @@ public class Estudio {
 	
 	private Double unidadesFacturacionTotal; 
 	
+	private Double montoAdeudado;	
+	
 	@ManyToOne()
 	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "paciente_fk")	
@@ -100,5 +102,12 @@ public class Estudio {
 	public void setMedico(Medico medico) {
 		this.medico = medico;
 	}
-	
+
+	public Double getMontoAdeudado() {
+		return montoAdeudado;
+	}
+
+	public void setMontoAdeudado(Double montoAdeudado) {
+		this.montoAdeudado = montoAdeudado;
+	}	
 }

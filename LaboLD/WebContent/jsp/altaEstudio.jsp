@@ -6,6 +6,7 @@
 <script type="text/javascript" src="<html:rewrite page='/js/funcUtiles.js'/>"></script>
 <script type="text/javascript" src="<html:rewrite page='/js/validarLetras.js'/>"></script>
 <script type="text/javascript" src="<html:rewrite page='/js/validarNum.js'/>"></script>
+<script type="text/javascript" src="<html:rewrite page='/js/agregarModificarMedico.js'/>"></script>
 
 <script type="text/javascript"
 	src="<html:rewrite page='/js/JQuery/ui/jquery-ui-1.8.10.custom.min.js'/>"></script>	
@@ -227,6 +228,15 @@
 	}
 //------Fin Modificar Paciente---------//
 	
+	function cambioPaciente(){
+
+		if($('#idPaciente').val()!=-1){
+			$('#botonModificar').removeAttr("disabled");
+		}else{
+			$('#botonModificar').attr("disabled","disabled");
+		}
+	}	
+	
 //------Agregar Paciente---------//
 	
 	function abrirVentantAgregarPaciente(){
@@ -293,7 +303,7 @@
 //------Fin Agregar Paciente---------//
 
 //------Agregar Medico---------//
-	
+/*	
 	function abrirVentantAgregarMedico(){
 
 		$('#textoErrorMedico').text("");
@@ -416,7 +426,7 @@
 			$('#botonModificarMedico').attr("disabled","disabled");
 		}
 	}
-	
+	*/
 </script>
 
 <div id="exitoGrabado" class="verdeExito"><br>${exitoGrabado}<br></div>
@@ -433,7 +443,7 @@
 			<td height="20" colspan="4"></td>
 		</tr>				
 		<tr>
-			<td class="botoneralNegritaRight" width="10%" >Número</td>
+			<td class="botoneralNegritaRight" width="12%" >Número</td>
 			<td align="left" width="40%">			
 				<html:text property="estudioDTO.numero" value="${nroEstudio}" styleClass="botonerab" size="10"  
 					onkeypress="javascript:esNumerico(event);" readonly="readonly"/>
@@ -464,7 +474,7 @@
 		</tr>	
 		
 		<tr>
-			<td class="botoneralNegritaRight" width="10%" >Solicitado Por</td>
+			<td class="botoneralNegritaRight" width="12%" >Solicitado Por</td>
 			<td align="left" width="40%">
 				<div style="display: " id="comboMedicos">	
 					<select id="idMedico" class="botonerab" onchange="cambioMedico()" name="estudioDTO.medico.id">
@@ -492,7 +502,16 @@
 				<img alt="" src="<html:rewrite page='/imagenes/calendar/calendar2.gif'/>" align="top" width='17' height='21'>				
 			</td>					
 		</tr>
-					
+		
+		<tr>
+			<td class="botoneralNegritaRight" width="12%" >Monto Adeudado $</td>
+			<td align="left" width="30%">			
+				<input type="text" class="botonerab" size="30" name="estudioDTO.montoAdeudado" onkeypress="javascript:esNumericoConDecimal(event);"/>
+			</td>
+						
+			<td colspan="2" ></td>		
+		</tr>
+							
 		<tr>
 			<td height="20" colspan="2"></td>
 		</tr>
