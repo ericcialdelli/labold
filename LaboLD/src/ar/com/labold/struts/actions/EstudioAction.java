@@ -773,7 +773,7 @@ public class EstudioAction extends ValidadorAction {
 		for (PracticaDTO practicaDTO : estudioForm.getListaPracticas()) {
 			listaPracticas.add(practicaFachada.getPractica(practicaDTO.getId()));
 		}		
-		estudioDTO.setFecha("20/09/2014");//Le pongo cualquier fecha para que no pinche en el ProviderDominio
+		estudioDTO.setFecha("20/09/2015");//Le pongo cualquier fecha para que no pinche en el ProviderDominio
 		Estudio estudio = ProviderDominio.getEstudio(estudioDTO,null,listaPracticas,null);		
 		
 		respuesta.append("<unidades>" + estudio.getUnidadesFacturacionTotal() + "</unidades>");
