@@ -760,6 +760,7 @@ public class EstudioAction extends ValidadorAction {
 	public void calcularPresupuestoEstudio(StringBuffer respuesta, ActionForm form){
 		
 		EstudioForm estudioForm = (EstudioForm)form;
+		
 		estudioForm.normalizarListaPracticas();
 		EstudioDTO estudioDTO = estudioForm.getEstudioDTO();
 		WebApplicationContext ctx = getWebApplicationContext();
