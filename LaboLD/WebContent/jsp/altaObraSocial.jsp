@@ -39,6 +39,14 @@
 						styleId="nombre" onkeypress="return evitarAutoSubmit(event)"/>
 			</td>
 		</tr>
+		<tr>
+			<td width="40%" class="botoneralNegritaRight">Valor Unidad Bioquímica</td>
+			<td align="left">						
+				<html:text styleClass="botonerab" property="obraSocialDTO.valorUnidadBioquimica" value="" 
+						styleId="valor" onkeypress="return evitarAutoSubmit(event)"/>						
+						
+			</td>
+		</tr>		
 		
 		<tr>
 			<td height="20" colspan="2"></td>

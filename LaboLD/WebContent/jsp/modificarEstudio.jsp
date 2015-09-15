@@ -21,7 +21,8 @@
 <script type="text/javascript">
 
 	$(function() {
-		$( "#datepicker" ).datepicker({ dateFormat: 'dd/mm/yy'});		
+		$( "#datepicker" ).datepicker({ dateFormat: 'dd/mm/yy'});	
+		$( "#datepicker2" ).datepicker({ dateFormat: 'dd/mm/yy'});	
 	});
 
 	function submitir(){
@@ -106,6 +107,27 @@
 			</td>				
 		</tr>
 		
+		<tr>		
+			<td class="botoneralNegritaRight" width="12%" >Estado</td>
+			<td align="left" width="40%">			
+				<input type="text" value="${estudio.estadoStr}" class="botonerab" size="30" readonly="readonly"/>
+			</td>
+			
+			<td class="botoneralNegritaRight" width="20%" >Fecha de Entrega</td>
+			<td align="left">
+				<c:choose>
+					<c:when test="${estudio.fechaEntrega != null}">			
+						<input id="datepicker2" type="text" readonly="readonly" class="botonerab" name="estudioDTO.fechaEntrega"
+							value="<fmt:formatDate	value='${estudio.fechaEntrega}' pattern='dd/MM/yyyy' />">
+					</c:when>
+					<c:otherwise>
+						<input id="datepicker2" type="text" readonly="readonly" class="botonerab" value="" name="estudioDTO.fechaEntrega">					
+					</c:otherwise>		
+				</c:choose>		
+				<img alt="" src="<html:rewrite page='/imagenes/calendar/calendar2.gif'/>" align="top" width='17' height='21'>				
+			</td>		
+		</tr>		
+		
 		<tr>
 			<td class="botoneralNegritaRight" width="12%" >Monto Adeudado $</td>
 			<td align="left" width="40%">			
@@ -119,8 +141,20 @@
 		</tr>		
 					
 		<tr>
-			<td height="20" colspan="2"></td>
+			<td height="20" colspan="4">
+				<hr>
+			</td>
 		</tr>
+		<tr>
+			<td class="botoneralNegritaRight" width="12%" >Observaciones</td>
+			<td align="left"colspan="3">			
+				<input type="text" value="${estudio.paciente.observaciones}" class="botonerab" size="100" readonly="readonly"/>
+			</td>
+		</tr>		
+		<tr>
+			<td height="10" colspan="4"></td>
+		</tr>
+		
 	</table>
 	
 	<table border="0" class="cuadrado" align="center" width="80%" cellpadding="2" cellspacing="2">

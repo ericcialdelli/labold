@@ -51,7 +51,8 @@
 		<td>
 			<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2">
 				<tr>
-					<td class="azulAjustado">Nombre</td>
+					<td class="azulAjustado" width="40%">Nombre</td>
+					<td class="azulAjustado" width="40%">Valor Unidad Bioquímica</td>
 					<td class="azulAjustado"></td>
 				</tr>
 				<%String clase=""; %>
@@ -63,6 +64,7 @@
 						id="idTr<c:out value='${i.index}'></c:out>">					
 										
 						<td>${obraSocial.nombre}</td>
+						<td>${obraSocial.valorUnidadBioquimica}</td>
 						<td>
 							<a href="javascript:recuperarObraSocial(${obraSocial.id});">
 								Seleccionar

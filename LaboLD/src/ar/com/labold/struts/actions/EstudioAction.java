@@ -14,6 +14,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.springframework.web.context.WebApplicationContext;
+
 import ar.com.labold.dto.EstudioDTO;
 import ar.com.labold.dto.PracticaDTO;
 import ar.com.labold.fachada.EstudioFachada;
@@ -33,11 +34,11 @@ import ar.com.labold.struts.actions.forms.ValorUnidadFacturacionForm;
 import ar.com.labold.struts.utils.Validator;
 import ar.com.labold.utils.Constantes;
 import ar.com.labold.utils.MyLogger;
-
 import ar.com.labold.enums.AspectoOrina;
 import ar.com.labold.enums.CelulasEpitelialesOrina;
 import ar.com.labold.enums.CetonasOrina;
 import ar.com.labold.enums.ColorOrina;
+import ar.com.labold.enums.EstadoEstudio;
 import ar.com.labold.enums.GlucosaOrina;
 import ar.com.labold.enums.HematiesHbOrina;
 import ar.com.labold.enums.MucusOrina;
@@ -47,7 +48,6 @@ import ar.com.labold.enums.PiocitosOrina;
 import ar.com.labold.enums.ProteinasOrina;
 import ar.com.labold.enums.SedimentoOrina;
 import ar.com.labold.enums.UrobilinogenoOrina;
-
 import ar.com.labold.fachada.ReportesFachada;
 
 public class EstudioAction extends ValidadorAction {
@@ -738,9 +738,14 @@ public class EstudioAction extends ValidadorAction {
 
 			WebApplicationContext ctx = getWebApplicationContext();
 			ReportesFachada reportesFachada = (ReportesFachada) ctx.getBean("reportesFachada");
-
-			byte[] bytes = reportesFachada
-			.generarReportesEstudios(path,Long.valueOf(100),Long.valueOf(100));
+			PracticaFachada practicaFachada = (PracticaFachada) ctx.getBean("practicaFachada");
+			
+			List<Practica> listaPracticas = new ArrayList<Practica>(); 
+			for (PracticaDTO practicaDTO : estudioForm.getListaPracticas()) {
+				listaPracticas.add(practicaFachada.getPractica(practicaDTO.getId()));
+			} 
+			
+			byte[] bytes = reportesFachada.generarReportePresupuestoEstudio(path,listaPracticas,estudioForm.getValorEstudio());
 			
 			// Lo muestro en la salida del response
 			response.setContentType("application/pdf");
@@ -774,6 +779,8 @@ public class EstudioAction extends ValidadorAction {
 			listaPracticas.add(practicaFachada.getPractica(practicaDTO.getId()));
 		}		
 		estudioDTO.setFecha("20/09/2015");//Le pongo cualquier fecha para que no pinche en el ProviderDominio
+		estudioDTO.setFechaEntrega("20/09/2015");//Le pongo cualquier fecha para que no pinche en el ProviderDominio
+		estudioDTO.setEstado(EstadoEstudio.NO_ENTREGADO);//Le pongo cualquier fecha para que no pinche en el ProviderDominio
 		Estudio estudio = ProviderDominio.getEstudio(estudioDTO,null,listaPracticas,null);		
 		
 		respuesta.append("<unidades>" + estudio.getUnidadesFacturacionTotal() + "</unidades>");

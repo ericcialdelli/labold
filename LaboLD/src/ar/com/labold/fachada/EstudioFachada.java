@@ -14,6 +14,7 @@ import ar.com.labold.dao.PracticaDAO;
 import ar.com.labold.dto.EstudioDTO;
 import ar.com.labold.dto.PracticaDTO;
 import ar.com.labold.dto.ValorPracticaDTO;
+import ar.com.labold.enums.EstadoEstudio;
 import ar.com.labold.negocio.Estudio;
 import ar.com.labold.negocio.Medico;
 import ar.com.labold.negocio.Paciente;
@@ -50,6 +51,8 @@ public class EstudioFachada {
 			listaPracticas
 			.add(practicaDAO.getPractica(practicaDTO.getId()));
 		}
+		
+		estudioDTO.setEstado(EstadoEstudio.NO_ENTREGADO);
 		
 		Paciente paciente = pacienteDAO.getPaciente(estudioDTO.getPaciente().getId());
 		Medico medico = medicoDAO.getMedico(estudioDTO.getMedico().getId());

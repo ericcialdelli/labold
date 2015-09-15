@@ -18,6 +18,7 @@ public class EstudioForm extends ActionForm {
 	private List<PracticaDTO> listaPracticas;
 	private List<ValorPractica> listaValoresPractica;
 	private List<ValorPracticaDTO> listaValoresPracticaDTO;
+	private double valorEstudio;//Se usa para mostrar el valor en el reporte del presupuesto
 	
 	public EstudioForm(){
 		
@@ -84,5 +85,14 @@ public class EstudioForm extends ActionForm {
 			}
 		}
 		listaValoresPracticaDTO.removeAll(listaEliminarDTO);
-	}	
+	}
+
+	public double getValorEstudio() {
+		return valorEstudio;
+	}
+
+	public void setValorEstudio(double valorEstudio) {
+		this.valorEstudio = valorEstudio;
+	}
+	
 }

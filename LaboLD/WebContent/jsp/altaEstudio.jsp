@@ -23,7 +23,8 @@
 <script type="text/javascript">
 
 	$(function() {
-		$( "#datepicker" ).datepicker({ dateFormat: 'dd/mm/yy'});		
+		$( "#datepicker" ).datepicker({ dateFormat: 'dd/mm/yy'});
+		$( "#datepicker2" ).datepicker({ dateFormat: 'dd/mm/yy'});		
 	});
 
 	function submitir(){
@@ -185,7 +186,7 @@
 		$('#textoError').text("");
 		$('#tdAceptar').hide();
 		$('#tdModificar').show();
-		$('#dialogo').dialog({title: 'Modificar Paciente', height: 400, width: 600, modal: true});
+		$('#dialogo').dialog({title: 'Modificar Paciente', height: 450, width: 600, modal: true});
 		
 		$('#paciente').val(paciente.id);
 		$('#nombre').val(paciente.nombre);
@@ -194,7 +195,9 @@
 		$('#dni').val(paciente.dni);
 		$('#direccion').val(paciente.direccion);
 		$('#telefono').val(paciente.telefono);
-		$('#email').val(paciente.email);
+		$('#email').val(paciente.email);		
+		$('#nroCarnetObraSocial').val(paciente.nroCarnetObraSocial);
+		$('#observaciones').val(paciente.observaciones);
 		
 		if(paciente.obraSocial == null){
 			$('#obraSocial').val("-1");	
@@ -216,7 +219,8 @@
 	    if (nodos.length==0){
 
 			PacienteFachada.modificarPacienteDesdeAltaEstudio($('#paciente').val(),$('#nombre').val(),$('#apellido').val(),$('#fechaNacimiento').val(),
-					$('#dni').val(),$('#direccion').val(),$('#telefono').val(),$('#email').val(),$('#obraSocial').val(),cerrarVentanaAgregarPaciente);
+					$('#dni').val(),$('#direccion').val(),$('#telefono').val(),$('#email').val(),$('#obraSocial').val(),$('#nroCarnetObraSocial').val(),
+					$('#observaciones').val(),cerrarVentanaAgregarPaciente);
 				    	
 	    } else {
 	    	$('#textoError').text("");
@@ -252,8 +256,10 @@
 		$('#direccion').val("");
 		$('#telefono').val("");
 		$('#email').val("");
-		$('#obraSocial').val("-1");			
-		$('#dialogo').dialog({title: 'Agregar Paciente', height: 400, width: 600, modal: true});
+		$('#obraSocial').val("-1");
+		$('#nroCarnetObraSocial').val("");
+		$('#observaciones').val("");			
+		$('#dialogo').dialog({title: 'Agregar Paciente', height: 450, width: 600, modal: true});
 	}
 
 	function cerrarVentanaAgregarPaciente(){
@@ -278,7 +284,8 @@
 	    	//$('#pacienteFormId').submit();
 	 
 			PacienteFachada.altaPacienteDesdeAltaEstudio($('#nombre').val(),$('#apellido').val(),$('#fechaNacimiento').val(),
-					$('#dni').val(),$('#direccion').val(),$('#telefono').val(),$('#email').val(),$('#obraSocial').val(),mostrarPacienteCallback);
+					$('#dni').val(),$('#direccion').val(),$('#telefono').val(),$('#email').val(),$('#obraSocial').val(),$('#nroCarnetObraSocial').val(),
+					$('#observaciones').val(),mostrarPacienteCallback);
 				    	
 	    } else {
 	    	$('#textoError').text("");
@@ -509,7 +516,11 @@
 				<input type="text" class="botonerab" size="30" name="estudioDTO.montoAdeudado" onkeypress="javascript:esNumericoConDecimal(event);"/>
 			</td>
 						
-			<td colspan="2" ></td>		
+			<td class="botoneralNegritaRight" width="12%" >Fecha Entrega</td>
+			<td align="left">			
+				<input id="datepicker2" type="text" name="estudioDTO.fechaEntrega" readonly="readonly" class="botonerab">
+				<img alt="" src="<html:rewrite page='/imagenes/calendar/calendar2.gif'/>" align="top" width='17' height='21'>				
+			</td>		
 		</tr>
 							
 		<tr>
@@ -751,7 +762,23 @@
 						</c:forEach>										
 					</select>			
 				</td>
-			</tr>			
+			</tr>
+			<tr>
+				<td class="botoneralNegritaRight" width="40%">
+					Nro Carnet Obra Social
+				</td>
+				<td  align="left">
+					<html:text property="pacienteDTO.nroCarnetObraSocial" value="" styleClass="botonerab" styleId="nroCarnetObraSocial"/>			
+				</td>
+			</tr>
+		<tr>
+			<td class="botoneralNegritaRight" width="40%">
+				Observaciones
+			</td>
+			<td  align="left">
+				<html:text property="pacienteDTO.observaciones" value="" styleClass="botonerab" styleId="observaciones"/>			
+			</td>
+		</tr>										
 			<tr>
 				<td height="20" colspan="2"></td>
 			</tr>					

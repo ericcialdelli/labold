@@ -44,7 +44,15 @@
 			<td align="left">
 				<html:text property="obraSocialDTO.nombre" value="${obraSocial.nombre}" styleClass="botonerab" styleId="nombre"/>
 			</td>
-		</tr>					
+		</tr>
+		<tr>
+			<td width="40%" class="botoneralNegritaRight">Valor Unidad Bioquímica</td>
+			<td align="left">						
+				<html:text styleClass="botonerab" property="obraSocialDTO.valorUnidadBioquimica" value="${obraSocial.valorUnidadBioquimica}" 
+						styleId="valor"/>						
+						
+			</td>
+		</tr>							
 		<tr>
 			<td height="20" colspan="2"></td>
 		</tr>

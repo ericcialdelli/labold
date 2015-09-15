@@ -6,6 +6,8 @@ public class ObraSocialDTO {
 	
 	private String nombre;
 	
+	private double valorUnidadBioquimica;
+	
 	public ObraSocialDTO(){}
 
 	public Long getId() {
@@ -23,5 +25,12 @@ public class ObraSocialDTO {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	public double getValorUnidadBioquimica() {
+		return valorUnidadBioquimica;
+	}
 
+	public void setValorUnidadBioquimica(double valorUnidadBioquimica) {
+		this.valorUnidadBioquimica = valorUnidadBioquimica;
+	}
 }

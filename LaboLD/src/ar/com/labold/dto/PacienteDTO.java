@@ -18,6 +18,10 @@ public class PacienteDTO {
 	
 	private String fechaNacimiento;
 	
+	private String nroCarnetObraSocial;
+	
+	private String observaciones;	
+	
 	private ObraSocialDTO obraSocial;
 	
 	public PacienteDTO(){
@@ -96,4 +100,21 @@ public class PacienteDTO {
 	public void setObraSocial(ObraSocialDTO obraSocial) {
 		this.obraSocial = obraSocial;
 	}
+
+	public String getNroCarnetObraSocial() {
+		return nroCarnetObraSocial;
+	}
+
+	public void setNroCarnetObraSocial(String nroCarnetObraSocial) {
+		this.nroCarnetObraSocial = nroCarnetObraSocial;
+	}
+
+	public String getObservaciones() {
+		return observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
+	}
+	
 }

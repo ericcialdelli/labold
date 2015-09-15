@@ -18,7 +18,7 @@
 
 	function volver(){
 
-		parent.location=contextRoot() + "/estudio.do?metodo=cargarRecuperarEstudios&forward=recuperarEstudioParaConsulta";
+		parent.location=contextRoot() + "/estudio.do?metodo=cargarRecuperarEstudios&forward=recuperarEstudioParaEliminar";
 	}	
 
 	function expandirGrupo(idGrupo){
@@ -37,7 +37,22 @@
 			
 	}
 	
+	function eliminarEstudio(){
+		$("#confirmacionEliminar").dialog({title:'Atención!',resizable: false, modal: true ,buttons: {
+				    "send":{
+				      text:'Aceptar',click: function() {$('#estudioFormId').submit();$(this).dialog("close");} 
+				    },		
+				    "cancel":{
+				      text:'Cancelar',click:function() {$(this).dialog("close"); }
+				    }
+				 }});
+		 
+	}	
+	
 </script>
+<div id="confirmacionEliminar" style="display: none">
+	Desea eliminar el estudio?
+</div>
 <html:form action="estudio" styleId="estudioFormId">
 	<html:hidden property="metodo" value="eliminarEstudio"/>
 	
@@ -51,41 +66,77 @@
 			<td height="20" colspan="4"></td>
 		</tr>				
 		<tr>
-			<td class="botoneralNegritaRight" width="12%" >Número</td>
+			<td class="botoneralNegritaRight" width="15%" >Número</td>
 			<td align="left" width="30%">			
 				<input type="text" value="${estudio.numero}" class="botonerab" size="10" readonly="readonly" id="numeroEstudio" name="estudioDTO.numero"/>
 			</td>
 			
-			<td class="botoneralNegritaRight" width="30%" >Paciente</td>
+			<td class="botoneralNegritaRight" width="27%" >Paciente</td>
 			<td align="left">			
 				<input type="text" value="${estudio.paciente.apellido}, ${estudio.paciente.nombre}" class="botonerab" size="30" readonly="readonly"/>
 			</td>			
 		</tr>	
 		
 		<tr>
-			<td class="botoneralNegritaRight" width="12%" >Solicitado Por</td>
+			<td class="botoneralNegritaRight" width="15%" >Solicitado Por</td>
 			<td align="left" width="30%">			
 				<input type="text" value="${estudio.medico.descripcion}" class="botonerab" size="30" readonly="readonly"/>
 			</td>	
 			
-			<td class="botoneralNegritaRight" width="30%" >Fecha</td>
+			<td class="botoneralNegritaRight" width="27%" >Fecha</td>
 			<td align="left">			
 				<input id="datepicker" type="text" readonly="readonly" class="botonerab" 
 					value="<fmt:formatDate	value='${estudio.fecha}' pattern='dd/MM/yyyy' />">
 				<img alt="" src="<html:rewrite page='/imagenes/calendar/calendar2.gif'/>" align="top" width='17' height='21'>				
 			</td>				
 		</tr>
-		
-		<tr>
-			<td colspan="2"></td>
-			<td class="botoneralNegritaRight" width="30%" >Unidades de Facturación</td>
+
+		<tr>		
+			<td class="botoneralNegritaRight" width="15%" >Estado</td>
+			<td align="left" width="30%">			
+				<input type="text" value="${estudio.estadoStr}" class="botonerab" size="30" readonly="readonly"/>
+			</td>
+			
+			<td class="botoneralNegritaRight" width="27%" >Fecha de Entrega</td>
+			<td align="left">
+				<c:choose>
+					<c:when test="${estudio.fechaEntrega != null}">			
+						<input id="datepicker" type="text" readonly="readonly" class="botonerab" 
+							value="<fmt:formatDate	value='${estudio.fechaEntrega}' pattern='dd/MM/yyyy' />">
+					</c:when>
+					<c:otherwise>
+						<input id="datepicker" type="text" readonly="readonly" class="botonerab" value="">					
+					</c:otherwise>		
+				</c:choose>		
+				<img alt="" src="<html:rewrite page='/imagenes/calendar/calendar2.gif'/>" align="top" width='17' height='21'>				
+			</td>		
+		</tr>
+			
+		<tr>		
+			<td class="botoneralNegritaRight" width="15%" >Monto Adeudado $</td>
+			<td align="left" width="30%">			
+				<input type="text" value="${estudio.montoAdeudado}" class="botonerab" size="30" readonly="readonly"/>
+			</td>
+			
+			<td class="botoneralNegritaRight" width="27%" >Unidades de Facturación</td>
 			<td align="left">			
 				<input type="text" value="${estudio.unidadesFacturacionTotal}" class="botonerab" size="10" readonly="readonly"/>
 			</td>		
-		</tr>
-					
+		</tr>		
+		
 		<tr>
-			<td height="20" colspan="2"></td>
+			<td height="20" colspan="4">
+				<hr>
+			</td>
+		</tr>
+		<tr>
+			<td class="botoneralNegritaRight" width="15%" >Observaciones</td>
+			<td align="left"colspan="3">			
+				<input type="text" value="${estudio.paciente.observaciones}" class="botonerab" size="100" readonly="readonly"/>
+			</td>
+		</tr>		
+		<tr>
+			<td height="10" colspan="4"></td>
 		</tr>
 	</table>
 	
@@ -207,7 +258,8 @@
 		</tr>			
 		<tr>
 			<td align="center">
-				<input type="submit" value="Eliminar" class="botonerab">				
+				<!--  <input type="submit" value="Eliminar" class="botonerab">-->
+				<input type="button" class="botonerab" value="Eliminar" onclick="javascript:eliminarEstudio();">
 				<input type="button" class="botonerab" value="Volver" id="enviar" onclick="javascript:volver();">
 			</td>
 		</tr>

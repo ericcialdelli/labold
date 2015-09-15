@@ -126,7 +126,23 @@
 					</c:forEach>										
 				</select>			
 			</td>
-		</tr>				
+		</tr>
+		<tr>
+			<td class="botoneralNegritaRight" width="40%">
+				Nro Carnet Obra Social
+			</td>
+			<td  align="left">
+				<html:text property="pacienteDTO.nroCarnetObraSocial" value="" styleClass="botonerab"/>			
+			</td>
+		</tr>
+		<tr>
+			<td class="botoneralNegritaRight" width="40%">
+				Observaciones
+			</td>
+			<td  align="left">
+				<html:text property="pacienteDTO.observaciones" value="" styleClass="botonerab"/>			
+			</td>
+		</tr>								
 		<tr>
 			<td height="20" colspan="2"></td>
 		</tr>

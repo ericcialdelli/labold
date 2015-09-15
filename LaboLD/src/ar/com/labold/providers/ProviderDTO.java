@@ -128,6 +128,8 @@ public abstract class ProviderDTO {
 		pacienteDTO.setFechaNacimiento(Fecha.getFechaDDMMAAAASlash(Fecha
 				.dateToStringDDMMAAAA(paciente.getFechaNacimiento())));
 		pacienteDTO.setObraSocial(ProviderDTO.getObraSocialDTO(paciente.getObraSocial()));
+		pacienteDTO.setNroCarnetObraSocial(paciente.getNroCarnetObraSocial());
+		pacienteDTO.setObservaciones(paciente.getObservaciones());
 		
 		return pacienteDTO;
 	}	
@@ -137,6 +139,7 @@ public abstract class ProviderDTO {
 		ObraSocialDTO obraSocialDTO = new ObraSocialDTO();
 		obraSocialDTO.setId(obraSocial.getId());
 		obraSocialDTO.setNombre(obraSocial.getNombre());
+		obraSocialDTO.setValorUnidadBioquimica(obraSocial.getValorUnidadBioquimica());
 		
 		return obraSocialDTO;
 	}
@@ -151,6 +154,8 @@ public abstract class ProviderDTO {
 		estudioDTO.setFecha(Fecha.getFechaDDMMAAAASlash(Fecha
 				.dateToStringDDMMAAAA(estudio.getFecha())));
 		estudioDTO.setMontoAdeudado(estudio.getMontoAdeudado());
+		estudioDTO.setFechaEntrega((Fecha.getFechaDDMMAAAASlash(Fecha.dateToStringDDMMAAAA(estudio.getFechaEntrega()))));
+		estudioDTO.setEstado(estudio.getEstado());
 		
 		return estudioDTO;
 	}

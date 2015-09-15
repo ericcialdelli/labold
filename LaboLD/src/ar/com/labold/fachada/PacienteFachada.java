@@ -59,7 +59,8 @@ public class PacienteFachada {
 	}
 	
 	public Paciente altaPacienteDesdeAltaEstudio(String nombre,String apellido,String fechaNacimiento,int dni, 
-											     String direccion,String telefono,String email, Long idObraSocial){
+											     String direccion,String telefono,String email, Long idObraSocial,
+											     String nroCarnetObraSocial, String observaciones){
 		
 		PacienteDTO pacienteDTO = new PacienteDTO();
 		pacienteDTO.setNombre(nombre);
@@ -70,12 +71,14 @@ public class PacienteFachada {
 		pacienteDTO.setTelefono(telefono);
 		pacienteDTO.setEmail(email);
 		pacienteDTO.getObraSocial().setId(idObraSocial);
+		pacienteDTO.setNroCarnetObraSocial(nroCarnetObraSocial);
+		pacienteDTO.setObservaciones(observaciones);
 		
 		return this.altaPaciente(pacienteDTO);		
 	}
 	
 	public void modificarPacienteDesdeAltaEstudio(Long idPaciente, String nombre,String apellido,String fechaNacimiento,int dni, 
-		     String direccion,String telefono,String email, Long idObraSocial){
+		     String direccion,String telefono,String email, Long idObraSocial, String nroCarnetObraSocial, String observaciones){
 
 		PacienteDTO pacienteDTO = new PacienteDTO();
 		pacienteDTO.setId(idPaciente);
@@ -87,6 +90,8 @@ public class PacienteFachada {
 		pacienteDTO.setTelefono(telefono);
 		pacienteDTO.setEmail(email);
 		pacienteDTO.getObraSocial().setId(idObraSocial);
+		pacienteDTO.setNroCarnetObraSocial(nroCarnetObraSocial);
+		pacienteDTO.setObservaciones(observaciones);
 		
 		this.modificacionPaciente(pacienteDTO);		
 	}

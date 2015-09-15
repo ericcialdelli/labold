@@ -1,11 +1,13 @@
 package ar.com.labold.fachada;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.com.labold.dao.ReportesDAO;
+import ar.com.labold.negocio.Practica;
 import ar.com.labold.utils.Constantes;
 import ar.com.labold.utils.Fecha;
 
@@ -78,5 +80,16 @@ public class ReportesFachada {
 
 		return reportesDAO.generarReporte(
 				Constantes.REPORTE_FACTURACION_ENTRE_FECHAS_POR_OBRA_SOCIAL, parameters);
+	}
+	
+	public byte[] generarReportePresupuestoEstudio(String path, List<Practica> listaPracticas, double valorTotal) throws Exception {
+
+		Map parameters = new HashMap();
+		parameters.put("PATH_SUB_REPORTES", path);
+		parameters.put("valorTotal", valorTotal);
+		//parameters.put("listaPracticas", listaPracticas);
+		
+		return reportesDAO.generarReporteColeccion(
+				Constantes.REPORTE_PRESUPUESTO_ESTUDIO, parameters, listaPracticas);
 	}	
 }

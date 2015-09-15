@@ -16,6 +16,8 @@ public class ObraSocial {
 	@Column(nullable = false)
 	private String nombre;
 
+	private double valorUnidadBioquimica;
+	
 	public Long getId() {
 		return id;
 	}
@@ -31,4 +33,13 @@ public class ObraSocial {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+	public double getValorUnidadBioquimica() {
+		return valorUnidadBioquimica;
+	}
+
+	public void setValorUnidadBioquimica(double valorUnidadBioquimica) {
+		this.valorUnidadBioquimica = valorUnidadBioquimica;
+	}
+	
 }

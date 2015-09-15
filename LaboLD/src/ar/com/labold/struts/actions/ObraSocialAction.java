@@ -141,7 +141,11 @@ public class ObraSocialAction extends ValidadorAction {
 			if (existe) {
 				Validator.addErrorXML(error, Constantes.EXISTE_OBRA_SOCIAL);
 			}
-			return !existe && b1;
+			
+			boolean ok1 = Validator.validarDoubleMayorQue(0, String.valueOf(obraSocialForm.getObraSocialDTO().getValorUnidadBioquimica()),
+														  "Valor Unidad Bioquímica", error);			
+			
+			return !existe && b1 && ok1;
 
 		} catch (Throwable t) {
 			MyLogger.logError(t);

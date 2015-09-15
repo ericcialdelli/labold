@@ -40,6 +40,10 @@ public class Paciente {
 
 	private Date fechaNacimiento;	
 	
+	private String nroCarnetObraSocial;
+	
+	private String observaciones;
+	
 	@ManyToOne()
 	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "obraSocial_fk")	
@@ -141,4 +145,21 @@ public class Paciente {
 		}
 		return ""; 
 	}
+
+	public String getNroCarnetObraSocial() {
+		return nroCarnetObraSocial;
+	}
+
+	public void setNroCarnetObraSocial(String nroCarnetObraSocial) {
+		this.nroCarnetObraSocial = nroCarnetObraSocial;
+	}
+
+	public String getObservaciones() {
+		return observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
+	}
+	
 }

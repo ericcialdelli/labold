@@ -2,11 +2,13 @@ package ar.com.labold.dao;
 
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.JasperRunManager;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 
 import org.hibernate.Criteria;
@@ -50,6 +52,19 @@ public class ReportesDAO extends HibernateDaoSupport {
 
 		return JasperRunManager.runReportToPdf(jasperReport, parameters,
 				getSession().connection());
+
+	}
+	
+	public byte[] generarReporteColeccion(String nombreReporte,
+			Map<String, Object> parameters, Collection lista) throws Exception {
+		
+		InputStream input = obtenerReporte(nombreReporte);
+		this.cargarSubReportes(nombreReporte, parameters);
+		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(input);
+
+		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(lista);
+		
+		return JasperRunManager.runReportToPdf(jasperReport, parameters,dataSource);
 
 	}	
 }

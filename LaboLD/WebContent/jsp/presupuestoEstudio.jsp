@@ -46,6 +46,7 @@
 
 	   		$('#idUB').html("&nbsp;&nbsp;&nbsp;&nbsp;"+nodos[0].firstChild.nodeValue);
 	   		$('#idValor').html("&nbsp;&nbsp;&nbsp;$"+valor[0].firstChild.nodeValue);
+	   		$('#idValorEstudio').val(valor[0].firstChild.nodeValue);
 	   		$('#dialogoValor').dialog({title: 'Valor Presupuesto Estudio', height: 180, width: 380, modal: true});
 		}
 		else{	    	
@@ -196,9 +197,8 @@
 	}
 
 	function generarReporte(){
-		alert("asdasd");
-		$('#estudioFormId').submit();
-		alert("aaaaa");		
+		
+		$('#estudioFormId').submit();			
 	}	
 	
 </script>
@@ -226,6 +226,7 @@
 	
 <html:form action="estudio" styleId="estudioFormId" target="_blank">
 	<html:hidden property="metodo" value="generarReportePresupuestoEstudio"/>	
+	<input type="hidden" name="valorEstudio" id="idValorEstudio">
 	
 	<table border="0" class="cuadrado" align="center" width="85%" cellpadding="2" cellspacing="2">
 		<tr>
@@ -394,7 +395,8 @@
 				<td  align="left" class="botoneralNegritaLeftGrande" id="idValor"></td>
 			</tr>				
 			<tr>
-				<td height="20" colspan="2"></td>
+				<td height="20" colspan="2">								
+				</td>
 			</tr>					
 		</table>					
 		<table border="0" class="cuadradoSinBorde" align="center" width="80%" cellpadding="2">

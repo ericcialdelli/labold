@@ -84,6 +84,8 @@ public abstract class ProviderDominio {
 					.stringDDMMAAAAToUtilDate(pacienteDTO.getFechaNacimiento()));
 		}	
 		paciente.setObraSocial(obraSocial);
+		paciente.setNroCarnetObraSocial(pacienteDTO.getNroCarnetObraSocial());
+		paciente.setObservaciones(pacienteDTO.getObservaciones());
 		
 		return paciente;
 	}	
@@ -104,6 +106,8 @@ public abstract class ProviderDominio {
 			paciente.setFechaNacimiento(null);
 		}	
 		paciente.setObraSocial(obraSocial);
+		paciente.setNroCarnetObraSocial(pacienteDTO.getNroCarnetObraSocial());
+		paciente.setObservaciones(pacienteDTO.getObservaciones());
 		
 		return paciente;
 	}	
@@ -114,6 +118,7 @@ public abstract class ProviderDominio {
 		ObraSocial obraSocial = new ObraSocial();
 		obraSocial.setId(obraSocialDTO.getId());
 		obraSocial.setNombre(obraSocialDTO.getNombre());
+		obraSocial.setValorUnidadBioquimica(obraSocialDTO.getValorUnidadBioquimica());
 		
 		return obraSocial;
 	}	
@@ -122,6 +127,7 @@ public abstract class ProviderDominio {
 	public static ObraSocial getObraSocial(ObraSocial obraSocial, ObraSocialDTO obraSocialDTO){
 			
 		obraSocial.setNombre(obraSocialDTO.getNombre());
+		obraSocial.setValorUnidadBioquimica(obraSocialDTO.getValorUnidadBioquimica());
 		
 		return obraSocial;
 	}	
@@ -235,6 +241,10 @@ public abstract class ProviderDominio {
 		estudio.setFecha(Fecha.stringDDMMAAAAToUtilDate(estudioDTO.getFecha()));
 		estudio.setMedico(medico);
 		estudio.setMontoAdeudado(estudioDTO.getMontoAdeudado());
+		if(estudioDTO.getFechaEntrega()!=null && !estudioDTO.getFechaEntrega().equals("")){
+			estudio.setFechaEntrega(Fecha.stringDDMMAAAAToUtilDate(estudioDTO.getFechaEntrega()));
+		}	
+		estudio.setEstado(estudioDTO.getEstado());
 		
 		Map<Long,ValoresEstudio> mapValoresEstudio = new TreeMap<Long,ValoresEstudio>();
 		Map<Long,ValorSubItemPractica> mapValorSubItemPractica = new TreeMap<Long,ValorSubItemPractica>();
@@ -438,7 +448,11 @@ public abstract class ProviderDominio {
 		estudio.setFecha(Fecha.stringDDMMAAAAToUtilDate(estudioDTO.getFecha()));
 		estudio.setUnidadesFacturacionTotal(estudioDTO.getUnidadesFacturacionTotal());
 		estudio.setMedico(medico);
-		estudio.setMontoAdeudado(estudioDTO.getMontoAdeudado());		
+		estudio.setMontoAdeudado(estudioDTO.getMontoAdeudado());
+		if(estudioDTO.getFechaEntrega()!=null && !estudioDTO.getFechaEntrega().equals("")){
+			estudio.setFechaEntrega(Fecha.stringDDMMAAAAToUtilDate(estudioDTO.getFechaEntrega()));
+		}	
+		//estudio.setEstado(estudioDTO.getEstado());
 		
 		return estudio;
 	}		

@@ -1,5 +1,7 @@
 package ar.com.labold.dto;
 
+import ar.com.labold.enums.EstadoEstudio;
+
 public class EstudioDTO {
 
 	private Long id;
@@ -10,6 +12,8 @@ public class EstudioDTO {
 	
 	private String fecha;
 	
+	private String fechaEntrega;
+	
 	private Double unidadesFacturacionTotal;
 	
 	private PacienteDTO paciente;
@@ -17,6 +21,8 @@ public class EstudioDTO {
 	private MedicoDTO medico;
 	
 	private double montoAdeudado;	
+	
+	private EstadoEstudio estado;
 	
 	public EstudioDTO(){
 		paciente = new PacienteDTO();
@@ -85,5 +91,29 @@ public class EstudioDTO {
 
 	public void setMontoAdeudado(double montoAdeudado) {
 		this.montoAdeudado = montoAdeudado;
+	}
+
+	public String getFechaEntrega() {
+		return fechaEntrega;
+	}
+
+	public void setFechaEntrega(String fechaEntrega) {
+		this.fechaEntrega = fechaEntrega;
+	}
+
+	public EstadoEstudio getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoEstudio estado) {
+		this.estado = estado;
+	}
+	
+	public String getEstadoStr(){
+		return (this.estado == null)?"":this.estado.getDescripcion();
+	}
+	
+	public void setEstadoStr(String estadoEstudio){
+		this.estado = EstadoEstudio.valueOf(estadoEstudio);
 	}	
 }

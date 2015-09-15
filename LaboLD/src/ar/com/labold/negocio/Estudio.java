@@ -6,15 +6,20 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+
+import ar.com.labold.enums.EstadoEstudio;
 
 @Entity
 public class Estudio {
@@ -31,7 +36,12 @@ public class Estudio {
 	
 	private Double unidadesFacturacionTotal; 
 	
-	private Double montoAdeudado;	
+	private Double montoAdeudado;
+	
+	private Date fechaEntrega;
+	
+	@Enumerated(EnumType.STRING)
+	private EstadoEstudio estado;
 	
 	@ManyToOne()
 	@Cascade(value = CascadeType.SAVE_UPDATE)
@@ -109,5 +119,31 @@ public class Estudio {
 
 	public void setMontoAdeudado(Double montoAdeudado) {
 		this.montoAdeudado = montoAdeudado;
+	}
+
+	public Date getFechaEntrega() {
+		return fechaEntrega;
+	}
+
+	public void setFechaEntrega(Date fechaEntrega) {
+		this.fechaEntrega = fechaEntrega;
+	}
+
+	public EstadoEstudio getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoEstudio estado) {
+		this.estado = estado;
+	}	
+
+	@Transient
+	public String getEstadoStr(){
+		return (this.estado == null)?"":this.estado.getDescripcion();
+	}
+	
+	@Transient
+	public void setEstadoStr(String estadoEstudio){
+		this.estado = EstadoEstudio.valueOf(estadoEstudio);
 	}	
 }
