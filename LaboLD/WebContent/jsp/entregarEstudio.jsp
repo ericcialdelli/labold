@@ -16,29 +16,9 @@
 
 <script type="text/javascript">
 
-function generarReporte(){
-
-	var idEstudio = $("#idEstudio").val();
-	
-	var especificaciones = 'top=0,left=0,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable';
-	/*if(type == "IE"){
-		window.open("./reporte.do?metodo=generarReporteEstudio&idEstudio="+idEstudio,"",especificaciones);		
-	}else{
-		window.open("../../reporte.do?metodo=generarReporteEstudio&idEstudio="+idEstudio,"",especificaciones);				
-	}*/
-
-	var desde = $("#numeroEstudio").val();
-	var hasta = $("#numeroEstudio").val();
-	if(type == "IE"){
-		window.open("./reporte.do?metodo=generarReportesEstudios&desde="+desde+"&hasta="+hasta,"",especificaciones);		
-	}else{
-		window.open("../../reporte.do?metodo=generarReportesEstudios&desde="+desde+"&hasta="+hasta,"",especificaciones);				
-	}
-}
-
 	function volver(){
 
-		parent.location=contextRoot() + "/estudio.do?metodo=cargarRecuperarEstudios&forward=recuperarEstudioParaConsulta";
+		parent.location=contextRoot() + "/estudio.do?metodo=cargarRecuperarEstudios&forward=recuperarEstudioEntregarEstudio";
 	}	
 
 	function expandirGrupo(idGrupo){
@@ -57,14 +37,31 @@ function generarReporte(){
 			
 	}
 	
-	
+	function entregarEstudio(){
+		$("#confirmacionEntregar").dialog({title:'Atención!',resizable: false, modal: true ,buttons: {
+				    "send":{
+				      text:'Aceptar',click: function() {$('#estudioFormId').submit();$(this).dialog("close");} 
+				    },		
+				    "cancel":{
+				      text:'Cancelar',click:function() {$(this).dialog("close"); }
+				    }
+				 }});
+		 
+	}	
 	
 </script>
 
-	<input type="hidden" value="${estudio.id}" id="idEstudio"/>
+<div id="confirmacionEntregar" style="display: none">
+	Desea entregar el estudio?
+</div>
+
+<html:form action="estudio" styleId="estudioFormId">
+	<html:hidden property="metodo" value="entregarEstudio"/>
+	<html:hidden property="estudioDTO.id" value="${estudio.id}"/>
+	
 	<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2" cellspacing="0">
 		<tr>
-			<td colspan="4"  class="azulAjustado" >Consulta de Estudio</td>
+			<td colspan="4"  class="azulAjustado" >Entregar Estudio</td>
 		</tr>
 		<tr>
 			<td height="20" colspan="4"></td>
@@ -268,7 +265,9 @@ function generarReporte(){
 		</tr>			
 		<tr>
 			<td align="center">
-				<input type="button" value="Generar Reporte" class="botonerab" onclick="generarReporte();">				
+				<c:if test="${estudio.estadoStr != 'Entregado'}">			
+					<input type="button" class="botonerab" value="Entregar Estudio" onclick="javascript:entregarEstudio();">
+				</c:if>					
 				<input type="button" class="botonerab" value="Volver" id="enviar" onclick="javascript:volver();">
 			</td>
 		</tr>
@@ -276,3 +275,4 @@ function generarReporte(){
 			<td height="10"></td>
 		</tr>									
 	</table>
+</html:form>	

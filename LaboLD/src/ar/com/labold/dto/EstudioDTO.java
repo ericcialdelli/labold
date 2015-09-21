@@ -16,6 +16,8 @@ public class EstudioDTO {
 	
 	private Double unidadesFacturacionTotal;
 	
+	private double valorUnidadBioquimica;
+	
 	private PacienteDTO paciente;
 	
 	private MedicoDTO medico;
@@ -115,5 +117,13 @@ public class EstudioDTO {
 	
 	public void setEstadoStr(String estadoEstudio){
 		this.estado = EstadoEstudio.valueOf(estadoEstudio);
-	}	
+	}
+
+	public double getValorUnidadBioquimica() {
+		return valorUnidadBioquimica;
+	}
+
+	public void setValorUnidadBioquimica(double valorUnidadBioquimica) {
+		this.valorUnidadBioquimica = valorUnidadBioquimica;
+	}
 }

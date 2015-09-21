@@ -15,6 +15,7 @@ import ar.com.labold.negocio.ItemMenu;
 import ar.com.labold.negocio.Rol;
 import ar.com.labold.negocio.exception.DataBaseException;
 import ar.com.labold.utils.ComparadorItemsMenu;
+import ar.com.labold.utils.ComparadorItemsMenuHijos;
 import ar.com.labold.utils.Constantes;
 
 public class MenuDAO extends HibernateDaoSupport {
@@ -40,6 +41,7 @@ public class MenuDAO extends HibernateDaoSupport {
 				iMenu.setId(itemMenu.getId());
 				iMenu.setItem(itemMenu.getItem());
 				iMenu.setOrden(itemMenu.getOrden());
+				iMenu.setOrdenHijo(itemMenu.getOrdenHijo());
 				iMenu.setPadre(itemMenu.getPadre());
 				iMenu.setUrl(itemMenu.getUrl());
 				iMenu.setHijos(new ArrayList<ItemMenu>());
@@ -59,6 +61,10 @@ public class MenuDAO extends HibernateDaoSupport {
 			List<ItemMenu> listaMenues = new ArrayList<ItemMenu>();
 			listaMenues.addAll(hashMenu.values());
 	
+			for (ItemMenu itemMenu : listaMenues) {
+				Collections.sort(itemMenu.getHijos(), new ComparadorItemsMenuHijos());
+			}
+			
 			return listaMenues;
 			
 		} catch (HibernateException he) {

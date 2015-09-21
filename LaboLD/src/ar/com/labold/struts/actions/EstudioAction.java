@@ -124,6 +124,7 @@ public class EstudioAction extends ValidadorAction {
 		try {
 			WebApplicationContext ctx = getWebApplicationContext();
 			PacienteFachada pacienteFachada = (PacienteFachada) ctx.getBean("pacienteFachada");
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
 			
 			String forward = request.getParameter("forward");
 			
@@ -151,8 +152,13 @@ public class EstudioAction extends ValidadorAction {
 										titulo="Eliminar Practicas de Estudio";
 									}
 									else{
-										titulo="Eliminar Estudio";
-									}
+										if(forward.equals("recuperarEstudioEntregarEstudio")){
+											titulo="Entregar Estudio";
+										}									
+										else{
+											titulo="Eliminar Estudio";
+										}
+									}	
 								}								
 							}							
 								
@@ -161,9 +167,12 @@ public class EstudioAction extends ValidadorAction {
 				}
 			}
 			
+			List<Estudio> listaUltimosEstudios = estudioFachada.recuperarUltimosEstudios();
+			
 			request.setAttribute("listaPacientes", pacienteFachada.getPacientes());
 			request.setAttribute("forward", forward);
 			request.setAttribute("titulo", titulo);
+			request.setAttribute("listaUltimosEstudios", listaUltimosEstudios);
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
@@ -675,6 +684,31 @@ public class EstudioAction extends ValidadorAction {
 	}		
 	
 	@SuppressWarnings("unchecked")
+	public ActionForward recuperarEstudioEntregarEstudio(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoRecuperarEstudioEntregarEstudio";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			
+			String nroProtocolo = request.getParameter("nroProtocolo");			
+			Estudio estudio = estudioFachada.getEstudioPorNroProtocolo(Long.valueOf(nroProtocolo));
+			
+			request.setAttribute("estudio", estudio);
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}	
+	
+	@SuppressWarnings("unchecked")
 	public ActionForward eliminarEstudio(ActionMapping mapping,
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -786,6 +820,31 @@ public class EstudioAction extends ValidadorAction {
 		respuesta.append("<unidades>" + estudio.getUnidadesFacturacionTotal() + "</unidades>");
 		respuesta.append("<valor>" + estudio.getUnidadesFacturacionTotal()*valor + "</valor>");		
 	}
+	
+	@SuppressWarnings("unchecked")
+	public ActionForward entregarEstudio(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoEntregarEstudio";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			
+			EstudioForm estudioForm = (EstudioForm)form;
+			estudioFachada.entregarEstudio(estudioForm.getEstudioDTO());
+			
+			request.setAttribute("exitoGrabado", Constantes.EXITO_ENTREGA_ESTUDIO);
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado");
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}	
 	
 	/**********************************************************************
 	 **********************	METODOS VALIDADORES ***************************

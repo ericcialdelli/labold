@@ -40,6 +40,8 @@ public class Estudio {
 	
 	private Date fechaEntrega;
 	
+	private double valorUnidadBioquimica;
+	
 	@Enumerated(EnumType.STRING)
 	private EstadoEstudio estado;
 	
@@ -145,5 +147,13 @@ public class Estudio {
 	@Transient
 	public void setEstadoStr(String estadoEstudio){
 		this.estado = EstadoEstudio.valueOf(estadoEstudio);
-	}	
+	}
+
+	public double getValorUnidadBioquimica() {
+		return valorUnidadBioquimica;
+	}
+
+	public void setValorUnidadBioquimica(double valorUnidadBioquimica) {
+		this.valorUnidadBioquimica = valorUnidadBioquimica;
+	}
 }

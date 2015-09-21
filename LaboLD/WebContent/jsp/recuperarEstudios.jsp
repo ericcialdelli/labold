@@ -62,6 +62,20 @@
 	    }	
 	}
 	
+	var clase;
+	function pintarFila(idTr){
+		
+		clase = $('#'+idTr).attr("class");
+		$('#'+idTr).removeClass(clase);
+		$('#'+idTr).addClass("verdeSeleccionFila");		
+	}
+
+	function despintarFila(idTr){
+		
+		$('#'+idTr).addClass(clase);
+		$('#'+idTr).removeClass("verdeSeleccionFila");
+	}	
+	
 </script>
 
 <div id="exitoGrabado" class="verdeExito">${exitoGrabado}</div>
@@ -149,7 +163,45 @@
 		<td height="10"></td>
 	</tr>	
 </table>
-
+<%-- <br>
+<table border="0" class="cuadrado" align="center" width="60%" cellpadding="2">
+	<tr>
+		<td class="azulAjustado" colspan="4">Ultimos Estudios</td>
+	</tr>
+	<tr>
+		<td height="5"></td>
+	</tr>
+	
+	<tr>
+		<td class="grisSubtituloCenter">Número</td>
+		<td class="grisSubtituloCenter">Paciente</td>
+		<td class="grisSubtituloCenter">Fecha</td>
+		<td class="grisSubtituloCenter"></td>
+	</tr>
+	<%String clase=""; %>
+	<c:forEach items="${listaUltimosEstudios}" var="estudio" varStatus="i">
+		<%clase=(clase.equals("")?"par":""); %>
+		
+		<tr class="<%=clase%>" 
+			onmouseover="javascript:pintarFila('idTrUE<c:out value='${i.index}'></c:out>');"
+			onmouseout="javascript:despintarFila('idTrUE<c:out value='${i.index}'></c:out>');"
+			id="idTrUE<c:out value='${i.index}'></c:out>">					
+		
+			<td>${estudio.numero}</td>
+			<td>${estudio.paciente.apellido}, ${estudio.paciente.nombre}</td>
+			
+			<td>
+				<fmt:formatDate	value='${estudio.fecha}' pattern='dd/MM/yyyy' />
+			</td>
+			<td>
+				<a href="javascript:recuperarEstudio(${estudio.numero});">
+					Seleccionar
+				</a>
+			</td>
+		</tr>
+	</c:forEach>		
+</table>
+<br>--%>
 <script type="text/javascript">
 
 	$('#nroProtocolo').focus();

@@ -180,7 +180,7 @@
 					
 		<tr>
 			<td height="20" colspan="4">
-				<hr>
+				<hr color="lightgrey">
 			</td>
 		</tr>
 		<tr>

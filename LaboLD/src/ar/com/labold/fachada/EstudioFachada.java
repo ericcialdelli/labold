@@ -56,6 +56,10 @@ public class EstudioFachada {
 		
 		Paciente paciente = pacienteDAO.getPaciente(estudioDTO.getPaciente().getId());
 		Medico medico = medicoDAO.getMedico(estudioDTO.getMedico().getId());
+		
+		//Seteo el valor de la UB, copiandolo de la obra social del paciente
+		estudioDTO.setValorUnidadBioquimica(paciente.getObraSocial().getValorUnidadBioquimica());
+		
 		Estudio estudio = ProviderDominio.getEstudio(estudioDTO, paciente,listaPracticas,medico);
 		
 		estudioDAO.altaEstudio(estudio);
@@ -244,5 +248,18 @@ public class EstudioFachada {
 			}
 		}		
 		return map;
+	}
+	
+	public void entregarEstudio(EstudioDTO estudioDTO){
+		
+		Estudio estudio = estudioDAO.getEstudio(estudioDTO.getId());
+		estudio.setMontoAdeudado(new Double(0));
+		estudio.setEstado(EstadoEstudio.ENTREGADO);
+		estudioDAO.altaEstudio(estudio);
+	}	
+	
+	public List<Estudio> recuperarUltimosEstudios(){
+		
+		return estudioDAO.recuperarUltimosEstudios();
 	}
 }

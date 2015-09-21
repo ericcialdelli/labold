@@ -156,6 +156,7 @@ public abstract class ProviderDTO {
 		estudioDTO.setMontoAdeudado(estudio.getMontoAdeudado());
 		estudioDTO.setFechaEntrega((Fecha.getFechaDDMMAAAASlash(Fecha.dateToStringDDMMAAAA(estudio.getFechaEntrega()))));
 		estudioDTO.setEstado(estudio.getEstado());
+		estudioDTO.setValorUnidadBioquimica(estudio.getValorUnidadBioquimica());
 		
 		return estudioDTO;
 	}

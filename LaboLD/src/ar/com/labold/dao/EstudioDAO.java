@@ -137,4 +137,14 @@ public class EstudioDAO extends HibernateDaoSupport {
 		this.getHibernateTemplate().flush();
 		this.getHibernateTemplate().clear();		
 	}
+	
+	public List<Estudio> recuperarUltimosEstudios(){
+		
+		Criteria criteria = getSession().createCriteria(Estudio.class);
+		criteria.addOrder(Order.desc("numero"));
+		criteria.setMaxResults(10);
+		List<Estudio> estudios = criteria.list(); 
+		
+		return estudios;		
+	}	
 }

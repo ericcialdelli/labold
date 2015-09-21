@@ -241,6 +241,7 @@ public abstract class ProviderDominio {
 		estudio.setFecha(Fecha.stringDDMMAAAAToUtilDate(estudioDTO.getFecha()));
 		estudio.setMedico(medico);
 		estudio.setMontoAdeudado(estudioDTO.getMontoAdeudado());
+		estudio.setValorUnidadBioquimica(estudioDTO.getValorUnidadBioquimica());
 		if(estudioDTO.getFechaEntrega()!=null && !estudioDTO.getFechaEntrega().equals("")){
 			estudio.setFechaEntrega(Fecha.stringDDMMAAAAToUtilDate(estudioDTO.getFechaEntrega()));
 		}	
@@ -447,6 +448,7 @@ public abstract class ProviderDominio {
 		//estudio.setSolicitadoPor(estudioDTO.getSolicitadoPor());
 		estudio.setFecha(Fecha.stringDDMMAAAAToUtilDate(estudioDTO.getFecha()));
 		estudio.setUnidadesFacturacionTotal(estudioDTO.getUnidadesFacturacionTotal());
+		//estudio.setValorUnidadBioquimica(estudioDTO.getValorUnidadBioquimica());
 		estudio.setMedico(medico);
 		estudio.setMontoAdeudado(estudioDTO.getMontoAdeudado());
 		if(estudioDTO.getFechaEntrega()!=null && !estudioDTO.getFechaEntrega().equals("")){

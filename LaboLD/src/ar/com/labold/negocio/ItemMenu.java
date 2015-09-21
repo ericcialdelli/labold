@@ -34,6 +34,8 @@ public class ItemMenu implements Comparable<ItemMenu> {
 
 	private Integer orden;
 
+	private Integer ordenHijo;
+	
 	public Long getId() {
 		return id;
 	}
@@ -100,5 +102,13 @@ public class ItemMenu implements Comparable<ItemMenu> {
 		}
 
 		return this.getOrden().compareTo(o.getOrden());
+	}
+
+	public Integer getOrdenHijo() {
+		return ordenHijo;
+	}
+
+	public void setOrdenHijo(Integer ordenHijo) {
+		this.ordenHijo = ordenHijo;
 	}
 }

@@ -51,7 +51,7 @@
 	
 </script>
 <div id="confirmacionEliminar" style="display: none">
-	Desea eliminar el estudio?
+	<b>Desea eliminar el estudio?</b>
 </div>
 <html:form action="estudio" styleId="estudioFormId">
 	<html:hidden property="metodo" value="eliminarEstudio"/>
@@ -126,7 +126,7 @@
 		
 		<tr>
 			<td height="20" colspan="4">
-				<hr>
+				<hr color="lightgrey">
 			</td>
 		</tr>
 		<tr>

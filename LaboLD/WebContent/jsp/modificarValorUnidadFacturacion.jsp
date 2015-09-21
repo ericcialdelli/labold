@@ -26,7 +26,7 @@
 		cellpadding="2">
 		<tr>
 			<td colspan="2" class="azulAjustado">
-				Modificación Valor Unidad de Facturación
+				Modificación Valor Unidad de Facturación Particular
 			</td>
 		</tr>
 		<tr>

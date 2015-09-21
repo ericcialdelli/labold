@@ -15,20 +15,6 @@
 <script type="text/javascript" src="<html:rewrite page='/js/funcUtiles.js'/>"></script>
 
 <script>
-
-	var clase;
-	function pintarFila(idTr){
-		
-		clase = $('#'+idTr).attr("class");
-		$('#'+idTr).removeClass(clase);
-		$('#'+idTr).addClass("verdeSeleccionFila");		
-	}
-
-	function despintarFila(idTr){
-		
-		$('#'+idTr).addClass(clase);
-		$('#'+idTr).removeClass("verdeSeleccionFila");
-	}
 	
 </script>
 	<c:choose>
