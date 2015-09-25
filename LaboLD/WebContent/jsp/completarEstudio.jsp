@@ -16,18 +16,29 @@
 
 <script type="text/javascript">
 
-	function generarReporte(){
+	function generarReporte(xmlDoc){
+		//var nodos = xmlDoc.getElementsByTagName('error');
+	    //if (nodos.length==0){
+	    $('#errores').text("");
+	    if (xmlDoc==""){
+		
+			var idEstudio = $("#idEstudio").val();
+			var especificaciones = 'top=0,left=0,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable';
 	
-		var idEstudio = $("#idEstudio").val();
-		var especificaciones = 'top=0,left=0,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable';
-
-		var desde = $("#numeroEstudio").val();
-		var hasta = $("#numeroEstudio").val();
-		if(type == "IE"){
-			window.open("./reporte.do?metodo=generarReportesEstudios&desde="+desde+"&hasta="+hasta,"",especificaciones);		
-		}else{
-			window.open("../../reporte.do?metodo=generarReportesEstudios&desde="+desde+"&hasta="+hasta,"",especificaciones);				
-		}		
+			var desde = $("#numeroEstudio").val();
+			var hasta = $("#numeroEstudio").val();
+			if(type == "IE"){
+				window.open("./reporte.do?metodo=generarReportesEstudios&desde="+desde+"&hasta="+hasta,"",especificaciones);		
+			}else{
+				window.open("../../reporte.do?metodo=generarReportesEstudios&desde="+desde+"&hasta="+hasta,"",especificaciones);					
+			}
+	    } else {	    	
+	    	var nodos = xmlDoc.getElementsByTagName('error');
+		    for(var i=0; i < nodos.length; i++) { 
+			    $('#errores').append( '<div>* ' + nodos[i].firstChild.nodeValue + '</div>');
+		    }
+		    $('#errores').show();
+	    }			
 	}
 
 	function submitir(){
@@ -103,12 +114,19 @@
 			}	
 		}	
 	}
+
+	function generarReporte2(){
+		
+		var form = $('#estudioFormId').serialize(); 
+		var url = '../../estudio.do?metodo=completarEstudioParaReporte';		
+		$.post(url,form,generarReporte);		
+	}
 	
 </script>
 
 <div id="errores" class="rojoAdvertencia">${error}</div>
 
-<html:form action="estudio">
+<html:form action="estudio" styleId="estudioFormId">
 	<html:hidden property="metodo" value="completarEstudio"/>
 	<html:hidden property="estudioDTO.id" value="${estudio.id}" styleId="idEstudio"/>
 	
@@ -435,7 +453,7 @@
 			<td align="center">				
 				<input type="submit" class="botonerab" value="Aceptar" id="enviar">
 				<input type="button" class="botonerab" value="Volver" id="enviar" onclick="javascript:volver();">
-				<input type="button" value="Generar Reporte" class="botonerab" onclick="generarReporte();">					
+				<input type="button" value="Generar Reporte" class="botonerab" onclick="generarReporte2();">					
 			</td>
 		</tr>
 		<tr>

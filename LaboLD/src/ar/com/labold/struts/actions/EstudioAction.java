@@ -1,5 +1,6 @@
 package ar.com.labold.struts.actions;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -416,6 +418,41 @@ public class EstudioAction extends ValidadorAction {
 		}
 
 		return mapping.findForward(strForward);
+	}	
+	
+	@SuppressWarnings("unchecked")
+	public ActionForward completarEstudioParaReporte(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		PrintWriter out = null;
+		try {
+			ActionForm actionForm = (ActionForm) Class.forName("ar.com.labold.struts.actions.forms.EstudioForm").newInstance(); 
+			BeanUtils.populate(actionForm, request.getParameterMap());			
+			EstudioForm estudioForm = (EstudioForm)actionForm;
+			
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+
+			estudioFachada.completarEstudio(estudioForm.getEstudioDTO(),estudioForm.getListaValoresPractica());
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			//request.setAttribute("error", "Error Inesperado");
+			
+			StringBuffer error = Validator.abrirXML();
+			Validator.addErrorXML(error, "Error Inesperado");
+			Validator.cerrarXML(error);
+			
+			try {
+				out = response.getWriter();
+			} catch (IOException e) {
+			}
+			out.write(error.toString());
+			response.setContentType("text/xml");			
+		}
+
+		return null;
 	}	
 	
 	@SuppressWarnings("unchecked")
@@ -877,6 +914,8 @@ public class EstudioAction extends ValidadorAction {
 																			"Paciente",error);			
 			
 			//ok3 = Validator.requerido(estudio.getSolicitadoPor(),"Solicitado Por", error);
+
+			ok3 = Validator.validarComboRequeridoSinNull("-1",Long.toString(estudio.getMedico().getId()),"Medico",error);				
 			
 			ok4 = Validator.requerido(estudio.getFecha(),"Fecha", error);
 
