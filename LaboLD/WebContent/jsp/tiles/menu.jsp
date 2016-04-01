@@ -77,7 +77,8 @@
 	
 </script>
 
-<table height="17" width="100%" bgcolor="#C2DAF9">
+<!--  <table height="17" width="100%" bgcolor="#C2DAF9">-->
+<table height="17" width="100%" bgcolor="#337ab7">
 	<tr>
 		<td>
 		<div id="toolbar"></div>

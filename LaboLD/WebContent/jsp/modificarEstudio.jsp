@@ -240,9 +240,13 @@
 			<td height="10"></td>
 		</tr>			
 		<tr>
-			<td align="center">				
-				<input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();">
-				<input type="button" class="botonerab" value="Volver" id="enviar" onclick="javascript:volver();">
+			<td align="center">	
+			
+				<button type="button" class="btn btn-primary btn-sm" onclick="javascript:submitir();">Aceptar</button>
+				<button type="button" class="btn btn-primary btn-sm" onclick="javascript:volver();">Volver</button>
+						
+				<!--  <input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();">
+				<input type="button" class="botonerab" value="Volver" id="enviar" onclick="javascript:volver();">-->
 			</td>
 		</tr>
 		<tr>

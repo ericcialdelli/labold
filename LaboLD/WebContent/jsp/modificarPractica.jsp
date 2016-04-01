@@ -46,8 +46,10 @@
 			$('.DH').val(null);
 			$('#idTextArea').val(null);
 			$('#idMayorMenor').val(">");
-			$('#radioMayor').attr('checked','checked');
-			$('#radioMenor').removeAttr('checked');
+			$('#radioMayor').prop('checked',true);
+			$('#radioMenor').prop('checked',false);			
+			//$('#radioMayor').attr('checked','checked');
+			//$('#radioMenor').removeAttr('checked');
 		}
 		if(valor=="SV"){
 			$('#trValorDesdeHasta').hide();

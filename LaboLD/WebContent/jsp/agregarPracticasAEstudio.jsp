@@ -64,6 +64,19 @@
 			
 	}
 
+	function clickCheckFila(ind){
+		
+		if(!$('#checkPractica'+ind).is(':checked')){
+			//$('#checkPractica'+ind).attr('checked','checked');
+			$('#checkPractica'+ind).prop('checked', true);
+		}
+		else{
+			//$('#checkPractica'+ind).removeAttr('checked');			
+			$('#checkPractica'+ind).prop('checked', false);
+		}
+		clickCheck(ind);
+	}
+
 	function clickCheck(ind){
 
 		if($('#checkPractica'+ind).is(':checked')){
@@ -78,7 +91,8 @@
 	
 	function seleccionarTodos(nroGrupo){
 
-		$('.checkG'+nroGrupo).attr('checked','checked');
+		$('.checkG'+nroGrupo).prop('checked',true);
+		//$('.checkG'+nroGrupo).attr('checked','checked');
 		//$('.trG'+nroGrupo).addClass("verdeClaroSubtituloCenter");
 
 		$('.grupo'+nroGrupo).each(
@@ -90,7 +104,8 @@
 
 	function desSeleccionarTodos(nroGrupo){
 
-		$('.checkG'+nroGrupo).removeAttr('checked');
+		$('.checkG'+nroGrupo).prop('checked',false);
+		//$('.checkG'+nroGrupo).removeAttr('checked');
 		//$('.trG'+nroGrupo).removeClass("verdeClaroSubtituloCenter");
 
 		$('.grupo'+nroGrupo).each(
@@ -102,7 +117,8 @@
 
 	function seleccionarTodosSubItem(nroGrupo,nroSubItem){
 
-		$('.checkSI'+nroGrupo+"-"+nroSubItem).attr('checked','checked');		
+		$('.checkSI'+nroGrupo+"-"+nroSubItem).prop('checked',true);
+		//$('.checkSI'+nroGrupo+"-"+nroSubItem).attr('checked','checked');		
 
 		$('.subItem'+nroGrupo+"-"+nroSubItem).each(
 			function(){
@@ -113,7 +129,8 @@
 
 	function desSeleccionarTodosSubItem(nroGrupo,nroSubItem){
 
-		$('.checkSI'+nroGrupo+"-"+nroSubItem).removeAttr('checked');		
+		$('.checkSI'+nroGrupo+"-"+nroSubItem).prop('checked',false);
+		//$('.checkSI'+nroGrupo+"-"+nroSubItem).removeAttr('checked');		
 
 		$('.subItem'+nroGrupo+"-"+nroSubItem).each(
 			function(){
@@ -240,7 +257,7 @@
 													id="checkPractica<%=i%>"
 													value="${practica.id}">
 											</td>
-											<td align="left" width="65%">
+											<td align="left" width="65%" onclick="javascript:clickCheckFila(<%=i%>);">
 												${practica.nombre}
 											</td>
 											<td align="right" width="25%">
@@ -323,7 +340,7 @@
 																id="checkPractica<%=i%>"
 																value="${prac.id}">												
 														</td>														
-														<td align="left" width="80%">
+														<td align="left" width="80%" onclick="javascript:clickCheckFila(<%=i%>);">
 															${prac.nombre}
 														</td>
 														<td align="left" width="10%">

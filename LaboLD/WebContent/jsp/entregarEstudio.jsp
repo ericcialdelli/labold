@@ -3,16 +3,27 @@
 <%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+<head>
+  <!--  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+</head>
+
 <script type="text/javascript" src="<html:rewrite page='/js/validacionAjax.js'/>"></script>
 <script type="text/javascript" src="<html:rewrite page='/js/funcUtiles.js'/>"></script>
 <script type="text/javascript" src="<html:rewrite page='/js/validarLetras.js'/>"></script>
 <script type="text/javascript" src="<html:rewrite page='/js/validarNum.js'/>"></script>
 
-<script type="text/javascript"
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" href="<html:rewrite page='/css/jquery-ui_1_11_3.css'/>" type="text/css">
+
+<!--  <script type="text/javascript"
 	src="<html:rewrite page='/js/JQuery/ui/jquery-ui-1.8.10.custom.min.js'/>"></script>	
 
 <link rel="stylesheet" href="<html:rewrite page='/css/ui-lightness/jquery-ui-1.8.10.custom.css'/>"
-	type="text/css">
+	type="text/css">-->
 
 <script type="text/javascript">
 
@@ -54,6 +65,18 @@
 <div id="confirmacionEntregar" style="display: none">
 	Desea entregar el estudio?
 </div>
+<br>
+<c:if test="${estudio.estado == 'ENTREGADO'}">
+	<table border="0" class="cuadradoSinBordeBootstrap" align="center" width="70%" cellpadding="2" cellspacing="0">
+		<tr>
+			<td>
+				<div class="alert alert-success">
+				  <strong>El estudio ha sido entregado</strong>
+				</div>
+			</td>
+		</tr>
+	</table>		
+</c:if>
 
 <html:form action="estudio" styleId="estudioFormId">
 	<html:hidden property="metodo" value="entregarEstudio"/>
@@ -265,10 +288,18 @@
 		</tr>			
 		<tr>
 			<td align="center">
+				<%-- 
 				<c:if test="${estudio.estadoStr != 'Entregado'}">			
 					<input type="button" class="botonerab" value="Entregar Estudio" onclick="javascript:entregarEstudio();">
 				</c:if>					
 				<input type="button" class="botonerab" value="Volver" id="enviar" onclick="javascript:volver();">
+				--%>
+				
+				<%-- Con Bootstrap--%>
+				<c:if test="${estudio.estadoStr != 'Entregado'}">			
+					<button type="button" class="btn btn-primary btn-sm" onclick="javascript:entregarEstudio();">Entregar Estudio</button>
+				</c:if>					
+				<button type="button" class="btn btn-primary btn-sm" onclick="javascript:volver();">Volver</button>																		
 			</td>
 		</tr>
 		<tr>

@@ -11,6 +11,8 @@
 <html:base />
 <link rel="stylesheet" href="<html:rewrite page='/css/main.css'/>"
 	type="text/css">
+<link rel="stylesheet" href="<html:rewrite page='/css/bootstrap.css'/>"
+	type="text/css">
 <link rel="stylesheet"
 	href="<html:rewrite page='/css/jqueryslidemenu.css'/>" type="text/css">
 </head>

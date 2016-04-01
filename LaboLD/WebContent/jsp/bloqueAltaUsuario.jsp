@@ -141,9 +141,9 @@
 			<td height="20" colspan="2" class="TDtablaNormal">				
 				<c:choose>
 					<c:when test="${metodo=='altaUsuario'}">
-						<input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();">
+						<!--  --><input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();">
 						<input type="button" class="botonerab" value="Cancelar" 
-								onclick="javascript:parent.location= contextRoot() +  '/jsp.do?page=.index'">
+								onclick="javascript:parent.location= contextRoot() +  '/jsp.do?page=.index'">													
 					</c:when>
 					<c:otherwise>
 						<input type="button" class="botonerab" value="Modificar" id="enviar" onclick="javascript:submitir();">

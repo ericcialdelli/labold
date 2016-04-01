@@ -7,17 +7,20 @@
 <script type="text/javascript" src="<html:rewrite page='/js/validarLetras.js'/>"></script>
 <script type="text/javascript" src="<html:rewrite page='/js/validarNum.js'/>"></script>
 
-<script type="text/javascript"
+<!-- <script type="text/javascript"
 	src="<html:rewrite page='/js/JQuery/ui/jquery-ui-1.8.10.custom.min.js'/>"></script>	
+
+<link rel="stylesheet" href="<html:rewrite page='/css/ui-lightness/jquery-ui-1.8.10.custom.css'/>" type="text/css">-->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" href="<html:rewrite page='/css/jquery-ui_1_11_3.css'/>" type="text/css">
 
 <script type="text/javascript"
 	src="<html:rewrite page='/dwr/interface/PacienteFachada.js'/>"></script>
 
 <script type="text/javascript"
 	src="<html:rewrite page='/dwr/interface/MedicoFachada.js'/>"></script>
-
-<link rel="stylesheet" href="<html:rewrite page='/css/ui-lightness/jquery-ui-1.8.10.custom.css'/>"
-	type="text/css">
 
 <script type="text/javascript">
 
@@ -47,7 +50,7 @@
 	   		$('#idUB').html("&nbsp;&nbsp;&nbsp;&nbsp;"+nodos[0].firstChild.nodeValue);
 	   		$('#idValor').html("&nbsp;&nbsp;&nbsp;$"+valor[0].firstChild.nodeValue);
 	   		$('#idValorEstudio').val(valor[0].firstChild.nodeValue);
-	   		$('#dialogoValor').dialog({title: 'Valor Presupuesto Estudio', height: 180, width: 380, modal: true});
+	   		$('#dialogoValor').dialog({title: 'Valor Presupuesto Estudio', height: 200, width: 380, modal: true});
 		}
 		else{	    	
 		    for(var i=0; i < error.length; i++) { 
@@ -108,11 +111,14 @@
 	}
 
 	function clickCheckFila(ind){
+		
 		if(!$('#checkPractica'+ind).is(':checked')){
-			$('#checkPractica'+ind).attr('checked','checked');
+			//$('#checkPractica'+ind).attr('checked','checked');
+			$('#checkPractica'+ind).prop('checked', true);
 		}
 		else{
-			$('#checkPractica'+ind).removeAttr('checked');
+			//$('#checkPractica'+ind).removeAttr('checked');			
+			$('#checkPractica'+ind).prop('checked', false);
 		}
 		clickCheck(ind);
 	}
@@ -131,7 +137,8 @@
 	
 	function seleccionarTodos(nroGrupo){
 
-		$('.checkG'+nroGrupo).attr('checked','checked');
+		$('.checkG'+nroGrupo).prop('checked', true);
+		//$('.checkG'+nroGrupo).attr('checked','checked');		
 		//$('.trG'+nroGrupo).addClass("verdeClaroSubtituloCenter");
 
 		$('.grupo'+nroGrupo).each(
@@ -143,7 +150,8 @@
 
 	function desSeleccionarTodos(nroGrupo){
 
-		$('.checkG'+nroGrupo).removeAttr('checked');
+		$('.checkG'+nroGrupo).prop('checked', false);
+		//$('.checkG'+nroGrupo).removeAttr('checked');		
 		//$('.trG'+nroGrupo).removeClass("verdeClaroSubtituloCenter");
 
 		$('.grupo'+nroGrupo).each(
@@ -155,7 +163,8 @@
 
 	function seleccionarTodosSubItem(nroGrupo,nroSubItem){
 
-		$('.checkSI'+nroGrupo+"-"+nroSubItem).attr('checked','checked');		
+		$('.checkSI'+nroGrupo+"-"+nroSubItem).prop('checked', true);
+		//$('.checkSI'+nroGrupo+"-"+nroSubItem).attr('checked','checked');		
 
 		$('.subItem'+nroGrupo+"-"+nroSubItem).each(
 			function(){
@@ -166,7 +175,8 @@
 
 	function desSeleccionarTodosSubItem(nroGrupo,nroSubItem){
 
-		$('.checkSI'+nroGrupo+"-"+nroSubItem).removeAttr('checked');		
+		$('.checkSI'+nroGrupo+"-"+nroSubItem).prop('checked', false);
+		//$('.checkSI'+nroGrupo+"-"+nroSubItem).removeAttr('checked');		
 
 		$('.subItem'+nroGrupo+"-"+nroSubItem).each(
 			function(){
@@ -205,7 +215,11 @@
 
 <div id="errores" class="rojoAdvertencia"><br>${error}<br></div>
 
-<table border="0" class="cuadrado" align="center" width="85%" cellpadding="2" cellspacing="0">
+<table border="0" class="cuadradoSinBorde" align="center" width="85%" cellpadding="2" cellspacing="0">
+<tr><td>
+<div class="well well-sm">
+
+<table border="0" class="cuadradoSinBordeBootstrap" align="center" width="100%" cellpadding="2" cellspacing="0">
 	<tr>
 		<td height="10"></td>
 	</tr>			
@@ -251,6 +265,13 @@
 			</tr>	
 			<tr style="display: none" id="trGrupo<c:out value='${iGrupo.index}'></c:out>">
 				<td>
+				
+				
+<table border="0" class="cuadradoSinBordeBootstrapSinFont" align="center" width="100%" cellpadding="2" cellspacing="0">
+<tr><td>
+<div class="well-sm-bootstrap well-bootstrap">				
+				
+				
 					<table border="0" class="cuadrado" align="left" width="100%" cellpadding="2" >
 						<tr>
 							<td height="5" colspan="4" align="right">
@@ -372,7 +393,14 @@
 							</tr>							
 						</c:forEach>
 						
-					</table>	
+					</table>
+					
+			
+</div>
+</td></tr>
+</table>			
+					
+						
 				</td>
 			</tr>					
 		</c:forEach>		
@@ -405,11 +433,13 @@
 			</tr>	
 			<tr>
 				<td width="48%" class="botonerab" align="right">
-					<input type="button" class="botonerab" value="Generar Informe" onclick="javascript:generarReporte();">				
+				  	<button type="button" class="btn btn-primary" onclick="javascript:generarReporte();">Generar Informe</button>
+					<!--  <input type="button" class="botonerab" value="Generar Informe" onclick="javascript:generarReporte();">-->				
 				</td>		
 				<td width="4%"></td>			
 				<td width="48%" class="botonerab" align="left">
-					<input type="button" class="botonerab" value="Salir" onclick="javascript:cerrarVentanaValor();">
+					<button type="button" class="btn btn-primary" onclick="javascript:cerrarVentanaValor();">Salir</button>
+					<!--  <input type="button" class="botonerab" value="Salir" onclick="javascript:cerrarVentanaValor();">-->
 				</td>							
 			</tr>
 			<tr>
@@ -423,8 +453,10 @@
 			<td height="10"></td>
 		</tr>			
 		<tr>
-			<td align="center">				
-				<input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();">
+			<td align="center">
+				<!--  <button type="button" class="btn btn-primary" onclick="javascript:submitir();">Aceptar</button>-->
+				<button type="button" class="btn btn-primary-bootstrap btn-sm" onclick="javascript:submitir();">Aceptar</button>				
+				<!--  <input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();">-->
 			</td>
 		</tr>
 		<tr>

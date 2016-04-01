@@ -38,19 +38,19 @@
 			<td height="20" colspan="2"></td>
 		</tr>				
 		<tr>
-			<td class="botoneralNegritaRight" width="40%">Nombre</td>
+			<td class="fontNegritaRightBootstrap" width="40%">Nombre</td>
 			<td align="left">
 				<html:text property="pacienteDTO.nombre" value="${paciente.nombre}" styleClass="botonerab" styleId="nombre"/>
 			</td>
 		</tr>	
 		<tr>
-			<td class="botoneralNegritaRight" width="40%">Apellido</td>
+			<td class="fontNegritaRightBootstrap" width="40%">Apellido</td>
 			<td  align="left">
 				<html:text property="pacienteDTO.apellido" value="${paciente.apellido}" styleClass="botonerab"/>			
 			</td>
 		</tr>
 		<tr>
-			<td class="botoneralNegritaRight" width="40%">Fecha de Nacimiento</td>
+			<td class="fontNegritaRightBootstrap" width="40%">Fecha de Nacimiento</td>
 			<td  align="left">
 			
 				<input id="datepicker" class="botonerab" type="text" size="15" name="pacienteDTO.fechaNacimiento" 
@@ -59,7 +59,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="botoneralNegritaRight" width="40%">
+			<td class="fontNegritaRightBootstrap" width="40%">
 				DNI
 			</td>
 			<td  align="left">
@@ -75,7 +75,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="botoneralNegritaRight" width="40%">
+			<td class="fontNegritaRightBootstrap" width="40%">
 				Telefono
 			</td>
 			<td  align="left">
@@ -83,7 +83,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="botoneralNegritaRight" width="40%">
+			<td class="fontNegritaRightBootstrap" width="40%">
 				E-Mail
 			</td>
 			<td  align="left">
@@ -91,7 +91,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="botoneralNegritaRight" width="40%">
+			<td class="fontNegritaRightBootstrap" width="40%">
 				Obra Social
 			</td>
 			<td  align="left">
@@ -109,7 +109,7 @@
 		</tr>
 		
 		<tr>
-			<td class="botoneralNegritaRight" width="40%">
+			<td class="fontNegritaRightBootstrap" width="40%">
 				Nro Carnet Obra Social
 			</td>
 			<td  align="left">
@@ -117,7 +117,7 @@
 			</td>
 		</tr>		
 		<tr>
-			<td class="botoneralNegritaRight" width="40%">
+			<td class="fontNegritaRightBootstrap" width="40%">
 				Observaciones
 			</td>
 			<td  align="left">
@@ -130,12 +130,15 @@
 		<tr>
 			<td height="20" colspan="2">
 				<c:if test="${forward=='modificacionPaciente'}">
-					<input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();">
+					<!--  <input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();">-->
+					<input type="button" class="btn btn-primary-bootstrap btn-sm" value="Aceptar" onclick="javascript:submitir();">
 				</c:if>
 				<c:if test="${forward=='eliminarPaciente'}">
-					<input type="submit" class="botonerab" value="Eliminar" id="enviar">
+					<!--  <input type="submit" class="botonerab" value="Eliminar" id="enviar">-->
+					<input type="submit" class="btn btn-primary-bootstrap btn-sm" value="Eliminar">
 				</c:if>											
-				<input type="button" class="botonerab" value="Volver" id="enviar" onclick="javascript:volver();">
+				<!--  <input type="button" class="botonerab" value="Volver" id="enviar" onclick="javascript:volver();">-->
+				<input type="button" class="btn btn-primary-bootstrap btn-sm" value="Volver" onclick="javascript:volver();">
 			</td>
 		</tr>
 		<tr>

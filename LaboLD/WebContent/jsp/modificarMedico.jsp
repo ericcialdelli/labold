@@ -86,7 +86,81 @@
 		<tr>
 			<td height="10" colspan="2"></td>
 		</tr>									
-	</table>
+	</table>-->
+
+	<table border="0" class="cuadradoSinBordeBootstrapSinFont" align="center" width="65%" cellpadding="2" cellspacing="0">
+	<tr>
+		<td>
+			<div class="well-sm-bootstrap well-bootstrap">
+
+				<table border="0" class="cuadradoSinBordeBootstrapSinFont" align="center" width="100%" cellpadding="2">
+					<tr>
+						<td colspan="2"  class="tituloTabla">Modificaci�n de M�dico</td>
+					</tr>
+					<tr>
+						<td height="20" colspan="2"></td>
+					</tr>				
+					<tr>
+						<td class="fontNegritaRightBootstrap" width="40%">Nombre</td>
+						<td align="left">
+							<html:text property="medicoDTO.nombre" value="${medico.nombre}" styleClass="botonerab" styleId="nombre"/>
+						</td>
+					</tr>
+					
+					<tr>
+						<td class="fontNegritaRightBootstrap" width="40%">Apellido</td>
+						<td align="left">
+							<html:text property="medicoDTO.apellido" value="${medico.apellido}" styleClass="botonerab" styleId="nombre"/>
+						</td>
+					</tr>		
+						
+					<tr>
+						<td class="fontNegritaRightBootstrap" width="40%">Telefono</td>
+						<td align="left">
+							<html:text property="medicoDTO.telefono" value="${medico.telefono}" styleClass="botonerab" styleId="nombre"/>
+						</td>
+					</tr>			
+						
+					<tr>
+						<td class="fontNegritaRightBootstrap" width="40%">Matricula</td>
+						<td align="left">
+							<html:text property="medicoDTO.matricula" value="${medico.matricula}" styleClass="botonerab" styleId="nombre"/>
+						</td>
+					</tr>			
+						
+					<tr>
+						<td class="fontNegritaRightBootstrap" width="40%">Especialidad</td>
+						<td align="left">
+							<html:text property="medicoDTO.especialidad" value="${medico.especialidad}" styleClass="botonerab" styleId="nombre"/>
+						</td>
+					</tr>			
+					<tr>
+						<td height="10" colspan="2"></td>
+					</tr>									
+				</table>
+				
+				<table border="0" class="cuadradoSinBorde" align="center" width="85%" cellpadding="2" cellspacing="0">
+					<tr>
+						<td height="10"></td>
+					</tr>			
+					<tr>
+						<td align="center">
+							<!--  <input type="button" class="btn btn-primary btn-sm" value="Aceptar" id="enviar" onclick="javascript:submitir();">
+							<input type="button" class="btn btn-primary btn-sm" value="Volver" id="enviar" onclick="javascript:volver();">-->
+							
+							<input type="button" class="btn btn-primary-bootstrap btn-sm" value="Aceptar" id="enviar" onclick="javascript:submitir();">
+							<input type="button" class="btn btn-primary-bootstrap btn-sm" value="Volver" id="enviar" onclick="javascript:volver();">							
+							
+						</td>
+					</tr>
+					<tr>
+						<td height="10"></td>
+					</tr>									
+				</table>
+			</div>
+		</td>
+	</tr>
+	</table>				
 
 </html:form>
 <script type="text/javascript">

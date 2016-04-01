@@ -19,6 +19,8 @@ import ar.com.labold.utils.MyLogger;
 import ar.com.labold.dto.UsuarioDTO;
 import ar.com.labold.fachada.MenuFachada;
 import ar.com.labold.negocio.ItemMenu;
+import ar.com.labold.utils.ComparadorItemsMenu;
+import ar.com.labold.utils.ComparadorItemsMenuOrden;
 import ar.com.labold.utils.Constantes;
 import ar.com.labold.utils.MenuJSCook;
 
@@ -65,4 +67,23 @@ public class MenuAction extends DispatchActionSupport {
 		}
 		return null;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public ActionForward cargarMenu(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		try {
+			
+			UsuarioDTO usuario = (UsuarioDTO) request.getSession().getAttribute(
+					Constantes.USER_LABEL_SESSION);			
+			WebApplicationContext ctx = getWebApplicationContext();
+			MenuFachada menuFachada = (MenuFachada) ctx.getBean("menuFachada");
+			List<ItemMenu> listaMenues = menuFachada.getItemsMenu(usuario.getRol().getRol());
+			Collections.sort(listaMenues, new ComparadorItemsMenuOrden());
+			request.setAttribute("listaMenu", listaMenues);
+		} catch (Throwable e) {
+			MyLogger.logError(e);
+		}
+		return mapping.findForward("cargarMenu");
+	}
+	
 }

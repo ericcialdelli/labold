@@ -55,7 +55,9 @@
 	
 		<!-- MENU -->
 		<action path="/menu" type="ar.com.labold.struts.actions.MenuAction"
-			parameter="metodo" />	
+			parameter="metodo" >
+			<forward name="cargarMenu" path="/jsp/tiles/menu2.jsp" />
+		</action>		
 	
 		<!-- LOGIN -->
 		<action path="/login" type="ar.com.labold.struts.actions.LoginAction"
