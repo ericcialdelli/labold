@@ -279,8 +279,9 @@
 				<td height="10"></td>
 			</tr>			
 			<tr>
-				<td align="center">
-					<input type="button" class="btn btn-primary btn-sm" value="Aceptar" id="enviar" onclick="javascript:submitir();">
+				<td align="center">				
+					<input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();">
+					<!--  <input type="button" class="btn btn-primary btn-sm" value="Aceptar" id="enviar" onclick="javascript:submitir();">-->
 				</td>
 			</tr>
 			<tr>

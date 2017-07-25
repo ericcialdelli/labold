@@ -20,6 +20,14 @@ public class EstudioForm extends ActionForm {
 	private List<ValorPracticaDTO> listaValoresPracticaDTO;
 	private double valorEstudio;//Se usa para mostrar el valor en el reporte del presupuesto
 	
+	//ESTUDIO_HISTORICO
+	private String fechaDesde;//Se usa para pasar los estudios a historicos
+	private String fechaHasta;//Se usa para pasar los estudios a historicos
+	
+	//ESTUDIO_HISTORICO_POR_NUMERO
+	private Long nroDesde;//Se usa para pasar los estudios a historicos por nro
+	private Long nroHasta;//Se usa para pasar los estudios a historicos por nro
+	
 	public EstudioForm(){
 		
 		estudioDTO = new EstudioDTO();
@@ -93,6 +101,38 @@ public class EstudioForm extends ActionForm {
 
 	public void setValorEstudio(double valorEstudio) {
 		this.valorEstudio = valorEstudio;
+	}
+
+	public String getFechaDesde() {
+		return fechaDesde;
+	}
+
+	public void setFechaDesde(String fechaDesde) {
+		this.fechaDesde = fechaDesde;
+	}
+
+	public String getFechaHasta() {
+		return fechaHasta;
+	}
+
+	public void setFechaHasta(String fechaHasta) {
+		this.fechaHasta = fechaHasta;
+	}
+
+	public Long getNroDesde() {
+		return nroDesde;
+	}
+
+	public void setNroDesde(Long nroDesde) {
+		this.nroDesde = nroDesde;
+	}
+
+	public Long getNroHasta() {
+		return nroHasta;
+	}
+
+	public void setNroHasta(Long nroHasta) {
+		this.nroHasta = nroHasta;
 	}
 	
 }

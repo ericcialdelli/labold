@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Hibernate;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.com.labold.dao.EstudioDAO;
@@ -16,14 +17,18 @@ import ar.com.labold.dto.PracticaDTO;
 import ar.com.labold.dto.ValorPracticaDTO;
 import ar.com.labold.enums.EstadoEstudio;
 import ar.com.labold.negocio.Estudio;
+import ar.com.labold.negocio.EstudioHistorico;
 import ar.com.labold.negocio.Medico;
 import ar.com.labold.negocio.Paciente;
 import ar.com.labold.negocio.Practica;
 import ar.com.labold.negocio.SubItemPractica;
 import ar.com.labold.negocio.ValorPractica;
+import ar.com.labold.negocio.ValorPracticaHistorico;
 import ar.com.labold.negocio.ValorSubItemPractica;
+import ar.com.labold.negocio.ValorSubItemPracticaHistorico;
 import ar.com.labold.negocio.ValorUnidadFacturacion;
 import ar.com.labold.negocio.ValoresEstudio;
+import ar.com.labold.negocio.ValoresEstudioHistorico;
 import ar.com.labold.providers.ProviderDominio;
 
 @Transactional(rollbackFor = { Throwable.class })
@@ -262,4 +267,309 @@ public class EstudioFachada {
 		
 		return estudioDAO.recuperarUltimosEstudios();
 	}
+	
+	
+	//****************************************************************************************************//
+	//***************************** PASAR ESTUDIOS A HISTORICO *******************************************//
+	//****************************************************************************************************//
+	
+	//ESTUDIO_HISTORICO
+	public void pasarEstudiosAHistoricos(String fechaDesde, String fechaHasta){
+		
+		List<Estudio> listaEstudios = estudioDAO.getEstudiosEntreFechas(fechaDesde,fechaHasta);
+		EstudioHistorico estudioHistorico;
+		Paciente paciente;
+		Medico medico;
+		
+		for (Estudio estudio : listaEstudios) {
+		
+			paciente = pacienteDAO.getPaciente(estudio.getPaciente().getId());					
+			medico = (estudio.getMedico()!=null)?medicoDAO.getMedico(estudio.getMedico().getId()):null;			
+			
+			estudioHistorico = new EstudioHistorico();
+			estudioHistorico.setNumero(estudio.getNumero());
+			estudioHistorico.setFecha(estudio.getFecha());
+			estudioHistorico.setEstado(estudio.getEstado());
+			estudioHistorico.setFechaEntrega(estudio.getFechaEntrega());
+			estudioHistorico.setMontoAdeudado(estudio.getMontoAdeudado());
+			estudioHistorico.setUnidadesFacturacionTotal(estudio.getUnidadesFacturacionTotal());
+			estudioHistorico.setValorUnidadBioquimica(estudio.getValorUnidadBioquimica());
+			estudioHistorico.setPaciente(paciente);
+			estudioHistorico.setMedico(medico);
+			
+			pasarValoresEstudioAHistorico(estudio,estudioHistorico);
+			
+			estudioDAO.altaEstudioHistorico(estudioHistorico);
+			estudioDAO.eliminarEstudioSinFlushClear(estudio);
+			//estudioDAO.eliminarEstudio(estudio);
+		}
+		estudioDAO.flushClear();
+		System.out.println(listaEstudios.size());
+				
+	}	
+
+	//ESTUDIO_HISTORICO_POR_NRO
+	public void pasarEstudiosAHistoricosPorNro(Long nroDesde, Long nroHasta){
+		
+		List<Estudio> listaEstudios = estudioDAO.getEstudiosEntreNro(nroDesde,nroHasta);
+		EstudioHistorico estudioHistorico;
+		Paciente paciente;
+		Medico medico;
+		
+		for (Estudio estudio : listaEstudios) {
+		
+			paciente = pacienteDAO.getPaciente(estudio.getPaciente().getId());					
+			medico = (estudio.getMedico()!=null)?medicoDAO.getMedico(estudio.getMedico().getId()):null;			
+			
+			estudioHistorico = new EstudioHistorico();
+			estudioHistorico.setNumero(estudio.getNumero());
+			estudioHistorico.setFecha(estudio.getFecha());
+			estudioHistorico.setEstado(estudio.getEstado());
+			estudioHistorico.setFechaEntrega(estudio.getFechaEntrega());
+			estudioHistorico.setMontoAdeudado(estudio.getMontoAdeudado());
+			estudioHistorico.setUnidadesFacturacionTotal(estudio.getUnidadesFacturacionTotal());
+			estudioHistorico.setValorUnidadBioquimica(estudio.getValorUnidadBioquimica());
+			estudioHistorico.setPaciente(paciente);
+			estudioHistorico.setMedico(medico);
+			
+			pasarValoresEstudioAHistorico(estudio,estudioHistorico);
+			
+			estudioDAO.altaEstudioHistorico(estudioHistorico);
+			estudioDAO.eliminarEstudioSinFlushClear(estudio);
+			//estudioDAO.eliminarEstudio(estudio);
+		}
+		estudioDAO.flushClear();
+		System.out.println(listaEstudios.size());
+				
+	}		
+	
+	//ESTUDIO_HISTORICO
+	private void pasarValoresEstudioAHistorico(Estudio estudio, EstudioHistorico estudioHistorico){
+		
+		ValoresEstudioHistorico valoresEstudioHistorico;
+		
+		//Hibernate.initialize(estudio.getValoresEstudio());
+		
+		for (ValoresEstudio valoresEstudio : estudio.getValoresEstudio()) {
+			
+			valoresEstudioHistorico = new ValoresEstudioHistorico();
+			valoresEstudioHistorico.setEstudioHistorico(estudioHistorico);
+			valoresEstudioHistorico.setGrupoPractica(valoresEstudio.getGrupoPractica());
+			valoresEstudioHistorico.setNombre(valoresEstudio.getNombre());
+			valoresEstudioHistorico.setUnidadBioquimica(valoresEstudio.getUnidadBioquimica());
+			
+			pasarValorPracticaAHistorico(valoresEstudio,valoresEstudioHistorico);
+			pasarValorSubItemPracticaAHistorico(valoresEstudio,valoresEstudioHistorico);
+			
+			estudioHistorico.getValoresEstudioHistorico().add(valoresEstudioHistorico);
+		}
+	}
+	
+	//ESTUDIO_HISTORICO	
+	public void pasarValorPracticaAHistorico(ValoresEstudio valoresEstudio, ValoresEstudioHistorico valoresEstudioHistorico){
+		
+		ValorPracticaHistorico valorPracticaHistorico;
+		
+		for(ValorPractica valorPractica : valoresEstudio.getValoresPracticas()){
+		
+			valorPracticaHistorico = new ValorPracticaHistorico();
+			valorPracticaHistorico.setCubreOS(valorPractica.isCubreOS());
+			valorPracticaHistorico.setPractica(valorPractica.getPractica());
+			valorPracticaHistorico.setUnidadBioquimica(valorPractica.getUnidadBioquimica());
+			valorPracticaHistorico.setValor(valorPractica.getValor());
+			valorPracticaHistorico.setValoresEstudioHistorico(valoresEstudioHistorico);
+			
+			valoresEstudioHistorico.getValoresPracticasHistorico().add(valorPracticaHistorico);
+		}
+	}	
+	
+	//ESTUDIO_HISTORICO	
+	public void pasarValorSubItemPracticaAHistorico(ValoresEstudio valoresEstudio, ValoresEstudioHistorico valoresEstudioHistorico){
+		
+		ValorSubItemPracticaHistorico valorSubItemPracticaHistorico;
+		
+		for(ValorSubItemPractica valorSubItemPractica : valoresEstudio.getValorSubItemPractica()){
+			
+			valorSubItemPracticaHistorico = new ValorSubItemPracticaHistorico();
+			valorSubItemPracticaHistorico.setNombre(valorSubItemPractica.getNombre());
+			valorSubItemPracticaHistorico.setSubItemPractica(valorSubItemPractica.getSubItemPractica());
+			valorSubItemPracticaHistorico.setValoresEstudioHistorico(valoresEstudioHistorico);
+			
+			pasarValorPracticaAHistorico(valorSubItemPractica,valorSubItemPracticaHistorico);
+			
+			valoresEstudioHistorico.getValorSubItemPracticaHistorico().add(valorSubItemPracticaHistorico);
+		}
+	}	
+	
+	//ESTUDIO_HISTORICO
+	public void pasarValorPracticaAHistorico(ValorSubItemPractica valorSubItemPractica, ValorSubItemPracticaHistorico valorSubItemPracticaHistorico){
+		
+		ValorPracticaHistorico valorPracticaHistorico;
+		
+		for(ValorPractica valorPractica : valorSubItemPractica.getValoresPracticas()){
+
+			valorPracticaHistorico = new ValorPracticaHistorico();
+			valorPracticaHistorico.setCubreOS(valorPractica.isCubreOS());
+			valorPracticaHistorico.setPractica(valorPractica.getPractica());
+			valorPracticaHistorico.setUnidadBioquimica(valorPractica.getUnidadBioquimica());
+			valorPracticaHistorico.setValor(valorPractica.getValor());
+			valorPracticaHistorico.setValorSubItemPracticaHistorico(valorSubItemPracticaHistorico);			
+			
+			valorSubItemPracticaHistorico.getValoresPracticasHistorico().add(valorPracticaHistorico);
+		}				
+	}							   
+	//*********************************************************************************************************//
+	//*********************************************************************************************************//
+	//*********************************************************************************************************//	
+	
+	
+	
+	//*********************************************************************************************************//
+	//***************************** RECUPERAR ESTUDIOS DE HISTORICO *******************************************//
+	//*********************************************************************************************************//
+	
+	//RECUPERAR_ESTUDIO_HISTORICO
+	public void recuperarEstudiosDeHistorico(String fechaDesde, String fechaHasta){
+		
+		List<EstudioHistorico> listaEstudiosHistoricos = estudioDAO.getEstudiosHistoricosEntreFechas(fechaDesde,fechaHasta);
+		Estudio estudio;
+		Paciente paciente;
+		Medico medico;
+		
+		for (EstudioHistorico estudioHistorico : listaEstudiosHistoricos) {
+		
+			paciente = pacienteDAO.getPaciente(estudioHistorico.getPaciente().getId());					
+			medico = (estudioHistorico.getMedico()!=null)?medicoDAO.getMedico(estudioHistorico.getMedico().getId()):null;			
+			
+			estudio = new Estudio();
+			estudio.setNumero(estudioHistorico.getNumero());
+			estudio.setFecha(estudioHistorico.getFecha());
+			estudio.setEstado(estudioHistorico.getEstado());
+			estudio.setFechaEntrega(estudioHistorico.getFechaEntrega());
+			estudio.setMontoAdeudado(estudioHistorico.getMontoAdeudado());
+			estudio.setUnidadesFacturacionTotal(estudioHistorico.getUnidadesFacturacionTotal());
+			estudio.setValorUnidadBioquimica(estudioHistorico.getValorUnidadBioquimica());
+			estudio.setPaciente(paciente);
+			estudio.setMedico(medico);
+			
+			recuperarValoresEstudioDeHistorico(estudio,estudioHistorico);
+			
+			estudioDAO.altaEstudioSinFlushClear(estudio);
+			estudioDAO.eliminarEstudioHistoricoSinFlushClear(estudioHistorico);
+			//estudioDAO.eliminarEstudio(estudio);
+		}
+		estudioDAO.flushClear();
+		System.out.println(listaEstudiosHistoricos.size());			
+	}	
+
+	//RECUPERAR_ESTUDIO_HISTORICO_POR_NRO
+	public void recuperarEstudiosDeHistoricoPorNro(Long nroDesde, Long nroHasta){
+		
+		List<EstudioHistorico> listaEstudiosHistoricos = estudioDAO.getEstudiosHistoricosEntreFechasPorNro(nroDesde,nroHasta);
+		Estudio estudio;
+		Paciente paciente;
+		Medico medico;
+		
+		for (EstudioHistorico estudioHistorico : listaEstudiosHistoricos) {
+		
+			paciente = pacienteDAO.getPaciente(estudioHistorico.getPaciente().getId());					
+			medico = (estudioHistorico.getMedico()!=null)?medicoDAO.getMedico(estudioHistorico.getMedico().getId()):null;			
+			
+			estudio = new Estudio();
+			estudio.setNumero(estudioHistorico.getNumero());
+			estudio.setFecha(estudioHistorico.getFecha());
+			estudio.setEstado(estudioHistorico.getEstado());
+			estudio.setFechaEntrega(estudioHistorico.getFechaEntrega());
+			estudio.setMontoAdeudado(estudioHistorico.getMontoAdeudado());
+			estudio.setUnidadesFacturacionTotal(estudioHistorico.getUnidadesFacturacionTotal());
+			estudio.setValorUnidadBioquimica(estudioHistorico.getValorUnidadBioquimica());
+			estudio.setPaciente(paciente);
+			estudio.setMedico(medico);
+			
+			recuperarValoresEstudioDeHistorico(estudio,estudioHistorico);
+			
+			estudioDAO.altaEstudioSinFlushClear(estudio);
+			estudioDAO.eliminarEstudioHistoricoSinFlushClear(estudioHistorico);
+			//estudioDAO.eliminarEstudio(estudio);
+		}
+		estudioDAO.flushClear();
+		System.out.println(listaEstudiosHistoricos.size());			
+	}		
+	
+	//RECUPERAR_ESTUDIO_HISTORICO
+	private void recuperarValoresEstudioDeHistorico(Estudio estudio, EstudioHistorico estudioHistorico){
+		
+		ValoresEstudio valoresEstudio;
+		
+		for (ValoresEstudioHistorico valoresEstudioHistorico : estudioHistorico.getValoresEstudioHistorico()) {
+			
+			valoresEstudio = new ValoresEstudio();
+			valoresEstudio.setEstudio(estudio);
+			valoresEstudio.setGrupoPractica(valoresEstudioHistorico.getGrupoPractica());
+			valoresEstudio.setNombre(valoresEstudioHistorico.getNombre());
+			valoresEstudio.setUnidadBioquimica(valoresEstudioHistorico.getUnidadBioquimica());
+			
+			recuperarValorPracticaDeHistorico(valoresEstudio,valoresEstudioHistorico);
+			recuperarValorSubItemPracticaDeHistorico(valoresEstudio,valoresEstudioHistorico);
+			
+			estudio.getValoresEstudio().add(valoresEstudio);
+		}
+	}	
+	
+	//RECUPERAR_ESTUDIO_HISTORICO	
+	public void recuperarValorPracticaDeHistorico(ValoresEstudio valoresEstudio, ValoresEstudioHistorico valoresEstudioHistorico){
+		
+		ValorPractica valorPractica;
+		
+		for(ValorPracticaHistorico valorPracticaHistorico : valoresEstudioHistorico.getValoresPracticasHistorico()){
+		
+			valorPractica = new ValorPractica();
+			valorPractica.setCubreOS(valorPracticaHistorico.isCubreOS());
+			valorPractica.setPractica(valorPracticaHistorico.getPractica());
+			valorPractica.setUnidadBioquimica(valorPracticaHistorico.getUnidadBioquimica());
+			valorPractica.setValor(valorPracticaHistorico.getValor());
+			valorPractica.setValoresEstudio(valoresEstudio);
+			
+			valoresEstudio.getValoresPracticas().add(valorPractica);
+		}
+	}	
+	
+	//RECUPERAR_ESTUDIO_HISTORICO	
+	public void recuperarValorSubItemPracticaDeHistorico(ValoresEstudio valoresEstudio, ValoresEstudioHistorico valoresEstudioHistorico){
+		
+		ValorSubItemPractica valorSubItemPractica;
+		
+		for(ValorSubItemPracticaHistorico valorSubItemPracticaHistorico : valoresEstudioHistorico.getValorSubItemPracticaHistorico()){
+			
+			valorSubItemPractica = new ValorSubItemPractica();
+			valorSubItemPractica.setNombre(valorSubItemPracticaHistorico.getNombre());
+			valorSubItemPractica.setSubItemPractica(valorSubItemPracticaHistorico.getSubItemPractica());
+			valorSubItemPractica.setValoresEstudio(valoresEstudio);
+			
+			recuperarValorPracticaDeHistorico(valorSubItemPractica,valorSubItemPracticaHistorico);
+			
+			valoresEstudio.getValorSubItemPractica().add(valorSubItemPractica);
+		}
+	}	
+	
+	//RECUPERAR_ESTUDIO_HISTORICO
+	public void recuperarValorPracticaDeHistorico(ValorSubItemPractica valorSubItemPractica, ValorSubItemPracticaHistorico valorSubItemPracticaHistorico){
+		
+		ValorPractica valorPractica;
+		
+		for(ValorPracticaHistorico valorPracticaHistorico : valorSubItemPracticaHistorico.getValoresPracticasHistorico()){
+
+			valorPractica = new ValorPractica();
+			valorPractica.setCubreOS(valorPracticaHistorico.isCubreOS());
+			valorPractica.setPractica(valorPracticaHistorico.getPractica());
+			valorPractica.setUnidadBioquimica(valorPracticaHistorico.getUnidadBioquimica());
+			valorPractica.setValor(valorPracticaHistorico.getValor());
+			valorPractica.setValorSubItemPractica(valorSubItemPractica);			
+			
+			valorSubItemPractica.getValoresPracticas().add(valorPractica);
+		}				
+	}	
+	//*********************************************************************************************************//
+	//*********************************************************************************************************//
+	//*********************************************************************************************************//	
 }

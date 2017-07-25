@@ -37,7 +37,7 @@ public class PacienteAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -67,7 +67,7 @@ public class PacienteAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -132,7 +132,7 @@ public class PacienteAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -161,7 +161,7 @@ public class PacienteAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -191,7 +191,7 @@ public class PacienteAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -217,7 +217,7 @@ public class PacienteAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -267,7 +267,7 @@ public class PacienteAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			Validator.addErrorXML(error, "Error Inesperado");
+			Validator.addErrorXML(error, "Error Inesperado - "+t.getMessage());
 			return false;
 		}
 	}

@@ -21,7 +21,7 @@
 <html:form action="medico" styleId="medicoFormId" onsubmit="javascript:submitir();">
 
 	<html:hidden property="metodo" value="altaMedico" />
-	<!--  
+	  
 	<table border="0" class="cuadrado" align="center" width="60%"
 		cellpadding="2">
 		<tr>
@@ -78,8 +78,10 @@
 		<tr>
 			<td height="10" colspan="2"></td>
 		</tr>
-	</table>-->
+	</table>
 	
+	<!-- Nuevo Estilo -->
+	<!--  
 	<table border="0" class="cuadradoSinBordeBootstrapSinFont" align="center" width="65%" cellpadding="2" cellspacing="0">
 	<tr>
 		<td>
@@ -88,7 +90,7 @@
 				<table border="0" class="cuadradoSinBordeBootstrapSinFont" align="center" width="100%" cellpadding="2">
 					<tr>
 						<td colspan="2" class="tituloTabla">
-							Alta de Mï¿½dico
+							Alta de Médico
 						</td>
 					</tr>
 					<tr>
@@ -109,7 +111,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td width="40%" class="fontNegritaRightBootstrap">Telï¿½fono</td>
+						<td width="40%" class="fontNegritaRightBootstrap">Teléfono</td>
 						<td align="left">
 							<html:text styleClass="botonerab" property="medicoDTO.telefono" value="" 
 									styleId="nombre" onkeypress="return evitarAutoSubmit(event)"/>
@@ -150,7 +152,7 @@
 			</div>
 		</td>
 	</tr>
-	</table>
+	</table>-->
 
 </html:form>
 <script type="text/javascript">

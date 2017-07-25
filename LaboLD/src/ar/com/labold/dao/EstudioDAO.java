@@ -1,5 +1,6 @@
 package ar.com.labold.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -8,10 +9,12 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import ar.com.labold.negocio.Estudio;
+import ar.com.labold.negocio.EstudioHistorico;
 import ar.com.labold.negocio.ValorPractica;
 import ar.com.labold.negocio.ValorSubItemPractica;
 import ar.com.labold.negocio.ValorUnidadFacturacion;
 import ar.com.labold.negocio.ValoresEstudio;
+import ar.com.labold.utils.Fecha;
 
 public class EstudioDAO extends HibernateDaoSupport {
 
@@ -146,5 +149,87 @@ public class EstudioDAO extends HibernateDaoSupport {
 		List<Estudio> estudios = criteria.list(); 
 		
 		return estudios;		
+	}	
+	
+	//ESTUDIO_HISTORICO
+	public List<Estudio> getEstudiosEntreFechas(String pFechaDesde, String pFechaHasta){
+		
+		Date fechaDesde = Fecha.stringDDMMAAAAToUtilDate(pFechaDesde);
+		Date fechaHasta = Fecha.stringDDMMAAAAToUtilDate(pFechaHasta);
+		
+		Criteria criteria = getSession().createCriteria(Estudio.class);
+		criteria.add(Restrictions.ge("fecha", fechaDesde)); 
+		criteria.add(Restrictions.lt("fecha", fechaHasta));
+		 
+		List<Estudio> estudios = criteria.list();		
+		return estudios;
+	}
+
+	//ESTUDIO_HISTORICO_POR_NRO
+	public List<Estudio> getEstudiosEntreNro(Long pNroDesde, Long pNroHasta){
+		
+		Criteria criteria = getSession().createCriteria(Estudio.class);
+		criteria.add(Restrictions.ge("numero", pNroDesde)); 
+		criteria.add(Restrictions.le("numero", pNroHasta));
+		 
+		List<Estudio> estudios = criteria.list();		
+		return estudios;
+	}		
+	
+	//ESTUDIO_HISTORICO
+	public void altaEstudioHistorico(EstudioHistorico estudioHistorico){
+		
+		this.getHibernateTemplate().saveOrUpdate(estudioHistorico);
+		//this.getHibernateTemplate().flush();
+		//this.getHibernateTemplate().clear();		
+	}	
+	
+	//ESTUDIO_HISTORICO
+	public void eliminarEstudioSinFlushClear(Estudio estudio){
+		
+		this.getHibernateTemplate().delete(estudio);		
+	}	
+	
+	//ESTUDIO_HISTORICO
+	public void flushClear(){
+		this.getHibernateTemplate().flush();
+		this.getHibernateTemplate().clear();
+	}
+	
+	//RECUPERAR_ESTUDIO_HISTORICO
+	public List<EstudioHistorico> getEstudiosHistoricosEntreFechas(String pFechaDesde, String pFechaHasta){
+		
+		Date fechaDesde = Fecha.stringDDMMAAAAToUtilDate(pFechaDesde);
+		Date fechaHasta = Fecha.stringDDMMAAAAToUtilDate(pFechaHasta);
+		
+		Criteria criteria = getSession().createCriteria(EstudioHistorico.class);
+		criteria.add(Restrictions.ge("fecha", fechaDesde)); 
+		criteria.add(Restrictions.lt("fecha", fechaHasta));
+		 
+		List<EstudioHistorico> estudiosHistorico = criteria.list();		
+		return estudiosHistorico;
+	}
+
+	//ESTUDIO_HISTORICO_POR_NRO
+	public List<EstudioHistorico> getEstudiosHistoricosEntreFechasPorNro(Long pNroDesde, Long pNroHasta){
+
+		Criteria criteria = getSession().createCriteria(EstudioHistorico.class);
+		criteria.add(Restrictions.ge("numero", pNroDesde)); 
+		criteria.add(Restrictions.le("numero", pNroHasta));
+		 
+		List<EstudioHistorico> estudiosHistorico = criteria.list();		
+		return estudiosHistorico;
+	}		
+	
+	//RECUPERAR_ESTUDIO_HISTORICO
+	public void altaEstudioSinFlushClear(Estudio estudio){
+		
+		this.getHibernateTemplate().saveOrUpdate(estudio);		
+	}
+	
+	//RECUPERAR_ESTUDIO_HISTORICO
+	public void eliminarEstudioHistoricoSinFlushClear(EstudioHistorico estudioHistorico){
+		
+		this.getHibernateTemplate().delete(estudioHistorico);		
 	}	
 }

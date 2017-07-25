@@ -86,8 +86,10 @@
 		<tr>
 			<td height="10" colspan="2"></td>
 		</tr>									
-	</table>-->
+	</table>
 
+	<!-- Nuevo Estilo -->
+	<!-- 
 	<table border="0" class="cuadradoSinBordeBootstrapSinFont" align="center" width="65%" cellpadding="2" cellspacing="0">
 	<tr>
 		<td>
@@ -95,7 +97,7 @@
 
 				<table border="0" class="cuadradoSinBordeBootstrapSinFont" align="center" width="100%" cellpadding="2">
 					<tr>
-						<td colspan="2"  class="tituloTabla">Modificaciï¿½n de Mï¿½dico</td>
+						<td colspan="2"  class="tituloTabla">Modificación de Médico</td>
 					</tr>
 					<tr>
 						<td height="20" colspan="2"></td>
@@ -145,9 +147,6 @@
 					</tr>			
 					<tr>
 						<td align="center">
-							<!--  <input type="button" class="btn btn-primary btn-sm" value="Aceptar" id="enviar" onclick="javascript:submitir();">
-							<input type="button" class="btn btn-primary btn-sm" value="Volver" id="enviar" onclick="javascript:volver();">-->
-							
 							<input type="button" class="btn btn-primary-bootstrap btn-sm" value="Aceptar" id="enviar" onclick="javascript:submitir();">
 							<input type="button" class="btn btn-primary-bootstrap btn-sm" value="Volver" id="enviar" onclick="javascript:volver();">							
 							
@@ -161,6 +160,7 @@
 		</td>
 	</tr>
 	</table>				
+	-->
 
 </html:form>
 <script type="text/javascript">

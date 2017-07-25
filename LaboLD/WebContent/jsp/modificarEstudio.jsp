@@ -58,7 +58,7 @@
 	<html:hidden property="metodo" value="modificacionEstudio"/>
 	<html:hidden property="estudioDTO.id" value="${estudio.id}"/>
 
-	<table border="0" class="cuadrado" align="center" width="80%" cellpadding="2" cellspacing="0">
+	<table border="0" class="cuadrado" align="center" width="85%" cellpadding="2" cellspacing="0">
 		<tr>
 			<td colspan="4"  class="azulAjustado" >Modificación de Estudio</td>
 		</tr>
@@ -157,7 +157,7 @@
 		
 	</table>
 	
-	<table border="0" class="cuadrado" align="center" width="80%" cellpadding="2" cellspacing="2">
+	<table border="0" class="cuadrado" align="center" width="85%" cellpadding="2" cellspacing="2">
 		<tr>
 			<td height="20"></td>
 		</tr>
@@ -242,11 +242,13 @@
 		<tr>
 			<td align="center">	
 			
+				<!-- Nuevo Estilo -->
+				<!--
 				<button type="button" class="btn btn-primary btn-sm" onclick="javascript:submitir();">Aceptar</button>
-				<button type="button" class="btn btn-primary btn-sm" onclick="javascript:volver();">Volver</button>
+				<button type="button" class="btn btn-primary btn-sm" onclick="javascript:volver();">Volver</button>-->
 						
-				<!--  <input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();">
-				<input type="button" class="botonerab" value="Volver" id="enviar" onclick="javascript:volver();">-->
+				<input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();">
+				<input type="button" class="botonerab" value="Volver" id="enviar" onclick="javascript:volver();">
 			</td>
 		</tr>
 		<tr>

@@ -30,7 +30,12 @@
 		<form-bean name="medicoForm"
 			type="ar.com.labold.struts.actions.forms.MedicoForm">
 		</form-bean>
-														
+		<form-bean name="backupForm"
+			type="ar.com.labold.struts.actions.forms.BackupForm">
+		</form-bean>	
+		<form-bean name="parametroForm"
+			type="ar.com.labold.struts.actions.forms.ParametroForm">
+		</form-bean>																				
 	</form-beans>
 
 	<global-exceptions></global-exceptions>
@@ -50,13 +55,21 @@
 			<forward name=".altaGrupoPractica" path=".altaGrupoPractica" />
 			<forward name=".generarReportesEstudios" path=".generarReportesEstudios" />
 			<forward name=".reporteFacturacionEntreFechas" path=".reporteEstudiosEntreFechas" />
-			<forward name=".altaMedico" path=".altaMedico" />	
+			<forward name=".altaMedico" path=".altaMedico" />
+			<forward name=".pasarEstudiosAHistorico" path=".pasarEstudiosAHistorico" /><!--ESTUDIO_HISTORICO-->
+			<forward name=".recuperarEstudiosDeHistorico" path=".recuperarEstudiosDeHistorico" /><!--RECUPERAR_ESTUDIO_HISTORICO-->
+			
+			<forward name=".pasarEstudiosAHistoricoPorNro" path=".pasarEstudiosAHistoricoPorNro" /><!--ESTUDIO_HISTORICO_POR_NRO-->
+			<forward name=".recuperarEstudiosDeHistoricoPorNro" path=".recuperarEstudiosDeHistoricoPorNro" /><!--RECUPERAR_ESTUDIO_HISTORICO_POR_NRO-->
+			
+			<forward name=".realizarBackup" path=".realizarBackup" /><!--BACKUP-->	
 		</action>	
 	
 		<!-- MENU -->
 		<action path="/menu" type="ar.com.labold.struts.actions.MenuAction"
 			parameter="metodo" >
-			<forward name="cargarMenu" path="/jsp/tiles/menu2.jsp" />
+			<!-- Nuevo Estilo -->
+			<!-- <forward name="cargarMenu" path="/jsp/tiles/menu2.jsp" />-->
 		</action>		
 	
 		<!-- LOGIN -->
@@ -166,7 +179,12 @@
 			<forward name="exitoEliminarEstudio" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioParaEliminar" />			
 			<forward name="exitoCargaPresupuestoEstudio" path=".presupuestoEstudio" />															
 			<forward name="exitoRecuperarEstudioEntregarEstudio" path=".entregarEstudio" />
-			<forward name="exitoEntregarEstudio" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioEntregarEstudio" />																
+			<forward name="exitoEntregarEstudio" path="/estudio.do?metodo=cargarRecuperarEstudios&amp;forward=recuperarEstudioEntregarEstudio" />
+			<forward name="exitoPasarEstudiosAHistorico" path=".pasarEstudiosAHistorico" />	<!--ESTUDIO_HISTORICO-->
+			<forward name="exitoRecuperarEstudiosDeHistorico" path=".recuperarEstudiosDeHistorico" />	<!--RECUPERAR_ESTUDIO_HISTORICO-->			
+			<forward name="exitoPasarEstudiosAHistoricoPorNro" path=".pasarEstudiosAHistoricoPorNro" />	<!--ESTUDIO_HISTORICO_POR_NRO-->
+			<forward name="exitoRecuperarEstudiosDeHistoricoPorNro" path=".recuperarEstudiosDeHistoricoPorNro" />	<!--RECUPERAR_ESTUDIO_HISTORICO_POR_NRO-->
+																			
 		</action>
 		
 		<action path="/facturacion" type="ar.com.labold.struts.actions.EstudioAction"
@@ -183,6 +201,23 @@
 			parameter="metodo" scope="request">											
 		</action>				
 		<!-- FIN REPORTE -->
+
+		<!-- BACKUP -->
+		<action path="/backup" type="ar.com.labold.struts.actions.BackupAction"
+			parameter="metodo" name="backupForm" scope="request">
+			<forward name="exitoMostrarRealizarBackup" path=".realizarBackup" />
+			<forward name="exitoBackup" path="/backup.do?metodo=mostrarRealizarBackup" />
+			<!--  <forward name="exitoBackup" path="/jsp.do?page=.realizarBackup" />-->												
+		</action>				
+		<!-- FIN BACKUP -->
+
+		<!-- PARAMETROS -->
+		<action path="/parametros" type="ar.com.labold.struts.actions.ParametroAction"
+			parameter="metodo" name="parametroForm" scope="request">
+			<forward name="exitoMostrarModificarParametros" path=".mostrarParametros" />
+			<forward name="exitoModificarParametros" path="/parametros.do?metodo=mostrarModificarParametros" />											
+		</action>				
+		<!-- FIN PARAMETROS -->
 
 		<action path="/ajaxNull" type="ar.com.labold.struts.actions.ValidadorAction"
 			parameter="metodo" scope="request">											

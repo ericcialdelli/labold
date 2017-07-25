@@ -433,13 +433,13 @@
 			</tr>	
 			<tr>
 				<td width="48%" class="botonerab" align="right">
-				  	<button type="button" class="btn btn-primary" onclick="javascript:generarReporte();">Generar Informe</button>
-					<!--  <input type="button" class="botonerab" value="Generar Informe" onclick="javascript:generarReporte();">-->				
+				  	<!--  <button type="button" class="btn btn-primary" onclick="javascript:generarReporte();">Generar Informe</button>-->
+					<input type="button" class="botonerab" value="Generar Informe" onclick="javascript:generarReporte();">				
 				</td>		
 				<td width="4%"></td>			
 				<td width="48%" class="botonerab" align="left">
-					<button type="button" class="btn btn-primary" onclick="javascript:cerrarVentanaValor();">Salir</button>
-					<!--  <input type="button" class="botonerab" value="Salir" onclick="javascript:cerrarVentanaValor();">-->
+					<!--  <button type="button" class="btn btn-primary" onclick="javascript:cerrarVentanaValor();">Salir</button>-->
+					<input type="button" class="botonerab" value="Salir" onclick="javascript:cerrarVentanaValor();">
 				</td>							
 			</tr>
 			<tr>
@@ -454,9 +454,10 @@
 		</tr>			
 		<tr>
 			<td align="center">
-				<!--  <button type="button" class="btn btn-primary" onclick="javascript:submitir();">Aceptar</button>-->
-				<button type="button" class="btn btn-primary-bootstrap btn-sm" onclick="javascript:submitir();">Aceptar</button>				
-				<!--  <input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();">-->
+				<!-- Nuevo Estilo -->
+				<!--  <button type="button" class="btn btn-primary-bootstrap btn-sm" onclick="javascript:submitir();">Aceptar</button>-->				
+				
+				<input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();">
 			</td>
 		</tr>
 		<tr>

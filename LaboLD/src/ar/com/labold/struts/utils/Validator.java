@@ -139,12 +139,12 @@ public abstract class Validator {
 		try {
 			int entradaInt = Integer.parseInt(entrada);
 			if (entradaInt <= numeroMinimo) {
-				addErrorXML(pError, label + " debe ser un número mayor a "
+				addErrorXML(pError, label + " debe ser un numero mayor a "
 						+ Integer.toString(numeroMinimo));
 				return false;
 			}
 		} catch (NumberFormatException e) {
-			addErrorXML(pError, label + " debe ser un número entero");
+			addErrorXML(pError, label + " debe ser un numero entero");
 			return false;
 		}
 		return true;
@@ -161,12 +161,12 @@ public abstract class Validator {
 		try {
 			int entradaInt = Integer.parseInt(entrada);
 			if (entradaInt >= numeroMaximo) {
-				addErrorXML(pError, label + " debe ser un número menor a "
+				addErrorXML(pError, label + " debe ser un numero menor a "
 						+ Integer.toString(numeroMaximo));
 				return false;
 			}
 		} catch (NumberFormatException e) {
-			addErrorXML(pError, label + " debe ser un número entero");
+			addErrorXML(pError, label + " debe ser un numero entero");
 			return false;
 		}
 		return true;
@@ -180,12 +180,12 @@ public abstract class Validator {
 		try {
 			long entradaLong = Long.parseLong(entrada);
 			if (entradaLong <= numeroMinimo) {
-				addErrorXML(pError, label + " debe ser un número mayor a "
+				addErrorXML(pError, label + " debe ser un numero mayor a "
 						+ Integer.toString(numeroMinimo));
 				return false;
 			}
 		} catch (NumberFormatException e) {
-			addErrorXML(pError, " debe ser un número entero");
+			addErrorXML(pError, " debe ser un numero entero");
 			return false;
 		}
 

@@ -288,18 +288,20 @@
 		</tr>			
 		<tr>
 			<td align="center">
-				<%-- 
+				 
 				<c:if test="${estudio.estadoStr != 'Entregado'}">			
 					<input type="button" class="botonerab" value="Entregar Estudio" onclick="javascript:entregarEstudio();">
 				</c:if>					
 				<input type="button" class="botonerab" value="Volver" id="enviar" onclick="javascript:volver();">
-				--%>
-				
+								
+				<!-- Nuevo Estilo -->
 				<%-- Con Bootstrap--%>
+				<%--
 				<c:if test="${estudio.estadoStr != 'Entregado'}">			
 					<button type="button" class="btn btn-primary btn-sm" onclick="javascript:entregarEstudio();">Entregar Estudio</button>
 				</c:if>					
-				<button type="button" class="btn btn-primary btn-sm" onclick="javascript:volver();">Volver</button>																		
+				<button type="button" class="btn btn-primary btn-sm" onclick="javascript:volver();">Volver</button>
+				--%>																		
 			</td>
 		</tr>
 		<tr>

@@ -9,60 +9,38 @@
 <script type="text/javascript">
 
 	function submitir(){
-		validarForm("obraSocialFormId","../obraSocial","validarObraSocialForm","ObraSocialForm");
+		validarForm("backupFormId","../backup","validarBackupForm","BackupForm");
 	}
 </script>
 
 
-<div id="exitoGrabado" class="verdeExito">${exitoGrabado}</div>
+<div id="exitoGrabado" class="verdeExito">${mensaje}</div>
 <%-- errores de validaciones AJAX --%>
 
  <div id="errores" class="rojoAdvertencia">${error}</div>
-
-<!--
-		<table border="0" class="cuadradoSinBordeBootstrap" align="center" width="60%" cellpadding="2" cellspacing="0">
-			<tr>
-				<td>
-					<div class="alert alert-danger">
-					  <strong>
-					  	<div id="errores">
-					  	</div>
-					  </strong>
-					</div>
-				</td>
-			</tr>
-		</table>-->		
+	
 
 
+<html:form action="backup" styleId="backupFormId" onsubmit="javascript:submitir();">
 
-<html:form action="obraSocial" styleId="obraSocialFormId" onsubmit="javascript:submitir();">
-
-	<html:hidden property="metodo" value="altaObraSocial" />
+	<html:hidden property="metodo" value="realizarBackup" />
 	
 	  
-	<table border="0" class="cuadrado" align="center" width="60%"
+	<table border="0" class="cuadrado" align="center" width="80%"
 		cellpadding="2">
 		<tr>
 			<td colspan="2" class="azulAjustado">
-				Alta Obra Social
+				Realizar Backup
 			</td>
 		</tr>
 		<tr>
 			<td height="20" colspan="2"></td>
 		</tr>
 		<tr>
-			<td width="40%" class="botoneralNegritaRight">Nombre</td>
+			<td width="20%" class="botoneralNegritaRight">Nombre</td>
 			<td align="left">
-				<html:text styleClass="botonerab" property="obraSocialDTO.nombre" value="" 
-						styleId="nombre" onkeypress="return evitarAutoSubmit(event)"/>
-			</td>
-		</tr>
-		<tr>
-			<td width="40%" class="botoneralNegritaRight">Valor Unidad Bioquímica</td>
-			<td align="left">						
-				<html:text styleClass="botonerab" property="obraSocialDTO.valorUnidadBioquimica" value="" 
-						styleId="valor" onkeypress="return evitarAutoSubmit(event)"/>						
-						
+				<html:text styleClass="botonerab" property="nombre" value="${nombreArchivo}" 
+						styleId="nombre" onkeypress="return evitarAutoSubmit(event)" size="80"/>
 			</td>
 		</tr>		
 		

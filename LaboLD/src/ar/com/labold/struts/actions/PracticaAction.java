@@ -39,7 +39,7 @@ public class PracticaAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 		return mapping.findForward(strForward);
@@ -67,7 +67,7 @@ public class PracticaAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 		return mapping.findForward(strForward);
@@ -94,7 +94,7 @@ public class PracticaAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 		return mapping.findForward(strForward);
@@ -125,7 +125,7 @@ public class PracticaAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -151,7 +151,7 @@ public class PracticaAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -181,7 +181,7 @@ public class PracticaAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 		return mapping.findForward(strForward);
@@ -203,7 +203,7 @@ public class PracticaAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 		return mapping.findForward(strForward);
@@ -228,7 +228,7 @@ public class PracticaAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -257,7 +257,7 @@ public class PracticaAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 		return mapping.findForward(strForward);
@@ -285,7 +285,7 @@ public class PracticaAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 		return mapping.findForward(strForward);
@@ -307,7 +307,7 @@ public class PracticaAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 		return mapping.findForward(strForward);
@@ -335,7 +335,7 @@ public class PracticaAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 		return mapping.findForward(strForward);
@@ -390,7 +390,7 @@ public class PracticaAction extends ValidadorAction {
 
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			Validator.addErrorXML(error, "Error Inesperado");
+			Validator.addErrorXML(error, "Error Inesperado - "+t.getMessage());
 			return false;
 		}
 	}	
@@ -412,7 +412,7 @@ public class PracticaAction extends ValidadorAction {
 
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			Validator.addErrorXML(error, "Error Inesperado");
+			Validator.addErrorXML(error, "Error Inesperado - "+t.getMessage());
 			return false;
 		}
 	}	
@@ -432,7 +432,7 @@ public class PracticaAction extends ValidadorAction {
 
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			Validator.addErrorXML(error, "Error Inesperado");
+			Validator.addErrorXML(error, "Error Inesperado - "+t.getMessage());
 			return false;
 		}
 	}		

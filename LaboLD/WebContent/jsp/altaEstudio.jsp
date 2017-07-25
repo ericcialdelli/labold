@@ -8,9 +8,12 @@
 <script type="text/javascript" src="<html:rewrite page='/js/validarNum.js'/>"></script>
 <script type="text/javascript" src="<html:rewrite page='/js/agregarModificarMedico.js'/>"></script>
 
+<!-- Nuevo Estilo -->
+<!-- 
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 
 <link rel="stylesheet" href="<html:rewrite page='/css/jquery-ui_1_11_3.css'/>" type="text/css">
+-->
 
 <script type="text/javascript"
 	src="<html:rewrite page='/dwr/interface/PacienteFachada.js'/>"></script>
@@ -18,14 +21,16 @@
 <script type="text/javascript"
 	src="<html:rewrite page='/dwr/interface/MedicoFachada.js'/>"></script>
 
-<!--  <script type="text/javascript"
-	src="<html:rewrite page='/js/JQuery/ui/jquery-ui-1.8.10.custom.min.js'/>"></script>-->	
+<!-- Estilo Viejo -->
+<script type="text/javascript"
+	src="<html:rewrite page='/js/JQuery/ui/jquery-ui-1.8.10.custom.min.js'/>"></script>	
 
-<!--  <link rel="stylesheet" href="<html:rewrite page='/css/ui-lightness/jquery-ui-1.8.10.custom.css'/>"
+<link rel="stylesheet" href="<html:rewrite page='/css/ui-lightness/jquery-ui-1.8.10.custom.css'/>"
 	type="text/css">
 
 <link rel="stylesheet" href="<html:rewrite page='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css'/>"
-	type="text/css">-->
+	type="text/css">
+<!-- Estilo Viejo -->
 
 <script type="text/javascript">
 
@@ -273,7 +278,7 @@
 		$('#obraSocial').val("-1");
 		$('#nroCarnetObraSocial').val("");
 		$('#observaciones').val("");			
-		$('#dialogo').dialog({title: 'Agregar Paciente', height: 450, width: 600, modal: true, position: {my: "center", at: "top", of: window}});
+		$('#dialogo').dialog({title: 'Agregar Paciente', height: 450, width: 600, modal: true, position: {my: "center", at: "center", of: window}});			
 	}
 
 	function cerrarVentanaAgregarPaciente(){
@@ -489,13 +494,15 @@
 						</c:forEach>										
 					</select>
 					
-					<button type="button" class="btn btn-primary-bootstrap btn-xs" onclick="abrirVentantAgregarPaciente()">Agregar</button>
-					<button type="button" class="btn btn-primary-bootstrap btn-xs" onclick="abrirVentantModificarPaciente()" 
-						id="botonModificar" disabled="disabled">Modificar</button>
-					
-					<!--  <input type="button" value="Agregar" class="botonerab" onclick="abrirVentantAgregarPaciente()">
+					<input type="button" value="Agregar" class="botonerab" onclick="abrirVentantAgregarPaciente()">
 					<input id="botonModificar" disabled="disabled" type="button" value="Modificar" class="botonerab" 
-						onclick="abrirVentantModificarPaciente()">-->
+						onclick="abrirVentantModificarPaciente()">					
+					
+					<!-- Nuevo Estilo -->
+					<!--<button type="button" class="btn btn-primary-bootstrap btn-xs" onclick="abrirVentantAgregarPaciente()">Agregar</button>
+					<button type="button" class="btn btn-primary-bootstrap btn-xs" onclick="abrirVentantModificarPaciente()" 
+						id="botonModificar" disabled="disabled">Modificar</button>-->
+										
 				</div>
 				<div style="display: none" id="inputPaciente">
 					<input type="text" value="" id="nombrePacienteAgregado" readonly="readonly">
@@ -519,12 +526,14 @@
 						</c:forEach>										
 					</select>
 					
+					<input type="button" value="Agregar" class="botonerab" onclick="abrirVentantAgregarMedico()">
+					<input id="botonModificarMedico" disabled="disabled" type="button" value="Modificar" class="botonerab" onclick="abrirVentantModificarMedico();">					
+					
+					<!-- Nuevo Estilo -->
+					<!--  
 					<button type="button" class="btn btn-primary btn-xs" onclick="abrirVentantAgregarMedico()">Agregar</button>
 					<button type="button" class="btn btn-primary btn-xs" onclick="abrirVentantModificarMedico()" 
-						id="botonModificarMedico" disabled="disabled">Modificar</button>					
-												
-					<!--  <input type="button" value="Agregar" class="botonerab" onclick="abrirVentantAgregarMedico()">
-					<input id="botonModificarMedico" disabled="disabled" type="button" value="Modificar" class="botonerab" onclick="abrirVentantModificarMedico();">-->
+						id="botonModificarMedico" disabled="disabled">Modificar</button>-->																	
 					
 				</div>	
 				<div style="display: none" id="inputMedico">
@@ -701,8 +710,10 @@
 		</tr>			
 		<tr>
 			<td align="center">
-				<button type="button" class="btn btn-primary btn-sm" onclick="javascript:submitir();">Aceptar</button>				
-				<!--  <input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();">-->
+				<!-- Nuevo Estilo -->
+				<!--  <button type="button" class="btn btn-primary btn-sm" onclick="javascript:submitir();">Aceptar</button>-->				
+				
+				<input type="button" class="botonerab" value="Aceptar" id="enviar" onclick="javascript:submitir();">
 			</td>
 		</tr>
 		<tr>

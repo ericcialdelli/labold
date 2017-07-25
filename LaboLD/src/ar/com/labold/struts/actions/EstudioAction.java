@@ -78,7 +78,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -109,7 +110,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -178,7 +180,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -204,7 +207,8 @@ public class EstudioAction extends ValidadorAction {
 
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -233,7 +237,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -258,7 +263,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -300,7 +306,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -325,7 +332,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -350,7 +358,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -382,7 +391,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -413,7 +423,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -441,7 +452,9 @@ public class EstudioAction extends ValidadorAction {
 			//request.setAttribute("error", "Error Inesperado");
 			
 			StringBuffer error = Validator.abrirXML();
-			Validator.addErrorXML(error, "Error Inesperado");
+			//Validator.addErrorXML(error, "Error Inesperado");
+			Validator.addErrorXML(error, "Error Inesperado - "+t.getMessage());					
+			
 			Validator.cerrarXML(error);
 			
 			try {
@@ -475,7 +488,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -502,7 +516,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -525,7 +540,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -549,7 +565,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -581,7 +598,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -636,7 +654,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -661,7 +680,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -688,7 +708,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -713,7 +734,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -738,7 +760,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -758,17 +781,128 @@ public class EstudioAction extends ValidadorAction {
 			EstudioForm estudioForm = (EstudioForm)form;			
 				
 			estudioFachada.eliminarEstudio(estudioForm.getEstudioDTO().getId());
+			//estudioFachada.pasarEstudiosAHistoricos("2014");
 			
 			request.setAttribute("exitoGrabado", "El Estudio n° "+estudioForm.getEstudioDTO().getNumero()+" se ha eliminado");
 			
 		} catch (Throwable t) {
+			System.out.println(t);
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
 		return mapping.findForward(strForward);
 	}		
+
+	//ESTUDIO_HISTORICO
+	@SuppressWarnings("unchecked")
+	public ActionForward pasarEstudiosAHistorico(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoPasarEstudiosAHistorico";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			EstudioForm estudioForm = (EstudioForm)form;			
+				
+			estudioFachada.pasarEstudiosAHistoricos(estudioForm.getFechaDesde(),estudioForm.getFechaHasta());
+			
+			request.setAttribute("exitoGrabado", "Los Estudios fueron pasados al Historico con exito!");
+			
+		} catch (Throwable t) {
+			System.out.println(t);
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}	
+	
+	//RECUPERAR_ESTUDIO_HISTORICO
+	@SuppressWarnings("unchecked")
+	public ActionForward recuperarEstudiosDeHistorico(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoRecuperarEstudiosDeHistorico";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			EstudioForm estudioForm = (EstudioForm)form;			
+				
+			estudioFachada.recuperarEstudiosDeHistorico(estudioForm.getFechaDesde(),estudioForm.getFechaHasta());
+			
+			request.setAttribute("exitoGrabado", "Los Estudios fueron recuperados del Historico con exito!");
+			
+		} catch (Throwable t) {
+			System.out.println(t);
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}	
+
+	//ESTUDIO_HISTORICO_POR_NRO
+	@SuppressWarnings("unchecked")
+	public ActionForward pasarEstudiosAHistoricoPorNro(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoPasarEstudiosAHistoricoPorNro";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			EstudioForm estudioForm = (EstudioForm)form;			
+				
+			estudioFachada.pasarEstudiosAHistoricosPorNro(estudioForm.getNroDesde(),estudioForm.getNroHasta());
+			
+			request.setAttribute("exitoGrabado", "Los Estudios fueron pasados al Historico con exito!");
+			
+		} catch (Throwable t) {
+			System.out.println(t);
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}	
+		
+	//ESTUDIO_HISTORICO_POR_NRO
+	@SuppressWarnings("unchecked")
+	public ActionForward recuperarEstudiosDeHistoricoPorNro(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoRecuperarEstudiosDeHistoricoPorNro";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			EstudioForm estudioForm = (EstudioForm)form;			
+				
+			estudioFachada.recuperarEstudiosDeHistoricoPorNro(estudioForm.getNroDesde(),estudioForm.getNroHasta());
+			
+			request.setAttribute("exitoGrabado", "Los Estudios fueron recuperados del Historico con exito!");
+			
+		} catch (Throwable t) {
+			System.out.println(t);
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}	
 	
 	@SuppressWarnings("unchecked")
 	public ActionForward cargarPresupuestoEstudio(ActionMapping mapping,
@@ -787,7 +921,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -826,7 +961,8 @@ public class EstudioAction extends ValidadorAction {
 
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			return mapping.findForward("errorSinMenu");
 		}
 
@@ -851,7 +987,7 @@ public class EstudioAction extends ValidadorAction {
 		}		
 		estudioDTO.setFecha("20/09/2015");//Le pongo cualquier fecha para que no pinche en el ProviderDominio
 		estudioDTO.setFechaEntrega("20/09/2015");//Le pongo cualquier fecha para que no pinche en el ProviderDominio
-		estudioDTO.setEstado(EstadoEstudio.NO_ENTREGADO);//Le pongo cualquier fecha para que no pinche en el ProviderDominio
+		estudioDTO.setEstado(EstadoEstudio.NO_ENTREGADO);//Le pongo cualquier estado para que no pinche en el ProviderDominio
 		Estudio estudio = ProviderDominio.getEstudio(estudioDTO,null,listaPracticas,null);		
 		
 		respuesta.append("<unidades>" + estudio.getUnidadesFacturacionTotal() + "</unidades>");
@@ -876,7 +1012,8 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			request.setAttribute("error", "Error Inesperado");
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";
 		}
 
@@ -923,7 +1060,7 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			Validator.addErrorXML(error, "Error Inesperado");
+			Validator.addErrorXML(error, "Error Inesperado - "+t.getMessage());			
 			return false;
 		}
 	}
@@ -960,7 +1097,7 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			Validator.addErrorXML(error, "Error Inesperado");
+			Validator.addErrorXML(error, "Error Inesperado - "+t.getMessage());
 			return false;
 		}
 	}	
@@ -978,7 +1115,7 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
-			Validator.addErrorXML(error, "Error Inesperado");
+			Validator.addErrorXML(error, "Error Inesperado - "+t.getMessage());
 			return false;
 		}
 	}	
@@ -1011,5 +1148,47 @@ public class EstudioAction extends ValidadorAction {
 		}
 
 		return null;
+	}
+	
+	//ESTUDIO_HISTORICO
+	public boolean validarPasarEstudiosAHistoricoForm(StringBuffer error, ActionForm form) {
+		
+		try{			
+			EstudioForm estudioForm = (EstudioForm)form;
+			
+			boolean ok1 = true;
+			boolean ok2 = true;
+
+			ok1 = Validator.requerido(estudioForm.getFechaDesde(),"Fecha Desde", error);
+			ok2 = Validator.requerido(estudioForm.getFechaHasta(),"Fecha Hasta", error);
+
+			return ok1 && ok2;
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			Validator.addErrorXML(error, "Error Inesperado - "+t.getMessage());
+			return false;
+		}
+	}	
+	
+	//ESTUDIO_HISTORICO_POR_NRO
+	public boolean validarPasarEstudiosAHistoricoPorNroForm(StringBuffer error, ActionForm form) {
+		
+		try{			
+			EstudioForm estudioForm = (EstudioForm)form;
+			
+			boolean ok1 = true;
+			boolean ok2 = true;
+
+			ok1 = Validator.validarLongMayorQue(0,String.valueOf(estudioForm.getNroDesde()),"Numero Desde", error);
+			ok2 = Validator.validarLongMayorQue(estudioForm.getNroDesde().intValue()-1,String.valueOf(estudioForm.getNroHasta()),"Numero Hasta", error);
+
+			return ok1 && ok2;
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			Validator.addErrorXML(error, "Error Inesperado - "+t.getMessage());
+			return false;
+		}
 	}	
 }

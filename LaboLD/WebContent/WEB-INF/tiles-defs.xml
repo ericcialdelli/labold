@@ -14,8 +14,10 @@
 	<definition name=".base" path="/jsp/tiles/layout.jsp">
 		<put name="title" value="Main Layout" />
 		<put name="header" value="/jsp/tiles/header.jsp" />
-		<!--<put name="menu" value="/jsp/tiles/menu.jsp" />-->
-		<put name="menu" value="/menu.do?metodo=cargarMenu" />
+		<put name="menu" value="/jsp/tiles/menu.jsp" />
+		
+		<!-- Nuevo Estilo -->
+		<!--<put name="menu" value="/menu.do?metodo=cargarMenu" />-->
 		<put name="footer" value="/jsp/tiles/footer.jsp" />
 		<put name="body" value="doc.portal.body" />
 	</definition>
@@ -28,6 +30,19 @@
 		<put name="body" value="/jsp/index.jsp" />
 	</definition>
 
+	<!-- BACKUP -->
+	<definition name=".realizarBackup" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/realizarBackup.jsp" />
+	</definition>
+	<!-- FIN BACKUP-->
+
+	<!-- PARAMETROS -->
+	<definition name=".mostrarParametros" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/mostrarParametros.jsp" />
+	</definition>
+	<!-- FIN PARAMETROS-->
 
 	<!-- USUARIO -->
 	<definition name=".altaUsuario" extends=".base">
@@ -179,7 +194,28 @@
 	<definition name=".entregarEstudio" extends=".base">
 		<put name="title" value="LaboLD" />
 		<put name="body" value="/jsp/entregarEstudio.jsp" />
-	</definition>			
+	</definition>
+	
+	<definition name=".pasarEstudiosAHistorico" extends=".base"><!--ESTUDIO_HISTORICO-->	
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/pasarEstudiosAHistorico.jsp" />
+	</definition>
+	
+	<definition name=".recuperarEstudiosDeHistorico" extends=".base"><!--RECUPERAR_ESTUDIO_HISTORICO-->	
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/recuperarEstudiosDeHistorico.jsp" />
+	</definition>	
+
+	<definition name=".pasarEstudiosAHistoricoPorNro" extends=".base"><!--ESTUDIO_HISTORICO POR NRO-->	
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/pasarEstudiosAHistoricoPorNro.jsp" />
+	</definition>	
+
+	<definition name=".recuperarEstudiosDeHistoricoPorNro" extends=".base"><!--RECUPERAR_ESTUDIO_HISTORICO_POR_NRO-->	
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/recuperarEstudiosDeHistoricoPorNro.jsp" />
+	</definition>	
+	
 	<!-- FIN ESTUDIO -->		
 
 	<!-- REPORTES -->

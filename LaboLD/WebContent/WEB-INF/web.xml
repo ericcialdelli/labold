@@ -9,6 +9,12 @@
     	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
+	<listener>  
+	    <listener-class>
+	        ar.com.labold.listener.LaboContextListener
+	    </listener-class>
+	</listener> 	
+	
 	<context-param>
 	   <param-name>webAppRootKey</param-name>
 	   <param-value>webapp.root5</param-value>

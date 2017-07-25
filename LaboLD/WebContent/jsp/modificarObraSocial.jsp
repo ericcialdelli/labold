@@ -65,9 +65,11 @@
 		<tr>
 			<td height="10" colspan="2"></td>
 		</tr>									
-	</table>-->
+	</table>
 
 
+<!-- Nuevo Estilo -->
+<!--
 	<table border="0" class="cuadradoSinBordeBootstrapSinFont" align="center" width="60%" cellpadding="2" cellspacing="0">
 	<tr>
 		<td>
@@ -117,7 +119,7 @@
 		</td>
 	</tr>
 	</table>
-
+-->
 </html:form>
 <script type="text/javascript">
 

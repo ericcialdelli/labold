@@ -24,6 +24,7 @@
 					<td class="grisSubtituloCenter">Número</td>
 					<td class="grisSubtituloCenter">Paciente</td>
 					<td class="grisSubtituloCenter">Fecha</td>
+					<td class="grisSubtituloCenter">Estado</td>
 					<td class="grisSubtituloCenter"></td>
 				</tr>
 				<%String clase=""; %>
@@ -40,6 +41,9 @@
 						<td>
 							<fmt:formatDate	value='${estudio.fecha}' pattern='dd/MM/yyyy' />
 						</td>
+						<td>
+							${estudio.estadoStr}
+						</td>						
 						<td>
 							<a href="javascript:recuperarEstudio(${estudio.numero});">
 								Seleccionar
