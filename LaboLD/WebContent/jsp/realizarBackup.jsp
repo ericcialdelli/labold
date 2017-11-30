@@ -37,10 +37,10 @@
 			<td height="20" colspan="2"></td>
 		</tr>
 		<tr>
-			<td width="20%" class="botoneralNegritaRight">Nombre</td>
+			<td width="14%" class="botoneralNegritaRight">Nombre</td>
 			<td align="left">
 				<html:text styleClass="botonerab" property="nombre" value="${nombreArchivo}" 
-						styleId="nombre" onkeypress="return evitarAutoSubmit(event)" size="80"/>
+						styleId="nombre" onkeypress="return evitarAutoSubmit(event)" size="110"/>
 			</td>
 		</tr>		
 		
@@ -82,7 +82,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td width="40%" class="fontNegritaRightBootstrap">Valor Unidad Bioqu�mica</td>
+						<td width="40%" class="fontNegritaRightBootstrap">Valor Unidad Bioquimica</td>
 						<td align="left">						
 							<html:text styleClass="botonerab" property="obraSocialDTO.valorUnidadBioquimica" value="" 
 									styleId="valor" onkeypress="return evitarAutoSubmit(event)"/>						
