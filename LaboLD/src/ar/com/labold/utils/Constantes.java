@@ -95,6 +95,12 @@ public class Constantes {
 	public static final String EXISTE_PRACTICA = "Ya existe una Práctica con ese nombre";
 	
 	public static final String EXISTE_GRUPO_PRACTICA = "Ya existe un Grupo Práctica con ese nombre";
+	
+	public static final String EXITO_ALTA_ESTUDIO_PRESETEADO = "El Estudio Pre Seteado se ha dado de alta con exito";
+	
+	public static final String EXITO_MODIFICACION_ESTUDIO_PRESETEADO = "El Estudio Pre Seteado se ha modificado con exito";
+	
+	public static final String EXITO_ELIMINAR_ESTUDIO_PRESETEADO = "El Estudio Pre Seteado se ha eliminado con exito";
 	//FIN PRACTICA	
 	
 	//ESTUDIO
@@ -132,6 +138,8 @@ public class Constantes {
 	
 	public static final String REPORTE_FACTURACION_ENTRE_FECHAS_POR_OBRA_SOCIAL = "reporteFacturacionEntreFechasPorObraSocial";
 	
-	public static final String REPORTE_PRESUPUESTO_ESTUDIO = "reportePresupuestoEstudio";	
+	public static final String REPORTE_PRESUPUESTO_ESTUDIO = "reportePresupuestoEstudio";
+	
+	public static final String REPORTE_FACTURACION_POR_ANIO = "reporteFacturacionPorAnio";
 	// FIN REPORTES
 }
