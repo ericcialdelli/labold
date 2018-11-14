@@ -247,6 +247,8 @@ public abstract class ProviderDominio {
 		}	
 		estudio.setEstado(estudioDTO.getEstado());
 		
+		estudio.setObservaciones(estudioDTO.getObservaciones());//OBSERVACIONES
+		
 		Map<Long,ValoresEstudio> mapValoresEstudio = new TreeMap<Long,ValoresEstudio>();
 		Map<Long,ValorSubItemPractica> mapValorSubItemPractica = new TreeMap<Long,ValorSubItemPractica>();
 		
@@ -455,6 +457,8 @@ public abstract class ProviderDominio {
 			estudio.setFechaEntrega(Fecha.stringDDMMAAAAToUtilDate(estudioDTO.getFechaEntrega()));
 		}	
 		//estudio.setEstado(estudioDTO.getEstado());
+		
+		estudio.setObservaciones(estudioDTO.getObservaciones());//OBSERVACIONES
 		
 		return estudio;
 	}		

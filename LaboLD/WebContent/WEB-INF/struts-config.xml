@@ -35,7 +35,11 @@
 		</form-bean>	
 		<form-bean name="parametroForm"
 			type="ar.com.labold.struts.actions.forms.ParametroForm">
-		</form-bean>																				
+		</form-bean>
+		<form-bean name="estudioPreSeteadoForm"
+			type="ar.com.labold.struts.actions.forms.EstudioPreSeteadoForm"> <!-- PRESELECCION -->	
+		</form-bean>				
+																						
 	</form-beans>
 
 	<global-exceptions></global-exceptions>
@@ -139,7 +143,8 @@
 			<forward name="exitoCargarModificacionPractica" path=".recuperarPracticasPorGrupo" />						
 			<forward name="exitoRecuperarPracticasPorGrupo" path="/jsp/bloqueRecuperarPracticasPorGrupo.jsp" />
 			<forward name="exitoRecuperarPractica" path=".modificarPractica" />
-			<forward name="exitoModificacionPractica" path="/practica.do?metodo=cargarModificacionPractica" />																	
+			<forward name="exitoModificacionPractica" path="/practica.do?metodo=cargarModificacionPractica" />					
+																				
 		</action>	
 		
 		<action path="/grupoPractica" type="ar.com.labold.struts.actions.PracticaAction"
@@ -151,7 +156,18 @@
 			
 			<forward name="exitoCargarAltaSubItemPractica" path=".altaSubItemPractica" />
 			<forward name="exitoAltaSubItemPractica" path="/grupoPractica.do?metodo=cargarAltaSubItemPractica" />																			
-		</action>								
+		</action>			
+		
+		<action path="/estudioPreSeteado" type="ar.com.labold.struts.actions.PracticaAction"
+			parameter="metodo" name="estudioPreSeteadoForm" scope="request">		
+			<forward name="exitoCargarAltaEstudioPreSeteado" path=".altaEstudioPreSeteado" /> <!-- PRESELECCION -->
+			<forward name="exitoAltaEstudioPreSeteado" path="/estudioPreSeteado.do?metodo=cargarAltaEstudioPreSeteado" /> <!-- PRESELECCION -->
+			<forward name="exitoCargarEstudioPreSeteado" path=".recuperarEstudiosPreSeteados" /> <!-- PRESELECCION -->
+			<forward name="exitoRecuperarEstudioPreSeteado" path=".modificarEstudioPreSeteado" /> <!-- PRESELECCION -->
+			<forward name="exitoModificacionEstudioPreSeteado" path="/estudioPreSeteado.do?metodo=cargarEstudiosPreSeteados&amp;forward=modificacionEstudioPreSeteado" /> <!-- PRESELECCION -->
+			<forward name="exitoEliminarEstudioPreSeteado" path="/estudioPreSeteado.do?metodo=cargarEstudiosPreSeteados&amp;forward=eliminarEstudioPreSeteado" /> <!-- PRESELECCION -->
+		</action>
+							
 		<!-- FIN PRACTICA -->		
 
 		<!-- ESTUDIO -->
@@ -184,6 +200,10 @@
 			<forward name="exitoRecuperarEstudiosDeHistorico" path=".recuperarEstudiosDeHistorico" />	<!--RECUPERAR_ESTUDIO_HISTORICO-->			
 			<forward name="exitoPasarEstudiosAHistoricoPorNro" path=".pasarEstudiosAHistoricoPorNro" />	<!--ESTUDIO_HISTORICO_POR_NRO-->
 			<forward name="exitoRecuperarEstudiosDeHistoricoPorNro" path=".recuperarEstudiosDeHistoricoPorNro" />	<!--RECUPERAR_ESTUDIO_HISTORICO_POR_NRO-->
+			
+			<forward name="exitoCargarRecuperarEstudiosPorMedicoObraSocial" path=".mostrarRecuperarEstudiosPorMedicoObraSocial" />
+			<!--  <forward name="exitoRecuperarEstudiosPorMedicoObraSocial" path=".recuperarEstudiosPorMedicoObraSocial" />-->			
+			<forward name="exitoRecuperarEstudiosPorMedicoObraSocial" path="/jsp/recuperarEstudiosPorMedicoObraSocial.jsp" />
 																			
 		</action>
 		
@@ -237,3 +257,18 @@
 	</plug-in>
 
 </struts-config>
+
+
+<!-- 
+
+Alta Estudio Pre Seteado - http://localhost:8080/LaboLD/estudioPreSeteado.do?metodo=cargarAltaEstudioPreSeteado
+
+Modificar Estudio Pre Seteado - http://localhost:8080/LaboLD/estudioPreSeteado.do?metodo=cargarEstudiosPreSeteados&forward=modificacionEstudioPreSeteado
+
+Borrar Estudio Pre Seteado - http://localhost:8080/LaboLD/estudioPreSeteado.do?metodo=cargarEstudiosPreSeteados&forward=eliminarEstudioPreSeteado
+
+Estudios Por Medico - Obra Social - http://localhost:8080/LaboLD/estudio.do?metodo=cargarRecuperarEstudiosPorMedicoObraSocial
+
+
+ -->
+

@@ -139,16 +139,22 @@
 				<input type="text" value="${estudio.unidadesFacturacionTotal}" class="botonerab" size="10" name="estudioDTO.unidadesFacturacionTotal"/>
 			</td>		
 		</tr>		
-					
 		<tr>
+			<td class="botoneralNegritaCenter" width="12%" >Observaciones del Estudio</td>
+			<td align="left" colspan="3">			
+				<textarea class="botonerab" rows="3" cols="110" name="estudioDTO.observaciones">${estudio.observaciones}</textarea>
+			</td>
+		</tr>				
+		<!--  <tr>
 			<td height="20" colspan="4">
 				<hr color="lightgrey">
 			</td>
-		</tr>
+		</tr>-->
 		<tr>
-			<td class="botoneralNegritaRight" width="12%" >Observaciones</td>
-			<td align="left"colspan="3">			
-				<input type="text" value="${estudio.paciente.observaciones}" class="botonerab" size="100" readonly="readonly"/>
+			<td class="botoneralNegritaCenter" width="12%" >Observaciones del Paciente</td>
+			<td align="left"colspan="3">
+				<textarea class="botonerab" rows="2" cols="110" readonly="readonly">${estudio.paciente.observaciones}</textarea>			
+				<!--  <input type="text" value="${estudio.paciente.observaciones}" class="botonerab" size="100" readonly="readonly"/>-->
 			</td>
 		</tr>		
 		<tr>

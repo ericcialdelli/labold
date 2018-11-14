@@ -268,6 +268,12 @@ public class EstudioFachada {
 		return estudioDAO.recuperarUltimosEstudios();
 	}
 	
+	public List<Estudio> recuperarEstudiosPorMedicoObraSocial(String fechaDesde, String fechaHasta, long idMedico, long idObraSocial){
+		
+		List<Estudio> lista = null;
+		lista = estudioDAO.recuperarEstudiosPorMedicoObraSocial(fechaDesde,fechaHasta,idMedico,idObraSocial);
+		return lista;
+	}
 	
 	//****************************************************************************************************//
 	//***************************** PASAR ESTUDIOS A HISTORICO *******************************************//

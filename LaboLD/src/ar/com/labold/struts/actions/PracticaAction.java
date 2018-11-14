@@ -12,9 +12,11 @@ import org.apache.struts.action.ActionMapping;
 import org.springframework.web.context.WebApplicationContext;
 
 import ar.com.labold.fachada.PracticaFachada;
+import ar.com.labold.negocio.EstudioPreSeteado;
 import ar.com.labold.negocio.GrupoPractica;
 import ar.com.labold.negocio.Practica;
 import ar.com.labold.negocio.SubItemPractica;
+import ar.com.labold.struts.actions.forms.EstudioPreSeteadoForm;
 import ar.com.labold.struts.actions.forms.GrupoPracticaForm;
 import ar.com.labold.struts.actions.forms.PracticaForm;
 import ar.com.labold.struts.utils.Validator;
@@ -341,6 +343,165 @@ public class PracticaAction extends ValidadorAction {
 		return mapping.findForward(strForward);
 	}		
 	
+	//PRESELECCION
+	public ActionForward cargarAltaEstudioPreSeteado(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoCargarAltaEstudioPreSeteado";
+		try {
+			
+			WebApplicationContext ctx = getWebApplicationContext();
+			PracticaFachada practicaFachada = (PracticaFachada) ctx.getBean("practicaFachada");
+
+			List<GrupoPractica> gruposPracticas = practicaFachada.getGruposPractica();
+			request.setAttribute("gruposPracticas", gruposPracticas);			
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
+			strForward = "error";
+		}
+		return mapping.findForward(strForward);		
+	}
+	
+	//PRESELECCION
+	public ActionForward altaEstudioPreSeteado(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoAltaEstudioPreSeteado";
+		try {
+			
+			WebApplicationContext ctx = getWebApplicationContext();
+			PracticaFachada practicaFachada = (PracticaFachada) ctx.getBean("practicaFachada");			
+			
+			EstudioPreSeteadoForm estudioForm = (EstudioPreSeteadoForm)form; 
+			estudioForm.normalizarListaPracticas();
+			
+			practicaFachada.altaEstudioPreSeteado(estudioForm.getNombre(),estudioForm.getListaPracticas());
+			
+			request.setAttribute("exitoGrabado", Constantes.EXITO_ALTA_ESTUDIO_PRESETEADO);			
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
+			strForward = "error";
+		}
+		return mapping.findForward(strForward);		
+	}	
+	
+	//PRESELECCION
+	public ActionForward cargarEstudiosPreSeteados(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		String strForward = "exitoCargarEstudioPreSeteado";
+		try {
+			
+			WebApplicationContext ctx = getWebApplicationContext();
+			PracticaFachada practicaFachada = (PracticaFachada)ctx.getBean("practicaFachada");						
+			
+			String forward = request.getParameter("forward");
+			
+			List<EstudioPreSeteado> listaEstudiosPreSeteados = practicaFachada.getEstudiosPreSeteados();
+			request.setAttribute("listaEstudiosPreSeteados", listaEstudiosPreSeteados);	
+			request.setAttribute("forward", forward);
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
+			strForward = "error";
+		}
+		return mapping.findForward(strForward);
+	}	
+	
+	//PRESELECCION
+	public ActionForward recuperarEstudioPreSeteado(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		String strForward = "exitoRecuperarEstudioPreSeteado";
+		try {
+			
+			WebApplicationContext ctx = getWebApplicationContext();
+			PracticaFachada practicaFachada = (PracticaFachada)ctx.getBean("practicaFachada");						
+			
+			String forward = request.getParameter("forward");
+			
+			List<GrupoPractica> gruposPracticas = practicaFachada.getGruposPractica();					
+			
+			String id = request.getParameter("id");			
+			EstudioPreSeteado estudioPreSeteado = practicaFachada.getEstudioPreSeteado(Long.valueOf(id));
+			
+			request.setAttribute("estudio", estudioPreSeteado);
+			request.setAttribute("cantPracitcas", estudioPreSeteado.getListaPracticas().size());
+			request.setAttribute("gruposPracticas", gruposPracticas);
+			request.setAttribute("forward", forward);
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
+			strForward = "error";
+		}
+		return mapping.findForward(strForward);
+	}	
+	
+	//PRESELECCION
+	public ActionForward modificacionEstudioPreSeteado(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoModificacionEstudioPreSeteado";
+		try {
+			
+			WebApplicationContext ctx = getWebApplicationContext();
+			PracticaFachada practicaFachada = (PracticaFachada) ctx.getBean("practicaFachada");			
+			
+			EstudioPreSeteadoForm estudioForm = (EstudioPreSeteadoForm)form; 
+			estudioForm.normalizarListaPracticas();
+			
+			practicaFachada.modificacionEstudioPreSeteado(estudioForm.getId(),estudioForm.getNombre(),estudioForm.getListaPracticas());
+			
+			request.setAttribute("exitoGrabado", Constantes.EXITO_MODIFICACION_ESTUDIO_PRESETEADO);			
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
+			strForward = "error";
+		}
+		return mapping.findForward(strForward);		
+	}	
+
+	//PRESELECCION
+	public ActionForward eliminarEstudioPreSeteado(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoEliminarEstudioPreSeteado";
+		try {
+			
+			WebApplicationContext ctx = getWebApplicationContext();
+			PracticaFachada practicaFachada = (PracticaFachada) ctx.getBean("practicaFachada");			
+									
+			String id = request.getParameter("id");			
+					
+			practicaFachada.eliminarEstudioPreSeteado(Long.valueOf(id));
+			
+			request.setAttribute("exitoGrabado", Constantes.EXITO_ELIMINAR_ESTUDIO_PRESETEADO);			
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
+			strForward = "error";
+		}
+		return mapping.findForward(strForward);		
+	}		
+	
+	/**********************************************************************
+	 **********************	METODOS VALIDADORES ***************************
+	 **********************************************************************/	
+	
 	public boolean validarPracticaForm(StringBuffer error, ActionForm form) {
 		try {
 			PracticaForm pacticaForm = (PracticaForm)form;
@@ -435,5 +596,20 @@ public class PracticaAction extends ValidadorAction {
 			Validator.addErrorXML(error, "Error Inesperado - "+t.getMessage());
 			return false;
 		}
-	}		
+	}	
+	
+	public boolean validarEstudioPreSeteadoForm(StringBuffer error, ActionForm form) {
+		try {
+			EstudioPreSeteadoForm estudioForm = (EstudioPreSeteadoForm)form;
+			
+			boolean b1 = Validator.requerido(estudioForm.getNombre(),"Nombre Estudio Pre-Seteado", error);			
+
+			return  b1;
+
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			Validator.addErrorXML(error, "Error Inesperado - "+t.getMessage());
+			return false;
+		}
+	}	
 }

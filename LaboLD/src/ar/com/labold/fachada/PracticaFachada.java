@@ -11,6 +11,7 @@ import ar.com.labold.dao.PracticaDAO;
 import ar.com.labold.dto.GrupoPracticaDTO;
 import ar.com.labold.dto.PracticaDTO;
 import ar.com.labold.dto.SubItemPracticaDTO;
+import ar.com.labold.negocio.EstudioPreSeteado;
 import ar.com.labold.negocio.GrupoPractica;
 import ar.com.labold.negocio.Practica;
 import ar.com.labold.negocio.SubItemPractica;
@@ -134,5 +135,71 @@ public class PracticaFachada {
 		listaSubItems.addAll(grupo.getSubItemsPractica());
 		
 		return listaSubItems;
+	}
+	
+	//PRESELECCION
+	public void altaEstudioPreSeteado(String nombre, List<PracticaDTO> listaPracticasDTO){
+		
+		List<Practica> listaPracticas = new ArrayList<Practica>(); 
+		for (PracticaDTO practicaDTO : listaPracticasDTO) {
+			listaPracticas
+			.add(practicaDAO.getPractica(practicaDTO.getId()));
+		}
+		
+		EstudioPreSeteado estudio = new EstudioPreSeteado();
+		estudio.setNombre(nombre);
+		estudio.setListaPracticas(listaPracticas);
+		
+		practicaDAO.altaEstudioPreSeteado(estudio);
+	}
+	
+	//PRESELECCION
+	public void modificacionEstudioPreSeteado(String id, String nombre, List<PracticaDTO> listaPracticasDTO){
+		
+		List<Practica> listaPracticas = new ArrayList<Practica>(); 
+		for (PracticaDTO practicaDTO : listaPracticasDTO) {
+			listaPracticas
+			.add(practicaDAO.getPractica(practicaDTO.getId()));
+		}
+		
+		EstudioPreSeteado estudio = getEstudioPreSeteado(Long.valueOf(id));
+		estudio.setNombre(nombre);
+		estudio.setListaPracticas(listaPracticas);
+		
+		practicaDAO.altaEstudioPreSeteado(estudio);
+	}	
+	
+	//PRESELECCION
+	public List<EstudioPreSeteado> getEstudiosPreSeteados(){
+		
+		return practicaDAO.getEstudiosPreSeteados();
+	}
+	
+	//PRESELECCION
+	public EstudioPreSeteado getEstudioPreSeteado(Long id){
+	
+		return practicaDAO.getEstudioPreSeteado(id);
+	}
+	
+	//PRESELECCION
+	public String[] obtenerEstudioPreSeteado(String id){
+		
+		EstudioPreSeteado estudio = practicaDAO.getEstudioPreSeteado(Long.valueOf(id));
+		List<String> lista = new ArrayList<String>();		
+		String[] l = new String[estudio.getListaPracticas().size()];
+		
+		int i=0;
+		for (Practica practica : estudio.getListaPracticas()) {
+			l[i]=String.valueOf(practica.getId());
+			i++;
+		}
+		return l;
+	}
+	
+	//PRESELECCION
+	public void eliminarEstudioPreSeteado(Long id){
+		
+		EstudioPreSeteado estudio = practicaDAO.getEstudioPreSeteado(id);
+		practicaDAO.eliminarEstudioPreSeteado(estudio);	
 	}
 }

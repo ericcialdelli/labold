@@ -561,6 +561,13 @@
 				<img alt="" src="<html:rewrite page='/imagenes/calendar/calendar2.gif'/>" align="top" width='17' height='21'>				
 			</td>		
 		</tr>
+					
+		<tr>
+			<td class="botoneralNegritaCenter" width="12%" >Observaciones del Estudio</td>
+			<td align="left" colspan="3">			
+				<textarea class="botonerab" rows="3" cols="110" name="estudioDTO.observaciones"></textarea>
+			</td>
+		</tr>									
 							
 		<tr>
 			<td height="20" colspan="2"></td>

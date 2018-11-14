@@ -24,6 +24,8 @@ public class EstudioDTO {
 	
 	private double montoAdeudado;	
 	
+	private String observaciones;//OBSERVACIONES
+	
 	private EstadoEstudio estado;
 	
 	public EstudioDTO(){
@@ -126,4 +128,14 @@ public class EstudioDTO {
 	public void setValorUnidadBioquimica(double valorUnidadBioquimica) {
 		this.valorUnidadBioquimica = valorUnidadBioquimica;
 	}
+
+	public String getObservaciones() {
+		return observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
+	}
+	
+	
 }

@@ -232,4 +232,31 @@ public class EstudioDAO extends HibernateDaoSupport {
 		
 		this.getHibernateTemplate().delete(estudioHistorico);		
 	}	
+	
+	public List<Estudio> recuperarEstudiosPorMedicoObraSocial(String pFechaDesde, String pFechaHasta, long idMedico, long idObraSocial){
+		
+		Criteria criteria = getSession().createCriteria(Estudio.class);		
+		
+		criteria.createAlias("paciente", "p");
+		criteria.addOrder(Order.asc("p.apellido"));
+		
+		if(pFechaDesde != null && !pFechaDesde.equals("") && pFechaHasta != null && !pFechaHasta.equals("")){
+			Date fechaDesde = Fecha.stringDDMMAAAAToUtilDate(pFechaDesde);
+			Date fechaHasta = Fecha.stringDDMMAAAAToUtilDate(pFechaHasta);
+					
+			criteria.add(Restrictions.ge("fecha", fechaDesde)); 
+			criteria.add(Restrictions.lt("fecha", fechaHasta));
+		}
+		if(idMedico >0){
+			criteria.add(Restrictions.eq("medico.id", idMedico));	
+		}
+		if(idObraSocial >0){
+			criteria.createAlias("paciente.obraSocial", "os");
+			criteria.add(Restrictions.eq("os.id", idObraSocial));	
+		}		
+		 
+		List<Estudio> estudios = criteria.list();		
+		return estudios;
+	}		
+	
 }

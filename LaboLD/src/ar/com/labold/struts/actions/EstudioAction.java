@@ -25,7 +25,10 @@ import ar.com.labold.fachada.ObraSocialFachada;
 import ar.com.labold.fachada.PacienteFachada;
 import ar.com.labold.fachada.PracticaFachada;
 import ar.com.labold.negocio.Estudio;
+import ar.com.labold.negocio.EstudioPreSeteado;
 import ar.com.labold.negocio.GrupoPractica;
+import ar.com.labold.negocio.Medico;
+import ar.com.labold.negocio.ObraSocial;
 import ar.com.labold.negocio.Practica;
 import ar.com.labold.negocio.ValorPractica;
 import ar.com.labold.negocio.ValorSubItemPractica;
@@ -75,6 +78,12 @@ public class EstudioAction extends ValidadorAction {
 			List<GrupoPractica> gruposPracticas = practicaFachada.getGruposPractica();
 			request.setAttribute("gruposPracticas", gruposPracticas);
 			request.setAttribute("medicos", medicoFachada.getMedicos());
+									
+			
+			//PRESELECCION
+			List<EstudioPreSeteado> listaEstudiosPreSeteados = practicaFachada.getEstudiosPreSeteados();
+			request.setAttribute("listaEstudiosPreSeteados", listaEstudiosPreSeteados);				
+			
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
@@ -256,10 +265,22 @@ public class EstudioAction extends ValidadorAction {
 			WebApplicationContext ctx = getWebApplicationContext();
 			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
 			
+			String fechaDesde = request.getParameter("fechaDesde");
+			String fechaHasta = request.getParameter("fechaHasta");
+			String idMedico = request.getParameter("idMedico");
+			String idObraSocial = request.getParameter("idObraSocial");
+			
 			String nroProtocolo = request.getParameter("nroProtocolo");			
 			Estudio estudio = estudioFachada.getEstudioPorNroProtocolo(Long.valueOf(nroProtocolo));
 			
 			request.setAttribute("estudio", estudio);
+			
+			if(idMedico!=null){//Si se llamo desde 'recuperarEstudiosPorMedicoObraSocial'
+				request.setAttribute("fechaDesde", fechaDesde);
+				request.setAttribute("fechaHasta", fechaHasta);
+				request.setAttribute("idMedico", idMedico);	
+				request.setAttribute("idObraSocial", idObraSocial);
+			}
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
@@ -1009,6 +1030,89 @@ public class EstudioAction extends ValidadorAction {
 			estudioFachada.entregarEstudio(estudioForm.getEstudioDTO());
 			
 			request.setAttribute("exitoGrabado", Constantes.EXITO_ENTREGA_ESTUDIO);
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}	
+	
+	@SuppressWarnings("unchecked")
+	public ActionForward cargarRecuperarEstudiosPorMedicoObraSocial(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoCargarRecuperarEstudiosPorMedicoObraSocial";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+
+			ObraSocialFachada obraSocialFachada = (ObraSocialFachada) ctx.getBean("obraSocialFachada");
+			MedicoFachada medicoFachada = (MedicoFachada) ctx.getBean("medicoFachada");
+			
+			String fechaDesde = request.getParameter("fechaDesde");
+			String fechaHasta = request.getParameter("fechaHasta");
+			String idMedico = request.getParameter("idMedico");
+			String idObraSocial = request.getParameter("idObraSocial");			
+			
+			request.setAttribute("obrasSociales", obraSocialFachada.getObrasSociales());						
+			request.setAttribute("medicos", medicoFachada.getMedicos());
+			
+			if(idMedico!=null){//Si se llamo desde 'recuperarEstudiosPorMedicoObraSocial'
+				request.setAttribute("fDesde", fechaDesde);
+				request.setAttribute("fHasta", fechaHasta);
+				request.setAttribute("idMed", idMedico);	
+				request.setAttribute("idOS", idObraSocial);
+			}			
+			
+		} catch (Throwable t) {
+			MyLogger.logError(t);
+			//request.setAttribute("error", "Error Inesperado");
+			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
+			strForward = "error";
+		}
+
+		return mapping.findForward(strForward);
+	}	
+	
+	@SuppressWarnings("unchecked")
+	public ActionForward recuperarEstudiosPorMedicoObraSocial(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String strForward = "exitoRecuperarEstudiosPorMedicoObraSocial";
+
+		try {
+			WebApplicationContext ctx = getWebApplicationContext();
+			EstudioFachada estudioFachada = (EstudioFachada) ctx.getBean("estudioFachada");
+			ObraSocialFachada obraSocialFachada = (ObraSocialFachada) ctx.getBean("obraSocialFachada");
+			MedicoFachada medicoFachada = (MedicoFachada) ctx.getBean("medicoFachada");			
+			
+			String fechaDesde = request.getParameter("fechaDesde");
+			String fechaHasta = request.getParameter("fechaHasta");
+			String idMedico = request.getParameter("idMedico");
+			String idObraSocial = request.getParameter("idObraSocial");
+			
+			List<Estudio> lista = estudioFachada.recuperarEstudiosPorMedicoObraSocial(fechaDesde,fechaHasta,Long.valueOf(idMedico),Long.valueOf(idObraSocial));
+			
+			Medico medico = medicoFachada.getMedico(Long.valueOf(idMedico));
+			String nomMedico = (medico == null)?"No se especifico medico":medico.getApellido()+","+medico.getNombre()+"-"+medico.getMatricula();
+			
+			ObraSocial obraSocial = obraSocialFachada.getObraSocial(Long.valueOf(idObraSocial));
+			String nomObraSocial = (obraSocial == null)?"No se especifico obra social":obraSocial.getNombre();
+			
+			request.setAttribute("estudios",lista);
+			request.setAttribute("cantEstudios",(lista != null)?lista.size():0);
+			/*request.setAttribute("fechaDesde",fechaDesde);
+			request.setAttribute("fechaHasta",fechaHasta);
+			request.setAttribute("medico",nomMedico);
+			request.setAttribute("obraSocial",nomObraSocial);*/
+						
+			//request.setAttribute("volver","/estudio.do?metodo=recuperarEstudiosPorMedicoObraSocial&amp;fechaDesde="+fechaDesde+"&amp;fechaHasta="+fechaHasta+"&amp;idMedico="+idMedico+"&amp;idObraSocial="+idObraSocial);
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);

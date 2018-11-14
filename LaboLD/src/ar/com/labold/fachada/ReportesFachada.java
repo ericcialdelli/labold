@@ -92,4 +92,9 @@ public class ReportesFachada {
 		return reportesDAO.generarReporteColeccion(
 				Constantes.REPORTE_PRESUPUESTO_ESTUDIO, parameters, listaPracticas);
 	}	
+	
+	public byte[] generarReporteFacturacionPorAnio() throws Exception {
+				
+		return reportesDAO.generarReporteFacturacionPorAnio(Constantes.REPORTE_FACTURACION_POR_ANIO);				
+	}
 }

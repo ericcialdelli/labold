@@ -158,6 +158,8 @@ public abstract class ProviderDTO {
 		estudioDTO.setEstado(estudio.getEstado());
 		estudioDTO.setValorUnidadBioquimica(estudio.getValorUnidadBioquimica());
 		
+		estudioDTO.setObservaciones(estudio.getObservaciones());//OBSERVACIONES
+		
 		return estudioDTO;
 	}
 	

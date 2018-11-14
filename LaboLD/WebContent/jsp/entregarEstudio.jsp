@@ -67,7 +67,7 @@
 </div>
 <br>
 <c:if test="${estudio.estado == 'ENTREGADO'}">
-	<table border="0" class="cuadradoSinBordeBootstrap" align="center" width="70%" cellpadding="2" cellspacing="0">
+	<table border="0" class="cuadradoSinBordeBootstrap" align="center" width="85%" cellpadding="2" cellspacing="0">
 		<tr>
 			<td>
 				<div class="alert alert-success">
@@ -82,7 +82,7 @@
 	<html:hidden property="metodo" value="entregarEstudio"/>
 	<html:hidden property="estudioDTO.id" value="${estudio.id}"/>
 	
-	<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2" cellspacing="0">
+	<table border="0" class="cuadrado" align="center" width="85%" cellpadding="2" cellspacing="0">
 		<tr>
 			<td colspan="4"  class="azulAjustado" >Entregar Estudio</td>
 		</tr>
@@ -146,17 +146,26 @@
 			<td align="left">			
 				<input type="text" value="${estudio.unidadesFacturacionTotal}" class="botonerab" size="10" readonly="readonly"/>
 			</td>		
-		</tr>			
-					
+		</tr>	
 		<tr>
-			<td height="20" colspan="4">
-				<hr color="lightgrey">
+			<td height="10" colspan="4"></td>
+		</tr>					
+		<tr>
+			<td class="botoneralNegritaCenter" width="15%" >Observaciones del Estudio</td>
+			<td align="left" colspan="3">			
+				<textarea class="botonerab" rows="3" cols="110" readonly="readonly">${estudio.observaciones}</textarea>
+			</td>
+		</tr>					
+		<tr>
+			<td height="10" colspan="4">
+				<!--  <hr color="lightgrey">-->
 			</td>
 		</tr>
 		<tr>
-			<td class="botoneralNegritaRight" width="15%" >Observaciones</td>
-			<td align="left"colspan="3">			
-				<input type="text" value="${estudio.paciente.observaciones}" class="botonerab" size="100" readonly="readonly"/>
+			<td class="botoneralNegritaCenter" width="15%" >Observaciones del Paciente</td>
+			<td align="left"colspan="3">
+				<textarea class="botonerab" rows="2" cols="110" readonly="readonly">${estudio.paciente.observaciones}</textarea>			
+				<!--  <input type="text" value="${estudio.paciente.observaciones}" class="botonerab" size="100" readonly="readonly"/>-->
 			</td>
 		</tr>		
 		<tr>
@@ -164,7 +173,7 @@
 		</tr>		
 	</table>
 	
-	<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2" cellspacing="2">
+	<table border="0" class="cuadrado" align="center" width="85%" cellpadding="2" cellspacing="2">
 		<tr>
 			<td height="20"></td>
 		</tr>

@@ -42,7 +42,17 @@ function generarReporte(){
 
 	function volver(){
 
-		parent.location=contextRoot() + "/estudio.do?metodo=cargarRecuperarEstudios&forward=recuperarEstudioParaConsulta";
+		var fechaDesde = $('#fechaDesde').val();
+		var fechaHasta = $('#fechaHasta').val();
+		var idMedico = $('#idMedico').val();
+		var idObraSocial = $('#idObraSocial').val();		
+
+		if(idMedico == ""){
+			parent.location=contextRoot() + "/estudio.do?metodo=cargarRecuperarEstudios&forward=recuperarEstudioParaConsulta";
+		}
+		else{
+			parent.location=contextRoot() + "/estudio.do?metodo=cargarRecuperarEstudiosPorMedicoObraSocial&fechaDesde="+fechaDesde+"&fechaHasta="+fechaHasta+"&idMedico="+idMedico+"&idObraSocial="+idObraSocial;			
+		}	
 	}	
 
 	function expandirGrupo(idGrupo){
@@ -78,7 +88,13 @@ function generarReporte(){
 	</c:if>
 	
 	<input type="hidden" value="${estudio.id}" id="idEstudio"/>
-	<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2" cellspacing="0">
+	
+	<input type="hidden" value="${fechaDesde}" id="fechaDesde"/>
+	<input type="hidden" value="${fechaHasta}" id="fechaHasta"/>
+	<input type="hidden" value="${idMedico}" id="idMedico"/>
+	<input type="hidden" value="${idObraSocial}" id="idObraSocial"/>	
+	
+	<table border="0" class="cuadrado" align="center" width="85%" cellpadding="2" cellspacing="0">
 		<tr>
 			<td colspan="4"  class="azulAjustado" >Consulta de Estudio</td>
 		</tr>
@@ -142,17 +158,27 @@ function generarReporte(){
 			<td align="left">			
 				<input type="text" value="${estudio.unidadesFacturacionTotal}" class="botonerab" size="10" readonly="readonly"/>
 			</td>		
-		</tr>			
-					
+		</tr>
 		<tr>
-			<td height="20" colspan="4">
-				<hr color="lightgrey">
+			<td height="10" colspan="4"></td>
+		</tr>		
+			
+		<tr>
+			<td class="botoneralNegritaCenter" width="15%" >Observaciones del Estudio</td>
+			<td align="left" colspan="3">			
+				<textarea class="botonerab" rows="3" cols="110" readonly="readonly">${estudio.observaciones}</textarea>
+			</td>
+		</tr>					
+  		<tr>
+			<td height="10" colspan="4">
+				<!--  <hr color="lightgrey">-->
 			</td>
 		</tr>
 		<tr>
-			<td class="botoneralNegritaRight" width="15%" >Observaciones</td>
-			<td align="left"colspan="3">			
-				<input type="text" value="${estudio.paciente.observaciones}" class="botonerab" size="100" readonly="readonly"/>
+			<td class="botoneralNegritaCenter" width="15%" >Observaciones del Paciente</td>
+			<td align="left"colspan="3">
+				<textarea class="botonerab" rows="2" cols="110" readonly="readonly">${estudio.paciente.observaciones}</textarea>			
+				<!--  <input type="text" value="${estudio.paciente.observaciones}" class="botonerab" size="100" readonly="readonly"/>-->
 			</td>
 		</tr>		
 		<tr>
@@ -160,7 +186,7 @@ function generarReporte(){
 		</tr>		
 	</table>
 	
-	<table border="0" class="cuadrado" align="center" width="70%" cellpadding="2" cellspacing="2">
+	<table border="0" class="cuadrado" align="center" width="85%" cellpadding="2" cellspacing="2">
 		<tr>
 			<td height="20"></td>
 		</tr>

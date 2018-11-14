@@ -59,6 +59,8 @@ public class Estudio {
 	@Cascade(value = { CascadeType.SAVE_UPDATE, CascadeType.DELETE_ORPHAN })
 	private List<ValoresEstudio> valoresEstudio = new ArrayList<ValoresEstudio>();	
 	
+	private String observaciones;//OBSERVACIONES
+	
 	public Long getId() {
 		return id;
 	}
@@ -156,4 +158,14 @@ public class Estudio {
 	public void setValorUnidadBioquimica(double valorUnidadBioquimica) {
 		this.valorUnidadBioquimica = valorUnidadBioquimica;
 	}
+
+	public String getObservaciones() {
+		return observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
+	}
+	
+	
 }

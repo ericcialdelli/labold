@@ -41,6 +41,7 @@
 		<mapping class='ar.com.labold.negocio.ValorPracticaHistorico'/><!-- ESTUDIO_HISTORICO -->
 		<mapping class='ar.com.labold.negocio.ValorSubItemPracticaHistorico'/><!-- ESTUDIO_HISTORICO -->					
 		<mapping class='ar.com.labold.negocio.Parametro'/>
+		<mapping class='ar.com.labold.negocio.EstudioPreSeteado'/><!-- PRESELECCION -->
 	
 	</session-factory>
 </hibernate-configuration>

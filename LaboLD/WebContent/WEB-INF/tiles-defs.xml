@@ -143,12 +143,28 @@
 		<put name="title" value="LaboLD" />
 		<put name="body" value="/jsp/altaSubItemPractica.jsp" />
 	</definition>		
+	
+	<definition name=".altaEstudioPreSeteado" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/altaEstudioPreSeteado.jsp" />
+	</definition>	
+
+	<definition name=".recuperarEstudiosPreSeteados" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/recuperarEstudiosPreSeteados.jsp" />
+	</definition>		
+
+	<definition name=".modificarEstudioPreSeteado" extends=".base">
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/modificarEstudioPreSeteado.jsp" />
+	</definition>		
 	<!-- FIN PRACTICA -->	
 
 	<!-- ESTUDIO -->
 	<definition name=".altaEstudio" extends=".base">
 		<put name="title" value="LaboLD" />
-		<put name="body" value="/jsp/altaEstudio.jsp" />
+		<!--  <put name="body" value="/jsp/altaEstudio.jsp" />-->
+		<put name="body" value="/jsp/altaEstudioAntesEstudiosPreSeteados.jsp" /><!-- PRESELECCION -->
 	</definition>	
 	
 	<definition name=".recuperarEstudios" extends=".base">
@@ -215,6 +231,16 @@
 		<put name="title" value="LaboLD" />
 		<put name="body" value="/jsp/recuperarEstudiosDeHistoricoPorNro.jsp" />
 	</definition>	
+
+	<definition name=".mostrarRecuperarEstudiosPorMedicoObraSocial" extends=".base"><!--MOSTRAR RECUPERAR_ESTUDIOS_POR_MEDICO_OBRA_SOCIAL-->	
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/mostrarRecuperarEstudiosPorMedicoObraSocial.jsp" />
+	</definition>		
+
+	<definition name=".recuperarEstudiosPorMedicoObraSocial" extends=".base"><!--RECUPERAR_ESTUDIOS_POR_MEDICO_OBRA_SOCIAL-->	
+		<put name="title" value="LaboLD" />
+		<put name="body" value="/jsp/recuperarEstudiosPorMedicoObraSocial.jsp" />
+	</definition>		
 	
 	<!-- FIN ESTUDIO -->		
 

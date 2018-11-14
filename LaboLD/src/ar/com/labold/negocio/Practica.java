@@ -1,11 +1,15 @@
 package ar.com.labold.negocio;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Cascade;
@@ -63,7 +67,14 @@ public class Practica {
 	@JoinColumn(name = "subItemPractica_fk")
 	private SubItemPractica subItemPractica;	
 	
+	
+	//PRESELECCION
+	/*@ManyToMany(cascade = {javax.persistence.CascadeType.ALL},mappedBy="listaPracticas")
+	private List<EstudioPreSeteado> listaEstudiosPreSeteados = new ArrayList<EstudioPreSeteado>();*/
+	
+	
 	//-----------------------------//
+	
 	
 	
 	public Long getId() {
@@ -201,4 +212,15 @@ public class Practica {
 	public void setOrden(int orden) {
 		this.orden = orden;
 	}
+
+	/*public List<EstudioPreSeteado> getListaEstudiosPreSeteados() {
+		return listaEstudiosPreSeteados;
+	}
+
+	public void setListaEstudiosPreSeteados(
+			List<EstudioPreSeteado> listaEstudiosPreSeteados) {
+		this.listaEstudiosPreSeteados = listaEstudiosPreSeteados;
+	}*/
+	
+	
 }

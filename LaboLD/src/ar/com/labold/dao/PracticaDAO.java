@@ -9,6 +9,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import ar.com.labold.negocio.EstudioPreSeteado;
 import ar.com.labold.negocio.GrupoPractica;
 import ar.com.labold.negocio.Practica;
 import ar.com.labold.negocio.SubItemPractica;
@@ -129,5 +130,36 @@ public class PracticaDAO extends HibernateDaoSupport {
 	public SubItemPractica getSubItemPractica(Long id){
 		
 		return (SubItemPractica)getHibernateTemplate().get(SubItemPractica.class,id);
-	}		
+	}
+	
+	public void altaEstudioPreSeteado(EstudioPreSeteado estudio){
+		
+		this.getHibernateTemplate().saveOrUpdate(estudio);
+		this.getHibernateTemplate().flush();
+		this.getHibernateTemplate().clear();
+	}	
+	
+	public List<EstudioPreSeteado> getEstudiosPreSeteados(){
+		
+		Criteria criteria = getSession().createCriteria(EstudioPreSeteado.class);
+		criteria.addOrder(Order.asc("nombre"));
+
+		List<EstudioPreSeteado> lista = (List<EstudioPreSeteado>) criteria.list();
+		for (EstudioPreSeteado estudioPreSeteado : lista) {
+			Hibernate.initialize(estudioPreSeteado.getListaPracticas());
+		}					
+		return lista;
+	}	
+	
+	public EstudioPreSeteado getEstudioPreSeteado(Long id){
+		
+		return (EstudioPreSeteado)getHibernateTemplate().get(EstudioPreSeteado.class,id);
+	}
+	
+	public void eliminarEstudioPreSeteado(EstudioPreSeteado estudio){
+		
+		this.getHibernateTemplate().delete(estudio);
+		this.getHibernateTemplate().flush();
+		this.getHibernateTemplate().clear();	
+	}	
 }

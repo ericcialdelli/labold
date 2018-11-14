@@ -101,4 +101,5 @@ public class PacienteFachada {
 		Paciente paciente = pacienteDAO.getPaciente(pacienteDTO.getId());
 		pacienteDAO.eliminarPaciente(paciente);
 	}
+
 }
