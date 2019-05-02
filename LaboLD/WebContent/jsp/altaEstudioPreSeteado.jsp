@@ -161,7 +161,20 @@
 
 </script>
 
-<div id="exitoGrabado" class="verdeExito"><br>${exitoGrabado}<br></div>
+<!--  <div id="exitoGrabado" class="verdeExito">${exitoGrabado}</div>-->
+	<br>
+	<c:if test="${exitoGrabado != null}">
+		<table border="0" class="cuadradoSinBordeBootstrap" align="center" width="85%" cellpadding="2" cellspacing="0">
+			<tr>
+				<td>
+					<div class="alert alert-success">
+					  <strong>${exitoGrabado}</strong>
+					</div>
+				</td>
+			</tr>
+		</table>		
+	</c:if>
+
 <div id="errores" class="rojoAdvertencia"><br>${error}<br></div>
 
 

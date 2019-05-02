@@ -76,7 +76,7 @@ function generarReporte(){
 </script>	
 	<br>
 	<c:if test="${estudio.estado == 'ENTREGADO'}">
-		<table border="0" class="cuadradoSinBordeBootstrap" align="center" width="70%" cellpadding="2" cellspacing="0">
+		<table border="0" class="cuadradoSinBordeBootstrap" align="center" width="85%" cellpadding="2" cellspacing="0">
 			<tr>
 				<td>
 					<div class="alert alert-success">

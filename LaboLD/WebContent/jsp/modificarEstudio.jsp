@@ -52,6 +52,19 @@
 	
 </script>
 
+<br>
+<c:if test="${estudio.estado == 'ENTREGADO'}">
+	<table border="0" class="cuadradoSinBordeBootstrap" align="center" width="85%" cellpadding="2" cellspacing="0">
+		<tr>
+			<td>
+				<div class="alert alert-success">
+				  <strong>El estudio ha sido entregado</strong>
+				</div>
+			</td>
+		</tr>
+	</table>		
+</c:if>
+
 <div id="errores" class="rojoAdvertencia">${error}</div>
 
 <html:form action="estudio" styleId="estudioFormId">

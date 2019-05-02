@@ -119,6 +119,7 @@ public class EstudioAction extends ValidadorAction {
 			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
+			t.printStackTrace();
 			//request.setAttribute("error", "Error Inesperado");
 			request.setAttribute("error", "Error Inesperado - "+t.getMessage());
 			strForward = "error";

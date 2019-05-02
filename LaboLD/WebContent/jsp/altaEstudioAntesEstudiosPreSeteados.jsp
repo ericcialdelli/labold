@@ -1,5 +1,6 @@
 <%@ taglib uri="http://struts.apache.org/tags-html"  prefix="html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
 
 <script type="text/javascript" src="<html:rewrite page='/js/validacionAjax.js'/>"></script>
@@ -86,6 +87,17 @@
 			
 	}
 
+	function pintarFilaEstudioPreSeteado(tag,id){
+		
+		$('#'+tag+id).attr("class", "verdeClaroSubtituloCenter");	
+	}
+
+	function despintarFilaEstudioPreSeteado(tag,id){
+
+		$('#'+tag+id).attr("class", "grisMuyClaroSubtituloCenterLetraChica");
+			
+	}		
+	
 	function pintarPractica(ind){
 		
 		$('#trPractica'+ind).addClass("verdeClaroSubtituloCenter");
@@ -506,7 +518,20 @@
 	*/
 </script>
 
-<div id="exitoGrabado" class="verdeExito"><br>${exitoGrabado}<br></div>
+<!--  <div id="exitoGrabado" class="verdeExito"><br>${exitoGrabado}<br></div>-->
+<br>
+<c:if test="${exitoGrabado != null}">
+	<table border="0" class="cuadradoSinBordeBootstrap" align="center" width="85%" cellpadding="2" cellspacing="0">
+		<tr>
+			<td>
+				<div class="alert alert-success">
+				  <strong>${exitoGrabado}</strong>
+				</div>
+			</td>
+		</tr>
+	</table>		
+</c:if>
+
 <div id="errores" class="rojoAdvertencia"><br>${error}<br></div>
 
 <!--
@@ -626,8 +651,36 @@
 	</table>
 	
 	<!-- PRESELECCION -->
-	<table border="0" class="cuadrado" align="center" width="85%" cellpadding="2" cellspacing="2">
+	<table border="0" class="cuadrado" align="center" width="85%" cellpadding="1" cellspacing="1">
+	
+		<tr onclick="expandirGrupo('EstudiosPreSeteados')" class="grisSubtituloCenter">				
+			<td width="85%" colspan="<c:out value='${fn:length(listaEstudiosPreSeteados)}'></c:out>" height="15">					
+				Estudios Pre Seteados							
+			</td>									
+		</tr>	
+		<tr style="display: none" id="trGrupoEstudiosPreSeteados">
+			<td width="85%">
+				<table border="0" class="cuadrado" align="center" width="100%" cellpadding="0" cellspacing="0">						
+					<c:forEach items="${listaEstudiosPreSeteados}" var="estudioPreSeteado" varStatus="iEstudioPreSeteado">
+						<tr>					
+							<td height="20" onclick="javascript:obtenerEstudioPreSeteado(<c:out value='${estudioPreSeteado.idEstudioPreSeteado}'></c:out>)"
+								onmouseover="javascript:pintarFilaEstudioPreSeteado('estudioPreSeteado',<c:out value='${iEstudioPreSeteado.index}'></c:out>);"
+								onmouseout="javascript:despintarFilaEstudioPreSeteado('estudioPreSeteado',<c:out value='${iEstudioPreSeteado.index}'></c:out>);"
+								id="estudioPreSeteado<c:out value='${iEstudioPreSeteado.index}'></c:out>"
+								class="grisMuyClaroSubtituloCenterLetraChica">
+																							
+								<c:out value='${estudioPreSeteado.nombre}'></c:out>
+																
+							</td>
+						</tr>
+					</c:forEach>
+				</table>	
+			</td>			
+		</tr>
+		
+		<!--
 		<tr>
+			<td class="botoneralNegritaCenter" width="15%">Estudios Pre Seteados <c:out value='${fn:length(listaEstudiosPreSeteados)}'></c:out></td>		
 			<c:forEach items="${listaEstudiosPreSeteados}" var="estudioPreSeteado" varStatus="iEstudioPreSeteado">
 				<td height="20">
 					<a href="javascript:obtenerEstudioPreSeteado(<c:out value='${estudioPreSeteado.idEstudioPreSeteado}'></c:out>)">
@@ -636,6 +689,8 @@
 				</td>
 			</c:forEach>	
 		</tr>	
+		-->
+		
 	</table>
 	<!-- PRESELECCION -->		
 			

@@ -68,7 +68,7 @@
 	</c:if>
 
  
-<table border="0" class="cuadrado" align="center" width="80%"
+<table border="0" class="cuadrado" align="center" width="65%"
 	cellpadding="2">
 	<tr>
 		<td class="azulAjustado" colspan="2">
