@@ -47,7 +47,7 @@
 		<tr>
 			<td class="botoneralNegritaRight" width="40%">Apellido</td>
 			<td  align="left">
-				<html:text property="pacienteDTO.apellido" value="${paciente.apellido}" styleClass="botonerab"/>			
+				<html:text property="pacienteDTO.apellido" value="${paciente.apellido}" styleClass="botonerab" styleId="apellido"/>			
 			</td>
 		</tr>
 		<tr>
@@ -64,7 +64,7 @@
 				DNI
 			</td>
 			<td  align="left">
-				<html:text property="pacienteDTO.dni" value="${paciente.dni}" onkeypress="javascript:esNumerico(event);" styleClass="botonerab"/>			
+				<html:text property="pacienteDTO.dni" value="${paciente.dni}" onkeypress="javascript:esNumerico(event);" styleClass="botonerab" styleId="dni"/>			
 			</td>
 		</tr>				
 		<tr>
@@ -72,7 +72,7 @@
 				Dirección
 			</td>
 			<td  align="left">
-				<html:text property="pacienteDTO.direccion" value="${paciente.direccion}" styleClass="botonerab"/>			
+				<html:text property="pacienteDTO.direccion" value="${paciente.direccion}" styleClass="botonerab" styleId="direccion"/>			
 			</td>
 		</tr>
 		<tr>
@@ -80,7 +80,7 @@
 				Telefono
 			</td>
 			<td  align="left">
-				<html:text property="pacienteDTO.telefono" value="${paciente.telefono}" styleClass="botonerab"/>			
+				<html:text property="pacienteDTO.telefono" value="${paciente.telefono}" styleClass="botonerab" styleId="telefono"/>			
 			</td>
 		</tr>
 		<tr>
@@ -88,7 +88,7 @@
 				E-Mail
 			</td>
 			<td  align="left">
-				<html:text property="pacienteDTO.email" value="${paciente.email}" styleClass="botonerab"/>			
+				<html:text property="pacienteDTO.email" value="${paciente.email}" styleClass="botonerab" styleId="email"/>			
 			</td>
 		</tr>
 		<tr>
@@ -96,7 +96,7 @@
 				Obra Social
 			</td>
 			<td  align="left">
-				<select id="obraSocial" class="botonerab" name="pacienteDTO.obraSocial.id" >
+				<select id="obraSocial" class="botonerab" name="pacienteDTO.obraSocial.id">
 					<option value="-1">
 						-Seleccione una Obra Social-
 					</option>		
@@ -114,7 +114,7 @@
 				Nro Carnet Obra Social
 			</td>
 			<td  align="left">
-				<html:text property="pacienteDTO.nroCarnetObraSocial" value="${paciente.nroCarnetObraSocial}" styleClass="botonerab"/>			
+				<html:text property="pacienteDTO.nroCarnetObraSocial" value="${paciente.nroCarnetObraSocial}" styleClass="botonerab" styleId="nroObraSocial"/>			
 			</td>
 		</tr>		
 		<tr>
@@ -122,7 +122,7 @@
 				Observaciones
 			</td>
 			<td  align="left">
-				<html:text property="pacienteDTO.observaciones" value="${paciente.observaciones}" styleClass="botonerab"/>			
+				<html:text property="pacienteDTO.observaciones" value="${paciente.observaciones}" styleClass="botonerab" styleId="observaciones"/>			
 			</td>
 		</tr>						
 		<tr>
@@ -265,4 +265,19 @@
 	$('#nombre').focus();
 	$('#obraSocial').val("${paciente.obraSocial.id}");
 	$('#idMetodo').val("${forward}");
+	
+	if("${forward}" == "eliminarPaciente"){		
+		$('#nombre').attr('readonly', true);
+		$('#apellido').attr('readonly', true);
+		$('#datepicker').attr('readonly', true);
+		$('#dni').attr('readonly', true);
+		$('#direccion').attr('readonly', true);
+		$('#telefono').attr('readonly', true);
+		$('#email').attr('readonly', true);
+		$('#obraSocial').attr('disabled', true);
+		$('#nroObraSocial').attr('readonly', true);
+		$('#observaciones').attr('readonly', true);
+		
+	}
+	
 </script>

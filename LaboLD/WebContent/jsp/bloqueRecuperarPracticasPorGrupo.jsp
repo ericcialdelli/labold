@@ -14,6 +14,7 @@
 
 <script type="text/javascript" src="<html:rewrite page='/js/funcUtiles.js'/>"></script>
 
+	<%int i=0; %>
 	<c:choose>
 		<c:when test="${fn:length(subItems)>0}">
 			<table border="0" class="cuadradoSinBorde" align="center" width="80%" cellpadding="2">
@@ -32,9 +33,9 @@
 								
 									<c:forEach items="${map[subItem.id]}" var="practica" varStatus="i">
 										<%clase=(clase.equals("")?"par":""); %>	
-										<tr class="<%=clase%>" onmouseover="javascript:pintarFila('idTr<c:out value='${i.index}'></c:out>');"
-											onmouseout="javascript:despintarFila('idTr<c:out value='${i.index}'></c:out>');"
-											id="idTr<c:out value='${i.index}'></c:out>">					
+										<tr class="<%=clase%>" onmouseover="javascript:pintarFila('idTr<%=i%>');"
+											onmouseout="javascript:despintarFila('idTr<%=i%>');"
+											id="idTr<%=i%>">					
 											
 											<td>${practica.orden}</td>				
 											<td>${practica.nombre}</td>
@@ -44,6 +45,7 @@
 												</a>
 											</td>
 										</tr>
+										<%i++; %>
 									</c:forEach>						
 								</table>
 								<br>

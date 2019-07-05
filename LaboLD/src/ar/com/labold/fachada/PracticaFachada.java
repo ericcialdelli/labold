@@ -62,8 +62,10 @@ public class PracticaFachada {
 	public long modificacionPractica(PracticaDTO practicaDTO) throws NegocioException{
 		
 		Practica practica = practicaDAO.getPractica(practicaDTO.getId());
+		GrupoPractica grupo = practicaDAO.getGrupoPractica(practicaDTO.getGrupoPracticaDTO().getId());
+		SubItemPractica subItem = practicaDAO.getSubItemPractica(practicaDTO.getSubItemPracticaDTO().getId());
 		
-		practicaDAO.altaPractica(ProviderDominio.getPractica(practica,practicaDTO));
+		practicaDAO.altaPractica(ProviderDominio.getPractica(practica,grupo,subItem,practicaDTO));
 		
 		return practica.getGrupoPractica().getId();
 	}	
@@ -113,6 +115,16 @@ public class PracticaFachada {
 		return practicaDAO.getGruposPractica();
 	}	
 
+	public List<GrupoPractica> getGruposPracticaOrdenados(){
+				
+		List<GrupoPractica> lista = practicaDAO.getGruposPractica();
+		for (GrupoPractica grupoPractica : lista) {		
+			grupoPractica.ordenarPracticas();
+		}
+				
+		return lista;
+	}	
+	
 	public GrupoPractica getGrupoPractica(Long id){
 		
 		return practicaDAO.getGrupoPractica(id);

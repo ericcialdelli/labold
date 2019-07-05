@@ -18,7 +18,6 @@
 <link rel="stylesheet" href="<html:rewrite page='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css'/>"
 	type="text/css">
 
-
 <script type="text/javascript" src="<html:rewrite page='/js/funcUtiles.js'/>"></script>
 
 <script>
@@ -61,7 +60,21 @@
 	
 </script>
 
-<div id="exitoGrabado" class="verdeExito">${exitoGrabado}</div>
+<!--  <div id="exitoGrabado" class="verdeExito">${exitoGrabado}</div>-->
+
+<br>
+<c:if test="${exitoGrabado != null}">
+	<table border="0" class="cuadradoSinBordeBootstrap" align="center" width="80%" cellpadding="2" cellspacing="0">
+		<tr>
+			<td>
+				<div class="alert alert-success">
+				  <strong>${exitoGrabado}</strong>
+				</div>
+			</td>
+		</tr>
+	</table>		
+</c:if>
+
 <table border="0" class="cuadrado" align="center" width="80%"
 	cellpadding="2">
 	<tr>
@@ -86,17 +99,41 @@
 					<tr class="<%=clase%>" onmouseover="javascript:pintarFila('idTr<c:out value='${i.index}'></c:out>');"
 						onmouseout="javascript:despintarFila('idTr<c:out value='${i.index}'></c:out>');"
 						id="idTr<c:out value='${i.index}'></c:out>">					
-										
-						<td>${parametro.clave}</td>
-						<td>${parametro.valor}</td>
-						<td>${parametro.descripcion}</td>
-						<td>
-							<input type="hidden" value="${parametro.valor}" id="val${parametro.clave}">
-							<input type="hidden" value="${parametro.descripcion}" id="desc${parametro.clave}">
-							<a href="javascript:abrirVentanaModificarParametro(${parametro.clave});">
-								Seleccionar
-							</a>
-						</td>
+						
+						<c:if test="${parametro.clave != 3}">				
+							<td>${parametro.clave}</td>
+							<td>${parametro.valor}</td>
+							<td>${parametro.descripcion}</td>
+							<td>
+								<input type="hidden" value="${parametro.valor}" id="val${parametro.clave}">
+								<input type="hidden" value="${parametro.descripcion}" id="desc${parametro.clave}">
+								<a href="javascript:abrirVentanaModificarParametro(${parametro.clave});">
+									Seleccionar
+								</a>
+							</td>
+						</c:if>	
+						<c:if test="${parametro.clave == 3}">
+						<html:form action="parametros" styleId="parametrosFormId">
+						
+							<html:hidden property="metodo" value="modificarParametros"/>
+							<html:hidden property="parametro.clave" value="${parametro.clave}"/>
+							<html:hidden property="parametro.descripcion" value="${parametro.descripcion}"/>
+																	
+							<td>${parametro.clave}</td>
+							
+							<td>
+								<html:select property="parametro.valor" value="${parametro.valor}" styleClass="botonerab">
+									<c:forEach items="${listaPeriodicidad}" var="p">
+										<html:option value="${p.clave}"><c:out value="${p.valor}"></c:out></html:option>										
+									</c:forEach>									
+								</html:select>								
+							</td>
+							
+							<td>${parametro.descripcion}</td>
+							
+							<td><input type="submit" class="botonerab" value="Asignar"></td>
+						</html:form>							
+						</c:if>							
 					</tr>
 				</c:forEach>
 			</table>

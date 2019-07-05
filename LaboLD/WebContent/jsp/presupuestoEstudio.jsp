@@ -186,11 +186,14 @@
 	}
 
 	function buscar(){
-		var texto = $('#textoABuscar').val();
+		var texto = $('#textoABuscar').val().toLowerCase();
 		var noEncontrado = true;
-		
+		var nombrePractica;
 		for(i=0;i<indexLP;i++){
-			var matches = listaPracticas[i].nombre.indexOf(texto) >= 0 ? true : false;
+			
+			nombrePractica = listaPracticas[i].nombre.toLowerCase();
+			var matches = nombrePractica.indexOf(texto) >= 0 ? true : false;
+			//var matches = listaPracticas[i].nombre.indexOf(texto) >= 0 ? true : false;
 			if (matches) {
 				alert("Grupo: "+listaPracticas[i].grupo+"\n"+"Práctica: "+listaPracticas[i].nombre);
 				noEncontrado = false; 

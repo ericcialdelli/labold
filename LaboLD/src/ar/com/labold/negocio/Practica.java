@@ -213,6 +213,11 @@ public class Practica {
 		this.orden = orden;
 	}
 
+	public String getNombreSubItem(){
+		
+		return (this.getSubItemPractica()!=null)?this.getSubItemPractica().getNombre():null;
+	}
+	
 	/*public List<EstudioPreSeteado> getListaEstudiosPreSeteados() {
 		return listaEstudiosPreSeteados;
 	}

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.ServletContextEvent;
@@ -26,20 +27,43 @@ public class LaboContextListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
-		System.out.println("Se inicio la aplicacion");
+		System.out.println("Se inicio la aplicacion LaboLD");
 
 		try {
 			WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(arg0.getServletContext());		
 			ParametroFachada parametroFachada = (ParametroFachada)ctx.getBean("parametroFachada");
 			String carpeta = parametroFachada.getNombreCarpetaBackup();		
 			String nombreArchivoCompleto = carpeta+File.separatorChar+"LaboLD_"+Fecha.dateToStringAAAAMMDD(new Date())+".sql";			
-			this.backup(nombreArchivoCompleto, ctx);
-			System.out.println("Se realizo backup en "+nombreArchivoCompleto);
+			
+			String periodicidadBackup = parametroFachada.getPeriodicidadBackup();
+			
+			if(verificarPeriodicidad(periodicidadBackup)) {
+				this.backup(nombreArchivoCompleto, ctx);
+				System.out.println("Se realizo backup en "+nombreArchivoCompleto);				
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}					
 	}
 
+	private boolean verificarPeriodicidad(String periodicidadBackup){
+		
+		switch (periodicidadBackup) {
+		case "1":
+			return true;
+		case "2":
+			return (Calendar.getInstance().get(Calendar.DAY_OF_WEEK) == 2 || Calendar.getInstance().get(Calendar.DAY_OF_WEEK) == 4 
+					|| Calendar.getInstance().get(Calendar.DAY_OF_WEEK) == 6); //El 2 es Lunes - El 4 es miercoles - El 6 es viernes			
+		case "3":
+			return Calendar.getInstance().get(Calendar.DAY_OF_WEEK) == 6; //El 6 es viernes
+		case "4":
+			return false;			
+		default:
+			return false;
+		}
+	}
+	
 	private void backup(String nombre, WebApplicationContext ctx) throws Exception {
 	   try {
 			
@@ -76,5 +100,4 @@ public class LaboContextListener implements ServletContextListener {
 		   throw e;
 	   }
 	}	
-	
 }

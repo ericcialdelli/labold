@@ -1,6 +1,7 @@
 package ar.com.labold.negocio;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,6 +15,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+
+import ar.com.labold.utils.ComparadorPracticas;
 
 @Entity
 public class SubItemPractica {
@@ -76,4 +79,8 @@ public class SubItemPractica {
 		this.codigoFaba = codigoFaba;
 	}	
 
+	public void ordenerPracticas(){
+		
+		Collections.sort(this.getPracticas(), new ComparadorPracticas());
+	}	
 }

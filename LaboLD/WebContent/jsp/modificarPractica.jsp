@@ -7,6 +7,7 @@
 <script type="text/javascript" src="<html:rewrite page='/js/funcUtiles.js'/>"></script>
 <script type="text/javascript" src="<html:rewrite page='/js/validarLetras.js'/>"></script>
 <script type="text/javascript" src="<html:rewrite page='/js/validarNum.js'/>"></script>
+<script type="text/javascript" src="<html:rewrite page='/dwr/interface/PracticaFachada.js'/>"></script>
 
 <script type="text/javascript"
 	src="<html:rewrite page='/js/JQuery/ui/jquery-ui-1.8.10.custom.min.js'/>"></script>	
@@ -77,6 +78,40 @@
 		$('#idMayorMenor').val(valor);
 	}
 	
+	function cambioGrupo(){
+
+		var idGrupo = $('#selectGrupoPractica').val();
+		if (idGrupo != "-1") {
+			$('#selectSubItemPractica').attr('disabled', false);
+			
+			PracticaFachada.getSubItemsPorGrupoPractica(idGrupo,
+					cambioGrupoCallback);
+		} else {
+			dwr.util.removeAllOptions("selectSubItemPractica");
+			var data = [ 
+						 {
+							nombre : "Sin SubItem",
+							id : 0
+						 }						  
+			 		   ];
+			dwr.util.addOptions("selectSubItemPractica", data, "id", "nombre");
+			$('#selectSubItemPractica').attr('disabled', true);
+		}
+	}
+
+	function cambioGrupoCallback(subItems){
+
+		dwr.util.removeAllOptions("selectSubItemPractica");
+		var data = [ 
+		 {
+			nombre : "Sin SubItem",
+			id : 0
+		 }						  
+		   ];
+		dwr.util.addOptions("selectSubItemPractica", data, "id", "nombre");
+		dwr.util.addOptions("selectSubItemPractica", subItems, "id", "nombre");		
+	}	
+	
 </script>
 
 <div id="errores" class="rojoAdvertencia">${error}</div>
@@ -84,16 +119,16 @@
 <html:form action="practica" styleId="practicaFormId">
 	<html:hidden property="metodo" value="modificacionPractica"/>
 	<html:hidden property="practicaDTO.id" value="${practica.id}"/>
-	<html:hidden styleId="idGrupo" property="practicaDTO.grupoPracticaDTO.id" value="${practica.grupoPractica.id}"/>
+	<html:hidden styleId="idGrupo" property="" value="${practica.grupoPractica.id}"/>
 	
-	<c:choose>
+	<!--<c:choose>
 		<c:when test="${practica.subItemPractica != null}">
 			<html:hidden property="practicaDTO.subItemPracticaDTO.id" value="${practica.subItemPractica.id}"/>
 		</c:when>
 		<c:otherwise>
 			<html:hidden property="practicaDTO.subItemPracticaDTO.id" value="0"/>
 		</c:otherwise>		
-	</c:choose>
+	</c:choose>-->
 	
 	<table border="0" class="cuadrado" align="center" width="60%" cellpadding="2">
 		<tr>
@@ -108,6 +143,39 @@
 				<html:text property="practicaDTO.nombre" value="${practica.nombre}" styleClass="botonerab" styleId="nombre" size="40"/>
 			</td>
 		</tr>
+		
+		<tr>
+			<td width="40%" class="botoneralNegritaRight">Grupo Practica</td>
+			<td align="left">
+				<html:select styleId="selectGrupoPractica" styleClass="botonerab" property="practicaDTO.grupoPracticaDTO.id" onchange="cambioGrupo();"
+					value="${practica.grupoPractica.id}">		
+					<c:forEach items="${listaGrupos}" var="grupo">
+						<html:option value="${grupo.id}">
+							<c:out value="${grupo.nombre}"></c:out>
+						</html:option>
+					</c:forEach>										
+				</html:select>
+			</td>
+		</tr>		
+		
+		<tr>
+			<td class="botoneralNegritaRight" width="40%">SubItem</td>
+			<td align="left">
+				<!--  <input type="text" value="${practica.nombreSubItem}" class="botonerab" id="subItem" size="40" readonly="readonly"/>-->
+				<html:select property="practicaDTO.subItemPracticaDTO.id" value="${practica.subItemPractica.id}" styleClass="botonerab" styleId="selectSubItemPractica">
+					<html:option value="0">Sin SubItem</html:option>				
+					<c:forEach items="${practica.grupoPractica.subItemsPractica}" var="s">
+						<html:option value="${s.id}"><c:out value="${s.nombre}"></c:out></html:option>										
+					</c:forEach>									
+				</html:select>
+				<!--  <select class="botonerab">
+					<c:forEach items="${practica.grupoPractica.subItemsPractica}" var="s">
+						<option value="<c:out value='${s.id}'></c:out>"><c:out value="${s.nombre}"></c:out></option>										
+					</c:forEach>									
+				</select>-->				
+			</td>
+		</tr>		
+		
 		<tr>
 			<td class="botoneralNegritaRight" width="40%">Orden</td>
 			<td align="left">

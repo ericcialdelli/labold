@@ -14,9 +14,22 @@
 </script>
 
 
-<div id="exitoGrabado" class="verdeExito">${mensaje}</div>
-<%-- errores de validaciones AJAX --%>
+<!--<div id="exitoGrabado" class="verdeExito">${mensaje}</div>-->
+<br>
+<c:if test="${mensaje != null}">
+	<table border="0" class="cuadradoSinBordeBootstrap" align="center" width="80%" cellpadding="2" cellspacing="0">
+		<tr>
+			<td>
+				<div class="alert alert-success">
+				  <strong>${mensaje}</strong>
+				</div>
+			</td>
+		</tr>
+	</table>		
+</c:if>
 
+
+<%-- errores de validaciones AJAX --%>
  <div id="errores" class="rojoAdvertencia">${error}</div>
 	
 

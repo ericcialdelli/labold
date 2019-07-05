@@ -10,14 +10,14 @@
 <script type="text/javascript" src="<html:rewrite page='/js/agregarModificarMedico.js'/>"></script>
 
 <!-- Nuevo Estilo -->
-<!-- 
+
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 
 <link rel="stylesheet" href="<html:rewrite page='/css/jquery-ui_1_11_3.css'/>" type="text/css">
--->
 
 
-<!-- Estilo Viejo -->
+
+<!-- Estilo Viejo --><!--  
 <script type="text/javascript"
 	src="<html:rewrite page='/js/JQuery/ui/jquery-ui-1.8.10.custom.min.js'/>"></script>	
 
@@ -25,8 +25,9 @@
 	type="text/css">
 
 <link rel="stylesheet" href="<html:rewrite page='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css'/>"
-	type="text/css">
+	type="text/css">-->
 <!-- Estilo Viejo -->
+
 
 <script type="text/javascript">
 
@@ -214,11 +215,27 @@
 		);		
 	}
 
+	function entregarEstudio(){
+		$("#confirmacionEliminar").dialog({title:'Atención!',resizable: false, modal: true ,buttons: {
+				    "send":{
+				      text:'Aceptar',click: function() {eliminar();$(this).dialog("close");} 
+				    },		
+				    "cancel":{
+				      text:'Cancelar',click:function() {$(this).dialog("close"); }
+				    }
+				 }});
+		 
+	}	
+	
 </script>
 
 <div id="exitoGrabado" class="verdeExito"><br>${exitoGrabado}<br></div>
 <div id="errores" class="rojoAdvertencia"><br>${error}<br></div>
 
+<div id="confirmacionEliminar" style="display: none">
+	Desea eliminar el estudio?
+</div>
+<br>
 
 <html:form action="estudioPreSeteado" styleId="estudioPreSeteadoFormId">
 	<html:hidden property="metodo" value="modificacionEstudioPreSeteado"/>
@@ -407,7 +424,7 @@
 					<input type="button" class="botonerab" value="Modificar" id="enviar" onclick="javascript:submitir();">
 				</c:if>
 				<c:if test="${forward=='eliminarEstudioPreSeteado'}">
-					<input type="button" class="botonerab" value="Eliminar" id="enviar" onclick="javascript:eliminar();">
+					<input type="button" class="botonerab" value="Eliminar" id="enviar" onclick="javascript:entregarEstudio();">
 				</c:if>					
 					
 				

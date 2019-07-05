@@ -76,6 +76,7 @@ public class EstudioAction extends ValidadorAction {
 			request.setAttribute("nroEstudio", estudioFachada.getProximoNroEstudio());
 			request.setAttribute("pacientes", pacienteFachada.getPacientes());
 			List<GrupoPractica> gruposPracticas = practicaFachada.getGruposPractica();
+			//List<GrupoPractica> gruposPracticas = practicaFachada.getGruposPracticaOrdenados();
 			request.setAttribute("gruposPracticas", gruposPracticas);
 			request.setAttribute("medicos", medicoFachada.getMedicos());
 									
@@ -805,7 +806,7 @@ public class EstudioAction extends ValidadorAction {
 			estudioFachada.eliminarEstudio(estudioForm.getEstudioDTO().getId());
 			//estudioFachada.pasarEstudiosAHistoricos("2014");
 			
-			request.setAttribute("exitoGrabado", "El Estudio n° "+estudioForm.getEstudioDTO().getNumero()+" se ha eliminado");
+			request.setAttribute("exitoGrabado", "El Estudio nï¿½ "+estudioForm.getEstudioDTO().getNumero()+" se ha eliminado");
 			
 		} catch (Throwable t) {
 			System.out.println(t);
@@ -1148,7 +1149,7 @@ public class EstudioAction extends ValidadorAction {
 				ok1 = !estudioFachada.existeEstudio(estudio.getNumero());
 
 				if (!ok1) {
-					Validator.addErrorXML(error, "El número de Estudio ya existe, especifique otro");
+					Validator.addErrorXML(error, "El nï¿½mero de Estudio ya existe, especifique otro");
 				}
 			}
 			
@@ -1189,7 +1190,7 @@ public class EstudioAction extends ValidadorAction {
 				ok1 = !estudioFachada.existeEstudio(estudio.getNumero(),estudio.getId());
 
 				if (!ok1) {
-					Validator.addErrorXML(error, "El número de Estudio ya existe, especifique otro");
+					Validator.addErrorXML(error, "El nï¿½mero de Estudio ya existe, especifique otro");
 				}
 			}
 			
