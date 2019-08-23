@@ -380,13 +380,13 @@
 												<c:choose>
 													<c:when test="${valorPractica.practica.valorReferencia != null}">
 														Valor de Referencia: ${valorPractica.practica.mayorMenor} ${valorPractica.practica.valorReferencia} ${valorPractica.practica.unidad}
-														<input type="hidden" value="${valorPractica.practica.valorReferencia}" id="valorReferencia<%=i%>">
+														<input type="hidden" value="${valorPractica.practica.valorReferenciaNumerico}" id="valorReferencia<%=i%>">
 														<input type="hidden" value="${valorPractica.practica.mayorMenor}" id="mayorMenor<%=i%>">	
 													</c:when>
 													<c:when test="${valorPractica.practica.valorNormalDesde != null}">
 														Valor de Referencia: ${valorPractica.practica.valorNormalDesde} a ${valorPractica.practica.valorNormalHasta} ${valorPractica.practica.unidad}
-														<input type="hidden" value="${valorPractica.practica.valorNormalDesde}" id="valorNormalDesde<%=i%>">
-														<input type="hidden" value="${valorPractica.practica.valorNormalHasta}" id="valorNormalHasta<%=i%>">		 	
+														<input type="hidden" value="${valorPractica.practica.valorNormalDesdeNumerico}" id="valorNormalDesde<%=i%>">
+														<input type="hidden" value="${valorPractica.practica.valorNormalHastaNumerico}" id="valorNormalHasta<%=i%>">		 	
 													</c:when>
 													<c:when test="${valorPractica.practica.valorRefLibre != null}">
 														${valorPractica.practica.valorRefLibreConBr}		 	
@@ -431,13 +431,13 @@
 												<c:choose>
 													<c:when test="${prac.practica.valorReferencia != null}">
 														Valor de Referencia: ${prac.practica.mayorMenor} ${prac.practica.valorReferencia} ${prac.practica.unidad}
-														<input type="hidden" value="${prac.practica.valorReferencia}" id="valorReferencia<%=i%>">
+														<input type="hidden" value="${prac.practica.valorReferenciaNumerico}" id="valorReferencia<%=i%>">
 														<input type="hidden" value="${valorPractica.practica.mayorMenor}" id="mayorMenor<%=i%>">	
 													</c:when>
 													<c:when test="${prac.practica.valorNormalDesde != null}">
 														Valor de Referencia: ${prac.practica.valorNormalDesde} a ${prac.practica.valorNormalHasta} ${prac.practica.unidad}
-														<input type="hidden" value="${prac.practica.valorNormalDesde}" id="valorNormalDesde<%=i%>">
-														<input type="hidden" value="${prac.practica.valorNormalHasta}" id="valorNormalHasta<%=i%>">		 	
+														<input type="hidden" value="${prac.practica.valorNormalDesdeNumerico}" id="valorNormalDesde<%=i%>">
+														<input type="hidden" value="${prac.practica.valorNormalHastaNumerico}" id="valorNormalHasta<%=i%>">		 	
 													</c:when>
 													<c:when test="${prac.practica.valorRefLibre != null}">
 														${prac.practica.valorRefLibreConBr}		 	

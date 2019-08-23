@@ -942,6 +942,10 @@ public class EstudioAction extends ValidadorAction {
 			List<GrupoPractica> gruposPracticas = practicaFachada.getGruposPractica();
 			request.setAttribute("gruposPracticas", gruposPracticas);
 			
+			//PRESELECCION
+			List<EstudioPreSeteado> listaEstudiosPreSeteados = practicaFachada.getEstudiosPreSeteados();
+			request.setAttribute("listaEstudiosPreSeteados", listaEstudiosPreSeteados);				
+			
 		} catch (Throwable t) {
 			MyLogger.logError(t);
 			//request.setAttribute("error", "Error Inesperado");

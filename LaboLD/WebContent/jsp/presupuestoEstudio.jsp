@@ -1,6 +1,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-html"  prefix="html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <script type="text/javascript" src="<html:rewrite page='/js/validacionAjax.js'/>"></script>
 <script type="text/javascript" src="<html:rewrite page='/js/funcUtiles.js'/>"></script>
@@ -21,6 +22,9 @@
 
 <script type="text/javascript"
 	src="<html:rewrite page='/dwr/interface/MedicoFachada.js'/>"></script>
+
+<script type="text/javascript"
+	src="<html:rewrite page='/dwr/interface/PracticaFachada.js'/>"></script>
 
 <script type="text/javascript">
 
@@ -110,6 +114,17 @@
 		}	
 	}
 
+	function pintarFilaEstudioPreSeteado(tag,id){
+		
+		$('#'+tag+id).attr("class", "verdeClaroSubtituloCenter");	
+	}
+
+	function despintarFilaEstudioPreSeteado(tag,id){
+
+		$('#'+tag+id).attr("class", "grisMuyClaroSubtituloCenterLetraChica");
+			
+	}	
+	
 	function clickCheckFila(ind){
 		
 		if(!$('#checkPractica'+ind).is(':checked')){
@@ -214,6 +229,38 @@
 		$('#estudioFormId').submit();			
 	}	
 	
+	function obtenerEstudioPreSeteado(idEstudoPreSeteado){
+		PracticaFachada.obtenerEstudioPreSeteado(idEstudoPreSeteado,obtenerEstudioPreSeteadoCallback);
+	}		
+	
+	function obtenerEstudioPreSeteadoCallback(lista){
+	
+		//alert(lista);		
+		//alert(lista.length);
+		
+		var i;
+		for (i = 0; i < lista.length; i++) {
+		    preSeleccion1(lista[i]);
+		}	
+	}
+	
+	//PRESELECCION
+	function preSeleccion1(idPractica){
+	
+		//idPractica 199
+		//Indice 21
+		//var idPractica = 199;		
+		var indicePractica = $('#valorIndice'+idPractica).val();	
+		var indiceGrupo = $('#valorGrupo'+idPractica).val();						
+			
+		$('#checkPractica'+indicePractica).prop('checked', true);
+		clickCheck(indicePractica);
+		
+		if(!$("#trGrupo"+indiceGrupo).is(':visible')){
+			expandirGrupo(indiceGrupo);
+		}	
+	}	
+	
 </script>
 
 <div id="errores" class="rojoAdvertencia"><br>${error}<br></div>
@@ -250,8 +297,47 @@
 			<td class="azulAjustado" >Presupuesto de Estudio</td>
 		</tr>	
 		<tr>
-			<td height="20"></td>
+			<td height="10"></td>
 		</tr>
+		
+		<tr>
+			<td height="20">
+				<!-- PRESELECCION -->
+				<table border="0" class="cuadrado" align="center" width="100%" cellpadding="1" cellspacing="1">
+				
+					<tr onclick="expandirGrupo('EstudiosPreSeteados')" class="grisSubtituloCenter">				
+						<td width="85%" colspan="<c:out value='${fn:length(listaEstudiosPreSeteados)}'></c:out>" height="15">					
+							Estudios Pre Seteados							
+						</td>									
+					</tr>	
+					<tr style="display: none" id="trGrupoEstudiosPreSeteados">
+						<td width="85%">
+							<table border="0" class="cuadrado" align="center" width="100%" cellpadding="0" cellspacing="0">						
+								<c:forEach items="${listaEstudiosPreSeteados}" var="estudioPreSeteado" varStatus="iEstudioPreSeteado">
+									<tr>					
+										<td height="20" onclick="javascript:obtenerEstudioPreSeteado(<c:out value='${estudioPreSeteado.idEstudioPreSeteado}'></c:out>)"
+											onmouseover="javascript:pintarFilaEstudioPreSeteado('estudioPreSeteado',<c:out value='${iEstudioPreSeteado.index}'></c:out>);"
+											onmouseout="javascript:despintarFilaEstudioPreSeteado('estudioPreSeteado',<c:out value='${iEstudioPreSeteado.index}'></c:out>);"
+											id="estudioPreSeteado<c:out value='${iEstudioPreSeteado.index}'></c:out>"
+											class="grisMuyClaroSubtituloCenterLetraChica">
+																										
+											<c:out value='${estudioPreSeteado.nombre}'></c:out>
+																			
+										</td>
+									</tr>
+								</c:forEach>
+							</table>	
+						</td>			
+					</tr>
+				</table>
+				<!-- PRESELECCION -->		
+			</td>
+		</tr>				
+		
+		<tr>
+			<td height="10"></td>
+		</tr>		
+		
 		<%int i=0; %>
 		<c:forEach items="${gruposPracticas}" var="grupo" varStatus="iGrupo">
 			<tr onclick="expandirGrupo(<c:out value='${iGrupo.index}'></c:out>)" class="grisSubtitulo"
@@ -275,6 +361,7 @@
 <div class="well-sm-bootstrap well-bootstrap">				
 				
 				
+				
 					<table border="0" class="cuadrado" align="left" width="100%" cellpadding="2" >
 						<tr>
 							<td height="5" colspan="4" align="right">
@@ -294,6 +381,9 @@
 										<input type="hidden" class="grupo<c:out value='${iGrupo.index}'></c:out>" value="<%=i%>">									
 										<input type="hidden" name="listaPracticas[<%=i%>].id" 
 											id="hiddenPractica<%=i%>">
+											
+										<input type="hidden" id="valorIndice${practica.id}" value="<%=i%>"><!-- PRESELECCION -->
+										<input type="hidden" id="valorGrupo${practica.id}" value="<c:out value='${iGrupo.index}'></c:out>"><!-- PRESELECCION -->											
 											
 										<input type="checkbox" class="checkG<c:out value='${iGrupo.index}'></c:out>"
 											onchange="clickCheck(<%=i%>)" 
@@ -370,6 +460,9 @@
 																																							
 													<input type="hidden" name="listaPracticas[<%=i%>].id" 
 														id="hiddenPractica<%=i%>">												
+									
+													<input type="hidden" id="valorIndice${prac.id}" value="<%=i%>"><!-- PRESELECCION -->
+													<input type="hidden" id="valorGrupo${prac.id}" value="<c:out value='${iGrupo.index}'></c:out>"><!-- PRESELECCION -->									
 									
 													<input type="checkbox" 
 														class="checkG<c:out value='${iGrupo.index}'></c:out> checkSI<c:out value='${iGrupo.index}'></c:out>-<c:out value='${iSubItem.index}'></c:out>"

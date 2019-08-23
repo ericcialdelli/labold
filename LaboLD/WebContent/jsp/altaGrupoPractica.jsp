@@ -6,6 +6,8 @@
 	src="<html:rewrite page='/js/validacionAjax.js'/>"></script>
 <script type="text/javascript"
 	src="<html:rewrite page='/js/funcUtiles.js'/>"></script>
+<script type="text/javascript" src="<html:rewrite page='/js/validarNum.js'/>"></script>
+	
 <script type="text/javascript">
 
 	function submitir(){
@@ -43,7 +45,7 @@
 			<td width="40%" class="botoneralNegritaRight">Unidad Bioquimica</td>
 			<td align="left">
 				<html:text styleClass="botonerab" property="grupoPracticaDTO.unidadBioquimica" value="" 
-						styleId="nombre" onkeypress="return evitarAutoSubmit(event)"/>
+						styleId="nombre" onkeypress="return validarNumeroConDecimal(event, this)"/>
 			</td>
 		</tr>
 		

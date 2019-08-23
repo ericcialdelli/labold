@@ -49,7 +49,7 @@
 			<td width="40%" class="botoneralNegritaRight">Valor Unidad Bioquímica</td>
 			<td align="left">						
 				<html:text styleClass="botonerab" property="obraSocialDTO.valorUnidadBioquimica" value="${obraSocial.valorUnidadBioquimica}" 
-						styleId="valor"/>						
+						styleId="valor" onkeypress="return validarNumeroConDecimal(event, this)"/>						
 						
 			</td>
 		</tr>							

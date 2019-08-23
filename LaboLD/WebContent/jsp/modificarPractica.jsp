@@ -111,7 +111,7 @@
 		dwr.util.addOptions("selectSubItemPractica", data, "id", "nombre");
 		dwr.util.addOptions("selectSubItemPractica", subItems, "id", "nombre");		
 	}	
-	
+		
 </script>
 
 <div id="errores" class="rojoAdvertencia">${error}</div>
@@ -179,7 +179,7 @@
 		<tr>
 			<td class="botoneralNegritaRight" width="40%">Orden</td>
 			<td align="left">
-				<html:text property="practicaDTO.orden" value="${practica.orden}" styleClass="botonerab" styleId="nombre"/>
+				<html:text property="practicaDTO.orden" value="${practica.orden}" styleClass="botonerab" styleId="nombre" onkeypress="javascript:esNumerico(event);"/>
 			</td>
 		</tr>		
 		<tr>
@@ -197,7 +197,7 @@
 		<tr>
 			<td class="botoneralNegritaRight" width="40%">Unidad Bioquimica</td>
 			<td align="left">
-				<html:text property="practicaDTO.unidadBioquimica" value="${practica.unidadBioquimica}" styleClass="botonerab" styleId="nombre"/>
+				<html:text property="practicaDTO.unidadBioquimica" value="${practica.unidadBioquimica}" styleClass="botonerab" styleId="nombre" onkeypress="return validarNumeroConDecimal(event, this)"/>
 			</td>
 		</tr>
 		<tr>
